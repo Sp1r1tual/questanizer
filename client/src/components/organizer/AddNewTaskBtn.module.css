@@ -1,0 +1,16 @@
+.addTask {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    border: 1px solid #000000;
+    border-radius: 4px;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: background-color 0.2s;
+}
+
+.addTask:hover {
+    background-color: #e8ce66;
+}

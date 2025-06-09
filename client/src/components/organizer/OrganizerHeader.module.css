@@ -1,0 +1,11 @@
+.mainImg {
+    width: 100px;
+    height: auto;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+h2 {
+    text-align: center;
+    white-space: nowrap;
+}

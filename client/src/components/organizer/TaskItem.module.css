@@ -1,0 +1,100 @@
+.taskItem {
+    padding: 8px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    font-size: 0.9em;
+    gap: 4px;
+    position: relative;
+    z-index: 1;
+}
+
+.taskContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.taskText {
+    text-align: left;
+    color: #333;
+    font-weight: 500;
+    width: 100%;
+}
+
+.timestamp {
+    font-size: 0.75em;
+    color: #888;
+    white-space: nowrap;
+    margin-right: 10px;
+}
+
+.taskItem.completed {
+    background-color: #d4edda;
+}
+
+.button {
+    background-color: #ffffff;
+    border: 1px solid #555;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    padding: 4px 10px;
+    font-size: 0.85em;
+    color: #fff;
+}
+
+.buttonContainer {
+    display: flex;
+    gap: 3px;
+}
+
+.completeBtn {
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+}
+
+.completeBtn:hover {
+    background-color: #4cae4c;
+}
+
+.incompleteBtn {
+    background-color: #ccc;
+    border-color: #999;
+}
+
+.incompleteBtn:hover {
+    background-color: #b3b3b3;
+}
+
+.deleteBtn {
+    background-color: #d9534f;
+}
+
+.deleteBtn:hover {
+    background-color: #c9302c;
+}
+
+.taskList {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+    width: 100%;
+}
+
+.deadlinePassed {
+    background-color: #ffcccc;
+    border-color: #ff6666;
+}
+
+.button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    opacity: 0.6;
+}

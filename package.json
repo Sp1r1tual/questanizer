@@ -1,0 +1,12 @@
+{
+    "name": "questanizer",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+        "dev": "concurrently \"npm run dev --prefix client\" \"npm run start --prefix server\""
+    },
+    "keywords": [],
+    "author": "Andrii Zub",
+    "license": "ISC",
+    "description": "MVP: atypical task scheduler with RPG elements. Organizer with experience collection and boss battles;\r Stack: js, react/redux-toolkit, node.js/express, mongoDB;\r Architecture: client ↔ server ↔ db;"
+}

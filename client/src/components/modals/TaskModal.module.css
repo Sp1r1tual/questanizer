@@ -1,0 +1,101 @@
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 1000;
+    padding-left: 20px;
+}
+
+.modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modalContent {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    min-width: 300px;
+    max-width: 80%;
+    border: 1px solid #e0e0e0;
+}
+
+.modalContent form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.modalContent h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin: 0;
+    text-align: center;
+}
+
+.modalContent .dateInput {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-family: Arial, sans-serif;
+    background-color: #fafafa;
+    box-sizing: border-box;
+}
+
+.modalContent .invalidInput {
+    border-color: #ff6666;
+    outline: none;
+}
+
+.modalContent .buttonGroup {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.modalContent button {
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #ffffff;
+    font-size: 1rem;
+    font-family: Arial, sans-serif;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.modalContent button:hover {
+    background-color: #e8ce66;
+    color: #000;
+}
+
+.modalContent button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.modalContent button:last-child {
+    border: 1px solid #ff6666;
+    color: #ff6666;
+}
+
+.modalContent button:last-child:hover {
+    background-color: #ff6666;
+    color: #ffffff;
+}
