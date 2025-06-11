@@ -1,0 +1,116 @@
+.contentForm {
+    background-color: #f7f1ee;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 20px rgba(80, 50, 40, 0.2);
+    max-width: 400px;
+    margin: 0 auto;
+    font-family: "Georgia", serif;
+    position: relative;
+    z-index: 1;
+}
+
+.formTitle {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: #4d2c20;
+}
+
+.formGroup {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.formLabel {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #3b2b23;
+}
+
+.formInput {
+    padding: 0.6rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #a89d94;
+    background-color: #fffaf7;
+    font-size: 1rem;
+    transition: border 0.2s ease, background-color 0.2s ease;
+}
+
+.formInput.errorInput {
+    border-color: darkred;
+    background-color: #ffebee;
+}
+
+.formInput:focus {
+    border-color: #7d5032;
+    outline: none;
+    background-color: #fffaf7;
+}
+
+.error {
+    color: darkred;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 2;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.submitButton {
+    flex: 1;
+    padding: 0.6rem 1rem;
+    background-color: #7d5032;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.submitButton:hover {
+    background-color: #5e3e28;
+}
+
+.cancelButton {
+    flex: 1;
+    padding: 0.6rem 1rem;
+    background-color: #b8aaa0;
+    color: #2c1c16;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.cancelButton:hover {
+    background-color: #98887f;
+}
+
+.registerLink {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #3b2b23;
+}
+
+.link {
+    color: #7d5032;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.link:hover {
+    text-decoration: underline;
+    color: #5e3e28;
+}

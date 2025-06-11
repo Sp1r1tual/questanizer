@@ -1,9 +1,16 @@
 .App {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     min-height: 100vh;
-    text-align: center;
     background-color: rgb(210, 207, 203);
+    overflow-x: hidden;
+}
+
+.mainContent {
+    padding-top: 100px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
