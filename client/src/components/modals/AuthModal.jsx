@@ -10,7 +10,7 @@ const AuthModal = ({ isOpen, onClose, onLoginSuccess }) => {
         onClose();
     };
 
-    if (!isOpen) return null; // Проста умова для рендерингу
+    if (!isOpen) return null;
 
     return (
         <div className={styles.modal}>
