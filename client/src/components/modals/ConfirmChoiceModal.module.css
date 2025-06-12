@@ -1,0 +1,105 @@
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal {
+    background-color: #f7f1ee;
+    border-radius: 1rem;
+    box-shadow: 0 0 20px rgba(80, 50, 40, 0.2);
+    max-width: 400px;
+    width: 90%;
+    margin: 20px;
+    animation: modalSlideIn 0.3s ease-out;
+    font-family: "Georgia", serif;
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.header {
+    padding: 2rem 2rem 1rem 2rem;
+    border-bottom: 1px solid #a89d94;
+}
+
+.title {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #4d2c20;
+    text-align: center;
+}
+
+.body {
+    padding: 1.5rem 2rem;
+}
+
+.message {
+    margin: 0;
+    color: #3b2b23;
+    text-align: center;
+    line-height: 1.5;
+    font-size: 1rem;
+}
+
+.footer {
+    padding: 1rem 2rem 2rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.button {
+    flex: 1;
+    padding: 0.6rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    min-width: 80px;
+}
+
+.button:hover {
+    transform: none;
+}
+
+.button:active {
+    transform: none;
+}
+
+.cancelBtn {
+    background-color: #b8aaa0;
+    color: #2c1c16;
+}
+
+.cancelBtn:hover {
+    background-color: #98887f;
+}
+
+.confirmBtn {
+    background-color: #7d5032;
+    color: white;
+}
+
+.confirmBtn:hover {
+    background-color: #5e3e28;
+}

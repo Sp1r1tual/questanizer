@@ -4,6 +4,7 @@ import TaskInput from "./TaskInput";
 import AddNewTaskBtn from "./AddNewTaskBtn";
 import TaskList from "./TaskList";
 import TaskModal from "../modals/TaskModal";
+import ConfirmChoiceModal from "../modals/ConfirmChoiceModal";
 
 const TaskManager = (props) => {
     const {
@@ -12,6 +13,7 @@ const TaskManager = (props) => {
         isInputInvalid,
         modalActive,
         deadline,
+        confirmModal,
         onInputChange,
         onOpenModal,
         onAddTask,
@@ -19,7 +21,28 @@ const TaskManager = (props) => {
         onDeleteTask,
         onCompleteTask,
         onSetDeadline,
+        onCloseConfirmModal,
+        onConfirmAction,
     } = props;
+
+    const getConfirmModal = () => {
+        if (confirmModal.actionType === "delete") {
+            return {
+                title: "Delete Task",
+                message: `Are you sure you want to delete the task "${confirmModal.taskText}"? This action cannot be undone.`,
+                confirmText: "Yes",
+                cancelText: "No",
+            };
+        } else if (confirmModal.actionType === "complete") {
+            return {
+                title: "Complete Task",
+                message: `Mark the task "${confirmModal.taskText}" as completed?`,
+                confirmText: "Yes",
+                cancelText: "No",
+            };
+        }
+        return {};
+    };
 
     return (
         <Container>
@@ -42,6 +65,14 @@ const TaskManager = (props) => {
                     onSubmit={onAddTask}
                     deadline={deadline}
                     setDeadline={onSetDeadline}
+                />
+            )}
+            {confirmModal.isOpen && (
+                <ConfirmChoiceModal
+                    isOpen={confirmModal.isOpen}
+                    onClose={onCloseConfirmModal}
+                    onConfirm={onConfirmAction}
+                    {...getConfirmModal()}
                 />
             )}
         </Container>

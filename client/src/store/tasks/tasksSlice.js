@@ -6,6 +6,12 @@ const initialState = {
     isInputInvalid: false,
     modalActive: false,
     deadline: "",
+    confirmModal: {
+        isOpen: false,
+        actionType: null,
+        taskId: null,
+        taskText: "",
+    },
 };
 
 const tasksSlice = createSlice({
@@ -21,6 +27,7 @@ const tasksSlice = createSlice({
         },
         addTask: (state, action) => {
             const { hasDeadline, difficulty } = action.payload;
+
             if (hasDeadline && !state.deadline) return;
 
             state.tasks.push({
@@ -45,13 +52,44 @@ const tasksSlice = createSlice({
             state.tasks = state.tasks.filter(
                 (task) => task.id !== action.payload
             );
+            state.confirmModal = {
+                isOpen: false,
+                actionType: null,
+                taskId: null,
+                taskText: "",
+            };
         },
         completeTask: (state, action) => {
             const task = state.tasks.find((t) => t.id === action.payload);
+
             if (task) task.isCompleted = !task.isCompleted;
+            state.confirmModal = {
+                isOpen: false,
+                actionType: null,
+                taskId: null,
+                taskText: "",
+            };
         },
         setDeadline: (state, action) => {
             state.deadline = action.payload;
+        },
+        openConfirmModal: (state, action) => {
+            const { actionType, taskId, taskText } = action.payload;
+
+            state.confirmModal = {
+                isOpen: true,
+                actionType,
+                taskId,
+                taskText,
+            };
+        },
+        closeConfirmModal: (state) => {
+            state.confirmModal = {
+                isOpen: false,
+                actionType: null,
+                taskId: null,
+                taskText: "",
+            };
         },
     },
 });
@@ -64,6 +102,8 @@ export const {
     deleteTask,
     completeTask,
     setDeadline,
+    openConfirmModal,
+    closeConfirmModal,
 } = tasksSlice.actions;
 
 export default tasksSlice.reducer;

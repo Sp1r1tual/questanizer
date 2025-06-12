@@ -8,6 +8,8 @@ import {
     deleteTask,
     completeTask,
     setDeadline,
+    openConfirmModal,
+    closeConfirmModal,
 } from "../store/tasks/tasksSlice";
 
 function useTasks() {
@@ -33,11 +35,55 @@ function useTasks() {
 
         onCloseModal: () => dispatch(closeModal()),
 
-        onDeleteTask: (id) => dispatch(deleteTask(id)),
+        onDeleteTask: (id) => {
+            const task = state.tasks.find((t) => t.id === id);
 
-        onCompleteTask: (id) => dispatch(completeTask(id)),
+            if (task) {
+                dispatch(
+                    openConfirmModal({
+                        actionType: "delete",
+                        taskId: id,
+                        taskText: task.text,
+                    })
+                );
+            }
+        },
+
+        onCompleteTask: (id) => {
+            const task = state.tasks.find((t) => t.id === id);
+
+            if (task) {
+                if (task.isCompleted) {
+                    dispatch(completeTask(id));
+                } else {
+                    dispatch(
+                        openConfirmModal({
+                            actionType: "complete",
+                            taskId: id,
+                            taskText: task.text,
+                        })
+                    );
+                }
+            }
+        },
 
         onSetDeadline: (dateStr) => dispatch(setDeadline(dateStr)),
+
+        onOpenConfirmModal: (actionType, taskId, taskText) => {
+            dispatch(openConfirmModal({ actionType, taskId, taskText }));
+        },
+
+        onCloseConfirmModal: () => dispatch(closeConfirmModal()),
+
+        onConfirmAction: () => {
+            const { actionType, taskId } = state.confirmModal;
+
+            if (actionType === "delete") {
+                dispatch(deleteTask(taskId));
+            } else if (actionType === "complete") {
+                dispatch(completeTask(taskId));
+            }
+        },
     };
 }
 

@@ -77,22 +77,21 @@
     gap: 3px;
 }
 
-.completeBtn {
+.completedBtn {
     background-color: #5cb85c;
     border-color: #4cae4c;
-}
-
-.completeBtn:hover {
-    background-color: #4cae4c;
+    cursor: not-allowed;
+    opacity: 0.6;
+    pointer-events: none;
 }
 
 .incompleteBtn {
-    background-color: #ccc;
+    background-color: #cccccc;
     border-color: #999;
 }
 
 .incompleteBtn:hover {
-    background-color: #b3b3b3;
+    background-color: #70c855;
 }
 
 .deleteBtn {
