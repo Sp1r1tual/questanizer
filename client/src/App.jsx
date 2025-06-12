@@ -6,6 +6,7 @@ import AuthManager from "./components/auth/AuthManager";
 import Footer from "./components/layout/Footer";
 
 import styles from "./App.module.css";
+import UserStatsPanel from "./components/layout/UserStatsPanel";
 
 function App() {
     const taskProps = useTasks();
@@ -16,7 +17,10 @@ function App() {
                 {({ onLoginClick }) => <Navbar onLoginClick={onLoginClick} />}
             </AuthManager>
             <main className={styles.mainContent}>
-                <TaskManager {...taskProps} />
+                <div className={styles.dashboard}>
+                    <UserStatsPanel />
+                    <TaskManager {...taskProps} />
+                </div>
                 <Footer />
             </main>
         </div>

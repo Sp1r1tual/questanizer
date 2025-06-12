@@ -1,0 +1,44 @@
+.experience {
+    flex: 1;
+    min-width: 180px;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.9rem;
+}
+
+.label {
+    white-space: nowrap;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.icon {
+    font-size: 1rem;
+}
+
+.progress {
+    flex-grow: 1;
+    height: 0.6rem;
+    appearance: none;
+    border-radius: 8px;
+    overflow: hidden;
+    min-width: 120px;
+}
+
+.progress::-webkit-progress-bar {
+    background-color: #ddd;
+}
+
+.progress::-webkit-progress-value {
+    background-color: #f4c542;
+}
+
+.progress::-moz-progress-bar {
+    background-color: #f4c542;
+}
