@@ -1,11 +1,17 @@
 import { useState } from "react";
 
-import DeadlineStep from "./DeadlineStep";
-import DifficultyStep from "./DifficultyStep";
+import DeadlinePage from "./DeadlinePage";
+import DifficultyPage from "./DifficultyPage";
 
 import styles from "./TaskModal.module.css";
 
-const TaskModal = ({ taskName, deadline, setDeadline, onSubmit, onClose }) => {
+const TaskModal = ({
+    deadline: initialDeadline,
+    setDeadline,
+    onSubmit,
+    onClose,
+    isOpen,
+}) => {
     const [isDateInvalid, setIsDateInvalid] = useState(false);
     const [pageModal, setPageModal] = useState("deadline");
     const [difficulty, setDifficulty] = useState(null);
@@ -27,7 +33,7 @@ const TaskModal = ({ taskName, deadline, setDeadline, onSubmit, onClose }) => {
     };
 
     const handleAddWithDeadline = () => {
-        if (!deadline || !validateYear(deadline)) {
+        if (!initialDeadline || !validateYear(initialDeadline)) {
             setIsDateInvalid(true);
             return;
         }
@@ -44,22 +50,23 @@ const TaskModal = ({ taskName, deadline, setDeadline, onSubmit, onClose }) => {
 
     const handleFinalSubmit = () => {
         if (!difficulty) return;
-
-        onSubmit({ hasDeadline: !!deadline, difficulty });
+        onSubmit({ hasDeadline: !!initialDeadline, difficulty });
     };
 
     return (
-        <div className={`${styles.modal} ${styles.active}`} onClick={onClose}>
+        <div
+            className={`${styles.modal} ${isOpen ? styles.active : ""}`}
+            onClick={onClose}
+        >
             <div
                 className={styles.modalContent}
                 onClick={(e) => e.stopPropagation()}
             >
                 <form onSubmit={(e) => e.preventDefault()}>
-                    <h2>{taskName || "New Task"}</h2>
-
+                    <h2>{"Set a deadline"}</h2>
                     {pageModal === "deadline" && (
-                        <DeadlineStep
-                            deadline={deadline}
+                        <DeadlinePage
+                            deadline={initialDeadline}
                             isDateInvalid={isDateInvalid}
                             onDateChange={handleDateChange}
                             onAddWithDeadline={handleAddWithDeadline}
@@ -67,9 +74,8 @@ const TaskModal = ({ taskName, deadline, setDeadline, onSubmit, onClose }) => {
                             onClose={onClose}
                         />
                     )}
-
                     {pageModal === "difficulty" && (
-                        <DifficultyStep
+                        <DifficultyPage
                             difficulty={difficulty}
                             onSelectDifficulty={setDifficulty}
                             onBack={handleBack}

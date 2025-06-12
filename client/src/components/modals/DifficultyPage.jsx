@@ -1,6 +1,6 @@
-import styles from "./TaskModal.module.css";
+import styles from "./DifficultyPage.module.css";
 
-const DifficultyStep = ({
+const DifficultyPage = ({
     difficulty,
     onSelectDifficulty,
     onBack,
@@ -43,4 +43,4 @@ const DifficultyStep = ({
     );
 };
 
-export default DifficultyStep;
+export default DifficultyPage;

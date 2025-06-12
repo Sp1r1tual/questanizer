@@ -1,0 +1,84 @@
+.dateInput {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-family: Arial, sans-serif;
+    background-color: #fafafa;
+    box-sizing: border-box;
+}
+
+.invalidInput {
+    border-color: #ff6666;
+    outline: none;
+}
+
+.error {
+    color: #ff6666;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+.buttonGroup {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.addWithDeadlineBtn {
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #ffffff;
+    font-size: 1rem;
+    font-family: Arial, sans-serif;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.addWithDeadlineBtn:hover {
+    background-color: #e8ce66;
+    color: #000;
+}
+
+.addWithoutDeadlineBtn {
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #ffffff;
+    font-size: 1rem;
+    font-family: Arial, sans-serif;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.addWithoutDeadlineBtn:hover {
+    background-color: #e8ce66;
+    color: #000;
+}
+
+.cancelBtn {
+    padding: 8px 16px;
+    border: 1px solid #ff6666;
+    border-radius: 5px;
+    background-color: #ffffff;
+    font-size: 1rem;
+    font-family: Arial, sans-serif;
+    color: #ff6666;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.cancelBtn:hover {
+    background-color: #ff6666;
+    color: #ffffff;
+}
+
+.cancelBtn:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}

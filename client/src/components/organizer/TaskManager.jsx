@@ -37,6 +37,7 @@ const TaskManager = (props) => {
             />
             {modalActive && (
                 <TaskModal
+                    isOpen={modalActive}
                     onClose={onCloseModal}
                     onSubmit={onAddTask}
                     deadline={deadline}

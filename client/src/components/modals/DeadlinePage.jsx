@@ -1,6 +1,6 @@
-import styles from "./TaskModal.module.css";
+import styles from "./DeadlinePage.module.css";
 
-const DeadlineStep = ({
+const DeadlinePage = ({
     deadline,
     isDateInvalid,
     onDateChange,
@@ -12,7 +12,7 @@ const DeadlineStep = ({
         <>
             <input
                 type="date"
-                value={deadline}
+                value={deadline || ""}
                 onChange={onDateChange}
                 className={`${styles.dateInput} ${
                     isDateInvalid ? styles.invalidInput : ""
@@ -26,13 +26,25 @@ const DeadlineStep = ({
                 </p>
             )}
             <div className={styles.buttonGroup}>
-                <button type="button" onClick={onAddWithDeadline}>
+                <button
+                    type="button"
+                    className={styles.addWithDeadlineBtn}
+                    onClick={onAddWithDeadline}
+                >
                     Add with deadline
                 </button>
-                <button type="button" onClick={onAddWithoutDeadline}>
+                <button
+                    type="button"
+                    className={styles.addWithoutDeadlineBtn}
+                    onClick={onAddWithoutDeadline}
+                >
                     Add without deadline
                 </button>
-                <button type="button" onClick={onClose}>
+                <button
+                    type="button"
+                    className={styles.cancelBtn}
+                    onClick={onClose}
+                >
                     Cancel
                 </button>
             </div>
@@ -40,4 +52,4 @@ const DeadlineStep = ({
     );
 };
 
-export default DeadlineStep;
+export default DeadlinePage;
