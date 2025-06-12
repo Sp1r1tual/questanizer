@@ -3,8 +3,10 @@ import styles from "./TaskItem.module.css";
 const TaskItem = ({ task, onDelete, onComplete }) => {
     const isDeadlinePassed = () => {
         if (!task.deadline) return false;
+
         const deadlineDate = new Date(task.deadline);
         const currentDate = new Date();
+
         return deadlineDate < currentDate;
     };
 
@@ -21,11 +23,14 @@ const TaskItem = ({ task, onDelete, onComplete }) => {
             <span className={styles.taskText}>{task.text}</span>
             <div className={styles.taskContent}>
                 <span className={styles.timestamp}>
-                    Created: {task.createdAt}
+                    📅 Created: {task.createdAt}
+                </span>
+                <span className={styles.difficulty}>
+                    ⚔️ Difficulty: {task.difficulty}
                 </span>
                 {task.deadline && (
                     <span className={styles.timestamp}>
-                        Deadline: {task.deadline}
+                        ⏰ Deadline: {task.deadline}
                     </span>
                 )}
                 <div className={styles.buttonContainer}>

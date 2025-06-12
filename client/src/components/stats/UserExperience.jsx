@@ -6,7 +6,7 @@ const UserExperience = ({ experience, level }) => {
             <div className={styles.row}>
                 <span className={styles.label}>
                     <span className={styles.icon}>⭐</span>
-                    Level {level}, XP {experience}/{level * 100}
+                    Level {level}, XP: {experience}/{level * 100}
                 </span>
                 <progress
                     className={styles.progress}

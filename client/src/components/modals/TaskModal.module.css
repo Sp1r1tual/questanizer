@@ -99,3 +99,131 @@
     background-color: #ff6666;
     color: #ffffff;
 }
+
+.difficultyButtons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.difficultyButton {
+    padding: 8px 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f7f7f7;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    font-family: Arial, sans-serif;
+}
+
+.difficultyButton.selected {
+    color: #fff;
+}
+
+.difficultyButton.easy {
+    border-color: #8bc34a;
+    background-color: #e6f4dc;
+}
+.difficultyButton.easy.selected {
+    background-color: #8bc34a;
+}
+
+.difficultyButton.medium {
+    border-color: #ffeb3b;
+    background-color: #fffde7;
+}
+.difficultyButton.medium.selected {
+    background-color: #fbc02d;
+}
+
+.difficultyButton.hard {
+    border-color: #ff9800;
+    background-color: #fff3e0;
+}
+.difficultyButton.hard.selected {
+    background-color: #fb8c00;
+}
+
+.difficultyButton.critical {
+    border-color: #9c27b0;
+    background-color: #f3e5f5;
+}
+.difficultyButton.critical.selected {
+    background-color: #9c27b0;
+}
+
+.backButton {
+    margin-top: 10px;
+    padding: 10px 16px;
+    width: 100%;
+    border: 1px solid #999;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    font-size: 1rem;
+    font-family: Arial, sans-serif;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.backButton:hover {
+    background-color: #d6d6d6;
+}
+
+.actionButtons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.backButtonCustom {
+    padding: 8px 16px;
+    border: 1px solid #999;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    font-size: 1rem;
+    font-family: Arial, sans-serif;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    flex-grow: 1;
+    max-width: 50%;
+}
+
+.backButtonCustom:hover {
+    background-color: #d6d6d6;
+}
+
+.backButtonCustom:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.confirmButtonCustom {
+    padding: 8px 16px;
+    border: 1px solid #ff6666;
+    border-radius: 5px;
+    background-color: #ffffff;
+    font-size: 1rem;
+    font-family: Arial, sans-serif;
+    color: #ff6666;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    flex-grow: 1;
+    max-width: 50%;
+}
+
+.confirmButtonCustom:hover {
+    background-color: #ff6666;
+    color: #ffffff;
+}
+
+.confirmButtonCustom:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}

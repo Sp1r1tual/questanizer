@@ -27,8 +27,8 @@ function useTasks() {
             }
         },
 
-        onAddTask: (withDeadline) => {
-            dispatch(addTask({ withDeadline }));
+        onAddTask: ({ hasDeadline, difficulty }) => {
+            dispatch(addTask({ hasDeadline, difficulty }));
         },
 
         onCloseModal: () => dispatch(closeModal()),

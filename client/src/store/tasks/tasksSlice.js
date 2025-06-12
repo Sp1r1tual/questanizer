@@ -20,14 +20,18 @@ const tasksSlice = createSlice({
             state.modalActive = action.payload;
         },
         addTask: (state, action) => {
-            if (action.payload.withDeadline && !state.deadline) return;
+            const { hasDeadline, difficulty } = action.payload;
+            if (hasDeadline && !state.deadline) return;
+
             state.tasks.push({
                 id: crypto.randomUUID(),
                 text: state.inputTask,
                 createdAt: new Date().toLocaleString(),
                 isCompleted: false,
-                deadline: action.payload.withDeadline ? state.deadline : null,
+                deadline: hasDeadline ? state.deadline : null,
+                difficulty: difficulty || null,
             });
+
             state.inputTask = "";
             state.deadline = "";
             state.modalActive = false;

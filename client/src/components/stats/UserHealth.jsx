@@ -6,7 +6,7 @@ const UserHealth = ({ health, maxHealth }) => {
             <div className={styles.row}>
                 <span className={styles.label}>
                     <span className={styles.icon}>❤️</span>
-                    HP {health}/{maxHealth}
+                    HP: {health}
                 </span>
                 <progress
                     className={styles.progress}

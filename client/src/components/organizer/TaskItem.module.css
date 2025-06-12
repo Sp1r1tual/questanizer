@@ -19,6 +19,8 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    flex-wrap: wrap;
+    gap: 5px;
 }
 
 .taskText {
@@ -32,7 +34,27 @@
     font-size: 0.75em;
     color: #888;
     white-space: nowrap;
-    margin-right: 10px;
+    margin-right: 5px;
+}
+
+.difficulty {
+    font-size: 0.75em;
+    color: #555;
+    white-space: nowrap;
+    margin-right: 5px;
+}
+
+.difficulty.easy {
+    color: #8bc34a;
+}
+.difficulty.medium {
+    color: #ffeb3b;
+}
+.difficulty.hard {
+    color: #ff9800;
+}
+.difficulty.critical {
+    color: #9c27b0;
 }
 
 .taskItem.completed {
