@@ -1,0 +1,15 @@
+.statsContainer {
+    background-color: #f6f4f0;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+    margin: 0.5rem 0;
+}
+
+.statsInner {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+}

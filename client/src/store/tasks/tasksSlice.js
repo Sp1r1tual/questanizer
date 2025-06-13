@@ -37,6 +37,7 @@ const tasksSlice = createSlice({
                 isCompleted: false,
                 deadline: hasDeadline ? state.deadline : null,
                 difficulty: difficulty || null,
+                damageTaken: false,
             });
 
             state.inputTask = "";
@@ -91,6 +92,13 @@ const tasksSlice = createSlice({
                 taskText: "",
             };
         },
+        markDamageTaken: (state, action) => {
+            const task = state.tasks.find((t) => t.id === action.payload);
+
+            if (task) {
+                task.damageTaken = true;
+            }
+        },
     },
 });
 
@@ -104,6 +112,7 @@ export const {
     setDeadline,
     openConfirmModal,
     closeConfirmModal,
+    markDamageTaken,
 } = tasksSlice.actions;
 
 export default tasksSlice.reducer;

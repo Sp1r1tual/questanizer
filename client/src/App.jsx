@@ -4,9 +4,10 @@ import TaskManager from "./components/organizer/TaskManager";
 import Navbar from "./components/layout/Navbar";
 import AuthManager from "./components/auth/AuthManager";
 import Footer from "./components/layout/Footer";
+import Dashboard from "./components/ui/Dashboard";
+import UserStatsManager from "./components/stats/UserStatsManager";
 
 import styles from "./App.module.css";
-import UserStatsPanel from "./components/layout/UserStatsPanel";
 
 function App() {
     const taskProps = useTasks();
@@ -17,10 +18,10 @@ function App() {
                 {({ onLoginClick }) => <Navbar onLoginClick={onLoginClick} />}
             </AuthManager>
             <main className={styles.mainContent}>
-                <div className={styles.dashboard}>
-                    <UserStatsPanel />
+                <Dashboard>
+                    <UserStatsManager />
                     <TaskManager {...taskProps} />
-                </div>
+                </Dashboard>
                 <Footer />
             </main>
         </div>

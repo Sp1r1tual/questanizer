@@ -11,10 +11,53 @@ import {
     openConfirmModal,
     closeConfirmModal,
 } from "../store/tasks/tasksSlice";
+import { gainExperience, takeDamage } from "../store/stats/userStatsSlice";
+import { DIFFICULTY_REWARDS } from "../config/statsConfig";
 
 function useTasks() {
     const dispatch = useDispatch();
     const state = useSelector((state) => state.tasks);
+
+    const awardExperience = (difficulty, hasDeadline) => {
+        const reward = DIFFICULTY_REWARDS[difficulty];
+
+        if (!reward) return;
+
+        let xp = reward.xp;
+
+        if (!hasDeadline) {
+            xp = Math.floor(xp / 5);
+        }
+
+        dispatch(gainExperience(xp));
+    };
+
+    const applyOverdueDamage = (difficulty) => {
+        const reward = DIFFICULTY_REWARDS[difficulty];
+
+        if (!reward) return;
+
+        dispatch(takeDamage(reward.damage));
+    };
+
+    const checkOverdueTasks = () => {
+        const now = new Date();
+
+        state.tasks.forEach((task) => {
+            if (!task.isCompleted && task.deadline && task.difficulty) {
+                const deadlineDate = new Date(task.deadline);
+
+                if (now > deadlineDate && !task.damageTaken) {
+                    applyOverdueDamage(task.difficulty);
+
+                    dispatch({
+                        type: "tasks/markDamageTaken",
+                        payload: task.id,
+                    });
+                }
+            }
+        });
+    };
 
     return {
         ...state,
@@ -81,9 +124,18 @@ function useTasks() {
             if (actionType === "delete") {
                 dispatch(deleteTask(taskId));
             } else if (actionType === "complete") {
+                const task = state.tasks.find((t) => t.id === taskId);
+
+                if (task && task.difficulty) {
+                    awardExperience(task.difficulty, !!task.deadline);
+                }
                 dispatch(completeTask(taskId));
             }
         },
+
+        checkOverdueTasks,
+        awardExperience,
+        applyOverdueDamage,
     };
 }
 

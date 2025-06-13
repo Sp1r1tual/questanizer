@@ -27,10 +27,11 @@ Architecture: Client ↔ Server ↔ Database
 🧾 Login system — personal progress tracking
 
 ⚙️ Installation
-...
+npm install
 
 🧪 Run the Project
-...
+cd client
+npm start
 
 🔮 Planned Features (Post-MVP)
 

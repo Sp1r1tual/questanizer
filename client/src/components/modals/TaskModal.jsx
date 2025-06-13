@@ -25,8 +25,8 @@ const TaskModal = ({
         return selectedYear >= currentYear && selectedYear <= 2099;
     };
 
-    const handleDateChange = (e) => {
-        const newDate = e.target.value;
+    const handleDateChange = (event) => {
+        const newDate = event.target.value;
 
         setDeadline(newDate);
         setIsDateInvalid(!validateYear(newDate));
@@ -60,9 +60,9 @@ const TaskModal = ({
         >
             <div
                 className={styles.modalContent}
-                onClick={(e) => e.stopPropagation()}
+                onClick={(event) => event.stopPropagation()}
             >
-                <form onSubmit={(e) => e.preventDefault()}>
+                <form onSubmit={(event) => event.preventDefault()}>
                     <h2>{"Set a deadline"}</h2>
                     {pageModal === "deadline" && (
                         <DeadlinePage

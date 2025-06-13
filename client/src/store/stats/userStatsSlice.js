@@ -4,7 +4,7 @@ const initialState = {
     experience: 0,
     level: 1,
     health: 100,
-    maxHealth: false,
+    maxHealth: 100,
 };
 
 const statsSlice = createSlice({

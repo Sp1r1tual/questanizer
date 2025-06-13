@@ -1,18 +1,22 @@
 import styles from "./UserExperience.module.css";
 
 const UserExperience = ({ experience, level }) => {
+    const expToNext = level * 100;
+    const progressPercent = Math.round((experience / expToNext) * 100);
+
     return (
-        <div className={styles.experience}>
-            <div className={styles.row}>
-                <span className={styles.label}>
-                    <span className={styles.icon}>⭐</span>
-                    Level {level}, XP: {experience}/{level * 100}
-                </span>
-                <progress
-                    className={styles.progress}
-                    value={experience}
-                    max={level * 100}
-                />
+        <div className={styles.container}>
+            <div className={styles.icon}>⭐</div>
+            <div className={styles.info}>
+                <div className={styles.text}>
+                    Level {level}, XP: {experience}/{expToNext}
+                </div>
+                <div className={styles.bar}>
+                    <div
+                        className={styles.fill}
+                        style={{ width: `${progressPercent}%` }}
+                    />
+                </div>
             </div>
         </div>
     );
