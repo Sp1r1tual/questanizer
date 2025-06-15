@@ -1,0 +1,74 @@
+.bossStats {
+    margin-bottom: 1.5rem;
+}
+
+.bossName {
+    color: #3e2723;
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-weight: 700;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.statsRow {
+    display: flex;
+    justify-content: space-around;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.statBlock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 140px;
+}
+
+.statText {
+    font-size: 0.95rem;
+    margin-bottom: 0.3rem;
+    font-weight: 500;
+}
+
+.progressBar {
+    width: 100%;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #ddd;
+    appearance: none;
+    overflow: hidden;
+}
+
+.progressBar::-webkit-progress-bar {
+    background-color: #ddd;
+    border-radius: 5px;
+}
+
+.progressBar::-moz-progress-bar {
+    border-radius: 5px;
+}
+
+.health::-webkit-progress-value {
+    background-color: #e53935;
+}
+
+.power::-webkit-progress-value {
+    background-color: #03a9f4;
+}
+
+.rage::-webkit-progress-value {
+    background-color: #ff9800;
+}
+
+.health::-moz-progress-bar {
+    background-color: #e53935;
+}
+
+.power::-moz-progress-bar {
+    background-color: #03a9f4;
+}
+
+.rage::-moz-progress-bar {
+    background-color: #ff9800;
+}

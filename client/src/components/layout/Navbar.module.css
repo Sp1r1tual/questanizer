@@ -19,6 +19,7 @@
 .logoContainer {
     display: flex;
     align-items: center;
+    gap: 2rem;
 }
 
 .logo {
@@ -48,5 +49,31 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-    margin-right: 5rem;
+}
+
+.navigationButtons {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.navLink {
+    text-decoration: none;
+    color: #2c1c16;
+    font-size: 1rem;
+    font-weight: 400;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.navLink:hover {
+    color: #ffffff;
+    background-color: #4a2c20;
+    text-decoration: none;
+}
+
+.navLink.active {
+    color: #ffffff;
+    background-color: #7d5032;
 }
