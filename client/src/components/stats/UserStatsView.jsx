@@ -6,7 +6,7 @@ import UserExperience from "./UserExperience";
 import UserHealth from "./UserHealth";
 import Container from "../ui/Container";
 
-import styles from "./UserStatsManager.module.css";
+import styles from "./UserStatsView.module.css";
 
 const UserStatsManager = () => {
     const { experience, level, health, maxHealth } = useUserStats();

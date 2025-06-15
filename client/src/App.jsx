@@ -1,11 +1,11 @@
 import { useTasks } from "./hooks/useTasks";
 
-import TaskManager from "./components/organizer/TaskManager";
+import TasksView from "./components/organizer/TasksView";
 import Navbar from "./components/layout/Navbar";
 import AuthManager from "./components/auth/AuthManager";
 import Footer from "./components/layout/Footer";
 import Dashboard from "./components/ui/Dashboard";
-import UserStatsManager from "./components/stats/UserStatsManager";
+import UserStatsView from "./components/stats/UserStatsView";
 
 import styles from "./App.module.css";
 
@@ -19,8 +19,8 @@ function App() {
             </AuthManager>
             <main className={styles.mainContent}>
                 <Dashboard>
-                    <UserStatsManager />
-                    <TaskManager {...taskProps} />
+                    <UserStatsView />
+                    <TasksView {...taskProps} />
                 </Dashboard>
                 <Footer />
             </main>

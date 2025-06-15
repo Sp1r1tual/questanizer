@@ -14,6 +14,7 @@ Frontend:
 JavaScript
 React
 Redux Toolkit
+React Router
 Backend:
 Node.js
 Express
