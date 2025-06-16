@@ -25,6 +25,7 @@ const useBossBattle = () => {
         (bossId) => {
             if (!boss.bossId) {
                 const foundBoss = bosses.find((b) => b.bossId === bossId);
+
                 if (foundBoss) {
                     dispatch(setActiveBoss(foundBoss));
                 }
@@ -34,17 +35,20 @@ const useBossBattle = () => {
     );
 
     const handleTaskCompleted = (difficulty, hasDeadline) => {
-        let damageAmount = DIFFICULTY_REWARDS[difficulty]?.damage || 0;
+        const baseDamage = DIFFICULTY_REWARDS[difficulty]?.damage || 0;
 
-        if (!hasDeadline) {
-            damageAmount = Math.floor(damageAmount / 5);
-        }
+        const damageAmount = hasDeadline
+            ? baseDamage
+            : Math.floor(baseDamage / 5);
 
         dispatch(takeDamage(damageAmount));
         dispatch(updateHealthBar());
 
-        if (boss.healthPoints - damageAmount <= 0) {
+        const newHealth = boss.healthPoints - damageAmount;
+
+        if (newHealth <= 0) {
             addXP(boss.bossRewardExp);
+            alert(`🎉 Victory on ${boss.bossName}! +${boss.bossRewardExp} XP`);
             dispatch(resetBoss());
         }
     };
@@ -77,9 +81,13 @@ const useBossBattle = () => {
             });
 
             if (projectedRage >= boss.bossRageBar) {
-                alert(
-                    `⚔️ ${boss.bossName} attacks and causes ${boss.bossPower} damage!`
-                );
+                if (boss.bossName && boss.bossPower) {
+                    alert(
+                        `⚔️ ${boss.bossName} attacks and causes ${boss.bossPower} damage!`
+                    );
+                } else {
+                    console.warn("Boss data is incomplete:", boss);
+                }
                 damage(boss.bossPower);
                 dispatch(resetRage());
             }
@@ -96,11 +104,13 @@ const useBossBattle = () => {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            handleOverdueTasks();
+            if (boss.bossId) {
+                handleOverdueTasks();
+            }
         }, 500);
 
         return () => clearInterval(interval);
-    }, [handleOverdueTasks]);
+    }, [handleOverdueTasks, boss.bossId]);
 
     return {
         boss,
