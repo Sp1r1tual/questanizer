@@ -1,0 +1,18 @@
+.startBtn {
+    display: block;
+    margin: 2rem auto;
+    padding: 0.8rem 2rem;
+    background-color: #7d5032;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-family: "Georgia", serif;
+}
+
+.startBtn:hover {
+    background-color: #5e3e28;
+}

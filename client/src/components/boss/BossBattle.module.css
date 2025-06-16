@@ -1,0 +1,24 @@
+.battleContainer {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.bossView {
+    flex: 1;
+    max-width: 40%;
+    padding: 1rem;
+    background-color: #fffaf7;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 10px rgba(80, 50, 40, 0.1);
+}
+
+.bossStats {
+    flex: 1;
+    max-width: 50%;
+    padding: 1rem;
+    background-color: #fffaf7;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 10px rgba(80, 50, 40, 0.1);
+    text-align: left;
+}

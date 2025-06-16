@@ -8,7 +8,7 @@ import Container from "../ui/Container";
 
 import styles from "./UserStatsView.module.css";
 
-const UserStatsManager = () => {
+const UserStatsView = () => {
     const { experience, level, health, maxHealth } = useUserStats();
     const { checkOverdueTasks } = useTasks();
 
@@ -32,4 +32,4 @@ const UserStatsManager = () => {
     );
 };
 
-export default UserStatsManager;
+export default UserStatsView;

@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+
 import styles from "./BossStats.module.css";
 
 const BossStats = () => {
@@ -9,16 +10,10 @@ const BossStats = () => {
     return (
         <div className={styles.bossStats}>
             <h3 className={styles.bossName}>{boss.bossName}</h3>
-            <img
-                src={boss.bossImg}
-                alt={boss.bossName}
-                style={{ maxWidth: "200px" }}
-            />
-
-            <div className={styles.statsRow}>
+            <div className={styles.statsContainer}>
                 <div className={styles.statBlock}>
                     <span className={styles.statText}>
-                        💚Health: {boss.healthPoints}/{boss.maxHealth}
+                        💚 Health: {boss.healthPoints}/{boss.maxHealth}
                     </span>
                     <progress
                         className={`${styles.progressBar} ${styles.health}`}
@@ -29,7 +24,7 @@ const BossStats = () => {
 
                 <div className={styles.statBlock}>
                     <span className={styles.statText}>
-                        🔥Rage: {boss.rage}/{boss.bossRageBar}
+                        🔥 Rage: {boss.rage}/{boss.bossRageBar}
                     </span>
                     <progress
                         className={`${styles.progressBar} ${styles.rage}`}
