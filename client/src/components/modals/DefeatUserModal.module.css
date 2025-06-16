@@ -1,0 +1,75 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(40, 40, 40, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal {
+    background-color: #f9f1e7;
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    border: 1px solid #d9c2a8;
+    font-family: "Georgia", serif;
+    color: #2f2f2f;
+}
+
+.modal h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: #8a5a2b;
+}
+
+.modal p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+    color: #4a4035;
+}
+
+.button {
+    background-color: #7d5032;
+    color: #ffffff;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    margin-top: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: inherit;
+}
+
+.button:hover {
+    background-color: #c5303b;
+}
+
+@media (max-width: 480px) {
+    .modal {
+        padding: 1.5rem;
+        max-width: 90%;
+    }
+
+    .modal h2 {
+        font-size: 1.5rem;
+    }
+
+    .modal p {
+        font-size: 1rem;
+    }
+
+    .button {
+        padding: 0.7rem 1.3rem;
+        font-size: 0.9rem;
+    }
+}

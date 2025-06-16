@@ -29,7 +29,7 @@ const bossBattleSlice = createSlice({
             state.bossRageBar = boss.bossRageBar;
             state.bossImg = boss.bossImg;
             state.rage = 0;
-            state.alreadyRagedTaskIds = boss.initiallyOverdue ?? [];
+            state.alreadyRagedTaskIds = boss.initiallyOverdue ?? []; // filters overdue tasks before activating the boss
         },
         updateHealthBar: (state) => {
             if (state.healthPoints < 0) state.healthPoints = 0;

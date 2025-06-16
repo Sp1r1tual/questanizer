@@ -28,9 +28,11 @@ const statsSlice = createSlice({
                 state.health + action.payload
             );
         },
+        resetStats: () => initialState,
     },
 });
 
-export const { gainExperience, takeDamage, heal } = statsSlice.actions;
+export const { gainExperience, takeDamage, heal, resetStats } =
+    statsSlice.actions;
 
 export default statsSlice.reducer;
