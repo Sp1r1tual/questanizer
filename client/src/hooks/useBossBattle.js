@@ -27,7 +27,18 @@ const useBossBattle = () => {
                 const foundBoss = bosses.find((b) => b.bossId === bossId);
 
                 if (foundBoss) {
-                    dispatch(setActiveBoss(foundBoss));
+                    const now = new Date();
+
+                    const initiallyOverdue = tasks
+                        .filter(
+                            (t) =>
+                                !t.isCompleted &&
+                                t.deadline &&
+                                new Date(t.deadline) < now
+                        )
+                        .map((t) => t.id);
+
+                    dispatch(setActiveBoss({ ...foundBoss, initiallyOverdue }));
                 }
             }
         },
@@ -46,7 +57,7 @@ const useBossBattle = () => {
 
         const newHealth = boss.healthPoints - damageAmount;
 
-        if (newHealth <= 0) {
+        if (boss.bossId && newHealth <= 0) {
             addXP(boss.bossRewardExp);
             alert(`🎉 Victory on ${boss.bossName}! +${boss.bossRewardExp} XP`);
             dispatch(resetBoss());
@@ -92,15 +103,7 @@ const useBossBattle = () => {
                 dispatch(resetRage());
             }
         }
-    }, [
-        tasks,
-        boss.alreadyRagedTaskIds,
-        boss.bossRageBar,
-        boss.rage,
-        boss.bossPower,
-        dispatch,
-        damage,
-    ]);
+    }, [tasks, boss, dispatch, damage]);
 
     useEffect(() => {
         const interval = setInterval(() => {
