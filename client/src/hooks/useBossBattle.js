@@ -33,8 +33,13 @@ const useBossBattle = () => {
         [boss.bossId, dispatch]
     );
 
-    const handleTaskCompleted = (difficulty) => {
-        const damageAmount = DIFFICULTY_REWARDS[difficulty]?.damage || 0;
+    const handleTaskCompleted = (difficulty, hasDeadline) => {
+        let damageAmount = DIFFICULTY_REWARDS[difficulty]?.damage || 0;
+
+        if (!hasDeadline) {
+            damageAmount = Math.floor(damageAmount / 5);
+        }
+
         dispatch(takeDamage(damageAmount));
         dispatch(updateHealthBar());
 
@@ -62,23 +67,29 @@ const useBossBattle = () => {
         }
 
         if (newRagedTasks.length > 0) {
-            dispatch(updateRageBar(newRagedTasks.length));
+            const totalNewRage = newRagedTasks.length;
+            const projectedRage = boss.rage + totalNewRage;
+
+            dispatch(updateRageBar(totalNewRage));
+
             newRagedTasks.forEach((taskId) => {
                 dispatch(markTaskAsRaged(taskId));
             });
-        }
-    }, [tasks, boss.alreadyRagedTaskIds, dispatch]);
 
-    useEffect(() => {
-        if (boss.rage >= boss.bossRageBar && boss.bossId) {
-            damage(boss.bossPower);
-            dispatch(resetRage());
+            if (projectedRage >= boss.bossRageBar) {
+                alert(
+                    `⚔️ ${boss.bossName} attacks and causes ${boss.bossPower} damage!`
+                );
+                damage(boss.bossPower);
+                dispatch(resetRage());
+            }
         }
     }, [
-        boss.rage,
+        tasks,
+        boss.alreadyRagedTaskIds,
         boss.bossRageBar,
+        boss.rage,
         boss.bossPower,
-        boss.bossId,
         dispatch,
         damage,
     ]);
@@ -86,7 +97,7 @@ const useBossBattle = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             handleOverdueTasks();
-        }, 10000);
+        }, 500);
 
         return () => clearInterval(interval);
     }, [handleOverdueTasks]);

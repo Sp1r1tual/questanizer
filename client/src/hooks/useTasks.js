@@ -130,7 +130,7 @@ const useTasks = () => {
 
                 if (task && task.difficulty) {
                     awardExperience(task.difficulty, !!task.deadline);
-                    handleTaskCompleted(task.difficulty);
+                    handleTaskCompleted(task.difficulty, !!task.deadline);
                 }
                 dispatch(completeTask(taskId));
             }
