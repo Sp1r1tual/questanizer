@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
+import { useBossBattle } from "./useBossBattle";
 
 import {
     setInputTask,
@@ -14,9 +15,10 @@ import {
 import { gainExperience, takeDamage } from "../store/stats/userStatsSlice";
 import { DIFFICULTY_REWARDS } from "../config/statsConfig";
 
-function useTasks() {
+const useTasks = () => {
     const dispatch = useDispatch();
     const state = useSelector((state) => state.tasks);
+    const { handleTaskCompleted } = useBossBattle();
 
     const awardExperience = (difficulty, hasDeadline) => {
         const reward = DIFFICULTY_REWARDS[difficulty];
@@ -128,6 +130,7 @@ function useTasks() {
 
                 if (task && task.difficulty) {
                     awardExperience(task.difficulty, !!task.deadline);
+                    handleTaskCompleted(task.difficulty);
                 }
                 dispatch(completeTask(taskId));
             }
@@ -137,6 +140,6 @@ function useTasks() {
         awardExperience,
         applyOverdueDamage,
     };
-}
+};
 
 export { useTasks };

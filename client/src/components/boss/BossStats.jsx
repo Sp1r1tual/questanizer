@@ -1,36 +1,47 @@
+import { useSelector } from "react-redux";
 import styles from "./BossStats.module.css";
 
 const BossStats = () => {
+    const boss = useSelector((state) => state.bossBattle);
+
+    if (!boss.bossId) return null;
+
     return (
         <div className={styles.bossStats}>
-            <h3 className={styles.bossName}>Назва боса</h3>
+            <h3 className={styles.bossName}>{boss.bossName}</h3>
+            <img
+                src={boss.bossImg}
+                alt={boss.bossName}
+                style={{ maxWidth: "200px" }}
+            />
 
             <div className={styles.statsRow}>
                 <div className={styles.statBlock}>
-                    <span className={styles.statText}>💚Health: 75/100</span>
+                    <span className={styles.statText}>
+                        💚Health: {boss.healthPoints}/{boss.maxHealth}
+                    </span>
                     <progress
                         className={`${styles.progressBar} ${styles.health}`}
-                        max="100"
-                        value={75}
+                        max={boss.maxHealth}
+                        value={boss.healthPoints}
                     ></progress>
                 </div>
 
                 <div className={styles.statBlock}>
-                    <span className={styles.statText}>⚡Power: 50/100</span>
-                    <progress
-                        className={`${styles.progressBar} ${styles.power}`}
-                        max="100"
-                        value={50}
-                    ></progress>
-                </div>
-
-                <div className={styles.statBlock}>
-                    <span className={styles.statText}>🔥Rage: 100/100</span>
+                    <span className={styles.statText}>
+                        🔥Rage: {boss.rage}/{boss.bossRageBar}
+                    </span>
                     <progress
                         className={`${styles.progressBar} ${styles.rage}`}
-                        max="100"
-                        value={100}
+                        max={boss.bossRageBar}
+                        value={boss.rage}
                     ></progress>
+                </div>
+
+                <div className={styles.statBlock}>
+                    <span className={styles.statText}>
+                        ⚔️ Power: {boss.bossPower}
+                    </span>
                 </div>
             </div>
         </div>
