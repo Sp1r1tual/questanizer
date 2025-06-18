@@ -1,3 +1,5 @@
+import { useTaskContext } from "../../context/TaskContext";
+
 import Container from "../ui/Container";
 import OrganizerHeader from "./OrganizerHeader";
 import TaskInput from "./TaskInput";
@@ -6,7 +8,7 @@ import TaskList from "./TaskList";
 import TaskModal from "../modals/TaskModal";
 import ConfirmChoiceModal from "../modals/ConfirmChoiceModal";
 
-const TaskManager = (props) => {
+const TasksView = () => {
     const {
         tasks,
         inputTask,
@@ -23,7 +25,7 @@ const TaskManager = (props) => {
         onSetDeadline,
         onCloseConfirmModal,
         onConfirmAction,
-    } = props;
+    } = useTaskContext();
 
     const getConfirmModal = () => {
         if (confirmModal.actionType === "delete") {
@@ -79,4 +81,4 @@ const TaskManager = (props) => {
     );
 };
 
-export default TaskManager;
+export default TasksView;

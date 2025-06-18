@@ -1,7 +1,7 @@
-import { useTasks } from "./hooks/useTasks";
 import { Routes, Route } from "react-router-dom";
 
 import TasksView from "./components/organizer/TasksView";
+import TaskProvider from "./components/organizer/TaskProvider";
 import Navbar from "./components/layout/Navbar";
 import AuthManager from "./components/auth/AuthManager";
 import Footer from "./components/layout/Footer";
@@ -13,8 +13,6 @@ import AnswersPage from "./pages/faq/AnswersPage";
 import styles from "./App.module.css";
 
 function App() {
-    const taskProps = useTasks();
-
     return (
         <div className={styles.App}>
             <AuthManager>
@@ -25,8 +23,10 @@ function App() {
                             path="/"
                             element={
                                 <Dashboard>
-                                    <UserStatsView />
-                                    <TasksView {...taskProps} />
+                                    <TaskProvider>
+                                        <UserStatsView />
+                                        <TasksView />
+                                    </TaskProvider>
                                 </Dashboard>
                             }
                         />
