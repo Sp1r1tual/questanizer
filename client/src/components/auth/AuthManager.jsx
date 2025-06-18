@@ -1,6 +1,8 @@
 import { useState } from "react";
-import AuthModal from "../modals/AuthModal";
 import { useAuth } from "../../hooks/useAuth";
+
+import { AuthModalContext } from "../../context/AuthModalContext";
+import AuthModal from "../modals/AuthModal";
 
 const AuthManager = ({ children }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -20,14 +22,14 @@ const AuthManager = ({ children }) => {
     };
 
     return (
-        <>
-            {children({ onLoginClick: handleOpenModal })}
+        <AuthModalContext.Provider value={{ openModal: handleOpenModal }}>
+            {children}
             <AuthModal
                 isOpen={isModalOpen}
                 onClose={handleCloseModal}
                 onLoginSuccess={handleLoginSuccess}
             />
-        </>
+        </AuthModalContext.Provider>
     );
 };
 

@@ -18,24 +18,24 @@ function App() {
     return (
         <div className={styles.App}>
             <AuthManager>
-                {({ onLoginClick }) => <Navbar onLoginClick={onLoginClick} />}
+                <Navbar />
+                <main className={styles.mainContent}>
+                    <Routes>
+                        <Route
+                            path="/"
+                            element={
+                                <Dashboard>
+                                    <UserStatsView />
+                                    <TasksView {...taskProps} />
+                                </Dashboard>
+                            }
+                        />
+                        <Route path="/boss" element={<BossBattlePage />} />
+                        <Route path="/faq" element={<AnswersPage />} />
+                    </Routes>
+                    <Footer />
+                </main>
             </AuthManager>
-            <main className={styles.mainContent}>
-                <Routes>
-                    <Route
-                        path="/"
-                        element={
-                            <Dashboard>
-                                <UserStatsView />
-                                <TasksView {...taskProps} />
-                            </Dashboard>
-                        }
-                    />
-                    <Route path="/boss" element={<BossBattlePage />} />
-                    <Route path="/faq" element={<AnswersPage />} />
-                </Routes>
-                <Footer />
-            </main>
         </div>
     );
 }

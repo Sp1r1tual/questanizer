@@ -1,18 +1,20 @@
 import { useAuth } from "../../hooks/useAuth";
+import { useAuthModal } from "../../context/AuthModalContext";
 
 import authLoginImg from "../../assets/user-authentication-svgrepo-login.png";
 import authLoggedInImg from "../../assets/user-authentication-svgrepo-logged-in.png";
 
 import styles from "./NavbarAuthBtn.module.css";
 
-const NavbarAuthBtn = ({ onLoginClick }) => {
+const NavbarAuthBtn = () => {
     const { isAuthenticated, signOut } = useAuth();
+    const { openModal } = useAuthModal();
 
     const handleAuthBtn = () => {
         if (isAuthenticated) {
             signOut();
         } else {
-            onLoginClick();
+            openModal();
         }
     };
 
