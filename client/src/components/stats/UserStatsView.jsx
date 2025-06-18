@@ -1,15 +1,18 @@
 import { useEffect, useRef, useState } from "react";
 import { useTasks } from "../../hooks/useTasks";
 import { useUserStats } from "../../hooks/useUserStats";
+import { useDispatch } from "react-redux";
 
 import UserExperience from "./UserExperience";
 import UserHealth from "./UserHealth";
 import Container from "../ui/Container";
 import DefeatUserModal from "../modals/DefeatUserModal";
+import { resetBoss } from "../../store/boss/bossBattleSlice";
 
 import styles from "./UserStatsView.module.css";
 
 const UserStatsView = () => {
+    const dispatch = useDispatch();
     const { experience, level, health, maxHealth } = useUserStats();
     const { checkOverdueTasks } = useTasks();
 
@@ -34,6 +37,7 @@ const UserStatsView = () => {
     const handleRestart = () => {
         setIsDefeated(false);
         defeatTriggered.current = false;
+        dispatch(resetBoss({ defeated: true }));
     };
 
     return (

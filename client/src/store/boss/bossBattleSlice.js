@@ -11,6 +11,7 @@ const initialState = {
     rage: 0,
     bossImg: null,
     alreadyRagedTaskIds: [],
+    currentBossIndex: 0,
 };
 
 const bossBattleSlice = createSlice({
@@ -54,7 +55,16 @@ const bossBattleSlice = createSlice({
         resetRage: (state) => {
             state.rage = 0;
         },
-        resetBoss: () => initialState,
+        resetBoss: (state, action) => {
+            const { defeated } = action.payload || {};
+
+            return defeated
+                ? { ...initialState, currentBossIndex: 0 }
+                : {
+                      ...initialState,
+                      currentBossIndex: state.currentBossIndex + 1,
+                  };
+        },
     },
 });
 

@@ -22,27 +22,31 @@ const useBossBattle = () => {
     const { addXP, damage } = useUserStats();
 
     const initBoss = useCallback(
-        (bossId) => {
-            if (!boss.bossId) {
-                const foundBoss = bosses.find((b) => b.bossId === bossId);
+        (forcedIndex) => {
+            const bossIndex = forcedIndex ?? boss.currentBossIndex ?? 0;
 
-                if (foundBoss) {
-                    const now = new Date();
+            if (bossIndex >= bosses.length) {
+                alert("🎉 You have defeated all available bosses!");
+                return;
+            }
 
-                    const initiallyOverdue = tasks
-                        .filter(
-                            (t) =>
-                                !t.isCompleted &&
-                                t.deadline &&
-                                new Date(t.deadline) < now
-                        )
-                        .map((t) => t.id);
+            const foundBoss = bosses[bossIndex];
 
-                    dispatch(setActiveBoss({ ...foundBoss, initiallyOverdue }));
-                }
+            if (foundBoss && !boss.bossId) {
+                const now = new Date();
+                const initiallyOverdue = tasks
+                    .filter(
+                        (t) =>
+                            !t.isCompleted &&
+                            t.deadline &&
+                            new Date(t.deadline) < now
+                    )
+                    .map((t) => t.id);
+
+                dispatch(setActiveBoss({ ...foundBoss, initiallyOverdue }));
             }
         },
-        [boss.bossId, dispatch]
+        [boss.bossId, boss.currentBossIndex, dispatch, tasks]
     );
 
     const handleTaskCompleted = (difficulty, hasDeadline) => {
@@ -60,7 +64,7 @@ const useBossBattle = () => {
         if (boss.bossId && newHealth <= 0) {
             addXP(boss.bossRewardExp);
             alert(`🎉 Victory on ${boss.bossName}! +${boss.bossRewardExp} XP`);
-            dispatch(resetBoss());
+            dispatch(resetBoss({ defeated: false }));
         }
     };
 

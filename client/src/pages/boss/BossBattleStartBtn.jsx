@@ -6,7 +6,7 @@ const BossBattleStartBtn = () => {
     const { initBoss } = useBossBattle();
 
     return (
-        <button className={styles.startBtn} onClick={() => initBoss(1)}>
+        <button className={styles.startBtn} onClick={() => initBoss()}>
             Start a boss fight
         </button>
     );
