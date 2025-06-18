@@ -11,6 +11,7 @@ import {
     setDeadline,
     openConfirmModal,
     closeConfirmModal,
+    markDamageTaken,
 } from "../store/tasks/tasksSlice";
 import { gainExperience, takeDamage } from "../store/stats/userStatsSlice";
 import { DIFFICULTY_REWARDS } from "../config/statsConfig";
@@ -51,11 +52,7 @@ const useTasks = () => {
 
                 if (now > deadlineDate && !task.damageTaken) {
                     applyOverdueDamage(task.difficulty);
-
-                    dispatch({
-                        type: "tasks/markDamageTaken",
-                        payload: task.id,
-                    });
+                    dispatch(markDamageTaken(task.id));
                 }
             }
         });
