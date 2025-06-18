@@ -8,6 +8,12 @@
     font-family: "Georgia", serif;
     position: relative;
     z-index: 1;
+    flex: 1;
+    max-width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .formTitle {
@@ -113,4 +119,12 @@
 .link:hover {
     text-decoration: underline;
     color: #5e3e28;
+}
+
+@media (max-width: 768px) {
+    .contentForm {
+        max-width: 100%;
+        margin: 0;
+        width: 100%;
+    }
 }

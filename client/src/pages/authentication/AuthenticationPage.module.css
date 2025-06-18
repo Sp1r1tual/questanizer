@@ -1,0 +1,45 @@
+.authPage {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+    background-color: #f9f1e7;
+    background-image: linear-gradient(
+            135deg,
+            rgba(249, 241, 231, 0.9) 0%,
+            rgba(217, 194, 168, 0.8) 100%
+        ),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Cpath d='M50 0 L150 100 L50 200 L0 100 Z' fill='none' stroke='%23d9c2a8' stroke-width='1' opacity='0.1'/%3E%3Ccircle cx='100' cy='100' r='50' fill='none' stroke='%23d9c2a8' stroke-width='0.5' opacity='0.1'/%3E%3C/svg%3E");
+    background-size: 300px 300px;
+    background-position: center;
+    background-repeat: repeat;
+}
+
+.authContentWrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 2rem;
+}
+
+.authContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    width: 100%;
+    max-width: 1000px;
+    margin: 2rem auto 0 auto;
+    padding: 2rem;
+    box-shadow: 0 0 20px rgba(80, 50, 40, 0.1);
+    border-radius: 1rem;
+    background-color: white;
+}
+
+@media (max-width: 768px) {
+    .authContainer {
+        flex-direction: column;
+        padding: 1rem;
+        align-items: center;
+    }
+}

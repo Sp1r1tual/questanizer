@@ -1,5 +1,5 @@
-import { useAuth } from "../../hooks/useAuth";
-import { useAuthModal } from "../../context/AuthModalContext";
+import { useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 import authLoginImg from "../../assets/user-authentication-svgrepo-login.png";
 import authLoggedInImg from "../../assets/user-authentication-svgrepo-logged-in.png";
@@ -7,14 +7,14 @@ import authLoggedInImg from "../../assets/user-authentication-svgrepo-logged-in.
 import styles from "./NavbarAuthBtn.module.css";
 
 const NavbarAuthBtn = () => {
+    const navigate = useNavigate();
     const { isAuthenticated, signOut } = useAuth();
-    const { openModal } = useAuthModal();
 
     const handleAuthBtn = () => {
         if (isAuthenticated) {
             signOut();
         } else {
-            openModal();
+            navigate("/authentication");
         }
     };
 

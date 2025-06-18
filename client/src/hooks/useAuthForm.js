@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const useAuthForm = ({ onSubmit, onClose }) => {
+const useAuthForm = ({ onSubmit }) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
@@ -17,10 +17,9 @@ const useAuthForm = ({ onSubmit, onClose }) => {
         const value = event.target.value;
 
         setUsername(value);
-
         if (!hasTypedUsername && value) setHasTypedUsername(true);
-        setUsernameError(hasTypedUsername && !validateUsername(value));
 
+        setUsernameError(hasTypedUsername && !validateUsername(value));
         if (value) setError("");
     };
 
@@ -32,7 +31,6 @@ const useAuthForm = ({ onSubmit, onClose }) => {
         if (!hasTypedPassword && value) setHasTypedPassword(true);
 
         setPasswordError(hasTypedPassword && !validatePassword(value));
-
         if (value) setError("");
     };
 
@@ -69,17 +67,6 @@ const useAuthForm = ({ onSubmit, onClose }) => {
         onSubmit({ username, password });
     };
 
-    const handleCancel = () => {
-        setUsername("");
-        setPassword("");
-        setError("");
-        setUsernameError(false);
-        setPasswordError(false);
-        setHasTypedUsername(false);
-        setHasTypedPassword(false);
-        onClose();
-    };
-
     return {
         username,
         password,
@@ -89,7 +76,6 @@ const useAuthForm = ({ onSubmit, onClose }) => {
         handleUsernameChange,
         handlePasswordChange,
         handleSubmit,
-        handleCancel,
     };
 };
 

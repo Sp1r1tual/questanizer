@@ -1,8 +1,18 @@
 import useAuthForm from "../../hooks/useAuthForm";
+import useAuth from "../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 import styles from "./AuthForm.module.css";
 
-const AuthForm = ({ onSubmit, onClose }) => {
+const AuthForm = () => {
+    const { signIn } = useAuth();
+    const navigate = useNavigate();
+
+    const onSubmit = (credentials) => {
+        signIn(credentials);
+        navigate("/", { replace: true });
+    };
+
     const {
         username,
         password,
@@ -12,8 +22,7 @@ const AuthForm = ({ onSubmit, onClose }) => {
         handleUsernameChange,
         handlePasswordChange,
         handleSubmit,
-        handleCancel,
-    } = useAuthForm({ onSubmit, onClose });
+    } = useAuthForm({ onSubmit });
 
     return (
         <div className={styles.contentForm}>
@@ -53,13 +62,6 @@ const AuthForm = ({ onSubmit, onClose }) => {
                 <div className={styles.buttons}>
                     <button type="submit" className={styles.submitButton}>
                         Login
-                    </button>
-                    <button
-                        type="button"
-                        className={styles.cancelButton}
-                        onClick={handleCancel}
-                    >
-                        Cancel
                     </button>
                 </div>
             </form>
