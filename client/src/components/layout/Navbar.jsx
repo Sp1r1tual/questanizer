@@ -40,6 +40,16 @@ const Navbar = ({ onLoginClick }) => {
                         >
                             Boss Battle
                         </NavLink>
+                        <NavLink
+                            to="/faq"
+                            className={({ isActive }) =>
+                                isActive
+                                    ? `${styles.navLink} ${styles.active}`
+                                    : styles.navLink
+                            }
+                        >
+                            FAQ
+                        </NavLink>
                     </div>
                 </div>
 

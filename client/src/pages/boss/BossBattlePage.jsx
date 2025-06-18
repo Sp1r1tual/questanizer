@@ -1,6 +1,6 @@
 import Container from "../../components/ui/Container";
 import Dashboard from "../../components/ui/Dashboard";
-import BossBattle from "../../components/boss/BossBattle";
+import BossBattle from "./BossBattle";
 import UserStatsView from "../../components/stats/UserStatsView";
 
 const BossBattlePage = () => {

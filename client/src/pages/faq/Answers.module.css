@@ -1,0 +1,20 @@
+.answersPage {
+    padding: 1rem;
+    min-height: 75vh;
+    width: 100%;
+    font-family: "Georgia", serif;
+    color: #2f2f2f;
+}
+
+.title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #8a5a2b;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.faqList {
+    max-width: 800px;
+    margin: 0 auto;
+}
