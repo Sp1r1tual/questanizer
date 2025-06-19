@@ -1,7 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 
 import TasksView from "./components/organizer/TasksView";
-import TaskProvider from "./components/organizer/TaskProvider";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import Dashboard from "./components/ui/Dashboard";
@@ -33,10 +32,8 @@ function App() {
                                         element={
                                             <PrivateRoute>
                                                 <Dashboard>
-                                                    <TaskProvider>
-                                                        <UserStatsView />
-                                                        <TasksView />
-                                                    </TaskProvider>
+                                                    <UserStatsView />
+                                                    <TasksView />
                                                 </Dashboard>
                                             </PrivateRoute>
                                         }

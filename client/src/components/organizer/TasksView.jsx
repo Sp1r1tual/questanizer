@@ -1,4 +1,4 @@
-import { useTaskContext } from "../../context/TaskContext";
+import { useTasks } from "../../hooks/useTasks";
 
 import Container from "../ui/Container";
 import OrganizerHeader from "./OrganizerHeader";
@@ -25,7 +25,7 @@ const TasksView = () => {
         onSetDeadline,
         onCloseConfirmModal,
         onConfirmAction,
-    } = useTaskContext();
+    } = useTasks();
 
     const getConfirmModal = () => {
         if (confirmModal.actionType === "delete") {
