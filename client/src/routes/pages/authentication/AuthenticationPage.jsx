@@ -1,6 +1,6 @@
-import AuthForm from "./AuthForm";
-import LoginImage from "./LoginImage";
-import Footer from "../../components/layout/Footer";
+import AuthForm from "./components/AuthForm";
+import LoginImage from "./components/LoginImage";
+import Footer from "../../../components/footer/Footer";
 
 import styles from "./AuthenticationPage.module.css";
 

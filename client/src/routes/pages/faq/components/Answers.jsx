@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import AnswerItem from "./AnswerItem";
-import faqs from "../../data/faqs";
+import faqs from "../../../../data/faqs";
 
 import styles from "./Answers.module.css";
 

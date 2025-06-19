@@ -1,5 +1,5 @@
-import Container from "../../components/ui/Container";
-import Answers from "./Answers";
+import Container from "../../../components/ui/Container";
+import Answers from "./components/Answers";
 
 const AnswersPage = () => {
     return (

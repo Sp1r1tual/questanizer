@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
-import AuthenticationPage from "./pages/authentication/AuthenticationPage";
-import ProtectedRoutes from "./components/layout/ProtectedRoutes";
+import AuthenticationPage from "./routes/pages/authentication/AuthenticationPage";
+import ProtectedRoutes from "./routes/ProtectedRoutes";
 
 function App() {
     return (

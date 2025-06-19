@@ -1,12 +1,12 @@
 import { Routes, Route } from "react-router-dom";
-import Navbar from "./Navbar";
-import Footer from "./Footer";
-import Dashboard from "../ui/Dashboard";
-import TasksView from "../organizer/TasksView";
-import UserStatsView from "../stats/UserStatsView";
-import BossBattlePage from "../../pages/boss/BossBattlePage";
-import AnswersPage from "../../pages/faq/AnswersPage";
-import PrivateRoute from "../../pages/authentication/PrivateRoute";
+import Navbar from "../components/navbar/Navbar";
+import Footer from "../components/footer/Footer";
+import Dashboard from "../components/ui/Dashboard";
+import TasksView from "../components/organizer/TasksView";
+import UserStatsView from "../components/stats/UserStatsView";
+import BossBattlePage from "../routes/pages/boss/BossBattlePage";
+import AnswersPage from "../routes/pages/faq/AnswersPage";
+import PrivateRoute from "./PrivateRoute";
 
 import styles from "./ProtectedRoutes.module.css";
 

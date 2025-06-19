@@ -1,4 +1,4 @@
-import questanizerLoginImg from "../../assets/questanizer_login.png";
+import questanizerLoginImg from "../../../../assets/questanizer_login.png";
 
 import styles from "./LoginImage.module.css";
 

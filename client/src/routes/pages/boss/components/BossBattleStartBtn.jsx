@@ -1,4 +1,4 @@
-import { useBoss } from "../../hooks/boss/useBoss";
+import { useBoss } from "../../../../hooks/boss/useBoss";
 
 import styles from "./BossBattleStartBtn.module.css";
 

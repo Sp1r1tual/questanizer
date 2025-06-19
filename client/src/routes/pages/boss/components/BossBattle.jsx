@@ -1,4 +1,4 @@
-import { useBoss } from "../../hooks/boss/useBoss";
+import { useBoss } from "../../../../hooks/boss/useBoss";
 
 import BossBattleStartBtn from "./BossBattleStartBtn";
 import BossStats from "./BossStats";
