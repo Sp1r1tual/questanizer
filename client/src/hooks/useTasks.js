@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useBossBattle } from "./useBossBattle";
+import { useBoss } from "./boss/useBoss";
 
 import {
     setInputTask,
@@ -19,7 +19,7 @@ import { DIFFICULTY_REWARDS } from "../config/statsConfig";
 const useTasks = () => {
     const dispatch = useDispatch();
     const state = useSelector((state) => state.tasks);
-    const { handleTaskCompleted } = useBossBattle();
+    const { handleTaskCompleted } = useBoss();
 
     const awardExperience = (difficulty, hasDeadline) => {
         const reward = DIFFICULTY_REWARDS[difficulty];

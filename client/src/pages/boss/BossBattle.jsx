@@ -1,4 +1,4 @@
-import { useBossBattle } from "../../hooks/useBossBattle";
+import { useBoss } from "../../hooks/boss/useBoss";
 
 import BossBattleStartBtn from "./BossBattleStartBtn";
 import BossStats from "./BossStats";
@@ -7,7 +7,7 @@ import BossView from "./BossView";
 import styles from "./BossBattle.module.css";
 
 const BossBattle = () => {
-    const { initBoss, boss } = useBossBattle();
+    const { initBoss, boss } = useBoss();
 
     const handleStartBattle = () => {
         console.log("Starting battle with boss ID: 1");

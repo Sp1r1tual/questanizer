@@ -1,53 +1,21 @@
 import { useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useUserStats } from "./useUserStats";
+import { useUserStats } from "../stats/useUserStats";
 
 import {
-    setActiveBoss,
     takeDamage,
     updateRageBar,
     updateHealthBar,
-    resetBoss,
     markTaskAsRaged,
     resetRage,
-} from "../store/boss/bossBattleSlice";
+} from "../../store/boss/bossBattleSlice";
+import { DIFFICULTY_REWARDS } from "../../config/statsConfig";
 
-import { DIFFICULTY_REWARDS } from "../config/statsConfig";
-import bosses from "../data/bosses";
-
-const useBossBattle = () => {
+const useBossCombat = () => {
     const dispatch = useDispatch();
     const boss = useSelector((state) => state.bossBattle);
     const tasks = useSelector((state) => state.tasks.tasks);
     const { addXP, damage } = useUserStats();
-
-    const initBoss = useCallback(
-        (forcedIndex) => {
-            const bossIndex = forcedIndex ?? boss.currentBossIndex ?? 0;
-
-            if (bossIndex >= bosses.length) {
-                alert("🎉 You have defeated all available bosses!");
-                return;
-            }
-
-            const foundBoss = bosses[bossIndex];
-
-            if (foundBoss && !boss.bossId) {
-                const now = new Date();
-                const initiallyOverdue = tasks
-                    .filter(
-                        (t) =>
-                            !t.isCompleted &&
-                            t.deadline &&
-                            new Date(t.deadline) < now
-                    )
-                    .map((t) => t.id);
-
-                dispatch(setActiveBoss({ ...foundBoss, initiallyOverdue }));
-            }
-        },
-        [boss.bossId, boss.currentBossIndex, dispatch, tasks]
-    );
 
     const handleTaskCompleted = (difficulty, hasDeadline) => {
         const baseDamage = DIFFICULTY_REWARDS[difficulty]?.damage || 0;
@@ -61,11 +29,20 @@ const useBossBattle = () => {
 
         const newHealth = boss.healthPoints - damageAmount;
 
-        if (boss.bossId && newHealth <= 0) {
+        return {
+            isDead: newHealth <= 0,
+            damage: damageAmount,
+            newHealth,
+        };
+    };
+
+    const handleBossVictory = () => {
+        if (boss.bossId) {
             addXP(boss.bossRewardExp);
             alert(`🎉 Victory on ${boss.bossName}! +${boss.bossRewardExp} XP`);
-            dispatch(resetBoss({ defeated: false }));
+            return true;
         }
+        return false;
     };
 
     const handleOverdueTasks = useCallback(() => {
@@ -120,10 +97,10 @@ const useBossBattle = () => {
     }, [handleOverdueTasks, boss.bossId]);
 
     return {
-        boss,
-        initBoss,
         handleTaskCompleted,
+        handleBossVictory,
+        handleOverdueTasks,
     };
 };
 
-export { useBossBattle };
+export { useBossCombat };

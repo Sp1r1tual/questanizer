@@ -4,7 +4,7 @@ import {
     gainExperience,
     takeDamage,
     heal,
-} from "../store/stats/userStatsSlice";
+} from "../../store/stats/userStatsSlice";
 
 const useUserStats = () => {
     const dispatch = useDispatch();
