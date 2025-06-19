@@ -1,7 +1,7 @@
 .authBtn {
-    background-color: #fff;
-    color: #b0a09b;
-    border: 1px solid #aaa;
+    background-color: #fffaf7;
+    color: #4a4035;
+    border: 1px solid #d9c2a8;
     border-radius: 8px;
     padding: 0.5rem 1rem;
     display: flex;
@@ -10,11 +10,13 @@
     font-size: 1rem;
     font-family: "Georgia", serif;
     transition: all 0.2s ease-in-out;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 .authBtn:hover {
-    background-color: #f0e8e4;
-    border-color: #888;
+    background-color: #f5efe9;
+    border-color: #7d5032;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
 }
 
 .icon {
@@ -26,8 +28,22 @@
 .loginImg {
     width: 17px;
     height: 17px;
+    filter: brightness(0.9);
+    transition: filter 0.2s ease;
 }
 
 .loginText {
     font-weight: 500;
+}
+
+@media (max-width: 480px) {
+    .authBtn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    .loginImg {
+        width: 15px;
+        height: 15px;
+    }
 }

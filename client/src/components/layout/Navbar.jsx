@@ -1,12 +1,12 @@
 import { NavLink } from "react-router-dom";
 
-import NavbarAuthBtn from "./NavbarAuthBtn";
+import NavbarDropdown from "./NavbarDropdown";
 
 import headerImg from "../../assets/questanizer_header.png";
 
 import styles from "./Navbar.module.css";
 
-const Navbar = ({ onLoginClick }) => {
+const Navbar = () => {
     return (
         <>
             <nav className={styles.navbar}>
@@ -54,7 +54,7 @@ const Navbar = ({ onLoginClick }) => {
                 </div>
 
                 <div className={styles.navButtons}>
-                    <NavbarAuthBtn onLoginClick={onLoginClick} />
+                    <NavbarDropdown />
                 </div>
             </nav>
         </>
