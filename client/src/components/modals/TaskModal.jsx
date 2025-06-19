@@ -41,6 +41,8 @@ const TaskModal = ({
     };
 
     const handleAddWithoutDeadline = () => {
+        setDeadline("");
+        setIsDateInvalid(false);
         setPageModal("difficulty");
     };
 

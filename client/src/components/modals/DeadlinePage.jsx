@@ -1,3 +1,5 @@
+import { useRef } from "react";
+
 import styles from "./DeadlinePage.module.css";
 
 const DeadlinePage = ({
@@ -8,17 +10,33 @@ const DeadlinePage = ({
     onAddWithoutDeadline,
     onClose,
 }) => {
+    const dateInputRef = useRef(null);
+
+    const handleFocusClick = () => {
+        const input = dateInputRef.current;
+
+        if (!input) return;
+
+        if (typeof input.showPicker === "function") {
+            input.showPicker();
+        }
+        input.focus();
+    };
+
     return (
         <>
-            <input
-                type="date"
-                value={deadline || ""}
-                onChange={onDateChange}
-                className={`${styles.dateInput} ${
-                    isDateInvalid ? styles.invalidInput : ""
-                }`}
-                placeholder="dd/mm/yyyy"
-            />
+            <div onClick={handleFocusClick}>
+                <input
+                    ref={dateInputRef}
+                    type="date"
+                    value={deadline || ""}
+                    onChange={onDateChange}
+                    className={`${styles.dateInput} ${
+                        isDateInvalid ? styles.invalidInput : ""
+                    }`}
+                    placeholder="dd/mm/yyyy"
+                />
+            </div>
             {isDateInvalid && deadline && (
                 <p className={styles.error}>
                     Please select a year between {new Date().getFullYear()} and
