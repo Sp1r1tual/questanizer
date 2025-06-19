@@ -54,6 +54,7 @@ const TaskItem = ({ task, onDelete, onComplete }) => {
                                     : styles.incompleteBtn
                             }`}
                             onClick={handleCompleteClick}
+                            disabled={deadlinePassed}
                         >
                             Done
                         </button>
