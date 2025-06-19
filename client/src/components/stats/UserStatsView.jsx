@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useTasks } from "../../hooks/useTasks";
+import { useTasks } from "../../hooks/tasks/useTasks";
 import { useUserStats } from "../../hooks/stats/useUserStats";
 import { useDispatch } from "react-redux";
 

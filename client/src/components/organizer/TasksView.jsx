@@ -1,4 +1,4 @@
-import { useTasks } from "../../hooks/useTasks";
+import { useTasks } from "../../hooks/tasks/useTasks";
 
 import Container from "../ui/Container";
 import OrganizerHeader from "./OrganizerHeader";
