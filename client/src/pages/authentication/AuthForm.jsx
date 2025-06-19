@@ -1,5 +1,5 @@
-import useAuthForm from "../../hooks/useAuthForm";
-import useAuth from "../../hooks/useAuth";
+import useAuthForm from "../../hooks/auth/useAuthForm";
+import useAuth from "../../hooks/auth/useAuth";
 import { useNavigate } from "react-router-dom";
 
 import styles from "./AuthForm.module.css";

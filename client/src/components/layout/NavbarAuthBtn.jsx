@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import useAuth from "../../hooks/useAuth";
+import useAuth from "../../hooks/auth/useAuth";
 
 import authLoginImg from "../../assets/user-authentication-svgrepo-login.png";
 import authLoggedInImg from "../../assets/user-authentication-svgrepo-logged-in.png";
