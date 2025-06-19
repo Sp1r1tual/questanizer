@@ -2,23 +2,30 @@
     display: flex;
     justify-content: center;
     gap: 2rem;
-}
-
-.bossView {
-    flex: 1;
-    max-width: 40%;
+    flex-wrap: wrap;
     padding: 1rem;
-    background-color: #fffaf7;
-    border-radius: 0.5rem;
-    box-shadow: 0 0 10px rgba(80, 50, 40, 0.1);
 }
 
+.bossView,
 .bossStats {
-    flex: 1;
-    max-width: 50%;
+    flex: 1 1 100%;
+    max-width: 100%;
     padding: 1rem;
     background-color: #fffaf7;
     border-radius: 0.5rem;
     box-shadow: 0 0 10px rgba(80, 50, 40, 0.1);
-    text-align: left;
+}
+
+@media (min-width: 768px) {
+    .bossView {
+        max-width: 40%;
+    }
+
+    .bossStats {
+        max-width: 50%;
+    }
+
+    .battleContainer {
+        flex-wrap: nowrap;
+    }
 }

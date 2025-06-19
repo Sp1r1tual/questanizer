@@ -15,3 +15,14 @@
     text-align: center;
     padding: 2rem;
 }
+
+@media (max-width: 480px) {
+    .placeholder {
+        font-size: 1rem;
+        padding: 1rem;
+    }
+
+    .bossImage {
+        max-width: 90%;
+    }
+}

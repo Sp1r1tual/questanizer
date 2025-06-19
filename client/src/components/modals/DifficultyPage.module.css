@@ -14,6 +14,9 @@
     cursor: pointer;
     transition: background-color 0.2s ease, color 0.2s ease;
     font-family: Arial, sans-serif;
+    flex: 1 1 calc(50% - 5px);
+    max-width: calc(50% - 5px);
+    box-sizing: border-box;
 }
 
 .difficultyButton.selected {
@@ -124,4 +127,43 @@
 .confirmButtonCustom:disabled {
     cursor: not-allowed;
     opacity: 0.6;
+}
+
+@media (max-width: 640px) {
+    .difficultyButtons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+    }
+
+    .difficultyButton {
+        width: 50%;
+        margin-bottom: 10px;
+    }
+
+    .difficultyButton:nth-child(2n) {
+        margin-right: 0;
+    }
+
+    .difficultyButton:nth-last-child(-n + 2) {
+        margin-bottom: 0;
+    }
+
+    .backButton {
+        width: 100%;
+    }
+
+    .actionButtons {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .backButtonCustom,
+    .confirmButtonCustom {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 0;
+    }
 }

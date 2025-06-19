@@ -8,4 +8,19 @@
 h2 {
     text-align: center;
     white-space: nowrap;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 640px) {
+    .mainImg {
+        width: 80px;
+        margin-right: 5px;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+    }
 }

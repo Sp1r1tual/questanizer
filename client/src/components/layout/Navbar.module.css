@@ -77,3 +77,83 @@
     color: #ffffff;
     background-color: #7d5032;
 }
+
+.burgerToggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.3rem;
+    display: none; /* Приховуємо за замовчуванням */
+}
+
+.burgerIcon {
+    width: 30px;
+    height: 30px;
+    transition: transform 0.2s ease;
+}
+
+.burgerToggle:hover .burgerIcon {
+    transform: scale(1.1);
+}
+
+.dropdownMenu {
+    width: 100%;
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fffef9;
+    border: 1px solid #d9c2a8;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem;
+    z-index: 999;
+    flex-direction: column;
+    gap: 0.5rem;
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+.dropdownMenu a {
+    display: block;
+    padding: 0.5rem 1rem;
+}
+
+.navbar:hover .dropdownMenu,
+.dropdownMenu.active {
+    display: flex;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 1.2rem;
+    }
+    .logo img {
+        height: 40px;
+    }
+    .navigationButtons {
+        display: none; /* Приховуємо посилання на малих екранах */
+    }
+
+    .burgerToggle {
+        display: block; /* Показуємо бургер на малих екранах */
+    }
+
+    .dropdownMenu {
+        display: none; /* Приховуємо меню за замовчуванням */
+    }
+
+    .dropdownMenu.active {
+        display: flex; /* Показуємо меню при активному стані */
+    }
+}

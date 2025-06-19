@@ -1,47 +1,217 @@
 .taskItem {
-    padding: 8px;
+    padding: 12px;
     background-color: #f9f9f9;
     border: 1px solid #ccc;
-    border-radius: 6px;
+    border-radius: 8px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
     margin-bottom: 10px;
     display: flex;
     flex-direction: column;
-    align-items: stretch;
     font-size: 0.9em;
-    gap: 4px;
+    gap: 8px;
     position: relative;
-    z-index: 1;
+    transition: all 0.2s ease;
+}
+
+.taskItem:hover {
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.taskHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    gap: 10px;
 }
 
 .taskContent {
+    flex: 1;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    flex-wrap: wrap;
-    gap: 5px;
+    flex-direction: column;
+    gap: 4px;
 }
 
 .taskText {
     text-align: left;
     color: #333;
     font-weight: 500;
+    word-wrap: break-word;
+    line-height: 1.3;
+}
+
+.deadlineInfo {
+    font-size: 0.8em;
+    color: #666;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 2px;
+}
+
+.overdueLabel {
+    background-color: #dc3545;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.75em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.actionContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.moreButton {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 6px 8px;
+    border-radius: 4px;
+    color: #666;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    height: 32px;
+}
+
+.moreButton:hover {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+.dropdownOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 998;
+}
+
+.dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 999;
+    min-width: 250px;
+    overflow: hidden;
+    animation: dropdownSlide 0.2s ease;
+}
+
+@keyframes dropdownSlide {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dropdownInfo {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    background-color: #f8f9fa;
+}
+
+.infoItem {
+    font-size: 0.8em;
+    color: #666;
+    margin-bottom: 4px;
+    display: block;
+}
+
+.infoItem:last-child {
+    margin-bottom: 0;
+}
+
+.dropdownActions {
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.dropdownButton {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 8px 12px;
+    font-size: 0.85em;
+    color: #333;
+    text-align: left;
     width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.dropdownButton:hover {
+    background-color: #f5f5f5;
+}
+
+.completedBtn {
+    background-color: #d4edda !important;
+    border-color: #c3e6cb !important;
+    color: #155724 !important;
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+.incompleteBtn {
+    background-color: #fff3cd;
+    border-color: #ffeaa7;
+    color: #856404;
+}
+
+.incompleteBtn:hover {
+    background-color: #fff3cd;
+    border-color: #ffcd39;
+}
+
+.deleteBtn {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+}
+
+.deleteBtn:hover {
+    background-color: #f1b0b7;
+    border-color: #f5c6cb;
+}
+
+.taskInfo {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
 }
 
 .timestamp {
     font-size: 0.75em;
     color: #888;
     white-space: nowrap;
-    margin-right: 5px;
 }
 
 .difficulty {
     font-size: 0.75em;
     color: #555;
     white-space: nowrap;
-    margin-right: 5px;
 }
 
 .difficulty.easy {
@@ -59,53 +229,7 @@
 
 .taskItem.completed {
     background-color: #d4edda;
-}
-
-.button {
-    background-color: #ffffff;
-    border: 1px solid #555;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.2s, transform 0.1s;
-    padding: 4px 10px;
-    font-size: 0.85em;
-    color: #fff;
-}
-
-.buttonContainer {
-    display: flex;
-    gap: 3px;
-}
-
-.completedBtn {
-    background-color: #5cb85c;
-    border-color: #4cae4c;
-    cursor: not-allowed;
-    opacity: 0.6;
-}
-
-.incompleteBtn {
-    background-color: #cccccc;
-    border-color: #999;
-}
-
-.incompleteBtn:hover {
-    background-color: #70c855;
-}
-
-.deleteBtn {
-    background-color: #d9534f;
-}
-
-.deleteBtn:hover {
-    background-color: #c9302c;
-}
-
-.taskList {
-    list-style: none;
-    padding: 0;
-    margin: 10px 0;
-    width: 100%;
+    border-color: #c3e6cb;
 }
 
 .deadlinePassed {
@@ -113,8 +237,57 @@
     border-color: #ff6666;
 }
 
-.button:disabled {
-    background-color: #cccccc;
+.dropdownButton:disabled {
+    background-color: #e9ecef !important;
+    border-color: #dee2e6 !important;
+    color: #6c757d !important;
     cursor: not-allowed;
     opacity: 0.6;
+}
+
+@media (max-width: 768px) {
+    .taskInfo {
+        display: none;
+    }
+
+    .dropdown {
+        min-width: 280px;
+        right: -10px;
+    }
+
+    .taskItem {
+        padding: 10px;
+    }
+
+    .moreButton {
+        font-size: 20px;
+        padding: 8px;
+    }
+
+    .deadlineInfo {
+        font-size: 0.75em;
+    }
+}
+
+@media (max-width: 480px) {
+    .dropdown {
+        position: fixed;
+        top: auto;
+        bottom: 20px;
+        left: 20px;
+        right: 20px;
+        min-width: auto;
+        width: auto;
+    }
+
+    .dropdownActions {
+        padding: 12px;
+        gap: 8px;
+    }
+
+    .dropdownButton {
+        padding: 12px;
+        font-size: 0.9em;
+        justify-content: center;
+    }
 }

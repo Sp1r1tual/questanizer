@@ -48,14 +48,34 @@
     border-top: 1px solid #d9c2a8;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
     .faqQuestion {
-        font-size: 1rem;
-        padding: 0.8rem;
+        font-size: 0.95rem;
+        padding: 0.75rem 1rem;
     }
 
     .faqAnswer {
         font-size: 0.9rem;
-        padding: 0.8rem;
+        padding: 0.75rem 1rem;
+    }
+
+    .arrow {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .faqQuestion {
+        font-size: 0.9rem;
+        padding: 0.65rem 0.8rem;
+    }
+
+    .faqAnswer {
+        font-size: 0.85rem;
+        padding: 0.65rem 0.8rem;
+    }
+
+    .arrow {
+        font-size: 0.8rem;
     }
 }

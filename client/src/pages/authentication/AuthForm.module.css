@@ -1,47 +1,48 @@
 .contentForm {
     background-color: #f7f1ee;
-    padding: 2rem;
-    border-radius: 1rem;
-    box-shadow: 0 0 20px rgba(80, 50, 40, 0.2);
-    max-width: 400px;
-    margin: 0 auto;
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 0 15px rgba(80, 50, 40, 0.2);
+    width: 300px;
     font-family: "Georgia", serif;
     position: relative;
     z-index: 1;
-    flex: 1;
-    max-width: 50%;
-    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 
 .formTitle {
     text-align: center;
-    font-size: 1.8rem;
-    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
     color: #4d2c20;
 }
 
 .formGroup {
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
 .formLabel {
     font-weight: bold;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.3rem;
     color: #3b2b23;
+    font-size: 0.875rem;
+    text-align: left;
 }
 
 .formInput {
-    padding: 0.6rem 1rem;
-    border-radius: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.4rem;
     border: 1px solid #a89d94;
     background-color: #fffaf7;
-    font-size: 1rem;
+    font-size: 0.875rem;
     transition: border 0.2s ease, background-color 0.2s ease;
+    width: 100%;
 }
 
 .formInput.errorInput {
@@ -58,55 +59,38 @@
 .error {
     color: darkred;
     font-weight: bold;
-    margin-bottom: 1rem;
-    position: relative;
-    z-index: 2;
+    margin-bottom: 0.75rem;
+    font-size: 0.75rem;
+    text-align: center;
 }
 
 .buttons {
     display: flex;
-    justify-content: space-between;
-    gap: 1rem;
+    justify-content: center;
+    gap: 0.75rem;
 }
 
 .submitButton {
-    flex: 1;
-    padding: 0.6rem 1rem;
+    padding: 0.5rem 1rem;
     background-color: #7d5032;
     color: white;
     border: none;
-    border-radius: 0.5rem;
+    border-radius: 0.4rem;
     font-weight: bold;
-    font-size: 1rem;
+    font-size: 0.875rem;
     cursor: pointer;
     transition: background-color 0.2s ease;
+    width: 100%;
 }
 
 .submitButton:hover {
     background-color: #5e3e28;
 }
 
-.cancelButton {
-    flex: 1;
-    padding: 0.6rem 1rem;
-    background-color: #b8aaa0;
-    color: #2c1c16;
-    border: none;
-    border-radius: 0.5rem;
-    font-weight: bold;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
-
-.cancelButton:hover {
-    background-color: #98887f;
-}
-
 .registerLink {
     text-align: center;
-    margin-top: 1rem;
-    font-size: 0.9rem;
+    margin-top: 0.75rem;
+    font-size: 0.75rem;
     color: #3b2b23;
 }
 
@@ -121,10 +105,38 @@
     color: #5e3e28;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 640px) {
     .contentForm {
-        max-width: 100%;
-        margin: 0;
-        width: 100%;
+        width: 280px;
+        padding: 1rem;
+    }
+
+    .formTitle {
+        font-size: 1.25rem;
+    }
+
+    .formLabel,
+    .formInput,
+    .submitButton {
+        font-size: 0.75rem;
+    }
+
+    .formInput {
+        padding: 0.4rem 0.6rem;
+    }
+
+    .submitButton {
+        padding: 0.4rem 0.6rem;
+    }
+
+    .registerLink {
+        font-size: 0.6875rem;
+    }
+}
+
+@media (min-width: 640px) and (max-width: 768px) {
+    .contentForm {
+        width: 300px;
+        padding: 1.25rem;
     }
 }

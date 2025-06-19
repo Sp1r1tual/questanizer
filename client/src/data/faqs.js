@@ -11,8 +11,7 @@ const faqs = [
     },
     {
         answerId: 3,
-        question:
-            "Is there a difference between tasks with deadlines and those without?",
+        question: "How do tasks differ with or without deadlines?",
         answer: "Yes! Tasks without a deadline earn 5 times less rewards. This affects both experience and boss damage.",
     },
     {

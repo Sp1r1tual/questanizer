@@ -7,15 +7,22 @@ const TaskInput = ({ onChange, value, isInvalid }) => {
     };
 
     return (
-        <input
-            type="text"
-            className={`${styles.taskInput} ${
-                isInvalid ? styles.invalidInput : ""
-            }`}
-            placeholder="Enter what you plan to do"
-            onChange={inputChangeHandler}
-            value={value}
-        />
+        <div className={styles.inputContainer}>
+            <input
+                type="text"
+                className={`${styles.taskInput} ${
+                    isInvalid ? styles.invalidInput : ""
+                }`}
+                placeholder="Enter what you plan to do..."
+                onChange={inputChangeHandler}
+                value={value}
+            />
+            {isInvalid && (
+                <div className={styles.errorMessage}>
+                    Please enter a task description
+                </div>
+            )}
+        </div>
     );
 };
 

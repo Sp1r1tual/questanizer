@@ -9,7 +9,7 @@
 .statsInner {
     display: flex;
     gap: 1rem;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
 }

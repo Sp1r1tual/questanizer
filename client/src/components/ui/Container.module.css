@@ -10,3 +10,10 @@
     flex-direction: column;
     align-items: center;
 }
+
+@media (max-width: 640px) {
+    .container {
+        max-width: 95%;
+        padding: 15px;
+    }
+}

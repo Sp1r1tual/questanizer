@@ -43,3 +43,17 @@
 .rage {
     background-color: #ff9800;
 }
+
+@media (max-width: 480px) {
+    .bossName {
+        font-size: 1.2rem;
+    }
+
+    .statText {
+        font-size: 0.9rem;
+    }
+
+    .progressBar {
+        height: 0.8rem;
+    }
+}
