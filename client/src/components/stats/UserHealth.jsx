@@ -14,6 +14,7 @@ const UserHealth = ({ health, maxHealth }) => {
                     <div
                         className={styles.fill}
                         style={{ width: `${healthPercent}%` }}
+                        data-testid="health-bar-fill"
                     />
                 </div>
             </div>

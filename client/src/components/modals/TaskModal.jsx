@@ -16,7 +16,7 @@ const TaskModal = ({
     const [pageModal, setPageModal] = useState("deadline");
     const [difficulty, setDifficulty] = useState(null);
 
-    const validateYear = (dateString) => {
+    const isDateValid = (dateString) => {
         if (!dateString) return false;
 
         const selectedYear = new Date(dateString).getFullYear();
@@ -27,13 +27,12 @@ const TaskModal = ({
 
     const handleDateChange = (event) => {
         const newDate = event.target.value;
-
         setDeadline(newDate);
-        setIsDateInvalid(!validateYear(newDate));
+        setIsDateInvalid(!newDate || !isDateValid(newDate));
     };
 
     const handleAddWithDeadline = () => {
-        if (!initialDeadline || !validateYear(initialDeadline)) {
+        if (!initialDeadline || !isDateValid(initialDeadline)) {
             setIsDateInvalid(true);
             return;
         }
@@ -48,18 +47,21 @@ const TaskModal = ({
 
     const handleBack = () => {
         setPageModal("deadline");
+        setDifficulty(null);
     };
 
     const handleFinalSubmit = () => {
         if (!difficulty) return;
         onSubmit({ hasDeadline: !!initialDeadline, difficulty });
+        onClose();
     };
 
+    if (!isOpen) {
+        return null;
+    }
+
     return (
-        <div
-            className={`${styles.modal} ${isOpen ? styles.active : ""}`}
-            onClick={onClose}
-        >
+        <div className={`${styles.modal} ${styles.active}`} onClick={onClose}>
             <div
                 className={styles.modalContent}
                 onClick={(event) => event.stopPropagation()}

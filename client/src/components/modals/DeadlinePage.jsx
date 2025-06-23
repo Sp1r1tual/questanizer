@@ -26,7 +26,14 @@ const DeadlinePage = ({
     return (
         <>
             <div onClick={handleFocusClick}>
+                <label
+                    htmlFor="deadline-date-input"
+                    className={styles.visuallyHidden}
+                >
+                    Select Deadline Date
+                </label>
                 <input
+                    id="deadline-date-input"
                     ref={dateInputRef}
                     type="date"
                     value={deadline || ""}
