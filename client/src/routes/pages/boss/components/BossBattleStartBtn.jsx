@@ -1,12 +1,8 @@
-import { useBoss } from "../../../../hooks/boss/useBoss";
-
 import styles from "./BossBattleStartBtn.module.css";
 
-const BossBattleStartBtn = () => {
-    const { initBoss } = useBoss();
-
+const BossBattleStartBtn = ({ onClick }) => {
     return (
-        <button className={styles.startBtn} onClick={() => initBoss()}>
+        <button type="button" className={styles.startBtn} onClick={onClick}>
             Start a boss fight
         </button>
     );

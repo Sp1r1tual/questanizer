@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import TaskDropdown from "./TaskDropdown";
+
 import styles from "./TaskItem.module.css";
 
 const TaskItem = ({ task, onDelete, onComplete }) => {
@@ -7,26 +9,10 @@ const TaskItem = ({ task, onDelete, onComplete }) => {
 
     const isDeadlinePassed = () => {
         if (!task.deadline) return false;
-
-        const deadlineDate = new Date(task.deadline);
-        const currentDate = new Date();
-
-        return deadlineDate < currentDate;
+        return new Date(task.deadline) < new Date();
     };
 
     const deadlinePassed = isDeadlinePassed();
-
-    const handleDeleteClick = () => {
-        onDelete(task.id);
-        setIsDropdownOpen(false);
-    };
-
-    const handleCompleteClick = () => {
-        if (!task.isCompleted) {
-            onComplete(task.id);
-        }
-        setIsDropdownOpen(false);
-    };
 
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
@@ -67,50 +53,13 @@ const TaskItem = ({ task, onDelete, onComplete }) => {
                         ⋯
                     </button>
                     {isDropdownOpen && (
-                        <>
-                            <div
-                                className={styles.dropdownOverlay}
-                                onClick={closeDropdown}
-                            />
-                            <div className={styles.dropdown}>
-                                <div className={styles.dropdownInfo}>
-                                    <div className={styles.infoItem}>
-                                        📅 Created: {task.createdAt}
-                                    </div>
-                                    <div className={styles.infoItem}>
-                                        ⚔️ Difficulty: {task.difficulty}
-                                    </div>
-                                    {task.deadline && (
-                                        <div className={styles.infoItem}>
-                                            ⏰ Deadline: {task.deadline}
-                                        </div>
-                                    )}
-                                </div>
-                                <div className={styles.dropdownActions}>
-                                    <button
-                                        className={`${styles.dropdownButton} ${
-                                            task.isCompleted
-                                                ? styles.completedBtn
-                                                : styles.incompleteBtn
-                                        }`}
-                                        onClick={handleCompleteClick}
-                                        disabled={
-                                            deadlinePassed || task.isCompleted
-                                        }
-                                    >
-                                        {task.isCompleted
-                                            ? "Completed"
-                                            : "Mark as Done"}
-                                    </button>
-                                    <button
-                                        className={`${styles.dropdownButton} ${styles.deleteBtn}`}
-                                        onClick={handleDeleteClick}
-                                    >
-                                        Delete
-                                    </button>
-                                </div>
-                            </div>
-                        </>
+                        <TaskDropdown
+                            task={task}
+                            onComplete={onComplete}
+                            onDelete={onDelete}
+                            onClose={closeDropdown}
+                            deadlinePassed={deadlinePassed}
+                        />
                     )}
                 </div>
             </div>

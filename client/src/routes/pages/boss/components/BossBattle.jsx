@@ -11,7 +11,7 @@ const BossBattle = () => {
 
     const handleStartBattle = () => {
         console.log("Starting battle with boss ID: 1");
-        initBoss(1);
+        initBoss();
     };
 
     return (

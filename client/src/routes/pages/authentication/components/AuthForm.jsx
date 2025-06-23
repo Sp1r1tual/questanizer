@@ -27,7 +27,7 @@ const AuthForm = () => {
     return (
         <div className={styles.contentForm}>
             <h2 className={styles.formTitle}>Login</h2>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} aria-label="login form">
                 <div className={styles.formGroup}>
                     <label htmlFor="username" className={styles.formLabel}>
                         Username

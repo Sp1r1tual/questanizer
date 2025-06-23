@@ -17,6 +17,16 @@
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
 }
 
+.taskItem.completed {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.deadlinePassed {
+    background-color: #ffcccc;
+    border-color: #ff6666;
+}
+
 .taskHeader {
     display: flex;
     justify-content: space-between;
@@ -87,114 +97,6 @@
     color: #333;
 }
 
-.dropdownOverlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 998;
-}
-
-.dropdown {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    z-index: 999;
-    min-width: 250px;
-    overflow: hidden;
-    animation: dropdownSlide 0.2s ease;
-}
-
-@keyframes dropdownSlide {
-    from {
-        opacity: 0;
-        transform: translateY(-5px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.dropdownInfo {
-    padding: 12px;
-    border-bottom: 1px solid #eee;
-    background-color: #f8f9fa;
-}
-
-.infoItem {
-    font-size: 0.8em;
-    color: #666;
-    margin-bottom: 4px;
-    display: block;
-}
-
-.infoItem:last-child {
-    margin-bottom: 0;
-}
-
-.dropdownActions {
-    padding: 8px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.dropdownButton {
-    background-color: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    padding: 8px 12px;
-    font-size: 0.85em;
-    color: #333;
-    text-align: left;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.dropdownButton:hover {
-    background-color: #f5f5f5;
-}
-
-.completedBtn {
-    background-color: #d4edda !important;
-    border-color: #c3e6cb !important;
-    color: #155724 !important;
-    cursor: not-allowed;
-    opacity: 0.8;
-}
-
-.incompleteBtn {
-    background-color: #fff3cd;
-    border-color: #ffeaa7;
-    color: #856404;
-}
-
-.incompleteBtn:hover {
-    background-color: #fff3cd;
-    border-color: #ffcd39;
-}
-
-.deleteBtn {
-    background-color: #f8d7da;
-    border-color: #f5c6cb;
-    color: #721c24;
-}
-
-.deleteBtn:hover {
-    background-color: #f1b0b7;
-    border-color: #f5c6cb;
-}
-
 .taskInfo {
     display: flex;
     gap: 12px;
@@ -227,32 +129,9 @@
     color: #9c27b0;
 }
 
-.taskItem.completed {
-    background-color: #d4edda;
-    border-color: #c3e6cb;
-}
-
-.deadlinePassed {
-    background-color: #ffcccc;
-    border-color: #ff6666;
-}
-
-.dropdownButton:disabled {
-    background-color: #e9ecef !important;
-    border-color: #dee2e6 !important;
-    color: #6c757d !important;
-    cursor: not-allowed;
-    opacity: 0.6;
-}
-
 @media (max-width: 768px) {
     .taskInfo {
         display: none;
-    }
-
-    .dropdown {
-        min-width: 280px;
-        right: -10px;
     }
 
     .taskItem {
@@ -266,28 +145,5 @@
 
     .deadlineInfo {
         font-size: 0.75em;
-    }
-}
-
-@media (max-width: 480px) {
-    .dropdown {
-        position: fixed;
-        top: auto;
-        bottom: 20px;
-        left: 20px;
-        right: 20px;
-        min-width: auto;
-        width: auto;
-    }
-
-    .dropdownActions {
-        padding: 12px;
-        gap: 8px;
-    }
-
-    .dropdownButton {
-        padding: 12px;
-        font-size: 0.9em;
-        justify-content: center;
     }
 }
