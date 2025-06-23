@@ -10,7 +10,11 @@ const ConfirmChoiceModal = ({ isOpen, onClose, onConfirm, title, message }) => {
     };
 
     return (
-        <div className={styles.backdrop} onClick={handleBackdropClick}>
+        <div
+            className={styles.backdrop}
+            onClick={handleBackdropClick}
+            data-testid="backdrop"
+        >
             <div className={styles.modal}>
                 <div className={styles.header}>
                     <h3 className={styles.title}>{title}</h3>

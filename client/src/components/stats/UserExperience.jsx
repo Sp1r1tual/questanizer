@@ -15,6 +15,7 @@ const UserExperience = ({ experience, level }) => {
                     <div
                         className={styles.fill}
                         style={{ width: `${progressPercent}%` }}
+                        data-testid="progress-bar-fill"
                     />
                 </div>
             </div>
