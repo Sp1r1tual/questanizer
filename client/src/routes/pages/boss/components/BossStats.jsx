@@ -19,6 +19,7 @@ const BossStats = () => {
                         className={`${styles.progressBar} ${styles.health}`}
                         max={boss.maxHealth}
                         value={boss.healthPoints}
+                        aria-label="Health"
                     ></progress>
                 </div>
 
@@ -30,6 +31,7 @@ const BossStats = () => {
                         className={`${styles.progressBar} ${styles.rage}`}
                         max={boss.bossRageBar}
                         value={boss.rage}
+                        aria-label="Rage"
                     ></progress>
                 </div>
 
