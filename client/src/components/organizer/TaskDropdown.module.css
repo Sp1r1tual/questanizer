@@ -9,7 +9,7 @@
 
 .dropdown {
     position: absolute;
-    top: 100%;
+    bottom: 100%;
     right: 0;
     background: white;
     border: 1px solid #ddd;
@@ -18,17 +18,18 @@
     z-index: 999;
     min-width: 250px;
     overflow: hidden;
-    animation: dropdownSlide 0.2s ease;
+    animation: dropdownFadeIn 0.2s ease-out forwards;
+    transform-origin: bottom right;
 }
 
-@keyframes dropdownSlide {
+@keyframes dropdownFadeIn {
     from {
         opacity: 0;
-        transform: translateY(-5px);
+        transform: scale(0.95);
     }
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: scale(1);
     }
 }
 
@@ -130,6 +131,8 @@
         right: 20px;
         min-width: auto;
         width: auto;
+        animation: dropdownFadeIn 0.2s ease-out forwards;
+        transform-origin: bottom;
     }
 
     .dropdownActions {
