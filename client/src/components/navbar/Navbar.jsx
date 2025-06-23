@@ -75,7 +75,10 @@ const Navbar = () => {
                         />
                     </button>
                     {isMenuOpen && (
-                        <div className={styles.dropdownMenu}>
+                        <div
+                            className={styles.dropdownMenu}
+                            data-testid="dropdown-menu"
+                        >
                             <NavLink
                                 to="/"
                                 className={({ isActive }) =>
