@@ -1,16 +1,16 @@
-import AuthForm from "./components/AuthForm";
+import LoginForm from "./components/LoginForm";
 import LoginImage from "./components/LoginImage";
 import Footer from "../../../components/footer/Footer";
 
-import styles from "./AuthenticationPage.module.css";
+import styles from "./LoginPage.module.css";
 
-const AuthenticationPage = () => {
+const LoginPage = () => {
     return (
         <div className={styles.authPage}>
             <div className={styles.authContentWrapper}>
                 <div className={styles.authContainer}>
                     <LoginImage />
-                    <AuthForm />
+                    <LoginForm />
                 </div>
             </div>
             <Footer />
@@ -18,4 +18,4 @@ const AuthenticationPage = () => {
     );
 };
 
-export default AuthenticationPage;
+export default LoginPage;

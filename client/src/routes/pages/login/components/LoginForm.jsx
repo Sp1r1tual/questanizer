@@ -1,10 +1,10 @@
-import useAuthForm from "../../../../hooks/auth/useAuthForm";
+import useAuthForm from "../../../../hooks/auth/useLoginForm";
 import useAuth from "../../../../hooks/auth/useAuth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
-import styles from "./AuthForm.module.css";
+import styles from "./LoginForm.module.css";
 
-const AuthForm = () => {
+const LoginForm = () => {
     const { signIn } = useAuth();
     const navigate = useNavigate();
 
@@ -14,12 +14,12 @@ const AuthForm = () => {
     };
 
     const {
-        username,
+        email,
         password,
-        usernameError,
+        emailError,
         passwordError,
         error,
-        handleUsernameChange,
+        handleEmailChange,
         handlePasswordChange,
         handleSubmit,
     } = useAuthForm({ onSubmit });
@@ -29,17 +29,17 @@ const AuthForm = () => {
             <h2 className={styles.formTitle}>Login</h2>
             <form onSubmit={handleSubmit} aria-label="login form">
                 <div className={styles.formGroup}>
-                    <label htmlFor="username" className={styles.formLabel}>
-                        Username
+                    <label htmlFor="email" className={styles.formLabel}>
+                        Email
                     </label>
                     <input
-                        type="text"
-                        id="username"
-                        value={username}
-                        onChange={handleUsernameChange}
-                        placeholder="Enter username"
+                        type="email"
+                        id="email"
+                        value={email}
+                        onChange={handleEmailChange}
+                        placeholder="Enter email"
                         className={`${styles.formInput} ${
-                            usernameError ? styles.errorInput : ""
+                            emailError ? styles.errorInput : ""
                         }`}
                     />
                 </div>
@@ -67,12 +67,12 @@ const AuthForm = () => {
             </form>
             <p className={styles.registerLink}>
                 Don't have an account?{" "}
-                <a href="/register" className={styles.link}>
+                <Link to="/registration" className={styles.link}>
                     Register here
-                </a>
+                </Link>
             </p>
         </div>
     );
 };
 
-export default AuthForm;
+export default LoginForm;

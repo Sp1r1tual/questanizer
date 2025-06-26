@@ -1,14 +1,8 @@
-import { Routes, Route } from "react-router-dom";
-import AuthenticationPage from "./routes/pages/authentication/AuthenticationPage";
-import AuthenticatedLayout from "./layouts/AuthenticatedLayout";
+import { RouterProvider } from "react-router-dom";
+import router from "./router";
 
 function App() {
-    return (
-        <Routes>
-            <Route path="/authentication" element={<AuthenticationPage />} />
-            <Route path="/*" element={<AuthenticatedLayout />} />
-        </Routes>
-    );
+    return <RouterProvider router={router} />;
 }
 
 export default App;

@@ -1,82 +1,82 @@
 import { useState } from "react";
 
-const useAuthForm = ({ onSubmit }) => {
-    const [username, setUsername] = useState("");
+const useLoginForm = ({ onSubmit }) => {
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
-    const [usernameError, setUsernameError] = useState(false);
+    const [emailError, setEmailError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
-    const [hasTypedUsername, setHasTypedUsername] = useState(false);
+    const [hasTypedEmail, setHasTypedEmail] = useState(false);
     const [hasTypedPassword, setHasTypedPassword] = useState(false);
 
-    const validateUsername = (value) => value.length >= 6 && value.length <= 20;
+    const validateEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+
     const validatePassword = (value) =>
-        value.length >= 8 && value.length <= 20 && /[A-Z]/.test(value);
+        value.length >= 8 && value.length <= 32 && /[A-Z]/.test(value);
 
-    const handleUsernameChange = (event) => {
+    const handleEmailChange = (event) => {
         const value = event.target.value;
+        setEmail(value);
 
-        setUsername(value);
-        if (!hasTypedUsername && value) setHasTypedUsername(true);
+        if (!hasTypedEmail && value) setHasTypedEmail(true);
+        setEmailError(hasTypedEmail && !validateEmail(value));
 
-        setUsernameError(hasTypedUsername && !validateUsername(value));
         if (value) setError("");
     };
 
     const handlePasswordChange = (event) => {
         const value = event.target.value;
-
         setPassword(value);
 
         if (!hasTypedPassword && value) setHasTypedPassword(true);
-
         setPasswordError(hasTypedPassword && !validatePassword(value));
+
         if (value) setError("");
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        const isUsernameValid = validateUsername(username);
+        const isEmailValid = validateEmail(email);
         const isPasswordValid = validatePassword(password);
 
-        if (!username || !password) {
-            setError("Please enter both username and password.");
-            setUsernameError(!username);
+        if (!email || !password) {
+            setError("Please enter both email and password.");
+            setEmailError(!email);
             setPasswordError(!password);
             return;
         }
 
-        if (!isUsernameValid) {
-            setError("Username must be between 6 and 20 characters.");
-            setUsernameError(true);
+        if (!isEmailValid) {
+            setError("Please enter a valid email address.");
+            setEmailError(true);
             return;
         }
 
         if (!isPasswordValid) {
             setError(
-                "Password must be between 8 and 20 english characters and contain at least one uppercase letter."
+                "Password must be 8–32 english characters and contain at least one uppercase letter."
             );
             setPasswordError(true);
             return;
         }
 
         setError("");
-        setUsernameError(false);
+        setEmailError(false);
         setPasswordError(false);
-        onSubmit({ username, password });
+        onSubmit({ email, password });
     };
 
     return {
-        username,
+        email,
         password,
-        usernameError,
+        emailError,
         passwordError,
         error,
-        handleUsernameChange,
+        handleEmailChange,
         handlePasswordChange,
         handleSubmit,
     };
 };
 
-export default useAuthForm;
+export default useLoginForm;
