@@ -68,6 +68,10 @@ class UserService {
             throw ApiError.BadRequest("Incorrect password");
         }
 
+        if (!user.isActivated) {
+            throw ApiError.BadRequest("Please activate your account via email");
+        }
+
         const userDto = new UserDto(user);
         const tokens = tokenService.generateTokens({ ...userDto });
 

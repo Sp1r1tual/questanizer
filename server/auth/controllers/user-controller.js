@@ -1,6 +1,8 @@
 import { validationResult } from "express-validator";
 import userService from "../services/user-service.js";
 import ApiError from "../exceptions/api-error.js";
+import activationSuccessHTML from "../views/activation/success.js";
+import activationErrorHTML from "../views/activation/error.js";
 
 class UserController {
     async registration(req, res, next) {
@@ -48,12 +50,19 @@ class UserController {
     async activate(req, res, next) {
         try {
             const activationLink = req.params.link;
-
             await userService.activate(activationLink);
-
-            return res.redirect(process.env.CLIENT_URL);
+            return res.send(
+                activationSuccessHTML(`${process.env.CLIENT_URL}/login`)
+            );
         } catch (error) {
-            next(error);
+            return res
+                .status(400)
+                .send(
+                    activationErrorHTML(
+                        `${process.env.CLIENT_URL}/login`,
+                        error.message
+                    )
+                );
         }
     }
 

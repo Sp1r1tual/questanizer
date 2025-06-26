@@ -1,43 +1,52 @@
-🧙 Atypical Task Scheduler (MVP)
+# 🧙 Atypical Task Scheduler (MVP)
 
-A productivity organizer gamified with RPG mechanics — schedule tasks, defeat bosses, gain experience, and level up your life.
+**A gamified productivity organizer with RPG mechanics** — schedule quests (tasks), defeat bosses, gain experience, and level up your life.
 
-🚀 MVP Features:<br/>
-✅ Task management (add/edit/delete)<br/>
-✅ Experience points for task completion<br/>
-✅ Boss battles triggered by accumulated progress<br/>
-✅ Login system for user-based task storage<br/>
-🧪 Fully client–server–DB integrated stack
+---
 
-🧱 Tech Stack:<br/>
-Frontend:<br/>
-JavaScript<br/>
-React<br/>
-Redux Toolkit<br/>
-React Router<br/>
-Backend:<br/>
-Node.js<br/>
-Express
+## 🚀 MVP Features
 
-Architecture: Client ↔ Server ↔ Database
+-   ✅ Task management (add/delete)
+-   ✅ Experience system for completed tasks
+-   ✅ Boss battles triggered by accumulated progress
+-   ✅ User login & authentication
+-   ✅ Full-stack client–server–database integration
 
-🧩 Key Concepts:<br/>
-📅 Tasks as quests — every task is a mission<br/>
-💥 Boss fights — defeat bosses by being productive<br/>
-🧠 XP system — earn experience and level up<br/>
-🧾 Login system — personal progress tracking
+---
 
-⚙️ Installation<br/>
-cd client<br/>
-npm install
+## 🧱 Tech Stack
 
-🧪 Run the Project
-cd client<br/>
-npm start
+### 🔹 Frontend
 
-🔮 Planned Features (Post-MVP):<br/>
-🧝‍♀️ User avatars and character sheets<br/>
-🧙 Boss design with randomized stats<br/>
-📈 Stats and leaderboard<br/>
-🔔 Notifications and reminders<br/>
-📊 Task analytics
+-   JavaScript (ES6+)
+-   React
+-   Redux Toolkit
+-   React Router
+
+### 🔸 Backend
+
+-   Node.js
+-   Express
+-   MongoDB (via Mongoose)
+
+📐 **Architecture**: Client ↔ Server ↔ Database
+
+---
+
+## 🧩 Core Gameplay Concepts
+
+-   📅 **Tasks as quests** — every task is a mission you choose to complete
+-   💥 **Boss battles** — productivity triggers challenges
+-   🧠 **XP system** — gain experience, progress, and evolve
+-   🔐 **Login system** — track your personal progress securely
+
+---
+
+## 🧪 Getting Started
+
+Install and run the app in development mode:
+
+```bash
+npm run install:all   # installs both client and server deps
+npm run dev           # starts both client and server concurrently
+```

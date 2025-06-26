@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const useRegistrationForm = ({ onSubmit }) => {
+const useRegistrationForm = ({ onSubmit, resetError }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -11,23 +11,27 @@ const useRegistrationForm = ({ onSubmit }) => {
     const validatePassword = (value) =>
         value.length >= 8 && value.length <= 32 && /[A-Z]/.test(value);
 
-    const handleEmailChange = (e) => {
-        setEmail(e.target.value);
+    const handleEmailChange = (event) => {
+        setEmail(event.target.value);
         setError("");
+        resetError?.();
     };
 
-    const handlePasswordChange = (e) => {
-        setPassword(e.target.value);
+    const handlePasswordChange = (event) => {
+        setPassword(event.target.value);
         setError("");
+        resetError?.();
     };
 
-    const handleConfirmPasswordChange = (e) => {
-        setConfirmPassword(e.target.value);
+    const handleConfirmPasswordChange = (event) => {
+        setConfirmPassword(event.target.value);
         setError("");
+        resetError?.();
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleSubmit = (event) => {
+        resetError?.();
+        event.preventDefault();
 
         if (!email || !password || !confirmPassword) {
             setError("Please fill out all fields.");

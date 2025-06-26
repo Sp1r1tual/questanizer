@@ -1,13 +1,11 @@
 import { useState } from "react";
 
-const useLoginForm = ({ onSubmit }) => {
+const useLoginForm = ({ onSubmit, resetError }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
     const [emailError, setEmailError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
-    const [hasTypedEmail, setHasTypedEmail] = useState(false);
-    const [hasTypedPassword, setHasTypedPassword] = useState(false);
+    const [error, setError] = useState("");
 
     const validateEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 
@@ -17,21 +15,17 @@ const useLoginForm = ({ onSubmit }) => {
     const handleEmailChange = (event) => {
         const value = event.target.value;
         setEmail(value);
-
-        if (!hasTypedEmail && value) setHasTypedEmail(true);
-        setEmailError(hasTypedEmail && !validateEmail(value));
-
-        if (value) setError("");
+        if (error) setError("");
+        resetError?.();
+        setEmailError(!validateEmail(value));
     };
 
     const handlePasswordChange = (event) => {
         const value = event.target.value;
         setPassword(value);
-
-        if (!hasTypedPassword && value) setHasTypedPassword(true);
-        setPasswordError(hasTypedPassword && !validatePassword(value));
-
-        if (value) setError("");
+        if (error) setError("");
+        resetError?.();
+        setPasswordError(!validatePassword(value));
     };
 
     const handleSubmit = (event) => {
@@ -40,24 +34,10 @@ const useLoginForm = ({ onSubmit }) => {
         const isEmailValid = validateEmail(email);
         const isPasswordValid = validatePassword(password);
 
-        if (!email || !password) {
-            setError("Please enter both email and password.");
-            setEmailError(!email);
-            setPasswordError(!password);
-            return;
-        }
-
-        if (!isEmailValid) {
-            setError("Please enter a valid email address.");
-            setEmailError(true);
-            return;
-        }
-
-        if (!isPasswordValid) {
-            setError(
-                "Password must be 8–32 english characters and contain at least one uppercase letter."
-            );
-            setPasswordError(true);
+        if (!isEmailValid || !isPasswordValid) {
+            setEmailError(!isEmailValid);
+            setPasswordError(!isPasswordValid);
+            setError("Please enter valid email and password.");
             return;
         }
 

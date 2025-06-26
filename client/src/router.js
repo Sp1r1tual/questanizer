@@ -7,7 +7,6 @@ import BossBattlePage from "./routes/pages/boss/BossBattlePage";
 import AnswersPage from "./routes/pages/faq/AnswersPage";
 import AuthenticatedLayout from "./layouts/AuthenticatedLayout";
 import RegistrationPage from "./routes/pages/registration/RegistrationPage";
-import VerifyEmailPage from "./routes/pages/verify/VerifyEmailPage";
 
 const router = createBrowserRouter([
     {
@@ -17,10 +16,6 @@ const router = createBrowserRouter([
     {
         path: "/registration",
         element: <RegistrationPage />,
-    },
-    {
-        path: "/verify-email",
-        element: <VerifyEmailPage />,
     },
     {
         path: "/",
