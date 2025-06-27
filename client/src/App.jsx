@@ -1,24 +1,27 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RouterProvider } from "react-router-dom";
-import { checkAuth } from "./store/auth/authSlice";
-import router from "./router";
 
-function App() {
+import { Outlet } from "react-router-dom";
+import { checkAuth } from "./store/auth/authSlice";
+import Loader from "./components/ui/Loader";
+
+const App = () => {
     const dispatch = useDispatch();
     const isLoading = useSelector((state) => state.auth.isLoading);
 
-    // TODO: Persist authentication state on page reload
-    // Currently, the user is logged out after refreshing the page
     useEffect(() => {
         if (localStorage.getItem("token")) {
             dispatch(checkAuth());
         }
-    }, []);
+    }, [dispatch]);
 
-    if (isLoading) return <div>Loading...</div>;
+    if (isLoading) return <Loader visible={true} />;
 
-    return <RouterProvider router={router} />;
-}
+    return (
+        <>
+            <Outlet />
+        </>
+    );
+};
 
 export default App;

@@ -3,12 +3,12 @@ import { useNavigate, Link } from "react-router-dom";
 import useAuth from "../../../../hooks/auth/useAuth";
 import useRegistrationForm from "../../../../hooks/auth/useRegistrationForm";
 
-import LoaderModal from "../../../../components/ui/Loader";
+import Loader from "../../../../components/ui/Loader";
 
 import styles from "./RegistrationForm.module.css";
 
 const RegistrationForm = () => {
-    const { registerUser, authError, resetError } = useAuth();
+    const { registerUser, authError } = useAuth();
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
@@ -22,7 +22,7 @@ const RegistrationForm = () => {
                 navigate("/login", { replace: true });
             }
         } catch (error) {
-            console.log("Registration failed:", error);
+            console.log(error);
         } finally {
             setIsLoading(false);
         }
@@ -32,19 +32,25 @@ const RegistrationForm = () => {
         email,
         password,
         confirmPassword,
-        error,
+        error: localError,
         handleEmailChange,
         handlePasswordChange,
         handleConfirmPasswordChange,
         handleSubmit,
-    } = useRegistrationForm({ onSubmit, resetError });
+    } = useRegistrationForm({ onSubmit });
+
+    const displayError = localError || authError;
 
     return (
         <>
-            <LoaderModal visible={isLoading} />
+            <Loader visible={isLoading} />
             <div className={styles.contentForm}>
                 <h2 className={styles.formTitle}>Register</h2>
-                <form onSubmit={handleSubmit} aria-label="registration form">
+                <form
+                    onSubmit={handleSubmit}
+                    aria-label="registration form"
+                    noValidate
+                >
                     <div className={styles.formGroup}>
                         <label htmlFor="email" className={styles.formLabel}>
                             Email
@@ -55,7 +61,18 @@ const RegistrationForm = () => {
                             value={email}
                             onChange={handleEmailChange}
                             placeholder="Enter your email"
-                            className={styles.formInput}
+                            className={`${styles.formInput} ${
+                                localError &&
+                                localError.toLowerCase().includes("email")
+                                    ? styles.errorInput
+                                    : ""
+                            }`}
+                            aria-invalid={
+                                !!(
+                                    localError &&
+                                    localError.toLowerCase().includes("email")
+                                )
+                            }
                         />
                     </div>
 
@@ -69,7 +86,20 @@ const RegistrationForm = () => {
                             value={password}
                             onChange={handlePasswordChange}
                             placeholder="Enter password"
-                            className={styles.formInput}
+                            className={`${styles.formInput} ${
+                                localError &&
+                                localError.toLowerCase().includes("password")
+                                    ? styles.errorInput
+                                    : ""
+                            }`}
+                            aria-invalid={
+                                !!(
+                                    localError &&
+                                    localError
+                                        .toLowerCase()
+                                        .includes("password")
+                                )
+                            }
                         />
                     </div>
 
@@ -86,14 +116,33 @@ const RegistrationForm = () => {
                             value={confirmPassword}
                             onChange={handleConfirmPasswordChange}
                             placeholder="Repeat password"
-                            className={styles.formInput}
+                            className={`${styles.formInput} ${
+                                localError &&
+                                localError.toLowerCase().includes("match")
+                                    ? styles.errorInput
+                                    : ""
+                            }`}
+                            aria-invalid={
+                                !!(
+                                    localError &&
+                                    localError.toLowerCase().includes("match")
+                                )
+                            }
                         />
                     </div>
-                    {(error || authError) && (
-                        <p className={styles.error}>{authError || error}</p>
+
+                    {displayError && (
+                        <p className={styles.error} role="alert">
+                            {displayError}
+                        </p>
                     )}
+
                     <div className={styles.buttons}>
-                        <button type="submit" className={styles.submitButton}>
+                        <button
+                            type="submit"
+                            className={styles.submitButton}
+                            disabled={isLoading}
+                        >
                             Register
                         </button>
                     </div>

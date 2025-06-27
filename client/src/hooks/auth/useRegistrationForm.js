@@ -1,6 +1,14 @@
 import { useState } from "react";
 
-const useRegistrationForm = ({ onSubmit, resetError }) => {
+const ERROR_MESSAGES = {
+    fillAllFields: "Please fill out all fields.",
+    invalidEmail: "Invalid email format.",
+    invalidPassword:
+        "Password must be 8-32 characters and include an uppercase letter.",
+    passwordMismatch: "Passwords do not match.",
+};
+
+const useRegistrationForm = ({ onSubmit }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -13,45 +21,36 @@ const useRegistrationForm = ({ onSubmit, resetError }) => {
 
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
-        setError("");
-        resetError?.();
     };
 
     const handlePasswordChange = (event) => {
         setPassword(event.target.value);
-        setError("");
-        resetError?.();
     };
 
     const handleConfirmPasswordChange = (event) => {
         setConfirmPassword(event.target.value);
-        setError("");
-        resetError?.();
     };
 
     const handleSubmit = (event) => {
-        resetError?.();
         event.preventDefault();
 
         if (!email || !password || !confirmPassword) {
-            setError("Please fill out all fields.");
+            setError(ERROR_MESSAGES.fillAllFields);
             return;
         }
 
         if (!validateEmail(email)) {
-            setError("Invalid email format.");
+            setError(ERROR_MESSAGES.invalidEmail);
             return;
         }
 
         if (!validatePassword(password)) {
-            setError(
-                "Password must be 8-32 characters and include an uppercase letter."
-            );
+            setError(ERROR_MESSAGES.invalidPassword);
             return;
         }
 
         if (password !== confirmPassword) {
-            setError("Passwords do not match.");
+            setError(ERROR_MESSAGES.passwordMismatch);
             return;
         }
 

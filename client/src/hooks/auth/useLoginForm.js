@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const useLoginForm = ({ onSubmit, resetError }) => {
+const useLoginForm = ({ onSubmit }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [emailError, setEmailError] = useState(false);
@@ -15,16 +15,12 @@ const useLoginForm = ({ onSubmit, resetError }) => {
     const handleEmailChange = (event) => {
         const value = event.target.value;
         setEmail(value);
-        if (error) setError("");
-        resetError?.();
         setEmailError(!validateEmail(value));
     };
 
     const handlePasswordChange = (event) => {
         const value = event.target.value;
         setPassword(value);
-        if (error) setError("");
-        resetError?.();
         setPasswordError(!validatePassword(value));
     };
 

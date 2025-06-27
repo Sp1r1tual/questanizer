@@ -10,9 +10,9 @@ const login = createAsyncThunk(
             const response = await AuthService.login(email, password);
             localStorage.setItem("token", response.data.accessToken);
             return response.data.user;
-        } catch (err) {
+        } catch (error) {
             return thunkAPI.rejectWithValue(
-                err.response?.data?.message || "Login failed"
+                error.response?.data?.message || "Login failed"
             );
         }
     }
@@ -25,9 +25,9 @@ const register = createAsyncThunk(
             const response = await AuthService.registration(email, password);
             localStorage.setItem("token", response.data.accessToken);
             return response.data.user;
-        } catch (err) {
+        } catch (error) {
             return thunkAPI.rejectWithValue(
-                err.response?.data?.message || "Registration failed"
+                error.response?.data?.message || "Registration failed"
             );
         }
     }
@@ -45,9 +45,9 @@ const checkAuth = createAsyncThunk("auth/checkAuth", async (_, thunkAPI) => {
         });
         localStorage.setItem("token", response.data.accessToken);
         return response.data.user;
-    } catch (err) {
+    } catch (error) {
         return thunkAPI.rejectWithValue(
-            err.response?.data?.message || "Session expired"
+            error.response?.data?.message || "Session expired"
         );
     }
 });
@@ -60,11 +60,7 @@ const authSlice = createSlice({
         isLoading: false,
         error: null,
     },
-    reducers: {
-        clearError(state) {
-            state.error = null;
-        },
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder
             .addCase(login.pending, (state) => {
@@ -121,8 +117,6 @@ const authSlice = createSlice({
             });
     },
 });
-
-export const { clearError } = authSlice.actions;
 
 export { login, register, logout, checkAuth };
 

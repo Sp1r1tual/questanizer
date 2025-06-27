@@ -3,24 +3,24 @@ import useAuthForm from "../../../../hooks/auth/useLoginForm";
 import useAuth from "../../../../hooks/auth/useAuth";
 import { useNavigate, Link } from "react-router-dom";
 
-import LoaderModal from "../../../../components/ui/Loader";
+import Loader from "../../../../components/ui/Loader";
 
 import styles from "./LoginForm.module.css";
 
 const LoginForm = () => {
-    const { signIn, authError, resetError } = useAuth();
+    const { signIn, authError } = useAuth();
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
     const onSubmit = async (credentials) => {
+        setIsLoading(true);
         try {
-            setIsLoading(true);
             const result = await signIn(credentials);
             if (result.meta.requestStatus === "fulfilled") {
                 navigate("/", { replace: true });
             }
         } catch (error) {
-            console.log("Login failed:", error);
+            console.error("Login failed:", error);
         } finally {
             setIsLoading(false);
         }
@@ -35,14 +35,20 @@ const LoginForm = () => {
         handleEmailChange,
         handlePasswordChange,
         handleSubmit,
-    } = useAuthForm({ onSubmit, resetError });
+    } = useAuthForm({ onSubmit });
+
+    const displayError = error || authError;
 
     return (
         <>
-            <LoaderModal visible={isLoading} />
+            <Loader visible={isLoading} />
             <div className={styles.contentForm}>
                 <h2 className={styles.formTitle}>Login</h2>
-                <form onSubmit={handleSubmit} aria-label="login form">
+                <form
+                    onSubmit={handleSubmit}
+                    aria-label="login form"
+                    noValidate
+                >
                     <div className={styles.formGroup}>
                         <label htmlFor="email" className={styles.formLabel}>
                             Email
@@ -56,6 +62,7 @@ const LoginForm = () => {
                             className={`${styles.formInput} ${
                                 emailError ? styles.errorInput : ""
                             }`}
+                            aria-invalid={emailError}
                         />
                     </div>
                     <div className={styles.formGroup}>
@@ -71,13 +78,20 @@ const LoginForm = () => {
                             className={`${styles.formInput} ${
                                 passwordError ? styles.errorInput : ""
                             }`}
+                            aria-invalid={passwordError}
                         />
                     </div>
-                    {(error || authError) && (
-                        <p className={styles.error}>{authError || error}</p>
+                    {displayError && (
+                        <p className={styles.error} role="alert">
+                            {displayError}
+                        </p>
                     )}
                     <div className={styles.buttons}>
-                        <button type="submit" className={styles.submitButton}>
+                        <button
+                            type="submit"
+                            className={styles.submitButton}
+                            disabled={isLoading}
+                        >
                             Login
                         </button>
                     </div>

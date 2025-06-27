@@ -3,14 +3,14 @@ import tokenModel from "../models/token-model.js";
 
 class TokenService {
     generateTokens(payload) {
-        const accesToken = jwt.sign(payload, process.env.JWT_ACCESS_SECRET, {
+        const accessToken = jwt.sign(payload, process.env.JWT_ACCESS_SECRET, {
             expiresIn: "15m",
         });
         const refreshToken = jwt.sign(payload, process.env.JWT_REFRESH_SECRET, {
             expiresIn: "30d",
         });
         return {
-            accesToken,
+            accessToken,
             refreshToken,
         };
     }
@@ -33,7 +33,7 @@ class TokenService {
         return tokenData;
     }
 
-    validateAccesToken(token) {
+    validateAccessToken(token) {
         try {
             const userData = jwt.verify(token, process.env.JWT_ACCESS_SECRET);
             return userData;
