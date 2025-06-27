@@ -22,8 +22,11 @@ class UserController {
             const userData = await userService.registration(email, password);
 
             res.cookie("refreshToken", userData.refreshToken, {
+                httpOnly: true,
+                secure: false,
+                sameSite: "lax",
+                path: "/api",
                 maxAge: 30 * 24 * 60 * 60 * 1000,
-                httpOnly: true, // https - secure: true
             });
 
             return res.json(userData);
@@ -38,9 +41,13 @@ class UserController {
             const userData = await userService.login(email, password);
 
             res.cookie("refreshToken", userData.refreshToken, {
+                httpOnly: true,
+                secure: false,
+                sameSite: "lax",
+                path: "/api",
                 maxAge: 30 * 24 * 60 * 60 * 1000,
-                httpOnly: true, // https - secure: true
             });
+
             return res.json(userData);
         } catch (error) {
             next(error);
@@ -84,9 +91,13 @@ class UserController {
             const userData = await userService.refresh(refreshToken);
 
             res.cookie("refreshToken", userData.refreshToken, {
+                httpOnly: true,
+                secure: false,
+                sameSite: "lax",
+                path: "/api",
                 maxAge: 30 * 24 * 60 * 60 * 1000,
-                httpOnly: true, // https - secure: true
             });
+
             return res.json(userData);
         } catch (error) {
             next(error);

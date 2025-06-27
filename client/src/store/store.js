@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import tasksReducer from "../store/tasks/tasksSlice";
-import authReducer from "../store/auth/authSlice";
+import authReducer, { checkAuth } from "../store/auth/authSlice";
 import userStatsReducer from "../store/stats/userStatsSlice";
 import bossBattleReducer from "./boss/bossBattleSlice";
 
-export const store = configureStore({
+const store = configureStore({
     reducer: {
         tasks: tasksReducer,
         auth: authReducer,
@@ -12,3 +12,10 @@ export const store = configureStore({
         bossBattle: bossBattleReducer,
     },
 });
+
+const token = localStorage.getItem("token");
+if (token) {
+    store.dispatch(checkAuth());
+}
+
+export { store, token };

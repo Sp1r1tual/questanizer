@@ -8,7 +8,7 @@ import Loader from "../../../../components/ui/Loader";
 import styles from "./RegistrationForm.module.css";
 
 const RegistrationForm = () => {
-    const { registerUser, authError } = useAuth();
+    const { registerUser, authError, clearError } = useAuth();
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
@@ -150,7 +150,11 @@ const RegistrationForm = () => {
 
                 <p className={styles.registerLink}>
                     Already have an account?{" "}
-                    <Link to="/login" className={styles.link}>
+                    <Link
+                        to="/login"
+                        className={styles.link}
+                        onClick={() => clearError()}
+                    >
                         Login here
                     </Link>
                 </p>

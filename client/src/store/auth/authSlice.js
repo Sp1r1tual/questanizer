@@ -20,9 +20,9 @@ const login = createAsyncThunk(
 
 const register = createAsyncThunk(
     "auth/register",
-    async ({ email, password }, thunkAPI) => {
+    async (credentials, thunkAPI) => {
         try {
-            const response = await AuthService.registration(email, password);
+            const response = await AuthService.registration(credentials);
             localStorage.setItem("token", response.data.accessToken);
             return response.data.user;
         } catch (error) {
@@ -59,8 +59,13 @@ const authSlice = createSlice({
         isAuthenticated: false,
         isLoading: false,
         error: null,
+        isAuthChecked: false,
     },
-    reducers: {},
+    reducers: {
+        clearAuthError(state) {
+            state.error = null;
+        },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(login.pending, (state) => {
@@ -72,12 +77,14 @@ const authSlice = createSlice({
                 state.isAuthenticated = true;
                 state.error = null;
                 state.isLoading = false;
+                state.isAuthChecked = true;
             })
             .addCase(login.rejected, (state, action) => {
                 state.error = action.payload;
                 state.user = null;
                 state.isAuthenticated = false;
                 state.isLoading = false;
+                state.isAuthChecked = true;
             })
             .addCase(register.pending, (state) => {
                 state.isLoading = true;
@@ -88,17 +95,20 @@ const authSlice = createSlice({
                 state.isAuthenticated = true;
                 state.error = null;
                 state.isLoading = false;
+                state.isAuthChecked = true;
             })
             .addCase(register.rejected, (state, action) => {
                 state.error = action.payload;
                 state.user = null;
                 state.isAuthenticated = false;
                 state.isLoading = false;
+                state.isAuthChecked = true;
             })
             .addCase(logout.fulfilled, (state) => {
                 state.user = null;
                 state.isAuthenticated = false;
                 state.error = null;
+                state.isAuthChecked = true;
             })
             .addCase(checkAuth.pending, (state) => {
                 state.isLoading = true;
@@ -108,16 +118,19 @@ const authSlice = createSlice({
                 state.isAuthenticated = true;
                 state.error = null;
                 state.isLoading = false;
+                state.isAuthChecked = true;
             })
             .addCase(checkAuth.rejected, (state, action) => {
                 state.user = null;
                 state.isAuthenticated = false;
                 state.error = action.payload;
                 state.isLoading = false;
+                state.isAuthChecked = true;
             });
     },
 });
 
 export { login, register, logout, checkAuth };
+export const { clearAuthError } = authSlice.actions;
 
 export default authSlice.reducer;

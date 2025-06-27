@@ -8,7 +8,7 @@ import Loader from "../../../../components/ui/Loader";
 import styles from "./LoginForm.module.css";
 
 const LoginForm = () => {
-    const { signIn, authError } = useAuth();
+    const { signIn, authError, clearError } = useAuth();
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
@@ -81,11 +81,13 @@ const LoginForm = () => {
                             aria-invalid={passwordError}
                         />
                     </div>
+
                     {displayError && (
                         <p className={styles.error} role="alert">
                             {displayError}
                         </p>
                     )}
+
                     <div className={styles.buttons}>
                         <button
                             type="submit"
@@ -98,7 +100,11 @@ const LoginForm = () => {
                 </form>
                 <p className={styles.registerLink}>
                     Don't have an account?{" "}
-                    <Link to="/registration" className={styles.link}>
+                    <Link
+                        to="/registration"
+                        className={styles.link}
+                        onClick={() => clearError()}
+                    >
                         Register here
                     </Link>
                 </p>

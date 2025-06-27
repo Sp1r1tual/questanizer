@@ -7,8 +7,14 @@ import Footer from "../components/footer/Footer";
 import styles from "./AuthenticatedLayout.module.css";
 
 const AuthenticatedLayout = () => {
-    const { isAuthenticated } = useSelector((state) => state.auth);
+    const { isAuthenticated, isAuthChecked } = useSelector(
+        (state) => state.auth
+    );
     const location = useLocation();
+
+    if (!isAuthChecked) {
+        return null;
+    }
 
     if (!isAuthenticated) {
         return <Navigate to="/login" replace state={{ from: location }} />;
