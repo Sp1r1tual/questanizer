@@ -1,56 +1,44 @@
-import { useState } from "react";
+import useForm from "./useForm";
 
-const useLoginForm = ({ onSubmit }) => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [emailError, setEmailError] = useState(false);
-    const [passwordError, setPasswordError] = useState(false);
-    const [error, setError] = useState("");
+import {
+    validateEmail,
+    validatePassword,
+    ERROR_MESSAGES,
+} from "../../utils/validation/validationForm";
 
-    const validateEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+const useLoginForm = ({ onSubmit, clearServerError }) => {
+    const validate = ({ email, password }) => {
+        const errors = {};
 
-    const validatePassword = (value) =>
-        value.length >= 8 && value.length <= 32 && /[A-Z]/.test(value);
-
-    const handleEmailChange = (event) => {
-        const value = event.target.value;
-        setEmail(value);
-        setEmailError(!validateEmail(value));
-    };
-
-    const handlePasswordChange = (event) => {
-        const value = event.target.value;
-        setPassword(value);
-        setPasswordError(!validatePassword(value));
-    };
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-
-        const isEmailValid = validateEmail(email);
-        const isPasswordValid = validatePassword(password);
-
-        if (!isEmailValid || !isPasswordValid) {
-            setEmailError(!isEmailValid);
-            setPasswordError(!isPasswordValid);
-            setError("Please enter valid email and password.");
-            return;
+        if (!email || !password) {
+            errors.fillAllFields = ERROR_MESSAGES.fillAllFields;
+            return errors;
         }
 
-        setError("");
-        setEmailError(false);
-        setPasswordError(false);
-        onSubmit({ email, password });
+        if (!validateEmail(email)) {
+            errors.email = ERROR_MESSAGES.invalidEmail;
+        }
+
+        if (!validatePassword(password)) {
+            errors.password = ERROR_MESSAGES.invalidPassword;
+        }
+
+        return errors;
     };
 
+    const { values, errors, handleChange, handleSubmit } = useForm({
+        initialValues: { email: "", password: "" },
+        validate,
+        onSubmit,
+        clearServerError,
+    });
+
     return {
-        email,
-        password,
-        emailError,
-        passwordError,
-        error,
-        handleEmailChange,
-        handlePasswordChange,
+        email: values.email,
+        password: values.password,
+        errors,
+        handleEmailChange: handleChange("email"),
+        handlePasswordChange: handleChange("password"),
         handleSubmit,
     };
 };

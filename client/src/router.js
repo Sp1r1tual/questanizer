@@ -8,6 +8,8 @@ import TasksView from "./components/organizer/TasksView";
 import UserStatsView from "./components/stats/UserStatsView";
 import BossBattlePage from "./routes/pages/boss/BossBattlePage";
 import AnswersPage from "./routes/pages/faq/AnswersPage";
+import ForgotPassword from "./routes/pages/forgot-password/ForgotPassword";
+import ResetPassword from "./routes/pages/reset-password/ResetPassword";
 
 const router = createBrowserRouter([
     {
@@ -21,6 +23,14 @@ const router = createBrowserRouter([
             {
                 path: "registration",
                 element: <RegistrationPage />,
+            },
+            {
+                path: "forgot-password",
+                element: <ForgotPassword />,
+            },
+            {
+                path: "reset-password/:token",
+                element: <ResetPassword />,
             },
             {
                 path: "/",

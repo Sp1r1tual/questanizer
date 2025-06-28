@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useAuthForm from "../../../../hooks/auth/useLoginForm";
+import useLoginForm from "../../../../hooks/auth/useLoginForm";
 import useAuth from "../../../../hooks/auth/useAuth";
 import { useNavigate, Link } from "react-router-dom";
 
@@ -16,6 +16,7 @@ const LoginForm = () => {
         setIsLoading(true);
         try {
             const result = await signIn(credentials);
+
             if (result.meta.requestStatus === "fulfilled") {
                 navigate("/", { replace: true });
             }
@@ -29,26 +30,25 @@ const LoginForm = () => {
     const {
         email,
         password,
-        emailError,
-        passwordError,
-        error,
+        errors,
         handleEmailChange,
         handlePasswordChange,
         handleSubmit,
-    } = useAuthForm({ onSubmit });
+    } = useLoginForm({ onSubmit, clearServerError: clearError });
 
-    const displayError = error || authError;
+    const allErrors = [
+        errors.fillAllFields,
+        errors.email,
+        errors.password,
+        authError,
+    ].filter(Boolean);
 
     return (
         <>
             <Loader visible={isLoading} />
             <div className={styles.contentForm}>
                 <h2 className={styles.formTitle}>Login</h2>
-                <form
-                    onSubmit={handleSubmit}
-                    aria-label="login form"
-                    noValidate
-                >
+                <form onSubmit={handleSubmit} noValidate>
                     <div className={styles.formGroup}>
                         <label htmlFor="email" className={styles.formLabel}>
                             Email
@@ -58,13 +58,15 @@ const LoginForm = () => {
                             id="email"
                             value={email}
                             onChange={handleEmailChange}
-                            placeholder="Enter email"
                             className={`${styles.formInput} ${
-                                emailError ? styles.errorInput : ""
+                                errors.email || errors.fillAllFields
+                                    ? styles.errorInput
+                                    : ""
                             }`}
-                            aria-invalid={emailError}
+                            placeholder="Enter email"
                         />
                     </div>
+
                     <div className={styles.formGroup}>
                         <label htmlFor="password" className={styles.formLabel}>
                             Password
@@ -74,18 +76,19 @@ const LoginForm = () => {
                             id="password"
                             value={password}
                             onChange={handlePasswordChange}
-                            placeholder="Enter password"
                             className={`${styles.formInput} ${
-                                passwordError ? styles.errorInput : ""
+                                errors.password || errors.fillAllFields
+                                    ? styles.errorInput
+                                    : ""
                             }`}
-                            aria-invalid={passwordError}
+                            placeholder="Enter password"
                         />
                     </div>
 
-                    {displayError && (
-                        <p className={styles.error} role="alert">
-                            {displayError}
-                        </p>
+                    {allErrors.length > 0 && (
+                        <div className={styles.error} role="alert">
+                            <p>{allErrors.join(", ")}</p>
+                        </div>
                     )}
 
                     <div className={styles.buttons}>
@@ -98,12 +101,24 @@ const LoginForm = () => {
                         </button>
                     </div>
                 </form>
+
+                <p className={styles.registerLink}>
+                    Forgot your password?{" "}
+                    <Link
+                        to="/forgot-password"
+                        className={styles.link}
+                        onClick={clearError}
+                    >
+                        Recover it here
+                    </Link>
+                </p>
+
                 <p className={styles.registerLink}>
                     Don't have an account?{" "}
                     <Link
                         to="/registration"
                         className={styles.link}
-                        onClick={() => clearError()}
+                        onClick={clearError}
                     >
                         Register here
                     </Link>

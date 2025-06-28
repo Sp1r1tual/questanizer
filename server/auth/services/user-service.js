@@ -83,6 +83,48 @@ class UserService {
         };
     }
 
+    async forgotPassword(email) {
+        const user = await UserModel.findOne({ email });
+
+        if (!user) {
+            return;
+        }
+
+        const resetToken = tokenService.generateResetToken({
+            email: user.email,
+            id: user._id,
+        });
+
+        await tokenService.saveResetToken(user._id, resetToken);
+        await mailService.sendPasswordResetMail(user.email, resetToken);
+    }
+
+    async resetPassword(resetToken, newPassword) {
+        const userData = tokenService.validateResetToken(resetToken);
+
+        if (!userData) {
+            throw ApiError.BadRequest("Invalid or expired reset token");
+        }
+
+        const tokenData = await tokenService.findResetToken(resetToken);
+
+        if (!tokenData) {
+            throw ApiError.BadRequest("Invalid or expired reset token");
+        }
+
+        const user = await UserModel.findById(userData.id);
+
+        if (!user) {
+            throw ApiError.BadRequest("User not found");
+        }
+
+        const hashPassword = await bcrypt.hash(newPassword, 5);
+
+        user.password = hashPassword;
+        await user.save();
+        await tokenService.removeResetToken(resetToken);
+    }
+
     async logout(refreshToken) {
         const token = await tokenService.removeToken(refreshToken);
         return token;

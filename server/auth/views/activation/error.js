@@ -1,4 +1,4 @@
-const activationErrorHTML = (loginUrl) => `
+const activationErrorHTML = (loginUrl, errorMessage) => `
 <!DOCTYPE html>
 <html>
     <head>

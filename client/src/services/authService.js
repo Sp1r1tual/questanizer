@@ -12,6 +12,14 @@ class AuthService {
     static async logout() {
         return $api.post("/logout");
     }
+
+    static async requestPasswordReset(email) {
+        return $api.post("/forgot-password", { email });
+    }
+
+    static async resetPassword(token, newPassword) {
+        return $api.post(`/reset-password/${token}`, { password: newPassword });
+    }
 }
 
 export { AuthService };

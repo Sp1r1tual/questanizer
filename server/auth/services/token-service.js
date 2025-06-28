@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import tokenModel from "../models/token-model.js";
+import resetTokenModel from "../models/reset-token-model.js";
 
 class TokenService {
     generateTokens(payload) {
@@ -15,6 +16,13 @@ class TokenService {
         };
     }
 
+    generateResetToken(payload) {
+        const resetToken = jwt.sign(payload, process.env.JWT_RESET_SECRET, {
+            expiresIn: "15m",
+        });
+        return resetToken;
+    }
+
     async saveToken(userId, refreshToken) {
         const tokenData = await tokenModel.findOne({ user: userId });
 
@@ -24,12 +32,24 @@ class TokenService {
         }
 
         const token = await tokenModel.create({ user: userId, refreshToken });
+        return token;
+    }
 
+    async saveResetToken(userId, resetToken) {
+        const token = await resetTokenModel.create({
+            user: userId,
+            resetToken,
+        });
         return token;
     }
 
     async removeToken(refreshToken) {
         const tokenData = await tokenModel.deleteOne({ refreshToken });
+        return tokenData;
+    }
+
+    async removeResetToken(resetToken) {
+        const tokenData = await resetTokenModel.deleteOne({ resetToken });
         return tokenData;
     }
 
@@ -51,9 +71,24 @@ class TokenService {
         }
     }
 
+    validateResetToken(token) {
+        try {
+            const userData = jwt.verify(token, process.env.JWT_RESET_SECRET);
+            return userData;
+        } catch (error) {
+            return null;
+        }
+    }
+
     async findToken(refreshToken) {
         const tokenData = await tokenModel.findOne({ refreshToken });
         return tokenData;
     }
+
+    async findResetToken(resetToken) {
+        const tokenData = await resetTokenModel.findOne({ resetToken });
+        return tokenData;
+    }
 }
+
 export default new TokenService();

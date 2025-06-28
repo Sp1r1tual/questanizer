@@ -1,15 +1,16 @@
 import { Schema, model } from "mongoose";
 
-const TokenSchema = new Schema({
+const ResetTokenSchema = new Schema({
     user: {
         type: Schema.Types.ObjectId,
         ref: "User",
         required: true,
+    },
+    resetToken: {
+        type: String,
+        required: true,
         unique: true,
     },
-    refreshToken: { type: String, required: true },
 });
 
-const TokenModel = model("Token", TokenSchema);
-
-export default TokenModel;
+export default model("ResetToken", ResetTokenSchema);

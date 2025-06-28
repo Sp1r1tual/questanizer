@@ -32,14 +32,20 @@ const RegistrationForm = () => {
         email,
         password,
         confirmPassword,
-        error: localError,
+        errors,
         handleEmailChange,
         handlePasswordChange,
         handleConfirmPasswordChange,
         handleSubmit,
-    } = useRegistrationForm({ onSubmit });
+    } = useRegistrationForm({ onSubmit, clearServerError: clearError });
 
-    const displayError = localError || authError;
+    const allErrors = [
+        errors.fillAllFields,
+        errors.email,
+        errors.password,
+        errors.confirmPassword,
+        authError,
+    ].filter(Boolean);
 
     return (
         <>
@@ -62,16 +68,12 @@ const RegistrationForm = () => {
                             onChange={handleEmailChange}
                             placeholder="Enter your email"
                             className={`${styles.formInput} ${
-                                localError &&
-                                localError.toLowerCase().includes("email")
+                                errors.email || errors.fillAllFields
                                     ? styles.errorInput
                                     : ""
                             }`}
                             aria-invalid={
-                                !!(
-                                    localError &&
-                                    localError.toLowerCase().includes("email")
-                                )
+                                !!(errors.email || errors.fillAllFields)
                             }
                         />
                     </div>
@@ -87,18 +89,12 @@ const RegistrationForm = () => {
                             onChange={handlePasswordChange}
                             placeholder="Enter password"
                             className={`${styles.formInput} ${
-                                localError &&
-                                localError.toLowerCase().includes("password")
+                                errors.password || errors.fillAllFields
                                     ? styles.errorInput
                                     : ""
                             }`}
                             aria-invalid={
-                                !!(
-                                    localError &&
-                                    localError
-                                        .toLowerCase()
-                                        .includes("password")
-                                )
+                                !!(errors.password || errors.fillAllFields)
                             }
                         />
                     </div>
@@ -117,24 +113,23 @@ const RegistrationForm = () => {
                             onChange={handleConfirmPasswordChange}
                             placeholder="Repeat password"
                             className={`${styles.formInput} ${
-                                localError &&
-                                localError.toLowerCase().includes("match")
+                                errors.confirmPassword || errors.fillAllFields
                                     ? styles.errorInput
                                     : ""
                             }`}
                             aria-invalid={
                                 !!(
-                                    localError &&
-                                    localError.toLowerCase().includes("match")
+                                    errors.confirmPassword ||
+                                    errors.fillAllFields
                                 )
                             }
                         />
                     </div>
 
-                    {displayError && (
-                        <p className={styles.error} role="alert">
-                            {displayError}
-                        </p>
+                    {allErrors.length > 0 && (
+                        <div className={styles.error} role="alert">
+                            <p>{allErrors.join(", ")}</p>
+                        </div>
                     )}
 
                     <div className={styles.buttons}>
@@ -153,7 +148,7 @@ const RegistrationForm = () => {
                     <Link
                         to="/login"
                         className={styles.link}
-                        onClick={() => clearError()}
+                        onClick={clearError}
                     >
                         Login here
                     </Link>

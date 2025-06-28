@@ -22,7 +22,10 @@ const register = createAsyncThunk(
     "auth/register",
     async (credentials, thunkAPI) => {
         try {
-            const response = await AuthService.registration(credentials);
+            const response = await AuthService.registration(
+                credentials.email,
+                credentials.password
+            );
             localStorage.setItem("token", response.data.accessToken);
             return response.data.user;
         } catch (error) {

@@ -54,6 +54,51 @@ class UserController {
         }
     }
 
+    async forgotPassword(req, res, next) {
+        try {
+            const { email } = req.body;
+
+            if (!email) {
+                return next(ApiError.BadRequest("Email is required"));
+            }
+
+            await userService.forgotPassword(email);
+
+            return res.json({
+                message:
+                    "If this email exists in our system, you will receive a password reset link shortly",
+            });
+        } catch (error) {
+            return res.json({
+                message:
+                    "If this email exists in our system, you will receive a password reset link shortly",
+            });
+        }
+    }
+
+    async resetPassword(req, res, next) {
+        try {
+            const { token } = req.params;
+            const { password } = req.body;
+
+            if (!token) {
+                return next(ApiError.BadRequest("Reset token are required"));
+            }
+
+            if (!password) {
+                return next(ApiError.BadRequest("New password are required"));
+            }
+
+            await userService.resetPassword(token, password);
+
+            return res.json({
+                message: "Password has been reset successfully",
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
+
     async activate(req, res, next) {
         try {
             const activationLink = req.params.link;
