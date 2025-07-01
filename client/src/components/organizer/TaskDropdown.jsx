@@ -9,13 +9,13 @@ const TaskDropdown = ({
 }) => {
     const handleCompleteClick = () => {
         if (!task.isCompleted) {
-            onComplete(task.id);
+            onComplete(task._id);
         }
         onClose();
     };
 
     const handleDeleteClick = () => {
-        onDelete(task.id);
+        onDelete(task._id);
         onClose();
     };
 

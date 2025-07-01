@@ -6,14 +6,16 @@ const TaskList = ({ tasks, onDeleteTask, onCompleteTask }) => {
     return (
         <ul className={styles.taskList}>
             {Array.isArray(tasks) && tasks.length > 0 ? (
-                tasks.map((task) => (
-                    <TaskItem
-                        key={task.id}
-                        task={task}
-                        onDelete={() => onDeleteTask(task.id)}
-                        onComplete={() => onCompleteTask(task.id)}
-                    />
-                ))
+                tasks.map((task) => {
+                    return (
+                        <TaskItem
+                            key={task._id}
+                            task={task}
+                            onDelete={() => onDeleteTask(task._id)}
+                            onComplete={() => onCompleteTask(task._id)}
+                        />
+                    );
+                })
             ) : (
                 <li>No tasks available</li>
             )}

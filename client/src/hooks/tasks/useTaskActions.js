@@ -1,46 +1,62 @@
 import { useBoss } from "../boss/useBoss";
 
 import {
-    addTask,
-    deleteTask,
-    completeTask,
+    addTaskAsync,
+    deleteTaskAsync,
+    completeTaskAsync,
     openConfirmModal,
+    setDeadline,
 } from "../../store/tasks/tasksSlice";
-import { setDeadline } from "../../store/tasks/tasksSlice";
-import { DIFFICULTY_REWARDS } from "../../config/statsConfig";
 import { gainExperience } from "../../store/stats/userStatsSlice";
+import { DIFFICULTY_REWARDS } from "../../config/statsConfig";
 
-export const useTaskActions = ({ tasks, confirmModal, dispatch }) => {
+const useTaskActions = ({
+    tasks,
+    confirmModal,
+    dispatch,
+    inputTask,
+    deadline,
+}) => {
     const { handleTaskCompleted } = useBoss();
 
-    const onAddTask = ({ hasDeadline, difficulty }) =>
-        dispatch(addTask({ hasDeadline, difficulty }));
+    const onAddTask = ({ hasDeadline, difficulty }) => {
+        if (!inputTask.trim()) return;
+        if (hasDeadline && !deadline) return;
 
-    const onDeleteTask = (id) => {
-        const task = tasks.find((t) => t.id === id);
+        dispatch(
+            addTaskAsync({
+                text: inputTask.trim(),
+                deadline: hasDeadline ? deadline : null,
+                difficulty,
+            })
+        );
+    };
+
+    const onDeleteTask = (_id) => {
+        const task = tasks.find((t) => t._id === _id);
 
         if (task) {
             dispatch(
                 openConfirmModal({
                     actionType: "delete",
-                    taskId: id,
+                    taskId: _id,
                     taskText: task.text,
                 })
             );
         }
     };
 
-    const onCompleteTask = (id) => {
-        const task = tasks.find((t) => t.id === id);
+    const onCompleteTask = (_id) => {
+        const task = tasks.find((t) => t._id === _id);
 
         if (task) {
             if (task.isCompleted) {
-                dispatch(completeTask(id));
+                dispatch(completeTaskAsync(_id));
             } else {
                 dispatch(
                     openConfirmModal({
                         actionType: "complete",
-                        taskId: id,
+                        taskId: _id,
                         taskText: task.text,
                     })
                 );
@@ -48,21 +64,26 @@ export const useTaskActions = ({ tasks, confirmModal, dispatch }) => {
         }
     };
 
-    const onSetDeadline = (dateStr) => dispatch(setDeadline(dateStr));
+    const onSetDeadline = (dateStr) => {
+        dispatch(setDeadline(dateStr));
+    };
 
     const onConfirmAction = () => {
         const { actionType, taskId } = confirmModal;
-        const task = tasks.find((t) => t.id === taskId);
+        const task = tasks.find((t) => t._id === taskId);
+
+        if (!task) return;
 
         if (actionType === "delete") {
-            dispatch(deleteTask(taskId));
-        } else if (actionType === "complete" && task && task.difficulty) {
+            dispatch(deleteTaskAsync(taskId));
+        } else if (actionType === "complete" && task.difficulty) {
             let xp = DIFFICULTY_REWARDS[task.difficulty]?.xp || 0;
 
             if (!task.deadline) xp = Math.floor(xp / 5);
+
             dispatch(gainExperience(xp));
             handleTaskCompleted(task.difficulty, !!task.deadline);
-            dispatch(completeTask(taskId));
+            dispatch(completeTaskAsync(taskId));
         }
     };
 
@@ -74,3 +95,5 @@ export const useTaskActions = ({ tasks, confirmModal, dispatch }) => {
         onConfirmAction,
     };
 };
+
+export { useTaskActions };

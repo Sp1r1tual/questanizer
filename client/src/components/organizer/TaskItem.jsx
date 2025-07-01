@@ -35,7 +35,10 @@ const TaskItem = ({ task, onDelete, onComplete }) => {
                     <span className={styles.taskText}>{task.text}</span>
                     {task.deadline && (
                         <div className={styles.deadlineInfo}>
-                            ⏰ {task.deadline}
+                            ⏰ Deadline:{" "}
+                            {new Date(task.deadline).toLocaleDateString(
+                                "uk-UA"
+                            )}
                             {deadlinePassed && !task.isCompleted && (
                                 <span className={styles.overdueLabel}>
                                     OVERDUE
@@ -65,10 +68,14 @@ const TaskItem = ({ task, onDelete, onComplete }) => {
             </div>
 
             <div className={styles.taskInfo}>
-                <span className={styles.timestamp}>📅 {task.createdAt}</span>
+                <span className={styles.timestamp}>
+                    📅 {new Date(task.createdAt).toLocaleDateString("uk-UA")}
+                </span>
                 <span className={styles.difficulty}>⚔️ {task.difficulty}</span>
                 {task.deadline && (
-                    <span className={styles.timestamp}>⏰ {task.deadline}</span>
+                    <span className={styles.timestamp}>
+                        ⏰ {new Date(task.deadline).toLocaleDateString("uk-UA")}
+                    </span>
                 )}
             </div>
         </div>
