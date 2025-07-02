@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 import mongoose from "mongoose";
 import authRouter from "./auth/router/auth-router.js";
 import tasksRouter from "./tasks/router/tasks-router.js";
+import userStatsRouter from "./stats/router/user-stats-router.js";
 import errorMiddleware from "./shared/middlewares/error-middleware.js";
 
 const PORT = process.env.PORT || 5000;
@@ -21,6 +22,7 @@ app.use(
 );
 app.use("/api", authRouter);
 app.use("/api", tasksRouter);
+app.use("/api", userStatsRouter);
 app.use(errorMiddleware);
 
 const start = async () => {
