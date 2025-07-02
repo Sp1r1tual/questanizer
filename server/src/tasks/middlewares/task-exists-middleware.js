@@ -1,6 +1,6 @@
 import { deleteTaskById } from "../services/tasks-service.js";
-import RESPONSE_MESSAGES from "../utils/response-messages.js";
-import ApiError from "../exceptions/api-error.js";
+import RESPONSE_MESSAGES from "../../shared/utils/response-messages.js";
+import ApiError from "../../shared/exceptions/api-error.js";
 
 const taskExistsMiddleware = async (req, res, next) => {
     try {

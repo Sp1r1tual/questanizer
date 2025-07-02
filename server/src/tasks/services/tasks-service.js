@@ -1,6 +1,6 @@
 import TaskModel from "../models/tasks-model.js";
-import ApiError from "../exceptions/api-error.js";
-import RESPONSE_MESSAGES from "../utils/response-messages.js";
+import ApiError from "../../shared/exceptions/api-error.js";
+import RESPONSE_MESSAGES from "../../shared/utils/response-messages.js";
 
 const getAllTasks = () => TaskModel.find();
 

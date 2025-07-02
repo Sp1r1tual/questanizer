@@ -3,8 +3,8 @@ import { v4 as uuidv4 } from "uuid";
 import UserModel from "../models/user-model.js";
 import mailService from "./mail-service.js";
 import tokenService from "./token-service.js";
-import UserDto from "../data-transfer-objects/user-dto.js";
-import ApiError from "../exceptions/api-error.js";
+import UserDto from "../dto/user-dto.js";
+import ApiError from "../../shared/exceptions/api-error.js";
 
 class UserService {
     async registration(email, password) {

@@ -1,5 +1,5 @@
-import ApiError from "../exceptions/api-error.js";
-import RESPONSE_MESSAGES from "../utils/response-messages.js";
+import ApiError from "../../shared/exceptions/api-error.js";
+import RESPONSE_MESSAGES from "../../shared/utils/response-messages.js";
 
 const tasksMiddleware = (req, res, next) => {
     const { text } = req.body;

@@ -5,8 +5,8 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import mongoose from "mongoose";
 import authRouter from "./auth/router/auth-router.js";
-import taskRouter from "./auth/router/tasks-router.js";
-import errorMiddleware from "./auth/middleware/error-middleware.js";
+import tasksRouter from "./tasks/router/tasks-router.js";
+import errorMiddleware from "./shared/middlewares/error-middleware.js";
 
 const PORT = process.env.PORT || 5000;
 const app = express();
@@ -20,7 +20,7 @@ app.use(
     })
 );
 app.use("/api", authRouter);
-app.use("/api", taskRouter);
+app.use("/api", tasksRouter);
 app.use(errorMiddleware);
 
 const start = async () => {
