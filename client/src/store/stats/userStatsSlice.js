@@ -1,38 +1,38 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { StatsService } from "../../services/statsService";
 
-const initialState = {
-    experience: 0,
-    level: 1,
-    health: 100,
-    maxHealth: 100,
-};
+export const fetchStats = createAsyncThunk("stats/fetchStats", async () => {
+    const response = await StatsService.getStats();
+
+    return response.data;
+});
 
 const statsSlice = createSlice({
     name: "stats",
-    initialState,
+    initialState: {
+        experience: 0,
+        level: 1,
+        health: 100,
+        maxHealth: 100,
+    },
     reducers: {
-        gainExperience: (state, action) => {
-            state.experience += action.payload;
-            while (state.experience >= state.level * 100) {
-                state.experience -= state.level * 100;
-                state.level += 1;
-                state.health = state.maxHealth;
-            }
+        resetStats: (state) => {
+            state.experience = 0;
+            state.level = 1;
+            state.health = 100;
+            state.maxHealth = 100;
         },
-        takeDamage: (state, action) => {
-            state.health = Math.max(0, state.health - action.payload);
-        },
-        heal: (state, action) => {
-            state.health = Math.min(
-                state.maxHealth,
-                state.health + action.payload
-            );
-        },
-        resetStats: () => initialState,
+    },
+    extraReducers: (builder) => {
+        builder.addCase(fetchStats.fulfilled, (state, action) => {
+            state.experience = action.payload.xp;
+            state.level = action.payload.level;
+            state.health = action.payload.hp;
+            state.maxHealth = action.payload.maxHp;
+        });
     },
 });
 
-export const { gainExperience, takeDamage, heal, resetStats } =
-    statsSlice.actions;
+export const { resetStats } = statsSlice.actions;
 
 export default statsSlice.reducer;

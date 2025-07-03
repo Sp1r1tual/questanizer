@@ -1,9 +1,12 @@
 import {
     getAllTasks,
     createTask,
-    toggleCompleteTask,
+    toggleTaskAsComplete,
     deleteTaskById,
+    completeTaskAndReward,
+    applyTaskOverdueDamage,
 } from "../services/tasks-service.js";
+
 import RESPONSE_MESSAGES from "../../shared/utils/response-messages.js";
 
 const getTasks = async (req, res, next) => {
@@ -32,9 +35,9 @@ const addTask = async (req, res, next) => {
     }
 };
 
-const completeTask = async (req, res, next) => {
+const toggleCompleteTask = async (req, res, next) => {
     try {
-        const task = await toggleCompleteTask(req.params.id, req.user.id);
+        const task = await toggleTaskAsComplete(req.params.id, req.user.id);
 
         return res.json(task);
     } catch (error) {
@@ -51,9 +54,45 @@ const deleteTask = async (req, res, next) => {
     }
 };
 
+const completeTask = async (req, res, next) => {
+    try {
+        const { task, stats } = await completeTaskAndReward(
+            req.params.id,
+            req.user.id
+        );
+
+        return res.json({
+            message: RESPONSE_MESSAGES.taskCompleted,
+            task,
+            stats,
+        });
+    } catch (error) {
+        return next(error);
+    }
+};
+
+const takeDamageOverdueTask = async (req, res, next) => {
+    try {
+        const { task, stats } = await applyTaskOverdueDamage(
+            req.params.id,
+            req.user.id
+        );
+
+        return res.json({
+            message: RESPONSE_MESSAGES.taskPenalty,
+            task,
+            stats,
+        });
+    } catch (error) {
+        return next(error);
+    }
+};
+
 export default {
     getTasks,
     addTask,
-    completeTask,
+    toggleCompleteTask,
     deleteTask,
+    completeTask,
+    takeDamageOverdueTask,
 };

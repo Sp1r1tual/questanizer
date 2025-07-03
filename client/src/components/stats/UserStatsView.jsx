@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import useUserStats from "../../hooks/stats/useUserStats";
+import useAuth from "../../hooks/auth/useAuth";
 
 import useTasks from "../../hooks/tasks/useTasks";
 import UserExperience from "./UserExperience";
@@ -8,6 +9,7 @@ import UserHealth from "./UserHealth";
 import Container from "../ui/Container";
 import DefeatUserModal from "../modals/DefeatUserModal";
 import { resetBoss } from "../../store/boss/bossBattleSlice";
+import { fetchStats } from "../../store/stats/userStatsSlice";
 
 import styles from "./UserStatsView.module.css";
 
@@ -15,9 +17,15 @@ const UserStatsView = () => {
     const dispatch = useDispatch();
     const { experience, level, health, maxHealth } = useUserStats();
     const { checkOverdueTasks } = useTasks();
-
     const [isDefeated, setIsDefeated] = useState(false);
     const defeatTriggered = useRef(false);
+    const { user } = useAuth();
+
+    useEffect(() => {
+        if (user?.id) {
+            dispatch(fetchStats());
+        }
+    }, [user, dispatch]);
 
     useEffect(() => {
         checkOverdueTasks();

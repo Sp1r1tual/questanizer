@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import tasksReducer, { fetchTasks } from "../store/tasks/tasksSlice";
+import tasksReducer from "../store/tasks/tasksSlice";
 import authReducer, { checkAuth } from "../store/auth/authSlice";
 import userStatsReducer from "../store/stats/userStatsSlice";
 import bossBattleReducer from "./boss/bossBattleSlice";
@@ -13,10 +13,10 @@ const store = configureStore({
     },
 });
 
+// TODO: Not called in the App.jsx. Requires a fix
 const token = localStorage.getItem("token");
 if (token) {
     store.dispatch(checkAuth());
-    store.dispatch(fetchTasks());
 }
 
 export { store, token };

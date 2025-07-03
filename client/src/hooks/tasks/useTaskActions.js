@@ -7,8 +7,6 @@ import {
     openConfirmModal,
     setDeadline,
 } from "../../store/tasks/tasksSlice";
-import { gainExperience } from "../../store/stats/userStatsSlice";
-import { DIFFICULTY_REWARDS } from "../../config/statsConfig";
 
 const useTaskActions = ({
     tasks,
@@ -35,33 +33,30 @@ const useTaskActions = ({
     const onDeleteTask = (_id) => {
         const task = tasks.find((t) => t._id === _id);
 
-        if (task) {
-            dispatch(
-                openConfirmModal({
-                    actionType: "delete",
-                    taskId: _id,
-                    taskText: task.text,
-                })
-            );
-        }
+        if (!task) return;
+
+        dispatch(
+            openConfirmModal({
+                actionType: "delete",
+                taskId: _id,
+                taskText: task.text,
+            })
+        );
     };
 
     const onCompleteTask = (_id) => {
         const task = tasks.find((t) => t._id === _id);
 
-        if (task) {
-            if (task.isCompleted) {
-                dispatch(completeTaskAsync(_id));
-            } else {
-                dispatch(
-                    openConfirmModal({
-                        actionType: "complete",
-                        taskId: _id,
-                        taskText: task.text,
-                    })
-                );
-            }
-        }
+        if (!task) return;
+        if (task.isCompleted) return;
+
+        dispatch(
+            openConfirmModal({
+                actionType: "complete",
+                taskId: _id,
+                taskText: task.text,
+            })
+        );
     };
 
     const onSetDeadline = (dateStr) => {
@@ -73,17 +68,12 @@ const useTaskActions = ({
         const task = tasks.find((t) => t._id === taskId);
 
         if (!task) return;
-
         if (actionType === "delete") {
             dispatch(deleteTaskAsync(taskId));
-        } else if (actionType === "complete" && task.difficulty) {
-            let xp = DIFFICULTY_REWARDS[task.difficulty]?.xp || 0;
-
-            if (!task.deadline) xp = Math.floor(xp / 5);
-
-            dispatch(gainExperience(xp));
-            handleTaskCompleted(task.difficulty, !!task.deadline);
-            dispatch(completeTaskAsync(taskId));
+        } else if (actionType === "complete") {
+            dispatch(completeTaskAsync(taskId)).then(() => {
+                handleTaskCompleted(task.difficulty, !!task.deadline);
+            });
         }
     };
 

@@ -1,17 +1,21 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { TaskService } from "../../services/tasksService";
+import { fetchStats } from "../stats/userStatsSlice";
 
-const fetchTasks = createAsyncThunk("tasks/fetchTasks", async (_, thunkAPI) => {
-    try {
-        const response = await TaskService.getAllTasks();
-        return response.data;
-    } catch (error) {
-        return thunkAPI.rejectWithValue("Failed to load tasks");
+export const fetchTasks = createAsyncThunk(
+    "tasks/fetchTasks",
+    async (_, thunkAPI) => {
+        try {
+            const response = await TaskService.getAllTasks();
+
+            return response.data;
+        } catch (error) {
+            return thunkAPI.rejectWithValue("Failed to load tasks");
+        }
     }
-});
+);
 
-const addTaskAsync = createAsyncThunk(
+export const addTaskAsync = createAsyncThunk(
     "tasks/addTaskAsync",
     async ({ text, deadline, difficulty }, thunkAPI) => {
         try {
@@ -20,6 +24,7 @@ const addTaskAsync = createAsyncThunk(
                 deadline,
                 difficulty,
             });
+
             return response.data;
         } catch (error) {
             return thunkAPI.rejectWithValue("Failed to create task");
@@ -27,7 +32,7 @@ const addTaskAsync = createAsyncThunk(
     }
 );
 
-const deleteTaskAsync = createAsyncThunk(
+export const deleteTaskAsync = createAsyncThunk(
     "tasks/deleteTaskAsync",
     async (_id, thunkAPI) => {
         try {
@@ -39,14 +44,16 @@ const deleteTaskAsync = createAsyncThunk(
     }
 );
 
-const completeTaskAsync = createAsyncThunk(
+export const completeTaskAsync = createAsyncThunk(
     "tasks/completeTaskAsync",
     async (_id, thunkAPI) => {
         try {
             const response = await TaskService.completeTask(_id);
-            return response.data;
+
+            thunkAPI.dispatch(fetchStats());
+            return response.data.task;
         } catch (error) {
-            return thunkAPI.rejectWithValue("Failed to complete task");
+            return thunkAPI.rejectWithValue("Failed to perform task");
         }
     }
 );
@@ -86,6 +93,7 @@ const tasksSlice = createSlice({
         },
         openConfirmModal: (state, action) => {
             const { actionType, taskId, taskText } = action.payload;
+
             state.confirmModal = {
                 isOpen: true,
                 actionType,
@@ -105,6 +113,7 @@ const tasksSlice = createSlice({
             const task = state.tasks.find(
                 (task) => task._id === action.payload
             );
+
             if (task) task.damageTaken = true;
         },
     },
@@ -138,13 +147,13 @@ const tasksSlice = createSlice({
                 const index = state.tasks.findIndex(
                     (task) => task._id === action.payload._id
                 );
+
                 if (index !== -1) state.tasks[index] = action.payload;
                 state.confirmModal = initialState.confirmModal;
             });
     },
 });
 
-export { fetchTasks, addTaskAsync, deleteTaskAsync, completeTaskAsync };
 export const {
     setInputTask,
     setModalActive,

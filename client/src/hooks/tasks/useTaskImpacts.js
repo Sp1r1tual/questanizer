@@ -1,29 +1,9 @@
-import { takeDamage } from "../../store/stats/userStatsSlice";
+import { TaskService } from "../../services/tasksService";
+import { fetchStats } from "../../store/stats/userStatsSlice";
 import { markDamageTaken } from "../../store/tasks/tasksSlice";
-import { gainExperience } from "../../store/stats/userStatsSlice";
-import { DIFFICULTY_REWARDS } from "../../config/statsConfig";
 
 const useTaskImpacts = ({ tasks, dispatch }) => {
-    const awardExperience = (difficulty, hasDeadline) => {
-        const reward = DIFFICULTY_REWARDS[difficulty];
-
-        if (!reward) return;
-
-        let xp = reward.xp;
-
-        if (!hasDeadline) xp = Math.floor(xp / 5);
-        dispatch(gainExperience(xp));
-    };
-
-    const applyOverdueDamage = (difficulty) => {
-        const reward = DIFFICULTY_REWARDS[difficulty];
-
-        if (!reward) return;
-
-        dispatch(takeDamage(reward.damage));
-    };
-
-    const checkOverdueTasks = () => {
+    const checkOverdueTasks = async () => {
         const now = new Date();
 
         const overdueTasks = tasks.filter(
@@ -33,19 +13,23 @@ const useTaskImpacts = ({ tasks, dispatch }) => {
                 task.difficulty &&
                 !task.damageTaken
         );
-        overdueTasks.forEach((task) => {
+
+        for (const task of overdueTasks) {
             const deadlineDate = new Date(task.deadline);
 
             if (!isNaN(deadlineDate.getTime()) && deadlineDate < now) {
-                applyOverdueDamage(task.difficulty);
-                dispatch(markDamageTaken(task._id));
+                try {
+                    await TaskService.takeDamageOverdueTask(task._id);
+                    dispatch(markDamageTaken(task._id));
+                    dispatch(fetchStats());
+                } catch (error) {
+                    console.error("Failed to apply overdue damage:", error);
+                }
             }
-        });
+        }
     };
 
     return {
-        awardExperience,
-        applyOverdueDamage,
         checkOverdueTasks,
     };
 };
