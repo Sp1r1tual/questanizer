@@ -48,4 +48,4 @@ const useBossManager = () => {
     };
 };
 
-export { useBossManager };
+export default useBossManager;

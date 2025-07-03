@@ -1,6 +1,7 @@
 import { Schema, model } from "mongoose";
 
 const taskSchema = new Schema({
+    user: { type: Schema.Types.ObjectId, ref: "User", required: true },
     text: { type: String, required: true },
     createdAt: { type: Date, default: Date.now, required: true },
     isCompleted: { type: Boolean, default: false },

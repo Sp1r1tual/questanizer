@@ -25,4 +25,4 @@ const useTaskModals = ({ inputTask, dispatch }) => ({
     onCloseConfirmModal: () => dispatch(closeConfirmModal()),
 });
 
-export { useTaskModals };
+export default useTaskModals;

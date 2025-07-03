@@ -7,4 +7,4 @@ const useTaskState = () => {
     return { ...state, dispatch };
 };
 
-export { useTaskState };
+export default useTaskState;

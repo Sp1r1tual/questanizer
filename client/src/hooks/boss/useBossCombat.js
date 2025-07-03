@@ -1,6 +1,6 @@
 import { useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useUserStats } from "../stats/useUserStats";
+import useUserStats from "../stats/useUserStats";
 
 import {
     takeDamage,
@@ -103,4 +103,4 @@ const useBossCombat = () => {
     };
 };
 
-export { useBossCombat };
+export default useBossCombat;

@@ -27,4 +27,4 @@ const useUserStats = () => {
     };
 };
 
-export { useUserStats };
+export default useUserStats;

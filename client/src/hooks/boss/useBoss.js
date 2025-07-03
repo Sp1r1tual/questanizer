@@ -1,5 +1,5 @@
-import { useBossManager } from "./useBossManager";
-import { useBossCombat } from "./useBossCombat";
+import useBossManager from "./useBossManager";
+import useBossCombat from "./useBossCombat";
 
 const useBoss = () => {
     const { boss, initBoss, resetCurrentBoss } = useBossManager();

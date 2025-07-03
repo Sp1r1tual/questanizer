@@ -38,7 +38,7 @@ const useTaskImpacts = ({ tasks, dispatch }) => {
 
             if (!isNaN(deadlineDate.getTime()) && deadlineDate < now) {
                 applyOverdueDamage(task.difficulty);
-                dispatch(markDamageTaken(task.id));
+                dispatch(markDamageTaken(task._id));
             }
         });
     };
@@ -50,4 +50,4 @@ const useTaskImpacts = ({ tasks, dispatch }) => {
     };
 };
 
-export { useTaskImpacts };
+export default useTaskImpacts;

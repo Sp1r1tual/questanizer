@@ -1,4 +1,7 @@
-import { useTasks } from "../../hooks/tasks/useTasks";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import useTasks from "../../hooks/tasks/useTasks";
+import useAuth from "../../hooks/auth/useAuth";
 
 import Container from "../ui/Container";
 import OrganizerHeader from "./OrganizerHeader";
@@ -7,8 +10,11 @@ import AddNewTaskBtn from "./AddNewTaskBtn";
 import TaskList from "./TaskList";
 import TaskModal from "../modals/TaskModal";
 import ConfirmChoiceModal from "../modals/ConfirmChoiceModal";
+import { fetchTasks } from "../../store/tasks/tasksSlice";
 
 const TasksView = () => {
+    const dispatch = useDispatch();
+    const { user } = useAuth();
     const {
         tasks,
         inputTask,
@@ -26,6 +32,12 @@ const TasksView = () => {
         onCloseConfirmModal,
         onConfirmAction,
     } = useTasks();
+
+    useEffect(() => {
+        if (user?.id) {
+            dispatch(fetchTasks());
+        }
+    }, [user, dispatch]);
 
     const getConfirmModal = () => {
         if (confirmModal.actionType === "delete") {

@@ -1,7 +1,7 @@
-import { useTaskState } from "./useTaskState";
-import { useTaskModals } from "./useTaskModals";
-import { useTaskActions } from "./useTaskActions";
-import { useTaskImpacts } from "./useTaskImpacts";
+import useTaskState from "./useTaskState";
+import useTaskModals from "./useTaskModals";
+import useTaskActions from "./useTaskActions";
+import useTaskImpacts from "./useTaskImpacts";
 
 const useTasks = () => {
     const state = useTaskState();
@@ -17,4 +17,4 @@ const useTasks = () => {
     };
 };
 
-export { useTasks };
+export default useTasks;

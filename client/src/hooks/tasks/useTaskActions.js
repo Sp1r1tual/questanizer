@@ -96,4 +96,4 @@ const useTaskActions = ({
     };
 };
 
-export { useTaskActions };
+export default useTaskActions;

@@ -8,7 +8,7 @@ import RESPONSE_MESSAGES from "../../shared/utils/response-messages.js";
 
 const getTasks = async (req, res, next) => {
     try {
-        const tasks = await getAllTasks();
+        const tasks = await getAllTasks(req.user.id);
 
         return res.json(tasks);
     } catch (error) {
@@ -19,7 +19,12 @@ const getTasks = async (req, res, next) => {
 const addTask = async (req, res, next) => {
     try {
         const { text, deadline, difficulty } = req.body;
-        const task = await createTask({ text, deadline, difficulty });
+        const task = await createTask({
+            text,
+            deadline,
+            difficulty,
+            userId: req.user.id,
+        });
 
         return res.status(201).json(task);
     } catch (error) {
@@ -29,7 +34,7 @@ const addTask = async (req, res, next) => {
 
 const completeTask = async (req, res, next) => {
     try {
-        const task = await toggleCompleteTask(req.params.id);
+        const task = await toggleCompleteTask(req.params.id, req.user.id);
 
         return res.json(task);
     } catch (error) {
@@ -39,7 +44,7 @@ const completeTask = async (req, res, next) => {
 
 const deleteTask = async (req, res, next) => {
     try {
-        await deleteTaskById(req.params.id);
+        await deleteTaskById(req.params.id, req.user.id);
         return res.json({ message: RESPONSE_MESSAGES.taskDeleted });
     } catch (error) {
         return next(error);

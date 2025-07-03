@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { useTasks } from "../../hooks/tasks/useTasks";
-import { useUserStats } from "../../hooks/stats/useUserStats";
 import { useDispatch } from "react-redux";
+import useUserStats from "../../hooks/stats/useUserStats";
 
+import useTasks from "../../hooks/tasks/useTasks";
 import UserExperience from "./UserExperience";
 import UserHealth from "./UserHealth";
 import Container from "../ui/Container";
