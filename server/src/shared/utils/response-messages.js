@@ -11,6 +11,7 @@ const RESPONSE_MESSAGES = {
     taskPenalty: "Overdue task penalty applied",
     taskAlreadyCompleted: "Task already completed",
     taskAlreadyDamaged: "Damage already applied",
+    bossNotFound: "Boss not found",
 };
 
 export default RESPONSE_MESSAGES;
