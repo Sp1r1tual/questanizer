@@ -8,10 +8,14 @@ import styles from "./DefeatUserModal.module.css";
 const DefeatUserModal = ({ onRestart }) => {
     const dispatch = useDispatch();
 
-    const handleRestart = () => {
-        dispatch(resetStats());
-        dispatch(resetBoss());
-        onRestart();
+    const handleRestart = async () => {
+        try {
+            await dispatch(resetStats()).unwrap();
+            dispatch(resetBoss());
+            onRestart();
+        } catch (error) {
+            console.error("Reset failed", error);
+        }
     };
 
     return (

@@ -116,6 +116,7 @@ const tasksSlice = createSlice({
 
             if (task) task.damageTaken = true;
         },
+        clearTasksState: () => ({ ...initialState }),
     },
     extraReducers: (builder) => {
         builder
@@ -162,6 +163,7 @@ export const {
     openConfirmModal,
     closeConfirmModal,
     markDamageTaken,
+    clearTasksState,
 } = tasksSlice.actions;
 
 export default tasksSlice.reducer;

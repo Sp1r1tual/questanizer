@@ -7,32 +7,49 @@ export const fetchStats = createAsyncThunk("stats/fetchStats", async () => {
     return response.data;
 });
 
+export const resetStats = createAsyncThunk(
+    "stats/reset",
+    async (_, thunkAPI) => {
+        try {
+            const response = await StatsService.resetStats();
+
+            return response.data;
+        } catch (err) {
+            return thunkAPI.rejectWithValue("Failed to reset stats");
+        }
+    }
+);
+
+const initialState = {
+    experience: 0,
+    level: 1,
+    health: 100,
+    maxHealth: 100,
+};
+
 const statsSlice = createSlice({
     name: "stats",
-    initialState: {
-        experience: 0,
-        level: 1,
-        health: 100,
-        maxHealth: 100,
-    },
+    initialState,
     reducers: {
-        resetStats: (state) => {
-            state.experience = 0;
-            state.level = 1;
-            state.health = 100;
-            state.maxHealth = 100;
-        },
+        clearStatsState: () => ({ ...initialState }),
     },
     extraReducers: (builder) => {
-        builder.addCase(fetchStats.fulfilled, (state, action) => {
-            state.experience = action.payload.xp;
-            state.level = action.payload.level;
-            state.health = action.payload.hp;
-            state.maxHealth = action.payload.maxHp;
-        });
+        builder
+            .addCase(fetchStats.fulfilled, (state, action) => {
+                state.experience = action.payload.xp;
+                state.level = action.payload.level;
+                state.health = action.payload.hp;
+                state.maxHealth = action.payload.maxHp;
+            })
+            .addCase(resetStats.fulfilled, (state, action) => {
+                state.experience = action.payload.xp;
+                state.level = action.payload.level;
+                state.health = action.payload.hp;
+                state.maxHealth = action.payload.maxHp;
+            });
     },
 });
 
-export const { resetStats } = statsSlice.actions;
+export const { clearStatsState } = statsSlice.actions;
 
 export default statsSlice.reducer;

@@ -1,4 +1,5 @@
 import UserStatsModel from "../models/user-stats-model.js";
+import bossService from "../../boss/services/boss-service.js";
 
 const getByUserId = async (userId) => {
     let stats = await UserStatsModel.findOne({ user: userId });
@@ -49,6 +50,7 @@ const resetStats = async (userId) => {
     stats.maxHp = 100;
     stats.xpToNextLevel = 100;
 
+    await bossService.resetBoss(userId);
     await stats.save();
     return stats;
 };

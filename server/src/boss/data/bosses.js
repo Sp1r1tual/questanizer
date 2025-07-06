@@ -6,7 +6,7 @@ const bosses = [
         bossPower: 15,
         bossRewardExp: 150,
         bossRageBar: 5,
-        bossImg: "../../../../client/src/assets/boss-02.png",
+        bossImg: "/images/boss-01.png",
     },
     {
         bossId: 2,
@@ -15,7 +15,7 @@ const bosses = [
         bossPower: 20,
         bossRewardExp: 250,
         bossRageBar: 3,
-        bossImg: "../../../../client/src/assets/boss-01.png",
+        bossImg: "/images/boss-02.png",
     },
 ];
 

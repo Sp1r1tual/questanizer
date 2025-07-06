@@ -13,11 +13,11 @@ const BossStats = () => {
             <div className={styles.statsContainer}>
                 <div className={styles.statBlock}>
                     <span className={styles.statText}>
-                        💚 Health: {boss.healthPoints}/{boss.maxHealth}
+                        💚 Health: {boss.healthPoints}/{boss.maxHealthPoints}
                     </span>
                     <progress
                         className={`${styles.progressBar} ${styles.health}`}
-                        max={boss.maxHealth}
+                        max={boss.maxHealthPoints}
                         value={boss.healthPoints}
                         aria-label="Health"
                     ></progress>

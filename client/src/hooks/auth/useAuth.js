@@ -5,6 +5,7 @@ import {
     logout,
     clearAuthError,
 } from "../../store/auth/authSlice";
+import clearAllStateHelper from "../../helpers/clearAllStateHelper";
 
 const useAuth = () => {
     const dispatch = useDispatch();
@@ -15,7 +16,10 @@ const useAuth = () => {
 
     const signIn = (credentials) => dispatch(login(credentials));
     const registerUser = (credentials) => dispatch(register(credentials));
-    const signOut = () => dispatch(logout());
+    const signOut = () => {
+        dispatch(logout());
+        clearAllStateHelper(dispatch);
+    };
     const clearError = () => dispatch(clearAuthError());
 
     return {

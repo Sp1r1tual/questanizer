@@ -1,10 +1,23 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { BossService } from "../../services/bossService";
+
+export const fetchBoss = createAsyncThunk(
+    "boss/fetchBoss",
+    async (_, thunkAPI) => {
+        try {
+            const response = await BossService.getBoss();
+            return response.data;
+        } catch (error) {
+            return thunkAPI.rejectWithValue("Boss not found");
+        }
+    }
+);
 
 const initialState = {
     bossId: null,
     bossName: null,
     healthPoints: 0,
-    maxHealth: 0,
+    maxHealthPoints: 0,
     bossPower: 0,
     bossRewardExp: 0,
     bossRageBar: 0,
@@ -12,6 +25,14 @@ const initialState = {
     bossImg: null,
     alreadyRagedTaskIds: [],
     currentBossIndex: 0,
+    loading: false,
+    error: null,
+    userBossProgress: {
+        currentBossIndex: 0,
+        lastDefeatedBossId: 0,
+        totalBossesDefeated: 0,
+        nextBossId: 1,
+    },
 };
 
 const bossBattleSlice = createSlice({
@@ -20,65 +41,89 @@ const bossBattleSlice = createSlice({
     reducers: {
         setActiveBoss: (state, action) => {
             const boss = action.payload;
-
             state.bossId = boss.bossId;
             state.bossName = boss.bossName;
             state.healthPoints = boss.healthPoints;
-            state.maxHealth = boss.healthPoints;
+            state.maxHealthPoints = boss.maxHealthPoints;
             state.bossPower = boss.bossPower;
             state.bossRewardExp = boss.bossRewardExp;
             state.bossRageBar = boss.bossRageBar;
             state.bossImg = boss.bossImg;
             state.rage = 0;
-            state.alreadyRagedTaskIds = boss.initiallyOverdue ?? []; // filters overdue tasks before activating the boss
-        },
-        updateHealthBar: (state) => {
-            if (state.healthPoints < 0) state.healthPoints = 0;
-        },
-        takeDamage: (state, action) => {
-            state.healthPoints = Math.max(
-                0,
-                state.healthPoints - action.payload
-            );
-        },
-        updateRageBar: (state, action) => {
-            const amount = action.payload ?? 1;
+            state.alreadyRagedTaskIds = boss.initiallyOverdue ?? [];
+            state.currentBossIndex = boss.currentBossIndex || 0;
 
-            state.rage += amount;
+            if (boss.userBossProgress) {
+                state.userBossProgress = boss.userBossProgress;
+            }
+        },
+        setBossProgress: (state, action) => {
+            state.userBossProgress = action.payload;
         },
         markTaskAsRaged: (state, action) => {
-            state.alreadyRagedTaskIds = [
-                ...state.alreadyRagedTaskIds,
-                action.payload,
-            ];
-        },
-        resetRage: (state) => {
-            state.rage = 0;
+            const taskId = action.payload;
+
+            if (!state.alreadyRagedTaskIds.includes(taskId)) {
+                state.alreadyRagedTaskIds.push(taskId);
+            }
         },
         resetBoss: (state, action) => {
-            const { defeated } = action.payload || {};
+            const currentProgress = state.userBossProgress;
 
-            return defeated
-                ? { ...initialState, currentBossIndex: 0 }
-                : {
-                      ...initialState,
-                      currentBossIndex: state.currentBossIndex + 1,
-                  };
+            return {
+                ...initialState,
+                userBossProgress: currentProgress,
+            };
         },
+        setBossEvent: (state, action) => {
+            state.event = action.payload;
+        },
+        clearBossState: () => initialState,
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(fetchBoss.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(fetchBoss.fulfilled, (state, action) => {
+                const response = action.payload;
+
+                state.loading = false;
+                state.userBossProgress =
+                    response?.userBossProgress || initialState.userBossProgress;
+
+                if (!response.boss) {
+                    return;
+                }
+
+                const boss = response.boss;
+
+                state.bossId = boss.bossId;
+                state.bossName = boss.bossName;
+                state.healthPoints = boss.healthPoints;
+                state.maxHealthPoints = boss.maxHealthPoints;
+                state.bossPower = boss.bossPower;
+                state.bossRewardExp = boss.bossRewardExp;
+                state.bossRageBar = boss.bossRageBar;
+                state.bossImg = boss.bossImg;
+                state.rage = boss.rage || 0;
+                state.alreadyRagedTaskIds = boss.alreadyRagedTaskIds || [];
+                state.currentBossIndex = boss.currentBossIndex || 0;
+            })
+            .addCase(fetchBoss.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            });
     },
 });
 
 export const {
     setActiveBoss,
-    updateHealthBar,
-    takeDamage,
-    updateRageBar,
-    setOverdueTasksCount,
-    attackUser,
-    rewardUser,
-    resetBoss,
+    setBossProgress,
     markTaskAsRaged,
-    resetRage,
+    resetBoss,
+    clearBossState,
 } = bossBattleSlice.actions;
 
 export default bossBattleSlice.reducer;

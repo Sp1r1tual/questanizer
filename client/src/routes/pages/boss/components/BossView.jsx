@@ -16,8 +16,8 @@ const BossView = () => {
         <section className={styles.bossView}>
             <img
                 src={boss.bossImg}
-                alt={boss.bossName}
                 className={styles.bossImage}
+                alt={boss.bossName}
             />
         </section>
     );

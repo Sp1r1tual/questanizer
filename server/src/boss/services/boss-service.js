@@ -6,9 +6,11 @@ import {
     hasBossFound,
     updateBossFromTemplate,
 } from "../helpers/boss-helpers.js";
+import bossProgressService from "./boss-progress-service.js";
 
 const getBoss = async (userId) => {
     validateObjectId(userId, "user ID");
+
     return BossModel.findOne({ user: userId });
 };
 
@@ -19,25 +21,22 @@ const spawnBoss = async (userId, bossId) => {
 
     if (!config) throw new Error("Invalid boss ID");
 
-    const existing = await BossModel.findOne({ user: userId });
+    let boss = await BossModel.findOne({ user: userId });
 
-    if (existing) await existing.deleteOne();
+    if (!boss) {
+        boss = new BossModel({ user: userId });
+    }
 
-    return BossModel.create({
-        user: userId,
-        bossId: config.bossId,
-        bossName: config.bossName,
-        healthPoints: config.healthPoints,
-        maxHealthPoints: config.healthPoints,
-        bossPower: config.bossPower,
-        bossRewardExp: config.bossRewardExp,
-        bossRageBar: config.bossRageBar,
-        bossImg: config.bossImg,
-        rage: 0,
-        alreadyRagedTaskIds: [],
-        currentBossIndex: bossId - 1,
-        spawnedAt: new Date(),
-    });
+    updateBossFromTemplate(boss, config);
+
+    boss.rage = 0;
+    boss.alreadyRagedTaskIds = [];
+    boss.currentBossIndex = bossId - 1;
+    boss.spawnedAt = new Date();
+
+    await boss.save();
+
+    return boss;
 };
 
 const damageBoss = async (userId, amount) => {
@@ -50,12 +49,35 @@ const damageBoss = async (userId, amount) => {
     const boss = await hasBossFound(userId);
 
     boss.healthPoints = Math.max(0, boss.healthPoints - amount);
+
+    const isDead = boss.healthPoints <= 0;
+
+    if (isDead) {
+        await userStatsService.gainExperience(userId, boss.bossRewardExp);
+
+        await bossProgressService.updateBossProgress(
+            userId,
+            boss.bossId,
+            boss.bossRewardExp
+        );
+
+        await boss.deleteOne();
+
+        return {
+            message: `Boss defeated! Gained ${boss.bossRewardExp} XP`,
+            healthPoints: 0,
+            isDead: true,
+            rewardExp: boss.bossRewardExp,
+            event: "BOSS_DEFEATED",
+        };
+    }
+
     await boss.save();
 
     return {
         message: `Boss damaged by ${amount}`,
         healthPoints: boss.healthPoints,
-        isDead: boss.healthPoints <= 0,
+        isDead: false,
     };
 };
 
@@ -90,12 +112,12 @@ const addRage = async (userId, newTaskIds = []) => {
         rage: boss.rage,
         shouldAttack,
         stats,
+        event: shouldAttack ? "BOSS_ATTACKED" : null,
     };
 };
 
 const markTaskAsRaged = async (userId, taskId) => {
     validateObjectId(userId, "user ID");
-    validateObjectId(taskId, "task ID");
 
     const boss = await hasBossFound(userId);
 
@@ -119,24 +141,31 @@ const resetBoss = async (userId) => {
         await userStatsService.gainExperience(userId, boss.bossRewardExp);
         rewardGiven = true;
 
-        const next = bosses.find((b) => b.bossId === boss.bossId + 1);
+        await bossProgressService.updateBossProgress(
+            userId,
+            boss.bossId,
+            boss.bossRewardExp
+        );
 
-        if (next) {
-            updateBossFromTemplate(boss, next);
+        const nextBoss = bosses.find((b) => b.bossId === boss.bossId + 1);
+
+        if (nextBoss) {
+            updateBossFromTemplate(boss, nextBoss);
+            boss.rage = 0;
+            boss.alreadyRagedTaskIds = [];
             boss.currentBossIndex += 1;
+            boss.spawnedAt = new Date();
+            await boss.save();
+            return { boss, rewardGiven };
         } else {
-            boss.healthPoints = boss.maxHealthPoints;
+            await boss.deleteOne();
+            return { boss: null, rewardGiven, event: "ALL_BOSSES_DEFEATED" };
         }
     } else {
-        boss.healthPoints = boss.maxHealthPoints;
+        await boss.deleteOne();
+        await bossProgressService.resetBossProgress(userId);
+        return { boss: null, rewardGiven: false };
     }
-
-    boss.rage = 0;
-    boss.alreadyRagedTaskIds = [];
-    boss.spawnedAt = new Date();
-    await boss.save();
-
-    return { boss, rewardGiven };
 };
 
 export default {

@@ -1,18 +1,10 @@
 import useBossManager from "./useBossManager";
-import useBossCombat from "./useBossCombat";
 
 const useBoss = () => {
     const { boss, initBoss, resetCurrentBoss } = useBossManager();
-    const {
-        handleTaskCompleted: handleTaskCompletedInternal,
-        handleBossVictory,
-    } = useBossCombat();
 
-    const handleTaskCompleted = (difficulty, hasDeadline) => {
-        const result = handleTaskCompletedInternal(difficulty, hasDeadline);
-
-        if (result.isDead) {
-            handleBossVictory();
+    const handleTaskCompleted = (isDead) => {
+        if (isDead) {
             resetCurrentBoss(true);
         }
     };
@@ -24,4 +16,4 @@ const useBoss = () => {
     };
 };
 
-export { useBossManager, useBossCombat, useBoss };
+export { useBossManager, useBoss };

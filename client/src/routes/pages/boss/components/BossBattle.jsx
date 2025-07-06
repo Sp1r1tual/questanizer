@@ -1,16 +1,27 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useBoss } from "../../../../hooks/boss/useBoss";
+import useAuth from "../../../../hooks/auth/useAuth";
 
-import BossBattleStartBtn from "./BossBattleStartBtn";
 import BossStats from "./BossStats";
 import BossView from "./BossView";
+import BossBattleStartBtn from "./BossBattleStartBtn";
+import { fetchBoss } from "../../../../store/boss/bossBattleSlice";
 
 import styles from "./BossBattle.module.css";
 
 const BossBattle = () => {
-    const { initBoss, boss } = useBoss();
+    const dispatch = useDispatch();
+    const { boss, initBoss } = useBoss();
+    const { user } = useAuth();
+
+    useEffect(() => {
+        if (user?.id) {
+            dispatch(fetchBoss());
+        }
+    }, [dispatch, user]);
 
     const handleStartBattle = () => {
-        console.log("Starting battle with boss ID: 1");
         initBoss();
     };
 

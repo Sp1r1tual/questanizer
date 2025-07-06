@@ -1,41 +1,37 @@
-import { useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
-
+import { $api } from "../../http";
+import { useDispatch, useSelector } from "react-redux";
 import { setActiveBoss, resetBoss } from "../../store/boss/bossBattleSlice";
-import bosses from "../../data/bosses";
 
-const useBossManager = () => {
+const useBossManager = (tasks) => {
     const dispatch = useDispatch();
     const boss = useSelector((state) => state.bossBattle);
-    const tasks = useSelector((state) => state.tasks.tasks);
 
-    const initBoss = useCallback(
-        (forcedIndex) => {
-            const bossIndex = forcedIndex ?? boss.currentBossIndex ?? 0;
+    const initBoss = async (forcedBossId = null) => {
+        try {
+            if (boss.bossId) return;
 
-            if (bossIndex >= bosses.length) {
-                alert("🎉 You have defeated all available bosses!");
-                return;
-            }
+            const payload = forcedBossId ? { bossId: forcedBossId } : {};
 
-            const foundBoss = bosses[bossIndex];
+            const response = await $api.post("/boss/spawn", payload);
+            const foundBoss = response.data;
 
-            if (foundBoss && !boss.bossId) {
-                const now = new Date();
-                const initiallyOverdue = tasks
-                    .filter(
-                        (t) =>
-                            !t.isCompleted &&
-                            t.deadline &&
-                            new Date(t.deadline) < now
-                    )
-                    .map((t) => t.id);
+            const now = new Date();
+            const initiallyOverdue = Array.isArray(tasks)
+                ? tasks
+                      .filter(
+                          (t) =>
+                              !t.isCompleted &&
+                              t.deadline &&
+                              new Date(t.deadline) < now
+                      )
+                      .map((t) => t.id)
+                : [];
 
-                dispatch(setActiveBoss({ ...foundBoss, initiallyOverdue }));
-            }
-        },
-        [boss.bossId, boss.currentBossIndex, dispatch, tasks]
-    );
+            dispatch(setActiveBoss({ ...foundBoss, initiallyOverdue }));
+        } catch (err) {
+            console.error("Failed to spawn boss:", err.response?.data || err);
+        }
+    };
 
     const resetCurrentBoss = (defeated = false) => {
         dispatch(resetBoss({ defeated }));
