@@ -8,34 +8,83 @@ const $api = axios.create({
 });
 
 $api.interceptors.request.use((config) => {
-    config.headers.Authorization = `Bearer ${localStorage.getItem("token")}`;
+    const token = localStorage.getItem("token");
+
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+    }
+
     return config;
 });
 
+let isRefreshing = false;
+let failedQueue = [];
+
+const processQueue = (error, token = null) => {
+    failedQueue.forEach(({ resolve, reject }) => {
+        if (error) {
+            reject(error);
+        } else {
+            resolve(token);
+        }
+    });
+    failedQueue = [];
+};
+
+const refreshToken = async () => {
+    const response = await axios.get(`${API_URL}/refresh`, {
+        withCredentials: true,
+    });
+
+    const newToken = response.data.accessToken;
+
+    localStorage.setItem("token", newToken);
+
+    $api.defaults.headers.common.Authorization = `Bearer ${newToken}`;
+
+    return newToken;
+};
+
+const retryRequestWithNewToken = (originalRequest, token) => {
+    originalRequest.headers.Authorization = `Bearer ${token}`;
+    return $api(originalRequest);
+};
+
 $api.interceptors.response.use(
-    (config) => {
-        return config;
-    },
+    (response) => response,
     async (error) => {
         const originalRequest = error.config;
+        const isUnauthorized = error.response?.status === 401;
+        const canRetry = originalRequest && !originalRequest._isRetry;
 
-        if (
-            error.response.status === 401 &&
-            error.config &&
-            !error.config._isRetry
-        ) {
-            originalRequest._isRetry = true;
-            try {
-                const response = await axios.get(`${API_URL}/refresh`, {
-                    withCredentials: true,
-                });
-                localStorage.setItem("token", response.data.accessToken);
-                return $api.request(originalRequest);
-            } catch (error) {
-                console.log("User is not authorized");
-            }
+        if (!isUnauthorized || !canRetry) {
+            return Promise.reject(error);
         }
-        throw error;
+
+        if (isRefreshing) {
+            return new Promise((resolve, reject) => {
+                failedQueue.push({ resolve, reject });
+            })
+                .then((token) =>
+                    retryRequestWithNewToken(originalRequest, token)
+                )
+                .catch((error) => Promise.reject(error));
+        }
+
+        originalRequest._isRetry = true;
+        isRefreshing = true;
+
+        try {
+            const newToken = await refreshToken();
+
+            processQueue(null, newToken);
+            return retryRequestWithNewToken(originalRequest, newToken);
+        } catch (refreshError) {
+            processQueue(refreshError, null);
+            return Promise.reject(refreshError);
+        } finally {
+            isRefreshing = false;
+        }
     }
 );
 
