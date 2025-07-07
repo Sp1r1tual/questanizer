@@ -1,7 +1,7 @@
 import UserStatsModel from "../models/user-stats-model.js";
 import bossService from "../../boss/services/boss-service.js";
 
-const getByUserId = async (userId) => {
+const getOrCreateStats = async (userId) => {
     let stats = await UserStatsModel.findOne({ user: userId });
 
     if (!stats) {
@@ -12,7 +12,7 @@ const getByUserId = async (userId) => {
 };
 
 const gainExperience = async (userId, amount) => {
-    const stats = await getByUserId(userId);
+    const stats = await getOrCreateStats(userId);
 
     stats.xp += amount;
 
@@ -27,11 +27,9 @@ const gainExperience = async (userId, amount) => {
 };
 
 const takeDamage = async (userId, amount) => {
-    const stats = await getByUserId(userId);
+    const stats = await getOrCreateStats(userId);
 
-    if (stats.hp <= 0) {
-        return stats;
-    }
+    if (stats.hp <= 0) return stats;
 
     stats.hp -= amount;
 
@@ -41,8 +39,8 @@ const takeDamage = async (userId, amount) => {
     return stats;
 };
 
-const resetStats = async (userId) => {
-    const stats = await getByUserId(userId);
+const resetUserStats = async (userId) => {
+    const stats = await getOrCreateStats(userId);
 
     stats.xp = 0;
     stats.level = 1;
@@ -56,8 +54,8 @@ const resetStats = async (userId) => {
 };
 
 export default {
-    getByUserId,
+    getOrCreateStats,
     gainExperience,
     takeDamage,
-    resetStats,
+    resetUserStats,
 };

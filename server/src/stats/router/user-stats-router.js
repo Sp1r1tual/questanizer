@@ -8,6 +8,6 @@ router.use(authMiddleware);
 
 router.get("/stats", userStatsController.getStats);
 
-router.patch("/stats/reset", userStatsController.resetStats);
+router.patch("/stats/reset", userStatsController.resetUserStats);
 
 export default router;
