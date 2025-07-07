@@ -1,8 +1,13 @@
 import TaskItem from "./TaskItem";
+import DotsLoader from "../ui/DotsLoader";
 
 import styles from "./TaskList.module.css";
 
-const TaskList = ({ tasks, onDeleteTask, onCompleteTask }) => {
+const TaskList = ({ tasks, onDeleteTask, onCompleteTask, loading }) => {
+    if (loading) {
+        return <DotsLoader />;
+    }
+
     return (
         <ul className={styles.taskList}>
             {Array.isArray(tasks) && tasks.length > 0 ? (

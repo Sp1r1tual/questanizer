@@ -5,6 +5,7 @@ import { setActiveBoss, resetBoss } from "../../store/boss/bossBattleSlice";
 const useBoss = (tasks = []) => {
     const dispatch = useDispatch();
     const boss = useSelector((state) => state.bossBattle);
+    const loading = useSelector((state) => state.bossBattle.loading);
 
     const initBoss = async (forcedBossId = null) => {
         try {
@@ -45,6 +46,7 @@ const useBoss = (tasks = []) => {
         initBoss,
         resetCurrentBoss,
         handleTaskCompleted,
+        loading,
     };
 };
 

@@ -20,6 +20,7 @@ const useTasks = () => {
     const alreadyRagedTaskIds = useSelector(
         (state) => state.bossBattle.alreadyRagedTaskIds
     );
+    const loading = useSelector((state) => state.tasks.loading);
     const {
         inputTask,
         modalActive,
@@ -137,6 +138,7 @@ const useTasks = () => {
         onCompleteTask,
         onSetDeadline,
         onConfirmAction,
+        loading,
     };
 };
 

@@ -31,6 +31,7 @@ const TasksView = () => {
         onSetDeadline,
         onCloseConfirmModal,
         onConfirmAction,
+        loading,
     } = useTasks();
 
     useEffect(() => {
@@ -71,6 +72,7 @@ const TasksView = () => {
                 tasks={tasks}
                 onCompleteTask={onCompleteTask}
                 onDeleteTask={onDeleteTask}
+                loading={loading}
             />
             {modalActive && (
                 <TaskModal

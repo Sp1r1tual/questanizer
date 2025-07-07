@@ -6,13 +6,14 @@ import useAuth from "../../../../hooks/auth/useAuth";
 import BossStats from "./BossStats";
 import BossView from "./BossView";
 import BossBattleStartBtn from "./BossBattleStartBtn";
+import Loader from "../../../../components/ui/Loader";
 import { fetchBoss } from "../../../../store/boss/bossBattleSlice";
 
 import styles from "./BossBattle.module.css";
 
 const BossBattle = () => {
     const dispatch = useDispatch();
-    const { boss, initBoss } = useBoss();
+    const { boss, initBoss, loading } = useBoss();
     const { user } = useAuth();
 
     useEffect(() => {
@@ -27,6 +28,7 @@ const BossBattle = () => {
 
     return (
         <div>
+            <Loader visible={loading} />
             {!boss.bossId && <BossBattleStartBtn onClick={handleStartBattle} />}
             {boss.bossId && (
                 <div className={styles.battleContainer}>
