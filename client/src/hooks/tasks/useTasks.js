@@ -15,11 +15,11 @@ import { TaskService } from "../../services/tasksService";
 
 const useTasks = () => {
     const dispatch = useDispatch();
-    const { tasks, bossId, alreadyRagedTaskIds } = useSelector((state) => ({
-        tasks: state.tasks.tasks,
-        bossId: state.bossBattle.bossId,
-        alreadyRagedTaskIds: state.bossBattle.alreadyRagedTaskIds,
-    }));
+    const tasks = useSelector((state) => state.tasks.tasks);
+    const bossId = useSelector((state) => state.bossBattle.bossId);
+    const alreadyRagedTaskIds = useSelector(
+        (state) => state.bossBattle.alreadyRagedTaskIds
+    );
     const {
         inputTask,
         modalActive,
