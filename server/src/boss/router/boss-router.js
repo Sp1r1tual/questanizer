@@ -11,6 +11,4 @@ router.get("/boss", bossMiddleware, bossController.getBoss);
 
 router.post("/boss/spawn", bossMiddleware, bossController.spawnBoss);
 
-router.post("/boss/reset", bossController.resetBoss);
-
 export default router;
