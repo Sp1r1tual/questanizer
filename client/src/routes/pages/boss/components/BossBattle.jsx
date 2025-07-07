@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useBoss } from "../../../../hooks/boss/useBoss";
+import useBoss from "../../../../hooks/boss/useBoss";
 import useAuth from "../../../../hooks/auth/useAuth";
 
 import BossStats from "./BossStats";

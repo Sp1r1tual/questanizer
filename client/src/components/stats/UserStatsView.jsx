@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import useUserStats from "../../hooks/stats/useUserStats";
 import useAuth from "../../hooks/auth/useAuth";
 
-import useTasks from "../../hooks/tasks/useTasks";
 import UserExperience from "./UserExperience";
 import UserHealth from "./UserHealth";
 import Container from "../ui/Container";
@@ -16,7 +15,6 @@ import styles from "./UserStatsView.module.css";
 const UserStatsView = () => {
     const dispatch = useDispatch();
     const { experience, level, health, maxHealth } = useUserStats();
-    const { checkOverdueTasks } = useTasks();
     const [isDefeated, setIsDefeated] = useState(false);
     const defeatTriggered = useRef(false);
     const { user } = useAuth();
@@ -26,14 +24,6 @@ const UserStatsView = () => {
             dispatch(fetchStats());
         }
     }, [user, dispatch]);
-
-    useEffect(() => {
-        checkOverdueTasks();
-        const interval = setInterval(() => {
-            checkOverdueTasks();
-        }, 5 * 60 * 1000);
-        return () => clearInterval(interval);
-    }, [checkOverdueTasks]);
 
     useEffect(() => {
         if (health <= 0 && !defeatTriggered.current) {

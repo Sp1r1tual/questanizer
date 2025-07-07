@@ -1,28 +1,50 @@
+import { useSelector, useDispatch } from "react-redux";
 import {
     setInputTask,
     setModalActive,
     closeModal,
     openConfirmModal,
     closeConfirmModal,
+    setDeadline,
 } from "../../store/tasks/tasksSlice";
 
-const useTaskModals = ({ inputTask, dispatch }) => ({
-    onInputChange: (value) => dispatch(setInputTask(value)),
+const useTaskModals = () => {
+    const dispatch = useDispatch();
+    const { inputTask, modalActive, confirmModal, deadline, isInputInvalid } =
+        useSelector((state) => state.tasks);
 
-    onOpenModal: () => {
+    const onInputChange = (value) => dispatch(setInputTask(value));
+
+    const onOpenModal = () => {
         if (inputTask.trim()) {
             dispatch(setModalActive(true));
         } else {
             dispatch(setInputTask(inputTask));
         }
-    },
+    };
 
-    onCloseModal: () => dispatch(closeModal()),
+    const onCloseModal = () => dispatch(closeModal());
 
-    onOpenConfirmModal: (actionType, taskId, taskText) =>
-        dispatch(openConfirmModal({ actionType, taskId, taskText })),
+    const onOpenConfirmModal = (actionType, taskId, taskText) =>
+        dispatch(openConfirmModal({ actionType, taskId, taskText }));
 
-    onCloseConfirmModal: () => dispatch(closeConfirmModal()),
-});
+    const onCloseConfirmModal = () => dispatch(closeConfirmModal());
+
+    const onSetDeadline = (dateStr) => dispatch(setDeadline(dateStr));
+
+    return {
+        inputTask,
+        modalActive,
+        confirmModal,
+        deadline,
+        isInputInvalid,
+        onInputChange,
+        onOpenModal,
+        onCloseModal,
+        onOpenConfirmModal,
+        onCloseConfirmModal,
+        onSetDeadline,
+    };
+};
 
 export default useTaskModals;
