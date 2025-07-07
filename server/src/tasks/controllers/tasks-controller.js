@@ -1,98 +1,64 @@
-import {
-    getAllTasks,
-    createTask,
-    toggleTaskAsComplete,
-    deleteTaskById,
-    completeTaskAndReward,
-    applyTaskOverdueDamage,
-} from "../services/tasks-service.js";
-
-import RESPONSE_MESSAGES from "../../shared/utils/response-messages.js";
+import tasksService from "../services/tasks-service.js";
 
 const getTasks = async (req, res, next) => {
     try {
-        const tasks = await getAllTasks(req.user.id);
+        const tasks = await tasksService.getAllTasks(req.user.id);
 
-        return res.json(tasks);
+        res.json(tasks);
     } catch (error) {
-        return next(error);
+        next(error);
     }
 };
 
 const addTask = async (req, res, next) => {
     try {
-        const { text, deadline, difficulty } = req.body;
-        const task = await createTask({
-            text,
-            deadline,
-            difficulty,
-            userId: req.user.id,
-        });
+        const task = await tasksService.createTask(req.body, req.user.id);
 
-        return res.status(201).json(task);
+        res.status(201).json(task);
     } catch (error) {
-        return next(error);
-    }
-};
-
-const toggleCompleteTask = async (req, res, next) => {
-    try {
-        const task = await toggleTaskAsComplete(req.params.id, req.user.id);
-
-        return res.json(task);
-    } catch (error) {
-        return next(error);
-    }
-};
-
-const deleteTask = async (req, res, next) => {
-    try {
-        await deleteTaskById(req.params.id, req.user.id);
-        return res.json({ message: RESPONSE_MESSAGES.taskDeleted });
-    } catch (error) {
-        return next(error);
+        next(error);
     }
 };
 
 const completeTask = async (req, res, next) => {
     try {
-        const { task, stats } = await completeTaskAndReward(
+        const result = await tasksService.completeTask(
             req.params.id,
             req.user.id
         );
 
-        return res.json({
-            message: RESPONSE_MESSAGES.taskCompleted,
-            task,
-            stats,
-        });
+        res.json(result);
     } catch (error) {
-        return next(error);
+        next(error);
+    }
+};
+
+const deleteTask = async (req, res, next) => {
+    try {
+        await tasksService.removeTask(req.params.id, req.user.id);
+        res.json({ message: "Task deleted" });
+    } catch (error) {
+        next(error);
     }
 };
 
 const takeDamageOverdueTask = async (req, res, next) => {
     try {
-        const { task, stats } = await applyTaskOverdueDamage(
+        const result = await tasksService.applyOverduePenalty(
             req.params.id,
             req.user.id
         );
 
-        return res.json({
-            message: RESPONSE_MESSAGES.taskPenalty,
-            task,
-            stats,
-        });
+        res.json(result);
     } catch (error) {
-        return next(error);
+        next(error);
     }
 };
 
 export default {
     getTasks,
     addTask,
-    toggleCompleteTask,
-    deleteTask,
     completeTask,
+    deleteTask,
     takeDamageOverdueTask,
 };
