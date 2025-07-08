@@ -1,3 +1,5 @@
+import getTaskStatus from "../../helpers/taskStatus";
+
 import styles from "./TaskDropdown.module.css";
 
 const TaskDropdown = ({
@@ -6,11 +8,14 @@ const TaskDropdown = ({
     onDelete,
     onClose,
     deadlinePassed,
+    groupDeleteCompleted,
+    groupDeleteOverdue,
 }) => {
     const handleCompleteClick = () => {
         if (!task.isCompleted) {
             onComplete(task._id);
         }
+
         onClose();
     };
 
@@ -18,6 +23,8 @@ const TaskDropdown = ({
         onDelete(task._id);
         onClose();
     };
+
+    const { isCompleted, isOverdue } = getTaskStatus(task);
 
     return (
         <>
@@ -29,14 +36,18 @@ const TaskDropdown = ({
             <div className={styles.dropdown}>
                 <div className={styles.dropdownInfo}>
                     <div className={styles.infoItem}>
-                        📅 Created: {task.createdAt}
+                        📅 Created:{" "}
+                        {new Date(task.createdAt).toLocaleDateString("uk-UA")}
                     </div>
                     <div className={styles.infoItem}>
                         ⚔️ Difficulty: {task.difficulty}
                     </div>
                     {task.deadline && (
                         <div className={styles.infoItem}>
-                            ⏰ Deadline: {task.deadline}
+                            ⏰ Deadline:{" "}
+                            {new Date(task.deadline).toLocaleDateString(
+                                "uk-UA"
+                            )}
                         </div>
                     )}
                 </div>
@@ -58,6 +69,29 @@ const TaskDropdown = ({
                     >
                         Delete
                     </button>
+                    {isCompleted && (
+                        <button
+                            className={`${styles.dropdownButton} ${styles.bulkDeleteBtn}`}
+                            onClick={() => {
+                                groupDeleteCompleted();
+                                onClose();
+                            }}
+                        >
+                            Delete all completed tasks
+                        </button>
+                    )}
+
+                    {isOverdue && (
+                        <button
+                            className={`${styles.dropdownButton} ${styles.bulkDeleteBtn}`}
+                            onClick={() => {
+                                groupDeleteOverdue();
+                                onClose();
+                            }}
+                        >
+                            Delete all overdue tasks
+                        </button>
+                    )}
                 </div>
             </div>
         </>

@@ -115,6 +115,32 @@
     opacity: 0.6;
 }
 
+.bulkDeleteBtn {
+    background-color: #f8d7da;
+    font-weight: bolder;
+    border-color: #f5c6cb;
+    color: #721c24;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    animation: pulse-red 2s infinite;
+}
+
+.bulkDeleteBtn:hover {
+    background-color: #f1b0b7;
+    border-color: #f5c6cb;
+}
+
+@keyframes pulse-red {
+    0% {
+        box-shadow: 0 0 0 0 rgba(192, 57, 43, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 6px rgba(192, 57, 43, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(192, 57, 43, 0);
+    }
+}
+
 @media (max-width: 768px) {
     .dropdown {
         min-width: 280px;

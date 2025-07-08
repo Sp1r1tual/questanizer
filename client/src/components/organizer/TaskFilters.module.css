@@ -1,0 +1,45 @@
+.filtersContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 10px;
+    width: 100%;
+    justify-content: center;
+}
+
+.select {
+    appearance: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 2px solid #7d5032;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    box-sizing: border-box;
+
+    flex: 1 1 200px;
+    max-width: calc(50% - 10px);
+}
+
+.select:hover {
+    transform: translateY(-1px);
+}
+
+.select option {
+    padding: 5px;
+}
+
+@media (max-width: 768px) {
+    .select {
+        font-size: 12px;
+        padding: 4px 10px;
+    }
+}
+
+@media (min-width: 769px) {
+    .select {
+        flex: 1 1 0;
+        max-width: none;
+    }
+}

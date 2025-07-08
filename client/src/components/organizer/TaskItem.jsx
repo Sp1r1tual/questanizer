@@ -1,14 +1,19 @@
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import TaskDropdown from "./TaskDropdown";
+import { deleteTaskAsync } from "../../store/tasks/tasksSlice";
 
 import styles from "./TaskItem.module.css";
 
 const TaskItem = ({ task, onDelete, onComplete }) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const dispatch = useDispatch();
+    const tasks = useSelector((state) => state.tasks.tasks);
 
     const isDeadlinePassed = () => {
         if (!task.deadline) return false;
+
         return new Date(task.deadline) < new Date();
     };
 
@@ -20,6 +25,23 @@ const TaskItem = ({ task, onDelete, onComplete }) => {
 
     const closeDropdown = () => {
         setIsDropdownOpen(false);
+    };
+
+    const handleGroupDeleteCompleted = () => {
+        tasks
+            .filter((task) => task.isCompleted)
+            .forEach((task) => dispatch(deleteTaskAsync(task._id)));
+    };
+
+    const handleGroupDeleteOverdue = () => {
+        tasks
+            .filter(
+                (task) =>
+                    !task.isCompleted &&
+                    task.deadline &&
+                    new Date(task.deadline) < new Date()
+            )
+            .forEach((task) => dispatch(deleteTaskAsync(task._id)));
     };
 
     return (
@@ -62,6 +84,8 @@ const TaskItem = ({ task, onDelete, onComplete }) => {
                             onDelete={onDelete}
                             onClose={closeDropdown}
                             deadlinePassed={deadlinePassed}
+                            groupDeleteCompleted={handleGroupDeleteCompleted}
+                            groupDeleteOverdue={handleGroupDeleteOverdue}
                         />
                     )}
                 </div>

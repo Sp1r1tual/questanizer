@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import useTasks from "../../hooks/tasks/useTasks";
+import useTaskFilters from "../../hooks/tasks/useTaskFilters";
 import useAuth from "../../hooks/auth/useAuth";
 
 import Container from "../ui/Container";
@@ -33,6 +34,7 @@ const TasksView = () => {
         onConfirmAction,
         loading,
     } = useTasks();
+    const { getFilteredTasks } = useTaskFilters();
 
     useEffect(() => {
         if (user?.id) {
@@ -40,24 +42,18 @@ const TasksView = () => {
         }
     }, [user, dispatch]);
 
-    const getConfirmModal = () => {
-        if (confirmModal.actionType === "delete") {
-            return {
-                title: "Delete Task",
-                message: `Are you sure you want to delete the task "${confirmModal.taskText}"? This action cannot be undone.`,
-                confirmText: "Yes",
-                cancelText: "No",
-            };
-        } else if (confirmModal.actionType === "complete") {
-            return {
-                title: "Complete Task",
-                message: `Mark the task "${confirmModal.taskText}" as completed?`,
-                confirmText: "Yes",
-                cancelText: "No",
-            };
-        }
-        return {};
+    const [filters, setFilters] = useState({
+        status: "all",
+        deadline: "all",
+        difficulty: "all",
+        sortBy: "createdAt",
+    });
+
+    const handleFilterChange = (newFilters) => {
+        setFilters((prev) => ({ ...prev, ...newFilters }));
     };
+
+    const filteredTasks = getFilteredTasks(tasks, filters);
 
     return (
         <Container>
@@ -69,10 +65,12 @@ const TasksView = () => {
             />
             <AddNewTaskBtn onClick={onOpenModal} />
             <TaskList
-                tasks={tasks}
+                tasks={filteredTasks}
                 onCompleteTask={onCompleteTask}
                 onDeleteTask={onDeleteTask}
                 loading={loading}
+                filters={filters}
+                onFilterChange={handleFilterChange}
             />
             {modalActive && (
                 <TaskModal
@@ -88,7 +86,18 @@ const TasksView = () => {
                     isOpen={confirmModal.isOpen}
                     onClose={onCloseConfirmModal}
                     onConfirm={onConfirmAction}
-                    {...getConfirmModal()}
+                    title={
+                        confirmModal.actionType === "delete"
+                            ? "Delete Task"
+                            : "Complete Task"
+                    }
+                    message={
+                        confirmModal.actionType === "delete"
+                            ? `Are you sure you want to delete the task "${confirmModal.taskText}"? This action cannot be undone.`
+                            : `Mark the task "${confirmModal.taskText}" as completed?`
+                    }
+                    confirmText="Yes"
+                    cancelText="No"
                 />
             )}
         </Container>
