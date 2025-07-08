@@ -11,13 +11,9 @@ const TaskItem = ({ task, onDelete, onComplete }) => {
     const dispatch = useDispatch();
     const tasks = useSelector((state) => state.tasks.tasks);
 
-    const isDeadlinePassed = () => {
-        if (!task.deadline) return false;
-
-        return new Date(task.deadline) < new Date();
-    };
-
-    const deadlinePassed = isDeadlinePassed();
+    const now = new Date();
+    const deadlineDate = task.deadline ? new Date(task.deadline) : null;
+    const isOverdue = deadlineDate && !task.isCompleted && deadlineDate < now;
 
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
@@ -29,28 +25,26 @@ const TaskItem = ({ task, onDelete, onComplete }) => {
 
     const handleGroupDeleteCompleted = () => {
         tasks
-            .filter((task) => task.isCompleted)
-            .forEach((task) => dispatch(deleteTaskAsync(task._id)));
+            .filter((t) => t.isCompleted)
+            .forEach((t) => dispatch(deleteTaskAsync(t._id)));
     };
 
     const handleGroupDeleteOverdue = () => {
         tasks
             .filter(
-                (task) =>
-                    !task.isCompleted &&
-                    task.deadline &&
-                    new Date(task.deadline) < new Date()
+                (t) =>
+                    !t.isCompleted &&
+                    t.deadline &&
+                    new Date(t.deadline) < new Date()
             )
-            .forEach((task) => dispatch(deleteTaskAsync(task._id)));
+            .forEach((t) => dispatch(deleteTaskAsync(t._id)));
     };
 
     return (
         <div
             className={`${styles.taskItem} ${
                 task.isCompleted ? styles.completed : ""
-            } ${
-                deadlinePassed && !task.isCompleted ? styles.deadlinePassed : ""
-            }`}
+            } ${isOverdue ? styles.deadlinePassed : ""}`}
         >
             <div className={styles.taskHeader}>
                 <div className={styles.taskContent}>
@@ -58,10 +52,8 @@ const TaskItem = ({ task, onDelete, onComplete }) => {
                     {task.deadline && (
                         <div className={styles.deadlineInfo}>
                             ⏰ Deadline:{" "}
-                            {new Date(task.deadline).toLocaleDateString(
-                                "uk-UA"
-                            )}
-                            {deadlinePassed && !task.isCompleted && (
+                            {deadlineDate.toLocaleDateString("uk-UA")}
+                            {isOverdue && (
                                 <span className={styles.overdueLabel}>
                                     OVERDUE
                                 </span>
@@ -80,10 +72,11 @@ const TaskItem = ({ task, onDelete, onComplete }) => {
                     {isDropdownOpen && (
                         <TaskDropdown
                             task={task}
+                            tasks={tasks}
                             onComplete={onComplete}
                             onDelete={onDelete}
                             onClose={closeDropdown}
-                            deadlinePassed={deadlinePassed}
+                            isOverdue={isOverdue}
                             groupDeleteCompleted={handleGroupDeleteCompleted}
                             groupDeleteOverdue={handleGroupDeleteOverdue}
                         />
@@ -98,7 +91,7 @@ const TaskItem = ({ task, onDelete, onComplete }) => {
                 <span className={styles.difficulty}>⚔️ {task.difficulty}</span>
                 {task.deadline && (
                     <span className={styles.timestamp}>
-                        ⏰ {new Date(task.deadline).toLocaleDateString("uk-UA")}
+                        ⏰ {deadlineDate.toLocaleDateString("uk-UA")}
                     </span>
                 )}
             </div>
