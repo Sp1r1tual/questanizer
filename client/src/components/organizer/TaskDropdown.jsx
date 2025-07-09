@@ -10,8 +10,8 @@ const TaskDropdown = ({
     onCompleteTask,
     onDeleteTask,
     onClose,
-    onGroupDeleteCompleted,
-    onGroupDeleteOverdue,
+    groupDeleteCompleted,
+    groupDeleteOverdue,
 }) => {
     const completedTasksCount = countCompletedTasks(tasks);
     const overdueTasksCount = countOverdueTasks(tasks);
@@ -76,7 +76,7 @@ const TaskDropdown = ({
                         <button
                             className={`${styles.dropdownButton} ${styles.bulkDeleteBtn}`}
                             onClick={() => {
-                                onGroupDeleteCompleted();
+                                groupDeleteCompleted();
                                 onClose();
                             }}
                         >
@@ -88,7 +88,7 @@ const TaskDropdown = ({
                         <button
                             className={`${styles.dropdownButton} ${styles.bulkDeleteBtn}`}
                             onClick={() => {
-                                onGroupDeleteOverdue();
+                                groupDeleteOverdue();
                                 onClose();
                             }}
                         >

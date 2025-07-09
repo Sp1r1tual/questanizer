@@ -53,8 +53,8 @@ const TaskItem = ({
                             onCompleteTask={onCompleteTask}
                             onDeleteTask={onDeleteTask}
                             onClose={() => setIsDropdownOpen(false)}
-                            onGroupDeleteCompleted={onGroupDeleteCompleted}
-                            onGroupDeleteOverdue={onGroupDeleteOverdue}
+                            groupDeleteCompleted={onGroupDeleteCompleted}
+                            groupDeleteOverdue={onGroupDeleteOverdue}
                         />
                     )}
                 </div>
