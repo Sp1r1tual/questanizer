@@ -1,32 +1,26 @@
+import isTaskOverdue from "../../utils/tasks/isTaskOverdue";
+import countCompletedTasks from "../../utils/tasks/countCompletedTasks";
+import countOverdueTasks from "../../utils/tasks/countOverdueTasks";
+
 import styles from "./TaskDropdown.module.css";
 
 const TaskDropdown = ({
     task,
     tasks,
-    onComplete,
-    onDelete,
+    onCompleteTask,
+    onDeleteTask,
     onClose,
-    isOverdue,
-    groupDeleteCompleted,
-    groupDeleteOverdue,
+    onGroupDeleteCompleted,
+    onGroupDeleteOverdue,
 }) => {
-    const handleCompleteClick = () => {
-        if (!task.isCompleted) {
-            onComplete(task._id);
-        }
+    const completedTasksCount = countCompletedTasks(tasks);
+    const overdueTasksCount = countOverdueTasks(tasks);
+    const overdue = isTaskOverdue(task);
 
+    const handleAction = (callback) => {
+        callback(task._id);
         onClose();
     };
-
-    const handleDeleteClick = () => {
-        onDelete(task._id);
-        onClose();
-    };
-
-    const completedTasksCount = tasks.filter((t) => t.isCompleted).length;
-    const overdueTasksCount = tasks.filter(
-        (t) => !t.isCompleted && t.deadline && new Date(t.deadline) < new Date()
-    ).length;
 
     return (
         <>
@@ -53,6 +47,7 @@ const TaskDropdown = ({
                         </div>
                     )}
                 </div>
+
                 <div className={styles.dropdownActions}>
                     <button
                         className={`${styles.dropdownButton} ${
@@ -60,33 +55,40 @@ const TaskDropdown = ({
                                 ? styles.completedBtn
                                 : styles.incompleteBtn
                         }`}
-                        onClick={handleCompleteClick}
-                        disabled={task.isCompleted || isOverdue}
+                        onClick={
+                            !task.isCompleted && !overdue
+                                ? () => handleAction(onCompleteTask)
+                                : null
+                        }
+                        disabled={task.isCompleted || overdue}
                     >
                         {task.isCompleted ? "Completed" : "Mark as Done"}
                     </button>
+
                     <button
                         className={`${styles.dropdownButton} ${styles.deleteBtn}`}
-                        onClick={handleDeleteClick}
+                        onClick={() => handleAction(onDeleteTask)}
                     >
                         Delete
                     </button>
+
                     {task.isCompleted && completedTasksCount > 2 && (
                         <button
                             className={`${styles.dropdownButton} ${styles.bulkDeleteBtn}`}
                             onClick={() => {
-                                groupDeleteCompleted();
+                                onGroupDeleteCompleted();
                                 onClose();
                             }}
                         >
                             Delete all completed tasks
                         </button>
                     )}
-                    {isOverdue && overdueTasksCount > 2 && (
+
+                    {overdue && overdueTasksCount > 2 && (
                         <button
                             className={`${styles.dropdownButton} ${styles.bulkDeleteBtn}`}
                             onClick={() => {
-                                groupDeleteOverdue();
+                                onGroupDeleteOverdue();
                                 onClose();
                             }}
                         >

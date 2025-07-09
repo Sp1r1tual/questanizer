@@ -1,59 +1,36 @@
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
 
 import TaskDropdown from "./TaskDropdown";
-import { deleteTaskAsync } from "../../store/tasks/tasksThunks";
+import isTaskOverdue from "../../utils/tasks/isTaskOverdue";
 
 import styles from "./TaskItem.module.css";
 
-const TaskItem = ({ task, onDelete, onComplete }) => {
+const TaskItem = ({
+    task,
+    tasks,
+    onDeleteTask,
+    onCompleteTask,
+    onGroupDeleteCompleted,
+    onGroupDeleteOverdue,
+}) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const dispatch = useDispatch();
-    const tasks = useSelector((state) => state.tasks.tasks);
-
-    const now = new Date();
+    const overdue = isTaskOverdue(task);
     const deadlineDate = task.deadline ? new Date(task.deadline) : null;
-    const isOverdue = deadlineDate && !task.isCompleted && deadlineDate < now;
-
-    const toggleDropdown = () => {
-        setIsDropdownOpen(!isDropdownOpen);
-    };
-
-    const closeDropdown = () => {
-        setIsDropdownOpen(false);
-    };
-
-    const handleGroupDeleteCompleted = () => {
-        tasks
-            .filter((t) => t.isCompleted)
-            .forEach((t) => dispatch(deleteTaskAsync(t._id)));
-    };
-
-    const handleGroupDeleteOverdue = () => {
-        tasks
-            .filter(
-                (t) =>
-                    !t.isCompleted &&
-                    t.deadline &&
-                    new Date(t.deadline) < new Date()
-            )
-            .forEach((t) => dispatch(deleteTaskAsync(t._id)));
-    };
 
     return (
         <div
             className={`${styles.taskItem} ${
                 task.isCompleted ? styles.completed : ""
-            } ${isOverdue ? styles.deadlinePassed : ""}`}
+            } ${overdue ? styles.deadlinePassed : ""}`}
         >
             <div className={styles.taskHeader}>
                 <div className={styles.taskContent}>
                     <span className={styles.taskText}>{task.text}</span>
-                    {task.deadline && (
+                    {deadlineDate && (
                         <div className={styles.deadlineInfo}>
                             ⏰ Deadline:{" "}
                             {deadlineDate.toLocaleDateString("uk-UA")}
-                            {isOverdue && (
+                            {overdue && (
                                 <span className={styles.overdueLabel}>
                                     OVERDUE
                                 </span>
@@ -64,7 +41,7 @@ const TaskItem = ({ task, onDelete, onComplete }) => {
                 <div className={styles.actionContainer}>
                     <button
                         className={styles.moreButton}
-                        onClick={toggleDropdown}
+                        onClick={() => setIsDropdownOpen((open) => !open)}
                         aria-label="More actions"
                     >
                         ⋯
@@ -73,12 +50,11 @@ const TaskItem = ({ task, onDelete, onComplete }) => {
                         <TaskDropdown
                             task={task}
                             tasks={tasks}
-                            onComplete={onComplete}
-                            onDelete={onDelete}
-                            onClose={closeDropdown}
-                            isOverdue={isOverdue}
-                            groupDeleteCompleted={handleGroupDeleteCompleted}
-                            groupDeleteOverdue={handleGroupDeleteOverdue}
+                            onCompleteTask={onCompleteTask}
+                            onDeleteTask={onDeleteTask}
+                            onClose={() => setIsDropdownOpen(false)}
+                            onGroupDeleteCompleted={onGroupDeleteCompleted}
+                            onGroupDeleteOverdue={onGroupDeleteOverdue}
                         />
                     )}
                 </div>
@@ -89,7 +65,7 @@ const TaskItem = ({ task, onDelete, onComplete }) => {
                     📅 {new Date(task.createdAt).toLocaleDateString("uk-UA")}
                 </span>
                 <span className={styles.difficulty}>⚔️ {task.difficulty}</span>
-                {task.deadline && (
+                {deadlineDate && (
                     <span className={styles.timestamp}>
                         ⏰ {deadlineDate.toLocaleDateString("uk-UA")}
                     </span>

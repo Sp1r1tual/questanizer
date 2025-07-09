@@ -8,6 +8,8 @@ const TaskList = ({
     tasks,
     onDeleteTask,
     onCompleteTask,
+    groupDeleteCompleted,
+    groupDeleteOverdue,
     loading,
     filters,
     onFilterChange,
@@ -33,8 +35,11 @@ const TaskList = ({
                         <TaskItem
                             key={task._id}
                             task={task}
-                            onDelete={() => onDeleteTask(task._id)}
-                            onComplete={() => onCompleteTask(task._id)}
+                            tasks={tasks}
+                            onDeleteTask={onDeleteTask}
+                            onCompleteTask={onCompleteTask}
+                            onGroupDeleteCompleted={groupDeleteCompleted}
+                            onGroupDeleteOverdue={groupDeleteOverdue}
                         />
                     ))
                 ) : (

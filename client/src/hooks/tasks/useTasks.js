@@ -21,6 +21,7 @@ const useTasks = () => {
         (state) => state.bossBattle.alreadyRagedTaskIds
     );
     const loading = useSelector((state) => state.tasks.loading);
+
     const {
         inputTask,
         modalActive,
@@ -31,13 +32,16 @@ const useTasks = () => {
         onOpenModal,
         onCloseModal,
         onOpenConfirmModal,
+        onOpenGroupDeleteConfirmModal,
         onCloseConfirmModal,
         onSetDeadline,
     } = useTaskModals();
+
     const { handleTaskCompleted } = useBoss();
 
     const onAddTask = ({ hasDeadline, difficulty }) => {
         if (!inputTask.trim()) return;
+
         if (hasDeadline && !deadline) return;
 
         dispatch(
@@ -65,30 +69,63 @@ const useTasks = () => {
         onOpenConfirmModal("complete", _id, task.text);
     };
 
+    const onGroupDeleteCompleted = () => {
+        onOpenGroupDeleteConfirmModal("group-delete-completed");
+    };
+
+    const onGroupDeleteOverdue = () => {
+        onOpenGroupDeleteConfirmModal("group-delete-overdue");
+    };
+
     const onConfirmAction = () => {
         const { actionType, taskId } = confirmModal;
-        const task = tasks.find((t) => t._id === taskId);
-
-        if (!task) return;
 
         if (actionType === "delete") {
+            const task = tasks.find((t) => t._id === taskId);
+
+            if (!task) return;
+
             dispatch(deleteTaskAsync(taskId));
         } else if (actionType === "complete") {
+            const task = tasks.find((t) => t._id === taskId);
+
+            if (!task) return;
+
             dispatch(completeTaskAsync(taskId)).then(() => {
                 handleTaskCompleted(task.difficulty, !!task.deadline);
             });
+        } else if (actionType === "group-delete-completed") {
+            const completedTasks = tasks.filter((t) => t.isCompleted);
+
+            completedTasks.forEach((task) => {
+                dispatch(deleteTaskAsync(task._id));
+            });
+        } else if (actionType === "group-delete-overdue") {
+            const now = new Date();
+
+            const overdueTasks = tasks.filter(
+                (t) =>
+                    !t.isCompleted && t.deadline && new Date(t.deadline) < now
+            );
+
+            overdueTasks.forEach((task) => {
+                dispatch(deleteTaskAsync(task._id));
+            });
         }
+
+        onCloseConfirmModal();
     };
 
     useEffect(() => {
         const checkOverdueTasks = async () => {
             const now = new Date();
+
             const overdueTasks = tasks.filter(
-                (tasks) =>
-                    !tasks.isCompleted &&
-                    tasks.deadline &&
-                    new Date(tasks.deadline) < now &&
-                    !tasks.damageTaken
+                (task) =>
+                    !task.isCompleted &&
+                    task.deadline &&
+                    new Date(task.deadline) < now &&
+                    !task.damageTaken
             );
 
             if (!overdueTasks.length) return;
@@ -115,7 +152,6 @@ const useTasks = () => {
         };
 
         checkOverdueTasks();
-
         const interval = setInterval(checkOverdueTasks, 60000);
 
         return () => clearInterval(interval);
@@ -136,6 +172,8 @@ const useTasks = () => {
         onAddTask,
         onDeleteTask,
         onCompleteTask,
+        onGroupDeleteCompleted,
+        onGroupDeleteOverdue,
         onSetDeadline,
         onConfirmAction,
         loading,

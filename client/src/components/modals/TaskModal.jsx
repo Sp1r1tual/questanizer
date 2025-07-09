@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import DeadlinePage from "./DeadlinePage";
 import DifficultyPage from "./DifficultyPage";
+import isDateValid from "../../utils/validation/isDateValid";
 
 import styles from "./TaskModal.module.css";
 
@@ -16,19 +17,11 @@ const TaskModal = ({
     const [pageModal, setPageModal] = useState("deadline");
     const [difficulty, setDifficulty] = useState(null);
 
-    const isDateValid = (dateString) => {
-        if (!dateString) return false;
-
-        const selectedYear = new Date(dateString).getFullYear();
-        const currentYear = new Date().getFullYear();
-
-        return selectedYear >= currentYear && selectedYear <= 2099;
-    };
-
     const handleDateChange = (event) => {
         const newDate = event.target.value;
+
         setDeadline(newDate);
-        setIsDateInvalid(!newDate || !isDateValid(newDate));
+        setIsDateInvalid(!isDateValid(newDate));
     };
 
     const handleAddWithDeadline = () => {
@@ -36,6 +29,7 @@ const TaskModal = ({
             setIsDateInvalid(true);
             return;
         }
+
         setPageModal("difficulty");
     };
 
@@ -50,10 +44,17 @@ const TaskModal = ({
         setDifficulty(null);
     };
 
-    const handleFinalSubmit = () => {
+    const handleFinalSubmit = async () => {
         if (!difficulty) return;
-        onSubmit({ hasDeadline: !!initialDeadline, difficulty });
-        onClose();
+
+        const result = await onSubmit({
+            hasDeadline: !!initialDeadline,
+            difficulty,
+        });
+
+        if (result?.success) {
+            onClose();
+        }
     };
 
     if (!isOpen) {

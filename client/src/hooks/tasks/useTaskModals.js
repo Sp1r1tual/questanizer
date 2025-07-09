@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
+
 import {
     setInputTask,
     setModalActive,
@@ -28,6 +29,9 @@ const useTaskModals = () => {
     const onOpenConfirmModal = (actionType, taskId, taskText) =>
         dispatch(openConfirmModal({ actionType, taskId, taskText }));
 
+    const onOpenGroupDeleteConfirmModal = (actionType) =>
+        dispatch(openConfirmModal({ actionType, taskId: null, taskText: "" }));
+
     const onCloseConfirmModal = () => dispatch(closeConfirmModal());
 
     const onSetDeadline = (dateStr) => dispatch(setDeadline(dateStr));
@@ -42,6 +46,7 @@ const useTaskModals = () => {
         onOpenModal,
         onCloseModal,
         onOpenConfirmModal,
+        onOpenGroupDeleteConfirmModal,
         onCloseConfirmModal,
         onSetDeadline,
     };

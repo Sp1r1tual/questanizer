@@ -29,11 +29,14 @@ const TasksView = () => {
         onCloseModal,
         onDeleteTask,
         onCompleteTask,
+        onGroupDeleteCompleted,
+        onGroupDeleteOverdue,
         onSetDeadline,
         onCloseConfirmModal,
         onConfirmAction,
         loading,
     } = useTasks();
+
     const { getFilteredTasks } = useTaskFilters();
 
     useEffect(() => {
@@ -68,6 +71,8 @@ const TasksView = () => {
                 tasks={filteredTasks}
                 onCompleteTask={onCompleteTask}
                 onDeleteTask={onDeleteTask}
+                groupDeleteCompleted={onGroupDeleteCompleted}
+                groupDeleteOverdue={onGroupDeleteOverdue}
                 loading={loading}
                 filters={filters}
                 onFilterChange={handleFilterChange}
@@ -89,12 +94,19 @@ const TasksView = () => {
                     title={
                         confirmModal.actionType === "delete"
                             ? "Delete Task"
-                            : "Complete Task"
+                            : confirmModal.actionType === "complete"
+                            ? "Complete Task"
+                            : "Confirm deletion"
                     }
                     message={
                         confirmModal.actionType === "delete"
                             ? `Are you sure you want to delete the task "${confirmModal.taskText}"? This action cannot be undone.`
-                            : `Mark the task "${confirmModal.taskText}" as completed?`
+                            : confirmModal.actionType === "complete"
+                            ? `Mark the task "${confirmModal.taskText}" as completed?`
+                            : confirmModal.actionType ===
+                              "group-delete-completed"
+                            ? "Are you sure you want to delete all completed tasks?"
+                            : "Are you sure you want to delete all overdue tasks?"
                     }
                     confirmText="Yes"
                     cancelText="No"
