@@ -1,69 +1,17 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import { AuthService } from "../../services/authService";
-import { API_URL } from "../../http";
+import { createSlice } from "@reduxjs/toolkit";
+import { login, register, logout, checkAuth } from "./authThunks";
 
-const login = createAsyncThunk(
-    "auth/login",
-    async ({ email, password }, thunkAPI) => {
-        try {
-            const response = await AuthService.login(email, password);
-            localStorage.setItem("token", response.data.accessToken);
-            return response.data.user;
-        } catch (error) {
-            return thunkAPI.rejectWithValue(
-                error.response?.data?.message || "Login failed"
-            );
-        }
-    }
-);
-
-const register = createAsyncThunk(
-    "auth/register",
-    async (credentials, thunkAPI) => {
-        try {
-            const response = await AuthService.registration(
-                credentials.email,
-                credentials.password
-            );
-            localStorage.setItem("token", response.data.accessToken);
-            return response.data.user;
-        } catch (error) {
-            return thunkAPI.rejectWithValue(
-                error.response?.data?.message || "Registration failed"
-            );
-        }
-    }
-);
-
-const logout = createAsyncThunk("auth/logout", async () => {
-    await AuthService.logout();
-    localStorage.removeItem("token");
-});
-
-const checkAuth = createAsyncThunk("auth/checkAuth", async (_, thunkAPI) => {
-    try {
-        const response = await axios.get(`${API_URL}/refresh`, {
-            withCredentials: true,
-        });
-        localStorage.setItem("token", response.data.accessToken);
-        return response.data.user;
-    } catch (error) {
-        return thunkAPI.rejectWithValue(
-            error.response?.data?.message || "Session expired"
-        );
-    }
-});
+const initialState = {
+    user: null,
+    isAuthenticated: false,
+    isLoading: false,
+    error: null,
+    isAuthChecked: false,
+};
 
 const authSlice = createSlice({
     name: "auth",
-    initialState: {
-        user: null,
-        isAuthenticated: false,
-        isLoading: false,
-        error: null,
-        isAuthChecked: false,
-    },
+    initialState,
     reducers: {
         clearAuthError(state) {
             state.error = null;
@@ -78,17 +26,18 @@ const authSlice = createSlice({
             .addCase(login.fulfilled, (state, action) => {
                 state.user = action.payload;
                 state.isAuthenticated = true;
-                state.error = null;
                 state.isLoading = false;
                 state.isAuthChecked = true;
+                state.error = null;
             })
             .addCase(login.rejected, (state, action) => {
-                state.error = action.payload;
                 state.user = null;
                 state.isAuthenticated = false;
                 state.isLoading = false;
                 state.isAuthChecked = true;
+                state.error = action.payload;
             })
+
             .addCase(register.pending, (state) => {
                 state.isLoading = true;
                 state.error = null;
@@ -96,44 +45,45 @@ const authSlice = createSlice({
             .addCase(register.fulfilled, (state, action) => {
                 state.user = action.payload;
                 state.isAuthenticated = true;
-                state.error = null;
                 state.isLoading = false;
                 state.isAuthChecked = true;
+                state.error = null;
             })
             .addCase(register.rejected, (state, action) => {
-                state.error = action.payload;
                 state.user = null;
                 state.isAuthenticated = false;
                 state.isLoading = false;
                 state.isAuthChecked = true;
+                state.error = action.payload;
             })
+
             .addCase(logout.fulfilled, (state) => {
                 state.user = null;
                 state.isAuthenticated = false;
-                state.error = null;
                 state.isAuthChecked = true;
+                state.error = null;
             })
+
             .addCase(checkAuth.pending, (state) => {
                 state.isLoading = true;
             })
             .addCase(checkAuth.fulfilled, (state, action) => {
                 state.user = action.payload;
                 state.isAuthenticated = true;
-                state.error = null;
                 state.isLoading = false;
                 state.isAuthChecked = true;
+                state.error = null;
             })
             .addCase(checkAuth.rejected, (state, action) => {
                 state.user = null;
                 state.isAuthenticated = false;
-                state.error = action.payload;
                 state.isLoading = false;
                 state.isAuthChecked = true;
+                state.error = action.payload;
             });
     },
 });
 
-export { login, register, logout, checkAuth };
 export const { clearAuthError } = authSlice.actions;
 
 export default authSlice.reducer;

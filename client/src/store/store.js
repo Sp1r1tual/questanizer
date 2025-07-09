@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import tasksReducer from "../store/tasks/tasksSlice";
-import authReducer, { checkAuth } from "../store/auth/authSlice";
+import authReducer from "../store/auth/authSlice";
+import { checkAuth } from "./auth/authThunks";
 import userStatsReducer from "../store/stats/userStatsSlice";
 import bossBattleReducer from "./boss/bossBattleSlice";
 
