@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import TaskDropdown from "./TaskDropdown";
-import { deleteTaskAsync } from "../../store/tasks/tasksSlice";
+import { deleteTaskAsync } from "../../store/tasks/tasksThunks";
 
 import styles from "./TaskItem.module.css";
 

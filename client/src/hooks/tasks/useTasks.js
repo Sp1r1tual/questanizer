@@ -3,12 +3,12 @@ import { useSelector, useDispatch } from "react-redux";
 import useBoss from "../boss/useBoss";
 import useTaskModals from "./useTaskModals";
 
+import { markDamageTaken } from "../../store/tasks/tasksSlice";
 import {
     addTaskAsync,
     deleteTaskAsync,
     completeTaskAsync,
-    markDamageTaken,
-} from "../../store/tasks/tasksSlice";
+} from "../../store/tasks/tasksThunks";
 import { markTaskAsRaged } from "../../store/boss/bossBattleSlice";
 import { fetchStats } from "../../store/stats/userStatsThunks";
 import { TaskService } from "../../services/tasksService";

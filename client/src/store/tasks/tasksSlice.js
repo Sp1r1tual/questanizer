@@ -1,62 +1,10 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { TaskService } from "../../services/tasksService";
-import { fetchStats } from "../stats/userStatsThunks";
-
-export const fetchTasks = createAsyncThunk(
-    "tasks/fetchTasks",
-    async (_, thunkAPI) => {
-        try {
-            const response = await TaskService.getAllTasks();
-
-            return response.data;
-        } catch (error) {
-            return thunkAPI.rejectWithValue("Failed to load tasks");
-        }
-    }
-);
-
-export const addTaskAsync = createAsyncThunk(
-    "tasks/addTaskAsync",
-    async ({ text, deadline, difficulty }, thunkAPI) => {
-        try {
-            const response = await TaskService.createTask({
-                text,
-                deadline,
-                difficulty,
-            });
-
-            return response.data;
-        } catch (error) {
-            return thunkAPI.rejectWithValue("Failed to create task");
-        }
-    }
-);
-
-export const deleteTaskAsync = createAsyncThunk(
-    "tasks/deleteTaskAsync",
-    async (_id, thunkAPI) => {
-        try {
-            await TaskService.deleteTask(_id);
-            return _id;
-        } catch (error) {
-            return thunkAPI.rejectWithValue("Failed to delete task");
-        }
-    }
-);
-
-export const completeTaskAsync = createAsyncThunk(
-    "tasks/completeTaskAsync",
-    async (_id, thunkAPI) => {
-        try {
-            const response = await TaskService.completeTask(_id);
-
-            thunkAPI.dispatch(fetchStats());
-            return response.data.task;
-        } catch (error) {
-            return thunkAPI.rejectWithValue("Failed to perform task");
-        }
-    }
-);
+import { createSlice } from "@reduxjs/toolkit";
+import {
+    fetchTasks,
+    addTaskAsync,
+    deleteTaskAsync,
+    completeTaskAsync,
+} from "./tasksThunks";
 
 const initialState = {
     tasks: [],
@@ -110,9 +58,7 @@ const tasksSlice = createSlice({
             };
         },
         markDamageTaken: (state, action) => {
-            const task = state.tasks.find(
-                (task) => task._id === action.payload
-            );
+            const task = state.tasks.find((t) => t._id === action.payload);
 
             if (task) task.damageTaken = true;
         },
@@ -132,18 +78,21 @@ const tasksSlice = createSlice({
                 state.loading = false;
                 state.error = action.payload;
             })
+
             .addCase(addTaskAsync.fulfilled, (state, action) => {
                 state.tasks.push(action.payload);
                 state.inputTask = "";
                 state.deadline = "";
                 state.modalActive = false;
             })
+
             .addCase(deleteTaskAsync.fulfilled, (state, action) => {
                 state.tasks = state.tasks.filter(
                     (task) => task._id !== action.payload
                 );
                 state.confirmModal = initialState.confirmModal;
             })
+
             .addCase(completeTaskAsync.fulfilled, (state, action) => {
                 const index = state.tasks.findIndex(
                     (task) => task._id === action.payload._id

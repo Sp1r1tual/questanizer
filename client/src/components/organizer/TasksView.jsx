@@ -11,7 +11,7 @@ import AddNewTaskBtn from "./AddNewTaskBtn";
 import TaskList from "./TaskList";
 import TaskModal from "../modals/TaskModal";
 import ConfirmChoiceModal from "../modals/ConfirmChoiceModal";
-import { fetchTasks } from "../../store/tasks/tasksSlice";
+import { fetchTasks } from "../../store/tasks/tasksThunks";
 
 const TasksView = () => {
     const dispatch = useDispatch();
