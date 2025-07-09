@@ -1,24 +1,5 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { StatsService } from "../../services/statsService";
-
-export const fetchStats = createAsyncThunk("stats/fetchStats", async () => {
-    const response = await StatsService.getStats();
-
-    return response.data;
-});
-
-export const resetStats = createAsyncThunk(
-    "stats/reset",
-    async (_, thunkAPI) => {
-        try {
-            const response = await StatsService.resetStats();
-
-            return response.data;
-        } catch (err) {
-            return thunkAPI.rejectWithValue("Failed to reset stats");
-        }
-    }
-);
+import { createSlice } from "@reduxjs/toolkit";
+import { fetchStats, resetStats } from "./userStatsThunks";
 
 const initialState = {
     experience: 0,
@@ -41,6 +22,7 @@ const statsSlice = createSlice({
                 state.health = action.payload.hp;
                 state.maxHealth = action.payload.maxHp;
             })
+
             .addCase(resetStats.fulfilled, (state, action) => {
                 state.experience = action.payload.xp;
                 state.level = action.payload.level;

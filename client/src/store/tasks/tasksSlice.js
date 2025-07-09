@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { TaskService } from "../../services/tasksService";
-import { fetchStats } from "../stats/userStatsSlice";
+import { fetchStats } from "../stats/userStatsThunks";
 
 export const fetchTasks = createAsyncThunk(
     "tasks/fetchTasks",

@@ -10,7 +10,7 @@ import {
     markDamageTaken,
 } from "../../store/tasks/tasksSlice";
 import { markTaskAsRaged } from "../../store/boss/bossBattleSlice";
-import { fetchStats } from "../../store/stats/userStatsSlice";
+import { fetchStats } from "../../store/stats/userStatsThunks";
 import { TaskService } from "../../services/tasksService";
 
 const useTasks = () => {

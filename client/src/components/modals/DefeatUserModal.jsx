@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 
-import { resetStats } from "../../store/stats/userStatsSlice";
+import { resetStats } from "../../store/stats/userStatsThunks";
 import { resetBoss } from "../../store/boss/bossBattleSlice";
 
 import styles from "./DefeatUserModal.module.css";

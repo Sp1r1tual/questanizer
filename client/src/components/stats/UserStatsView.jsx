@@ -8,7 +8,7 @@ import UserHealth from "./UserHealth";
 import Container from "../ui/Container";
 import DefeatUserModal from "../modals/DefeatUserModal";
 import { resetBoss } from "../../store/boss/bossBattleSlice";
-import { fetchStats } from "../../store/stats/userStatsSlice";
+import { fetchStats } from "../../store/stats/userStatsThunks";
 
 import styles from "./UserStatsView.module.css";
 
