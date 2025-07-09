@@ -18,7 +18,7 @@ const Answers = () => {
 
     return (
         <div className={styles.answersPage}>
-            <h1 className={styles.title}>Часті запитання</h1>
+            <h1 className={styles.title}>Frequently asked questions</h1>
             <div className={styles.faqList}>
                 {faqs.map((faq, index) => (
                     <AnswerItem

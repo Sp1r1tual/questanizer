@@ -8,7 +8,7 @@ const BossView = () => {
     if (!boss.bossId)
         return (
             <section className={styles.placeholder}>
-                🧟 Boss appears here...
+                Boss appears here...
             </section>
         );
 

@@ -1,48 +1,21 @@
-import { useState } from "react";
 import useResetPassword from "../../../hooks/auth/useResetPasswordForm";
-import { useParams, useNavigate } from "react-router-dom";
 
-import { AuthService } from "../../../services/authService";
 import Loader from "../../../components/ui/Loader";
 
 import styles from "./ResetPassword.module.css";
 
 const ResetPassword = () => {
-    const { token } = useParams();
-    const navigate = useNavigate();
-    const [serverError, setServerError] = useState("");
-    const [message, setMessage] = useState("");
-    const [isLoading, setIsLoading] = useState(false);
-
-    const clearServerError = () => {
-        setServerError("");
-    };
-
-    const onSubmit = async ({ password }) => {
-        setIsLoading(true);
-
-        try {
-            await AuthService.resetPassword(token, password);
-            setMessage("Password has been reset. Redirecting to login...");
-            setServerError("");
-            setTimeout(() => navigate("/login"), 3000);
-        } catch (error) {
-            setServerError(
-                error.response?.data?.message || "Failed to reset password."
-            );
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
     const {
         password,
         confirmPassword,
         errors,
+        message,
+        serverError,
+        isLoading,
         handlePasswordChange,
         handleConfirmPasswordChange,
         handleSubmit,
-    } = useResetPassword({ onSubmit, clearServerError });
+    } = useResetPassword();
 
     const allErrors = [
         errors.fillAllFields,

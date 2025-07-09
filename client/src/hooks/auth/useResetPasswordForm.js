@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import useForm from "./useForm";
 
 import {
@@ -5,8 +7,18 @@ import {
     validateConfirmPassword,
     ERROR_MESSAGES,
 } from "../../utils/validation/validationForm";
+import { AuthService } from "../../services/authService";
 
-const useResetPassword = ({ onSubmit, clearServerError }) => {
+const useResetPassword = () => {
+    const { token } = useParams();
+    const navigate = useNavigate();
+
+    const [message, setMessage] = useState("");
+    const [serverError, setServerError] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+
+    const clearServerError = () => setServerError("");
+
     const validate = ({ password, confirmPassword }) => {
         const errors = {};
 
@@ -25,6 +37,22 @@ const useResetPassword = ({ onSubmit, clearServerError }) => {
         return errors;
     };
 
+    const onSubmit = async ({ password }) => {
+        setIsLoading(true);
+        try {
+            await AuthService.resetPassword(token, password);
+            setMessage("Password has been reset. Redirecting to login...");
+            setServerError("");
+            setTimeout(() => navigate("/login"), 3000);
+        } catch (error) {
+            setServerError(
+                error.response?.data?.message || "Failed to reset password."
+            );
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     const { values, errors, handleChange, handleSubmit } = useForm({
         initialValues: { password: "", confirmPassword: "" },
         validate,
@@ -36,6 +64,9 @@ const useResetPassword = ({ onSubmit, clearServerError }) => {
         password: values.password,
         confirmPassword: values.confirmPassword,
         errors,
+        message,
+        serverError,
+        isLoading,
         handlePasswordChange: handleChange("password"),
         handleConfirmPasswordChange: handleChange("confirmPassword"),
         handleSubmit,
