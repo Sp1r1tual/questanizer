@@ -7,7 +7,7 @@ import BossStats from "./BossStats";
 import BossView from "./BossView";
 import BossBattleStartBtn from "./BossBattleStartBtn";
 import Loader from "../../../../components/ui/Loader";
-import { fetchBoss } from "../../../../store/boss/bossBattleSlice";
+import { fetchBoss } from "../../../../store/boss/bossBattleThunks";
 
 import styles from "./BossBattle.module.css";
 

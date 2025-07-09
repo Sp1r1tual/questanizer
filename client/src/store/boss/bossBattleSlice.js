@@ -1,17 +1,5 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { BossService } from "../../services/bossService";
-
-export const fetchBoss = createAsyncThunk(
-    "boss/fetchBoss",
-    async (_, thunkAPI) => {
-        try {
-            const response = await BossService.getBoss();
-            return response.data;
-        } catch (error) {
-            return thunkAPI.rejectWithValue("Boss not found");
-        }
-    }
-);
+import { createSlice } from "@reduxjs/toolkit";
+import { fetchBoss } from "./bossBattleThunks";
 
 const initialState = {
     bossId: null,
@@ -41,6 +29,7 @@ const bossBattleSlice = createSlice({
     reducers: {
         setActiveBoss: (state, action) => {
             const boss = action.payload;
+
             state.bossId = boss.bossId;
             state.bossName = boss.bossName;
             state.healthPoints = boss.healthPoints;
@@ -67,7 +56,7 @@ const bossBattleSlice = createSlice({
                 state.alreadyRagedTaskIds.push(taskId);
             }
         },
-        resetBoss: (state, action) => {
+        resetBoss: (state) => {
             const currentProgress = state.userBossProgress;
 
             return {
@@ -75,10 +64,10 @@ const bossBattleSlice = createSlice({
                 userBossProgress: currentProgress,
             };
         },
+        clearBossState: () => initialState,
         setBossEvent: (state, action) => {
             state.event = action.payload;
         },
-        clearBossState: () => initialState,
     },
     extraReducers: (builder) => {
         builder
@@ -93,11 +82,9 @@ const bossBattleSlice = createSlice({
                 state.userBossProgress =
                     response?.userBossProgress || initialState.userBossProgress;
 
-                if (!response.boss) {
-                    return;
-                }
-
                 const boss = response.boss;
+
+                if (!boss) return;
 
                 state.bossId = boss.bossId;
                 state.bossName = boss.bossName;
@@ -124,6 +111,7 @@ export const {
     markTaskAsRaged,
     resetBoss,
     clearBossState,
+    setBossEvent,
 } = bossBattleSlice.actions;
 
 export default bossBattleSlice.reducer;
