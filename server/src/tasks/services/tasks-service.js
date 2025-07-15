@@ -4,6 +4,7 @@ import TaskModel from "../models/tasks-model.js";
 import userStatsService from "../../stats/services/user-stats-service.js";
 import bossService from "../../boss/services/boss-service.js";
 import DIFFICULTY_REWARDS from "../../shared/config/user-stats-config.js";
+import { success, info, warning } from "../../shared/utils/notifications.js";
 
 const validateIds = (...ids) => {
     for (const id of ids) {
@@ -61,19 +62,9 @@ const completeTask = async (taskId, userId) => {
     const { stats, message: levelUpMessage } =
         await userStatsService.gainExperience(userId, xp);
 
-    let allMessages = [];
+    let messages = [success(`Task accomplished! Received ${xp} XP`)];
 
-    allMessages.push({
-        type: "success",
-        text: `Task accomplished! Received ${xp} XP`,
-    });
-
-    if (levelUpMessage) {
-        allMessages.push({
-            type: "info",
-            text: levelUpMessage,
-        });
-    }
+    if (levelUpMessage) messages.push(levelUpMessage);
 
     const boss = await bossService.getBoss(userId);
 
@@ -81,9 +72,9 @@ const completeTask = async (taskId, userId) => {
         const bossResult = await bossService.damageBoss(userId, reward.damage);
 
         if (bossResult.messages) {
-            allMessages.push(
+            messages.push(
                 ...bossResult.messages.map((msg) =>
-                    typeof msg === "string" ? { type: "info", text: msg } : msg
+                    typeof msg === "string" ? info(msg) : msg
                 )
             );
         }
@@ -92,7 +83,7 @@ const completeTask = async (taskId, userId) => {
     return {
         task,
         stats,
-        messages: allMessages,
+        messages,
     };
 };
 
@@ -108,21 +99,14 @@ const applyOverduePenalty = async (taskId, userId) => {
     await task.save();
 
     const { damage } = DIFFICULTY_REWARDS[task.difficulty] || {};
-    const stats = await userStatsService.takeDamage(userId, damage || 0);
+    const { stats, message: hpZeroMessage } = await userStatsService.takeDamage(
+        userId,
+        damage || 0
+    );
 
-    let allMessages = [];
+    let messages = [warning(`Penalty applied! Lost ${damage} HP`)];
 
-    allMessages.push({
-        type: "warning",
-        text: `Penalty applied! Lost ${damage} HP`,
-    });
-
-    if (stats.healthPoints <= 0) {
-        allMessages.push({
-            type: "error",
-            text: `Your health is over!`,
-        });
-    }
+    if (hpZeroMessage) messages.push(hpZeroMessage);
 
     const boss = await bossService.getBoss(userId);
 
@@ -130,9 +114,9 @@ const applyOverduePenalty = async (taskId, userId) => {
         const rageResult = await bossService.addRage(userId, [taskId]);
 
         if (rageResult.messages) {
-            allMessages.push(
+            messages.push(
                 ...rageResult.messages.map((msg) =>
-                    typeof msg === "string" ? { type: "info", text: msg } : msg
+                    typeof msg === "string" ? info(msg) : msg
                 )
             );
         }
@@ -141,7 +125,7 @@ const applyOverduePenalty = async (taskId, userId) => {
     return {
         task,
         stats,
-        messages: allMessages,
+        messages,
     };
 };
 

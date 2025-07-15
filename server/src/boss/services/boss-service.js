@@ -8,6 +8,7 @@ import {
     hasBossFound,
     updateBossFromTemplate,
 } from "../helpers/boss-helpers.js";
+import { success, info, warning } from "../../shared/utils/notifications.js";
 
 const getBoss = async (userId) => {
     validateObjectId(userId, "user ID");
@@ -22,12 +23,7 @@ const spawnBoss = async (userId, bossId) => {
     if (!config) {
         return {
             boss: null,
-            messages: [
-                {
-                    type: "success",
-                    text: "You have defeated all available bosses!",
-                },
-            ],
+            messages: [success("You have defeated all available bosses!")],
             allBossesDefeated: true,
         };
     }
@@ -78,23 +74,17 @@ const damageBoss = async (userId, amount) => {
         const allBossesDefeated =
             progress.currentAvailableBossId > bosses.length;
 
-        const messages = [
-            {
-                type: "success",
-                text: `Congratulations! You defeated the boss ${boss.bossName}!`,
-            },
-            {
-                type: "info",
-                text: `Received ${boss.bossRewardExp} XP!`,
-            },
-        ];
-
         return {
             healthPoints: 0,
             isDead: true,
             rewardExp: boss.bossRewardExp,
             allBossesDefeated,
-            messages,
+            messages: [
+                success(
+                    `Congratulations! You defeated the boss ${boss.bossName}!`
+                ),
+                info(`Received ${boss.bossRewardExp} XP!`),
+            ],
         };
     }
 
@@ -103,12 +93,7 @@ const damageBoss = async (userId, amount) => {
     return {
         healthPoints: boss.healthPoints,
         isDead: false,
-        messages: [
-            {
-                type: "info",
-                text: `Dealt ${amount} damage to boss!`,
-            },
-        ],
+        messages: [info(`Dealt ${amount} damage to boss!`)],
     };
 };
 
@@ -128,34 +113,37 @@ const addRage = async (userId, newTaskIds = []) => {
 
     let shouldAttack = false;
     let stats = null;
-    let messages = [];
+    const messages = [];
 
     if (uniqueNew.length > 0) {
-        messages.push({
-            type: "info",
-            text: `Boss's Rage increased by ${uniqueNew.length}! (${boss.rage}/${boss.bossRageBar})`,
-        });
+        messages.push(
+            info(
+                `Boss's Rage increased by ${uniqueNew.length}! (${boss.rage}/${boss.bossRageBar})`
+            )
+        );
     }
 
     if (boss.rage >= boss.bossRageBar) {
         boss.rage = 0;
         shouldAttack = true;
-        stats = await userStatsService.takeDamage(userId, boss.bossPower);
 
-        messages.push({
-            type: "warning",
-            text: `The boss is attacking! Assigned ${boss.bossPower} damage!`,
-        });
+        const result = await userStatsService.takeDamage(
+            userId,
+            boss.bossPower
+        );
+        stats = result.stats;
 
-        if (stats.healthPoints <= 0) {
-            messages.push({
-                type: "error",
-                text: `You lost! Your health is gone.`,
-            });
+        messages.push(
+            warning(`The boss is attacking! Assigned ${boss.bossPower} damage!`)
+        );
+
+        if (result.message) {
+            messages.push(result.message);
         }
     }
 
     await boss.save();
+
     return {
         rage: boss.rage,
         shouldAttack,
@@ -188,7 +176,10 @@ const resetBoss = async (userId) => {
 
     await bossProgressService.resetBossProgress(userId);
 
-    return { boss: null, rewardGiven: false };
+    return {
+        boss: null,
+        rewardGiven: false,
+    };
 };
 
 export default {

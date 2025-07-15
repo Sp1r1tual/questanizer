@@ -1,5 +1,6 @@
 import UserStatsModel from "../models/user-stats-model.js";
 import bossService from "../../boss/services/boss-service.js";
+import { success, error, info } from "../../shared/utils/notifications.js";
 
 const getOrCreateStats = async (userId) => {
     let stats = await UserStatsModel.findOne({ user: userId });
@@ -27,10 +28,7 @@ const gainExperience = async (userId, amount) => {
     let message = null;
 
     if (stats.level > oldLevel) {
-        message = {
-            type: "success",
-            text: `Your level has increased: ${stats.level}!`,
-        };
+        message = success(`Your level has increased: ${stats.level}!`);
     }
 
     await stats.save();
@@ -52,10 +50,7 @@ const takeDamage = async (userId, amount) => {
     let message = null;
 
     if (stats.hp === 0) {
-        message = {
-            type: "error",
-            text: `Your health dropped to zero!`,
-        };
+        message = error(`Your health dropped to zero!`);
     }
 
     return { stats, message };
@@ -75,10 +70,7 @@ const resetUserStats = async (userId) => {
 
     return {
         stats,
-        message: {
-            type: "info",
-            text: `Player progress reset.`,
-        },
+        message: info(`Player progress reset.`),
     };
 };
 

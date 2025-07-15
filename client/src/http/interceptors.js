@@ -1,4 +1,3 @@
-import { toast } from "react-toastify";
 import {
     refreshToken,
     processQueue,
@@ -21,37 +20,7 @@ function setupInterceptors(axiosInstance) {
     });
 
     axiosInstance.interceptors.response.use(
-        (response) => {
-            const { message, messages } = response.data;
-
-            if (Array.isArray(messages)) {
-                messages.forEach((msg) => {
-                    if (typeof msg === "string") {
-                        toast(msg);
-                    } else if (typeof msg === "object" && msg.text) {
-                        switch (msg.type) {
-                            case "success":
-                                toast.success(msg.text);
-                                break;
-                            case "error":
-                                toast.error(msg.text);
-                                break;
-                            case "warn":
-                            case "warning":
-                                toast.warn(msg.text);
-                                break;
-                            case "info":
-                            default:
-                                toast.info(msg.text);
-                        }
-                    }
-                });
-            } else if (message) {
-                toast(message);
-            }
-
-            return response;
-        },
+        (response) => response,
         async (error) => {
             const originalRequest = error.config;
 
@@ -59,9 +28,6 @@ function setupInterceptors(axiosInstance) {
             const canRetry = originalRequest && !originalRequest._retry;
 
             if (!isUnauthorized || !canRetry) {
-                const errMsg = error.response?.data?.message || "Unknown error";
-
-                toast.error(errMsg);
                 return Promise.reject(error);
             }
 
@@ -75,10 +41,8 @@ function setupInterceptors(axiosInstance) {
                     })
                     .catch((error) => {
                         processQueue(error, null, failedQueue);
-
                         localStorage.removeItem("token");
                         window.location.href = "/login";
-
                         return Promise.reject(error);
                     })
                     .finally(() => {
