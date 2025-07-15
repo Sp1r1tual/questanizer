@@ -63,10 +63,16 @@ const completeTask = async (taskId, userId) => {
 
     let allMessages = [];
 
-    allMessages.push(`✅ Mission accomplished! Received ${xp} XP`);
+    allMessages.push({
+        type: "success",
+        text: `Task accomplished! Received ${xp} XP`,
+    });
 
     if (levelUpMessage) {
-        allMessages.push(`🎉 ${levelUpMessage}`);
+        allMessages.push({
+            type: "info",
+            text: levelUpMessage,
+        });
     }
 
     const boss = await bossService.getBoss(userId);
@@ -75,7 +81,11 @@ const completeTask = async (taskId, userId) => {
         const bossResult = await bossService.damageBoss(userId, reward.damage);
 
         if (bossResult.messages) {
-            allMessages.push(...bossResult.messages);
+            allMessages.push(
+                ...bossResult.messages.map((msg) =>
+                    typeof msg === "string" ? { type: "info", text: msg } : msg
+                )
+            );
         }
     }
 
@@ -102,10 +112,16 @@ const applyOverduePenalty = async (taskId, userId) => {
 
     let allMessages = [];
 
-    allMessages.push(`⚠️ Penalty applied! Lost ${damage} XP`);
+    allMessages.push({
+        type: "warning",
+        text: `Penalty applied! Lost ${damage} HP`,
+    });
 
     if (stats.healthPoints <= 0) {
-        allMessages.push(`Your health is over!`);
+        allMessages.push({
+            type: "error",
+            text: `Your health is over!`,
+        });
     }
 
     const boss = await bossService.getBoss(userId);
@@ -114,7 +130,11 @@ const applyOverduePenalty = async (taskId, userId) => {
         const rageResult = await bossService.addRage(userId, [taskId]);
 
         if (rageResult.messages) {
-            allMessages.push(...rageResult.messages);
+            allMessages.push(
+                ...rageResult.messages.map((msg) =>
+                    typeof msg === "string" ? { type: "info", text: msg } : msg
+                )
+            );
         }
     }
 

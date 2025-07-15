@@ -25,8 +25,12 @@ const gainExperience = async (userId, amount) => {
     }
 
     let message = null;
+
     if (stats.level > oldLevel) {
-        message = `Your level has increased: ${stats.level}!`;
+        message = {
+            type: "success",
+            text: `Your level has increased: ${stats.level}!`,
+        };
     }
 
     await stats.save();
@@ -37,14 +41,24 @@ const gainExperience = async (userId, amount) => {
 const takeDamage = async (userId, amount) => {
     const stats = await getOrCreateStats(userId);
 
-    if (stats.hp <= 0) return stats;
+    if (stats.hp <= 0) return { stats, message: null };
 
     stats.hp -= amount;
 
     if (stats.hp < 0) stats.hp = 0;
 
     await stats.save();
-    return stats;
+
+    let message = null;
+
+    if (stats.hp === 0) {
+        message = {
+            type: "error",
+            text: `Your health dropped to zero!`,
+        };
+    }
+
+    return { stats, message };
 };
 
 const resetUserStats = async (userId) => {
@@ -58,7 +72,14 @@ const resetUserStats = async (userId) => {
 
     await bossService.resetBoss(userId);
     await stats.save();
-    return { message: `Player progress reset`, stats };
+
+    return {
+        stats,
+        message: {
+            type: "info",
+            text: `Player progress reset.`,
+        },
+    };
 };
 
 export default {

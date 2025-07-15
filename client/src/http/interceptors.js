@@ -25,7 +25,27 @@ function setupInterceptors(axiosInstance) {
             const { message, messages } = response.data;
 
             if (Array.isArray(messages)) {
-                messages.forEach((msg) => toast(msg));
+                messages.forEach((msg) => {
+                    if (typeof msg === "string") {
+                        toast(msg);
+                    } else if (typeof msg === "object" && msg.text) {
+                        switch (msg.type) {
+                            case "success":
+                                toast.success(msg.text);
+                                break;
+                            case "error":
+                                toast.error(msg.text);
+                                break;
+                            case "warn":
+                            case "warning":
+                                toast.warn(msg.text);
+                                break;
+                            case "info":
+                            default:
+                                toast.info(msg.text);
+                        }
+                    }
+                });
             } else if (message) {
                 toast(message);
             }

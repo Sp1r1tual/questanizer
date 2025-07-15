@@ -19,7 +19,18 @@ const spawnBoss = async (userId, bossId) => {
 
     const config = bosses.find((boss) => boss.bossId === bossId);
 
-    if (!config) throw ApiError.BadRequest("Invalid boss ID");
+    if (!config) {
+        return {
+            boss: null,
+            messages: [
+                {
+                    type: "success",
+                    text: "You have defeated all available bosses!",
+                },
+            ],
+            allBossesDefeated: true,
+        };
+    }
 
     let boss = await BossModel.findOne({ user: userId });
 
@@ -34,7 +45,11 @@ const spawnBoss = async (userId, bossId) => {
     });
 
     await boss.save();
-    return boss;
+
+    return {
+        boss,
+        allBossesDefeated: false,
+    };
 };
 
 const damageBoss = async (userId, amount) => {
@@ -51,29 +66,49 @@ const damageBoss = async (userId, amount) => {
 
     if (isDead) {
         await userStatsService.gainExperience(userId, boss.bossRewardExp);
-        await bossProgressService.updateBossProgress(
+
+        const progress = await bossProgressService.updateBossProgress(
             userId,
             boss.bossId,
             boss.bossRewardExp
         );
+
         await boss.deleteOne();
+
+        const allBossesDefeated =
+            progress.currentAvailableBossId > bosses.length;
+
+        const messages = [
+            {
+                type: "success",
+                text: `Congratulations! You defeated the boss ${boss.bossName}!`,
+            },
+            {
+                type: "info",
+                text: `Received ${boss.bossRewardExp} XP!`,
+            },
+        ];
 
         return {
             healthPoints: 0,
             isDead: true,
             rewardExp: boss.bossRewardExp,
-            messages: [
-                `🎉 Congratulations! You defeated the boss! ${boss.bossName}!`,
-                `⭐ Received ${boss.bossRewardExp} XP!`,
-            ],
+            allBossesDefeated,
+            messages,
         };
     }
 
     await boss.save();
+
     return {
         healthPoints: boss.healthPoints,
         isDead: false,
-        messages: [`⚔️ Dealt ${amount} damage to boss!`],
+        messages: [
+            {
+                type: "info",
+                text: `Dealt ${amount} damage to boss!`,
+            },
+        ],
     };
 };
 
@@ -96,9 +131,10 @@ const addRage = async (userId, newTaskIds = []) => {
     let messages = [];
 
     if (uniqueNew.length > 0) {
-        messages.push(
-            `🔥 Boss's Rage increased by ${uniqueNew.length}! (${boss.rage}/${boss.bossRageBar})`
-        );
+        messages.push({
+            type: "info",
+            text: `Boss's Rage increased by ${uniqueNew.length}! (${boss.rage}/${boss.bossRageBar})`,
+        });
     }
 
     if (boss.rage >= boss.bossRageBar) {
@@ -106,12 +142,16 @@ const addRage = async (userId, newTaskIds = []) => {
         shouldAttack = true;
         stats = await userStatsService.takeDamage(userId, boss.bossPower);
 
-        messages.push(
-            `⚡ The boss is attacking! Assigned ${boss.bossPower} damage!`
-        );
+        messages.push({
+            type: "warning",
+            text: `The boss is attacking! Assigned ${boss.bossPower} damage!`,
+        });
 
         if (stats.healthPoints <= 0) {
-            messages.push(`You lost! Your health is gone.`);
+            messages.push({
+                type: "error",
+                text: `You lost! Your health is gone.`,
+            });
         }
     }
 
