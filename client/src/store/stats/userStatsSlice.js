@@ -24,10 +24,12 @@ const statsSlice = createSlice({
             })
 
             .addCase(resetStats.fulfilled, (state, action) => {
-                state.experience = action.payload.xp;
-                state.level = action.payload.level;
-                state.health = action.payload.hp;
-                state.maxHealth = action.payload.maxHp;
+                const stats = action.payload.stats;
+
+                state.experience = stats.xp;
+                state.level = stats.level;
+                state.health = stats.hp;
+                state.maxHealth = stats.maxHp;
             });
     },
 });

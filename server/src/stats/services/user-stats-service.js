@@ -14,6 +14,8 @@ const getOrCreateStats = async (userId) => {
 const gainExperience = async (userId, amount) => {
     const stats = await getOrCreateStats(userId);
 
+    const oldLevel = stats.level;
+
     stats.xp += amount;
 
     while (stats.xp >= stats.level * 100) {
@@ -22,8 +24,14 @@ const gainExperience = async (userId, amount) => {
         stats.hp = stats.maxHp;
     }
 
+    let message = null;
+    if (stats.level > oldLevel) {
+        message = `Your level has increased: ${stats.level}!`;
+    }
+
     await stats.save();
-    return stats;
+
+    return { stats, message };
 };
 
 const takeDamage = async (userId, amount) => {
@@ -50,7 +58,7 @@ const resetUserStats = async (userId) => {
 
     await bossService.resetBoss(userId);
     await stats.save();
-    return stats;
+    return { message: `Player progress reset`, stats };
 };
 
 export default {

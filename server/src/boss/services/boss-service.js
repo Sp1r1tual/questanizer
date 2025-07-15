@@ -59,19 +59,21 @@ const damageBoss = async (userId, amount) => {
         await boss.deleteOne();
 
         return {
-            message: `Boss defeated! Gained ${boss.bossRewardExp} XP`,
             healthPoints: 0,
             isDead: true,
             rewardExp: boss.bossRewardExp,
-            event: "BOSS_DEFEATED",
+            messages: [
+                `🎉 Congratulations! You defeated the boss! ${boss.bossName}!`,
+                `⭐ Received ${boss.bossRewardExp} XP!`,
+            ],
         };
     }
 
     await boss.save();
     return {
-        message: `Boss damaged by ${amount}`,
         healthPoints: boss.healthPoints,
         isDead: false,
+        messages: [`⚔️ Dealt ${amount} damage to boss!`],
     };
 };
 
@@ -91,20 +93,34 @@ const addRage = async (userId, newTaskIds = []) => {
 
     let shouldAttack = false;
     let stats = null;
+    let messages = [];
+
+    if (uniqueNew.length > 0) {
+        messages.push(
+            `🔥 Boss's Rage increased by ${uniqueNew.length}! (${boss.rage}/${boss.bossRageBar})`
+        );
+    }
 
     if (boss.rage >= boss.bossRageBar) {
         boss.rage = 0;
         shouldAttack = true;
         stats = await userStatsService.takeDamage(userId, boss.bossPower);
+
+        messages.push(
+            `⚡ The boss is attacking! Assigned ${boss.bossPower} damage!`
+        );
+
+        if (stats.healthPoints <= 0) {
+            messages.push(`You lost! Your health is gone.`);
+        }
     }
 
     await boss.save();
     return {
-        message: `Rage increased by ${uniqueNew.length}`,
         rage: boss.rage,
         shouldAttack,
         stats,
-        event: shouldAttack ? "BOSS_ATTACKED" : null,
+        messages,
     };
 };
 
@@ -119,53 +135,20 @@ const markTaskAsRaged = async (userId, taskId) => {
     }
 
     return {
-        message: "Task marked as raged",
         alreadyRagedTaskIds: boss.alreadyRagedTaskIds,
     };
 };
 
 const resetBoss = async (userId) => {
-    const boss = await hasBossFound(userId);
-    const isDefeated = boss.healthPoints <= 0;
+    const boss = await BossModel.findOne({ user: userId });
 
-    if (!isDefeated) {
+    if (boss) {
         await boss.deleteOne();
-        await bossProgressService.resetBossProgress(userId);
-        return { boss: null, rewardGiven: false };
     }
 
-    const rewardExp = boss.bossRewardExp;
-    const currentBossId = boss.bossId;
-    const nextBoss = bosses.find((b) => b.bossId === currentBossId + 1);
+    await bossProgressService.resetBossProgress(userId);
 
-    await userStatsService.gainExperience(userId, rewardExp);
-    await bossProgressService.updateBossProgress(
-        userId,
-        currentBossId,
-        rewardExp
-    );
-
-    if (!nextBoss) {
-        await boss.deleteOne();
-        return {
-            boss: null,
-            rewardGiven: true,
-            event: "ALL_BOSSES_DEFEATED",
-        };
-    }
-
-    updateBossFromTemplate(boss, nextBoss);
-
-    Object.assign(boss, {
-        rage: 0,
-        alreadyRagedTaskIds: [],
-        currentBossIndex: boss.currentBossIndex + 1,
-        spawnedAt: new Date(),
-    });
-
-    await boss.save();
-
-    return { boss, rewardGiven: true };
+    return { boss: null, rewardGiven: false };
 };
 
 export default {

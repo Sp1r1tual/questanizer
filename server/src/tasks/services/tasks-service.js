@@ -57,15 +57,33 @@ const completeTask = async (taskId, userId) => {
 
     const reward = DIFFICULTY_REWARDS[task.difficulty] || { xp: 0, damage: 0 };
     const xp = !task.deadline ? Math.floor(reward.xp / 5) : reward.xp;
-    const stats = await userStatsService.gainExperience(userId, xp);
+
+    const { stats, message: levelUpMessage } =
+        await userStatsService.gainExperience(userId, xp);
+
+    let allMessages = [];
+
+    allMessages.push(`✅ Mission accomplished! Received ${xp} XP`);
+
+    if (levelUpMessage) {
+        allMessages.push(`🎉 ${levelUpMessage}`);
+    }
 
     const boss = await bossService.getBoss(userId);
 
     if (boss && task.deadline && task.createdAt > boss.spawnedAt) {
-        await bossService.damageBoss(userId, reward.damage);
+        const bossResult = await bossService.damageBoss(userId, reward.damage);
+
+        if (bossResult.messages) {
+            allMessages.push(...bossResult.messages);
+        }
     }
 
-    return { message: "Task completed", task, stats };
+    return {
+        task,
+        stats,
+        messages: allMessages,
+    };
 };
 
 const applyOverduePenalty = async (taskId, userId) => {
@@ -82,13 +100,29 @@ const applyOverduePenalty = async (taskId, userId) => {
     const { damage } = DIFFICULTY_REWARDS[task.difficulty] || {};
     const stats = await userStatsService.takeDamage(userId, damage || 0);
 
+    let allMessages = [];
+
+    allMessages.push(`⚠️ Penalty applied! Lost ${damage} XP`);
+
+    if (stats.healthPoints <= 0) {
+        allMessages.push(`Your health is over!`);
+    }
+
     const boss = await bossService.getBoss(userId);
 
     if (boss && task.deadline && task.createdAt > boss.spawnedAt) {
-        await bossService.addRage(userId, [taskId]);
+        const rageResult = await bossService.addRage(userId, [taskId]);
+
+        if (rageResult.messages) {
+            allMessages.push(...rageResult.messages);
+        }
     }
 
-    return { message: "Penalty applied", task, stats };
+    return {
+        task,
+        stats,
+        messages: allMessages,
+    };
 };
 
 export default {

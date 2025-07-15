@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
-
 import {
     setModalActive,
     closeModal,
     openConfirmModal,
+    closeConfirmModal,
 } from "../../store/tasks/tasksSlice";
 
 const useTaskModals = () => {
@@ -27,6 +27,8 @@ const useTaskModals = () => {
         dispatch(openConfirmModal({ actionType, taskId: null, taskText: "" }));
     };
 
+    const onCloseConfirmModal = () => dispatch(closeConfirmModal());
+
     return {
         modalActive,
         confirmModal,
@@ -34,6 +36,7 @@ const useTaskModals = () => {
         onCloseModal,
         onOpenConfirmModal,
         onOpenGroupDeleteConfirmModal,
+        onCloseConfirmModal,
     };
 };
 

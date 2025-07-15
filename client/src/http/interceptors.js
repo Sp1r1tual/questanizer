@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import {
     refreshToken,
     processQueue,
@@ -20,7 +21,17 @@ function setupInterceptors(axiosInstance) {
     });
 
     axiosInstance.interceptors.response.use(
-        (response) => response,
+        (response) => {
+            const { message, messages } = response.data;
+
+            if (Array.isArray(messages)) {
+                messages.forEach((msg) => toast(msg));
+            } else if (message) {
+                toast(message);
+            }
+
+            return response;
+        },
         async (error) => {
             const originalRequest = error.config;
 
@@ -28,6 +39,9 @@ function setupInterceptors(axiosInstance) {
             const canRetry = originalRequest && !originalRequest._retry;
 
             if (!isUnauthorized || !canRetry) {
+                const errMsg = error.response?.data?.message || "Unknown error";
+
+                toast.error(errMsg);
                 return Promise.reject(error);
             }
 
