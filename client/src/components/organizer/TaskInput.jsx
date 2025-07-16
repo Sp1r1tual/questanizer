@@ -10,6 +10,8 @@ const TaskInput = ({ onChange, value, isInvalid }) => {
         <div className={styles.inputContainer}>
             <input
                 type="text"
+                id="taskInput"
+                name="task"
                 className={`${styles.taskInput} ${
                     isInvalid ? styles.invalidInput : ""
                 }`}

@@ -26,7 +26,9 @@ const tasksSlice = createSlice({
     reducers: {
         setInputTask: (state, action) => {
             state.inputTask = action.payload;
-            state.isInputInvalid = action.payload.trim() === "";
+        },
+        setIsInputInvalid: (state, action) => {
+            state.isInputInvalid = action.payload;
         },
         setModalActive: (state, action) => {
             state.modalActive = action.payload;
@@ -106,6 +108,7 @@ const tasksSlice = createSlice({
 
 export const {
     setInputTask,
+    setIsInputInvalid,
     setModalActive,
     closeModal,
     setDeadline,

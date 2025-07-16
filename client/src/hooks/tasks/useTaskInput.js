@@ -1,6 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 
-import { setInputTask, setDeadline } from "../../store/tasks/tasksSlice";
+import {
+    setInputTask,
+    setDeadline,
+    setIsInputInvalid,
+} from "../../store/tasks/tasksSlice";
 
 const useTaskInput = () => {
     const dispatch = useDispatch();
@@ -8,7 +12,14 @@ const useTaskInput = () => {
         (state) => state.tasks
     );
 
-    const onInputChange = (value) => dispatch(setInputTask(value));
+    const onInputChange = (value) => {
+        dispatch(setInputTask(value));
+
+        if (isInputInvalid && value.trim() !== "") {
+            dispatch(setIsInputInvalid(false));
+        }
+    };
+
     const onSetDeadline = (dateStr) => dispatch(setDeadline(dateStr));
 
     return {

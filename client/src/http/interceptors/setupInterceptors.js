@@ -2,10 +2,10 @@ import {
     refreshToken,
     processQueue,
     retryRequestWithNewToken,
-} from "./tokenUtils.js";
+} from "../utils/tokenUtils.js";
 
 let failedQueue = [];
-let refreshPromise = null;
+let isRefreshing = false;
 
 function setupInterceptors(axiosInstance) {
     axiosInstance.interceptors.request.use((config) => {
@@ -33,20 +33,20 @@ function setupInterceptors(axiosInstance) {
 
             originalRequest._retry = true;
 
-            if (!refreshPromise) {
-                refreshPromise = refreshToken()
+            if (!isRefreshing) {
+                isRefreshing = true;
+
+                refreshToken()
                     .then((newToken) => {
                         processQueue(null, newToken, failedQueue);
-                        return newToken;
                     })
-                    .catch((error) => {
-                        processQueue(error, null, failedQueue);
+                    .catch((err) => {
+                        processQueue(err, null, failedQueue);
                         localStorage.removeItem("token");
                         window.location.href = "/login";
-                        return Promise.reject(error);
                     })
                     .finally(() => {
-                        refreshPromise = null;
+                        isRefreshing = false;
                     });
             }
 

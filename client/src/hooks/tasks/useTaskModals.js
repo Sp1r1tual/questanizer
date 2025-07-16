@@ -4,6 +4,7 @@ import {
     closeModal,
     openConfirmModal,
     closeConfirmModal,
+    setIsInputInvalid,
 } from "../../store/tasks/tasksSlice";
 
 const useTaskModals = () => {
@@ -13,7 +14,14 @@ const useTaskModals = () => {
     const confirmModal = useSelector((state) => state.tasks.confirmModal);
 
     const onOpenModal = () => {
-        if (!inputTask.trim()) return;
+        const trimmed = inputTask.trim();
+
+        if (!trimmed) {
+            dispatch(setIsInputInvalid(true));
+            return;
+        }
+
+        dispatch(setIsInputInvalid(false));
         dispatch(setModalActive(true));
     };
 
