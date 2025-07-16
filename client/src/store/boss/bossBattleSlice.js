@@ -27,6 +27,9 @@ const bossBattleSlice = createSlice({
     name: "bossBattle",
     initialState,
     reducers: {
+        setBossLoading: (state, action) => {
+            state.loading = action.payload;
+        },
         setActiveBoss: (state, action) => {
             const boss = action.payload;
 
@@ -106,6 +109,7 @@ const bossBattleSlice = createSlice({
 });
 
 export const {
+    setBossLoading,
     setActiveBoss,
     setBossProgress,
     markTaskAsRaged,

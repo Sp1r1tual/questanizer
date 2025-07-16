@@ -1,6 +1,10 @@
 import { $api } from "../../http";
 import { useDispatch, useSelector } from "react-redux";
-import { setActiveBoss, resetBoss } from "../../store/boss/bossBattleSlice";
+import {
+    setActiveBoss,
+    setBossLoading,
+    resetBoss,
+} from "../../store/boss/bossBattleSlice";
 
 const useBoss = (tasks = []) => {
     const dispatch = useDispatch();
@@ -9,25 +13,30 @@ const useBoss = (tasks = []) => {
 
     const initBoss = async (forcedBossId = null) => {
         try {
-            if (boss.bossId) return;
+            dispatch(setBossLoading(true));
 
             const payload = forcedBossId ? { bossId: forcedBossId } : {};
             const response = await $api.post("/boss/spawn", payload);
-            const foundBoss = response.data;
+            const foundBoss = response.data?.boss || response.data;
 
             const now = new Date();
             const initiallyOverdue = tasks
                 .filter(
-                    (t) =>
-                        !t.isCompleted &&
-                        t.deadline &&
-                        new Date(t.deadline) < now
+                    (task) =>
+                        !task.isCompleted &&
+                        task.deadline &&
+                        new Date(task.deadline) < now
                 )
-                .map((t) => t.id);
+                .map((task) => task.id);
 
             dispatch(setActiveBoss({ ...foundBoss, initiallyOverdue }));
-        } catch (err) {
-            console.error("Failed to spawn boss:", err.response?.data || err);
+        } catch (error) {
+            console.error(
+                "Failed to spawn boss:",
+                error.response?.data || error
+            );
+        } finally {
+            dispatch(setBossLoading(false));
         }
     };
 
