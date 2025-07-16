@@ -18,31 +18,13 @@ const Footer = () => {
                         rel="noopener noreferrer"
                         className={styles.link}
                     >
-                        About
+                        About us
                     </a>
                     <a
-                        href="/"
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        href="mailto:questanizer@gmail.com"
                         className={styles.link}
                     >
-                        Privacy Policy
-                    </a>
-                    <a
-                        href="/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={styles.link}
-                    >
-                        Licensing
-                    </a>
-                    <a
-                        href="/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={styles.link}
-                    >
-                        Contact
+                        Contact us
                     </a>
                 </div>
             </div>

@@ -53,11 +53,23 @@ const completeTask = async (taskId, userId) => {
     if (!task) throw ApiError.BadRequest("Task not found");
     if (task.isCompleted) throw ApiError.BadRequest("Task already completed");
 
-    task.isCompleted = true;
-    await task.save();
-
     const reward = DIFFICULTY_REWARDS[task.difficulty] || { xp: 0, damage: 0 };
     const xp = !task.deadline ? Math.floor(reward.xp / 5) : reward.xp;
+
+    const now = new Date();
+    const boss = await bossService.getBoss(userId);
+
+    const isEligibleToDamage =
+        boss && task.deadline && new Date(task.deadline) > now;
+
+    let bossResult = null;
+
+    if (isEligibleToDamage) {
+        bossResult = await bossService.damageBoss(userId, reward.damage);
+    }
+
+    task.isCompleted = true;
+    await task.save();
 
     const { stats, message: levelUpMessage } =
         await userStatsService.gainExperience(userId, xp);
@@ -66,18 +78,12 @@ const completeTask = async (taskId, userId) => {
 
     if (levelUpMessage) messages.push(levelUpMessage);
 
-    const boss = await bossService.getBoss(userId);
-
-    if (boss && task.deadline && task.createdAt > boss.spawnedAt) {
-        const bossResult = await bossService.damageBoss(userId, reward.damage);
-
-        if (bossResult.messages) {
-            messages.push(
-                ...bossResult.messages.map((msg) =>
-                    typeof msg === "string" ? info(msg) : msg
-                )
-            );
-        }
+    if (bossResult?.messages) {
+        messages.push(
+            ...bossResult.messages.map((msg) =>
+                typeof msg === "string" ? info(msg) : msg
+            )
+        );
     }
 
     return {
