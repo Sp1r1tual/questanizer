@@ -17,15 +17,7 @@
 
 @media (max-width: 640px) {
     .imageContainer {
-        width: 280px;
-        margin-bottom: 0.5rem;
-        margin-top: 0.75rem;
-        padding: 1rem;
-    }
-
-    .mainImg {
-        max-width: 280px;
-        height: auto;
+        display: none;
     }
 }
 

@@ -8,7 +8,8 @@ const ForgotPassword = () => {
     const {
         email,
         message,
-        error,
+        errors,
+        serverError,
         isLoading,
         handleEmailChange,
         handleSubmit,
@@ -25,16 +26,24 @@ const ForgotPassword = () => {
                 >
                     <input
                         type="email"
+                        id="email"
+                        name="email"
                         placeholder="Enter your email"
                         value={email}
                         onChange={handleEmailChange}
                         className={styles.input}
+                        autoComplete="email"
                     />
                     <button type="submit" className={styles.button}>
                         Send reset link
                     </button>
                     {message && <p className={styles.success}>{message}</p>}
-                    {error && <p className={styles.error}>{error}</p>}
+                    {errors.email && (
+                        <p className={styles.error}>{errors.email}</p>
+                    )}
+                    {serverError && (
+                        <p className={styles.error}>{serverError}</p>
+                    )}
                 </form>
             </div>
             <Loader visible={isLoading} />

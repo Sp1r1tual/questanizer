@@ -64,6 +64,7 @@ const LoginForm = () => {
                                     : ""
                             }`}
                             placeholder="Enter email"
+                            autoComplete="email"
                         />
                     </div>
 
@@ -82,6 +83,7 @@ const LoginForm = () => {
                                     : ""
                             }`}
                             placeholder="Enter password"
+                            autoComplete="current-password"
                         />
                     </div>
 

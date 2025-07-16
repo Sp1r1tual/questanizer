@@ -1,17 +1,19 @@
 import { useState } from "react";
 
-const useForm = ({ initialValues, validate, onSubmit, clearServerError }) => {
+const useForm = ({ initialValues, validate, onSubmit }) => {
     const [values, setValues] = useState(initialValues);
     const [errors, setErrors] = useState({});
 
-    const clearFieldError = (field) => {
-        setErrors((prev) => ({ ...prev, [field]: "" }));
-        clearServerError?.();
-    };
-
     const handleChange = (field) => (event) => {
-        setValues((prev) => ({ ...prev, [field]: event.target.value }));
-        clearFieldError(field);
+        const value = event.target.value;
+
+        setValues((prev) => ({ ...prev, [field]: value }));
+
+        setErrors((prev) => {
+            const next = { ...prev };
+            delete next[field];
+            return next;
+        });
     };
 
     const validateAll = () => {
@@ -21,10 +23,11 @@ const useForm = ({ initialValues, validate, onSubmit, clearServerError }) => {
         return Object.keys(validationErrors).length === 0;
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
+
         if (validateAll()) {
-            onSubmit(values);
+            await onSubmit(values);
         }
     };
 
@@ -33,6 +36,7 @@ const useForm = ({ initialValues, validate, onSubmit, clearServerError }) => {
         errors,
         handleChange,
         handleSubmit,
+        setErrors,
     };
 };
 

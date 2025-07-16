@@ -1,61 +1,64 @@
+import { useState } from "react";
 import useForm from "./useForm";
-
-import { ERROR_MESSAGES } from "../../utils/validation/validationForm";
 import { AuthService } from "../../services/authService";
+import {
+    validateEmail,
+    ERROR_MESSAGES,
+} from "../../utils/validation/validationForm";
 
 const useForgotPassword = () => {
+    const [serverError, setServerError] = useState("");
+    const [message, setMessage] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+
     const validate = ({ email }) => {
         const errors = {};
 
         if (!email) {
-            errors.fillAllFields = ERROR_MESSAGES.fillAllFields;
+            errors.email = ERROR_MESSAGES.fillAllFields;
+        } else if (!validateEmail(email)) {
+            errors.email = ERROR_MESSAGES.invalidEmail;
         }
 
         return errors;
     };
 
-    const onSubmit = async (
-        { email },
-        { setErrors, setMessage, setLoading }
-    ) => {
-        setLoading(true);
+    const onSubmit = async ({ email }) => {
+        setIsLoading(true);
+        setServerError("");
         try {
             const response = await AuthService.requestPasswordReset(email);
 
             setMessage(
                 response.data.message || "Check your email for the reset link"
             );
-            setErrors({});
         } catch (error) {
             const resData = error.response?.data;
 
-            if (resData && Array.isArray(resData.errors)) {
-                const fieldErrors = resData.errors
-                    .map((errors) => errors.msg)
-                    .join("\n");
-
-                setErrors({ server: `${resData.message}:\n${fieldErrors}` });
+            if (resData?.errors?.length) {
+                const detail = resData.errors.map((e) => e.msg).join("\n");
+                setServerError(`${resData.message}:\n${detail}`);
             } else {
-                setErrors({
-                    server: resData?.message || "Failed to send reset email",
-                });
+                setServerError(
+                    resData?.message || "Failed to send reset email"
+                );
             }
             setMessage("");
         } finally {
-            setLoading(false);
+            setIsLoading(false);
         }
     };
 
-    const { values, errors, isLoading, message, handleChange, handleSubmit } =
-        useForm({
-            initialValues: { email: "" },
-            validate,
-            onSubmit,
-        });
+    const { values, errors, handleChange, handleSubmit } = useForm({
+        initialValues: { email: "" },
+        validate,
+        onSubmit,
+    });
 
     return {
         email: values.email,
         errors,
+        serverError,
         message,
         isLoading,
         handleEmailChange: handleChange("email"),

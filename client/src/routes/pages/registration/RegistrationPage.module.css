@@ -30,7 +30,8 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: fit-content;
+    width: auto;
+    max-width: 100%;
     margin: 0 auto;
     padding: 1.5rem;
     box-shadow: 0 0 15px rgba(80, 50, 40, 0.1);
@@ -43,8 +44,10 @@
 @media (max-width: 640px) {
     .registrationContainer {
         flex-direction: column;
-        padding: 0.75rem;
-        width: 90%;
+        padding: 1rem;
+        width: auto;
+        max-width: calc(100% - 2rem);
+        margin: 0 1rem;
     }
 
     .registrationContentWrapper {
@@ -56,6 +59,8 @@
     .registrationContainer {
         flex-direction: column;
         padding: 1rem;
-        width: 90%;
+        width: auto;
+        max-width: calc(100% - 2rem);
+        margin: 0 1rem;
     }
 }

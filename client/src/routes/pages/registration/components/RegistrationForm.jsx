@@ -75,6 +75,7 @@ const RegistrationForm = () => {
                             aria-invalid={
                                 !!(errors.email || errors.fillAllFields)
                             }
+                            autoComplete="email"
                         />
                     </div>
 
@@ -96,6 +97,7 @@ const RegistrationForm = () => {
                             aria-invalid={
                                 !!(errors.password || errors.fillAllFields)
                             }
+                            autoComplete="new-password"
                         />
                     </div>
 
@@ -123,6 +125,7 @@ const RegistrationForm = () => {
                                     errors.fillAllFields
                                 )
                             }
+                            autoComplete="new-password"
                         />
                     </div>
 

@@ -43,6 +43,7 @@ const ResetPassword = () => {
                                 ? styles.inputError
                                 : ""
                         }`}
+                        autoComplete="new-password"
                     />
                     <input
                         type="password"
@@ -54,6 +55,7 @@ const ResetPassword = () => {
                                 ? styles.inputError
                                 : ""
                         }`}
+                        autoComplete="new-password"
                     />
                     <button
                         type="submit"

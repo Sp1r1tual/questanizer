@@ -42,9 +42,9 @@
     background-color: #fffaf7;
     font-size: 0.875rem;
     transition: border 0.2s ease, background-color 0.2s ease;
-    width: 100%;
+    width: 268px;
+    box-sizing: border-box;
 }
-
 .formInput.errorInput {
     border-color: darkred;
     background-color: #ffebee;
