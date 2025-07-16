@@ -13,7 +13,7 @@ import ResetPassword from "./pages/reset-password/ResetPassword";
 
 const router = createBrowserRouter([
     {
-        path: "",
+        path: "/",
         element: <App />,
         children: [
             {

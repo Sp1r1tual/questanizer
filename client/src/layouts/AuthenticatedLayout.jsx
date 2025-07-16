@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
-
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import Navbar from "../components/navbar/Navbar";
 import Footer from "../components/footer/Footer";
+import Loader from "../components/ui/Loader";
 
 import styles from "./AuthenticatedLayout.module.css";
 
@@ -12,9 +12,7 @@ const AuthenticatedLayout = () => {
     );
     const location = useLocation();
 
-    if (!isAuthChecked) {
-        return null;
-    }
+    if (!isAuthChecked) return <Loader visible={true} />;
 
     if (!isAuthenticated) {
         return <Navigate to="/login" replace state={{ from: location }} />;
