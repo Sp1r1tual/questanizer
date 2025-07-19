@@ -6,11 +6,25 @@
 
 ## 🚀 MVP Features
 
--   ✅ Task management (add/delete)
+-   ✅ Task management
 -   ✅ Experience system for completed tasks
 -   ✅ Boss battles triggered by accumulated progress
 -   ✅ User login & authentication
 -   ✅ Full-stack client–server–database integration
+
+---
+
+## 🧠 Planned Features
+
+> Bringing more RPG into your routine:
+
+-   🏆 **Leaderboard** — compete with others based on XP, boss defeats, or completed tasks
+-   🧑‍🎨 **Customizable profiles** — set avatars, titles, and personal stats
+-   🔰 **Friends system** — add friends, view their progress, and support each other
+-   💬 **Chat system** — interact with friends or party members in real time
+-   🎯 **Daily rewards** — push users to be consistent with bonus XP rewards
+-   🪙 **In-game currency** — earn coins for tasks and buy cosmetics or power-ups
+-   📊 **Progress analytics** — visual insights into your productivity and consistency
 
 ---
 
