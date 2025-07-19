@@ -50,7 +50,11 @@ const TaskFilters = ({ onFilterChange }) => {
 
     return (
         <div className={styles.filtersContainer}>
+            <label className={styles.visuallyHidden} htmlFor="status-select">
+                Filter tasks by status
+            </label>
             <select
+                id="status-select"
                 name="status"
                 value={status}
                 onChange={handleStatusChange}
@@ -61,7 +65,11 @@ const TaskFilters = ({ onFilterChange }) => {
                 <option value="active">Active</option>
             </select>
 
+            <label className={styles.visuallyHidden} htmlFor="deadline-select">
+                Filter tasks by deadline
+            </label>
             <select
+                id="deadline-select"
                 name="deadline"
                 value={deadline}
                 onChange={handleDeadlineChange}
@@ -73,7 +81,14 @@ const TaskFilters = ({ onFilterChange }) => {
                 <option value="none">No deadline</option>
             </select>
 
+            <label
+                className={styles.visuallyHidden}
+                htmlFor="difficulty-select"
+            >
+                Filter tasks by difficulty
+            </label>
             <select
+                id="difficulty-select"
                 name="difficulty"
                 value={difficulty}
                 onChange={handleDifficultyChange}
@@ -86,7 +101,11 @@ const TaskFilters = ({ onFilterChange }) => {
                 <option value="critical">Critical</option>
             </select>
 
+            <label className={styles.visuallyHidden} htmlFor="sortBy-select">
+                Sort tasks by
+            </label>
             <select
+                id="sortBy-select"
                 name="sortBy"
                 value={sortBy}
                 onChange={handleSortByChange}

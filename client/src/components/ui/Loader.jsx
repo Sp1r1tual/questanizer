@@ -4,7 +4,7 @@ const Loader = ({ visible = false }) => {
     if (!visible) return null;
 
     return (
-        <div className={styles.overlay}>
+        <div data-testid="loader" className={styles.overlay}>
             <div className={styles.spinner}></div>
         </div>
     );

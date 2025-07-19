@@ -31,13 +31,26 @@ const TaskModal = ({ deadline, setDeadline, onSubmit, onClose, isOpen }) => {
     };
 
     return (
-        <div className={`${styles.modal} ${styles.active}`} onClick={onClose}>
+        <div
+            className={`${styles.modal} ${styles.active}`}
+            onClick={onClose}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="task-modal-title"
+            aria-describedby="task-modal-desc"
+        >
             <div
                 className={styles.modalContent}
                 onClick={(e) => e.stopPropagation()}
             >
                 <form onSubmit={(e) => e.preventDefault()}>
-                    <h2>{modalTitles[pageModal]}</h2>
+                    <h2 id="task-modal-title">{modalTitles[pageModal]}</h2>
+
+                    <div id="task-modal-desc" className="visuallyHidden">
+                        {pageModal === "deadline"
+                            ? "Select a deadline date for your task."
+                            : "Select the difficulty level for your task."}
+                    </div>
 
                     {pageModal === "deadline" && (
                         <DeadlinePage

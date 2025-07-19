@@ -4,10 +4,10 @@ import {
     retryRequestWithNewToken,
 } from "../utils/tokenUtils.js";
 
-let failedQueue = [];
+let pendingRequestsQueue = [];
 let isRefreshing = false;
 
-function setupInterceptors(axiosInstance) {
+function authInterceptors(axiosInstance) {
     axiosInstance.interceptors.request.use((config) => {
         const token = localStorage.getItem("token");
 
@@ -23,7 +23,6 @@ function setupInterceptors(axiosInstance) {
         (response) => response,
         async (error) => {
             const originalRequest = error.config;
-
             const isUnauthorized = error.response?.status === 401;
             const canRetry = originalRequest && !originalRequest._retry;
 
@@ -36,22 +35,27 @@ function setupInterceptors(axiosInstance) {
             if (!isRefreshing) {
                 isRefreshing = true;
 
-                refreshToken()
-                    .then((newToken) => {
-                        processQueue(null, newToken, failedQueue);
-                    })
-                    .catch((err) => {
-                        processQueue(err, null, failedQueue);
-                        localStorage.removeItem("token");
-                        window.location.href = "/login";
-                    })
-                    .finally(() => {
-                        isRefreshing = false;
-                    });
+                try {
+                    const newToken = await refreshToken();
+
+                    processQueue(null, newToken, pendingRequestsQueue);
+                    isRefreshing = false;
+                    return retryRequestWithNewToken(
+                        axiosInstance,
+                        originalRequest,
+                        newToken
+                    );
+                } catch (error) {
+                    processQueue(error, null, pendingRequestsQueue);
+                    localStorage.removeItem("token");
+                    window.location.href = "/login";
+                    isRefreshing = false;
+                    throw error;
+                }
             }
 
             return new Promise((resolve, reject) => {
-                failedQueue.push({ resolve, reject });
+                pendingRequestsQueue.push({ resolve, reject });
             }).then((token) =>
                 retryRequestWithNewToken(axiosInstance, originalRequest, token)
             );
@@ -59,4 +63,4 @@ function setupInterceptors(axiosInstance) {
     );
 }
 
-export { setupInterceptors };
+export { authInterceptors };

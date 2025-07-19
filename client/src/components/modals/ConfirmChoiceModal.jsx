@@ -14,13 +14,21 @@ const ConfirmChoiceModal = ({ isOpen, onClose, onConfirm, title, message }) => {
             className={styles.backdrop}
             onClick={handleBackdropClick}
             data-testid="backdrop"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="confirm-modal-title"
+            aria-describedby="confirm-modal-desc"
         >
             <div className={styles.modal}>
                 <div className={styles.header}>
-                    <h3 className={styles.title}>{title}</h3>
+                    <h3 id="confirm-modal-title" className={styles.title}>
+                        {title}
+                    </h3>
                 </div>
                 <div className={styles.body}>
-                    <p className={styles.message}>{message}</p>
+                    <p id="confirm-modal-desc" className={styles.message}>
+                        {message}
+                    </p>
                 </div>
                 <div className={styles.footer}>
                     <button
