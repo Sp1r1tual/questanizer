@@ -5,10 +5,12 @@ const getBoss = async (req, res, next) => {
     try {
         const { id: userId } = req.user;
 
-        const [boss, progress] = await Promise.all([
-            req.boss ?? bossService.getBoss(userId),
-            bossProgressService.getBossProgress(userId),
-        ]);
+        let boss = req.boss;
+        if (!boss) {
+            boss = await bossService.getBoss(userId);
+        }
+
+        const progress = await bossProgressService.getBossProgress(userId);
 
         res.json({ boss: boss || null, progress });
     } catch (error) {

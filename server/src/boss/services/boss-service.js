@@ -3,12 +3,14 @@ import BossModel from "../models/boss-model.js";
 import bosses from "../data/bosses.js";
 import userStatsService from "../../stats/services/user-stats-service.js";
 import bossProgressService from "./boss-progress-service.js";
+import hasBossFound from "../helpers/has-boss-found.js";
+import updateBossFromTemplate from "../utils/update-boss-from-template.js";
+import { validateObjectId } from "../../shared/utils/validations/validate-object-id.js";
 import {
-    validateObjectId,
-    hasBossFound,
-    updateBossFromTemplate,
-} from "../helpers/boss-helpers.js";
-import { success, info, warning } from "../../shared/utils/notifications.js";
+    success,
+    info,
+    warning,
+} from "../../shared/utils/notifications/notifications.js";
 
 const getBoss = async (userId) => {
     validateObjectId(userId, "user ID");

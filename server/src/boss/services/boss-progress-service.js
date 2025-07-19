@@ -1,5 +1,5 @@
 import BossProgressModel from "../models/boss-progress-model.js";
-import { validateObjectId } from "../helpers/boss-helpers.js";
+import { validateUserId } from "../../shared/utils/validations/validate-object-id.js";
 
 const createDefaultProgress = async (userId) => {
     return BossProgressModel.create({
@@ -12,7 +12,7 @@ const createDefaultProgress = async (userId) => {
 };
 
 const getBossProgress = async (userId) => {
-    validateObjectId(userId, "user ID");
+    validateUserId(userId);
 
     let progress = await BossProgressModel.findOne({ user: userId });
 
@@ -24,7 +24,7 @@ const getBossProgress = async (userId) => {
 };
 
 const updateBossProgress = async (userId, defeatedBossId, expGained) => {
-    validateObjectId(userId, "user ID");
+    validateUserId(userId);
 
     const progress = await getBossProgress(userId);
 
@@ -34,13 +34,13 @@ const updateBossProgress = async (userId, defeatedBossId, expGained) => {
         totalBossesDefeated: progress.totalBossesDefeated + 1,
         totalExpFromBosses: progress.totalExpFromBosses + expGained,
     });
-    await progress.save();
 
+    await progress.save();
     return progress;
 };
 
 const resetBossProgress = async (userId) => {
-    validateObjectId(userId, "user ID");
+    validateUserId(userId);
 
     const progress = await BossProgressModel.findOne({ user: userId });
 
@@ -50,8 +50,9 @@ const resetBossProgress = async (userId) => {
 };
 
 const getAvailableBossId = async (userId) => {
-    const progress = await getBossProgress(userId);
+    validateUserId(userId);
 
+    const progress = await getBossProgress(userId);
     return progress.currentAvailableBossId;
 };
 

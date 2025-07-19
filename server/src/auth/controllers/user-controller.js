@@ -1,6 +1,6 @@
 import userService from "../services/user-service.js";
-import REFRESH_COOKIE_OPTIONS from "../../shared/utils/refresh-cookie-options.js";
-import RESPONSE_MESSAGES from "../../shared/utils/response-messages.js";
+import REFRESH_COOKIE_OPTIONS from "../utils/refresh-cookie-options.js";
+import RESPONSE_MESSAGES from "../../shared/utils/messages/response-messages.js";
 
 const setRefreshTokenCookie = (res, token) => {
     res.cookie("refreshToken", token, REFRESH_COOKIE_OPTIONS);

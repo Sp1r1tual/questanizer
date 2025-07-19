@@ -1,6 +1,10 @@
 import UserStatsModel from "../models/user-stats-model.js";
 import bossService from "../../boss/services/boss-service.js";
-import { success, error, info } from "../../shared/utils/notifications.js";
+import {
+    success,
+    error,
+    info,
+} from "../../shared/utils/notifications/notifications.js";
 
 const getOrCreateStats = async (userId) => {
     let stats = await UserStatsModel.findOne({ user: userId });
