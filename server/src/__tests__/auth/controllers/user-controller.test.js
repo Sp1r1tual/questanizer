@@ -252,11 +252,13 @@ describe("User Controller", () => {
     describe("getUserProfile", () => {
         it("should return user profile with username and bio", async () => {
             const mockUser = {
-                _id: "user-id",
+                id: "user-id",
                 email: "test@mail.com",
                 username: "testuser",
                 bio: "User bio",
                 isActivated: true,
+                createdAt: "2023-01-01T00:00:00Z",
+                stats: null,
             };
 
             req.user.id = "user-id";
@@ -264,23 +266,30 @@ describe("User Controller", () => {
 
             await userController.getUserProfile(req, res, next);
 
-            expect(userService.getUserById).toHaveBeenCalledWith("user-id");
+            expect(userService.getUserById).toHaveBeenCalledWith(
+                "user-id",
+                true
+            );
             expect(res.json).toHaveBeenCalledWith({
-                id: mockUser._id,
+                id: mockUser.id,
                 email: mockUser.email,
                 username: mockUser.username,
                 bio: mockUser.bio,
                 isActivated: mockUser.isActivated,
+                createdAt: mockUser.createdAt,
+                stats: mockUser.stats,
             });
         });
 
         it("should return user profile with username=null and bio=''", async () => {
             const mockUser = {
-                _id: "user-id",
+                id: "user-id",
                 email: "test@mail.com",
                 username: undefined,
                 bio: undefined,
                 isActivated: true,
+                createdAt: "2023-01-01T00:00:00Z",
+                stats: undefined,
             };
 
             req.user.id = "user-id";
@@ -288,13 +297,18 @@ describe("User Controller", () => {
 
             await userController.getUserProfile(req, res, next);
 
-            expect(userService.getUserById).toHaveBeenCalledWith("user-id");
+            expect(userService.getUserById).toHaveBeenCalledWith(
+                "user-id",
+                true
+            );
             expect(res.json).toHaveBeenCalledWith({
-                id: mockUser._id,
+                id: mockUser.id,
                 email: mockUser.email,
                 username: null,
                 bio: "",
                 isActivated: mockUser.isActivated,
+                createdAt: mockUser.createdAt,
+                stats: null,
             });
         });
 
@@ -415,6 +429,69 @@ describe("User Controller", () => {
             userService.getAllUsers.mockRejectedValue(error);
 
             await userController.getUsers(req, res, next);
+
+            expect(next).toHaveBeenCalledWith(error);
+        });
+    });
+
+    describe("getUserByIdPublic", () => {
+        it("should return public user data", async () => {
+            const mockUser = {
+                id: "public-id",
+                username: "publicUser",
+                bio: "Public bio",
+                createdAt: "2023-01-01T00:00:00Z",
+                stats: { posts: 5, comments: 10 },
+            };
+
+            req.params.id = "public-id";
+            userService.getUserById.mockResolvedValue(mockUser);
+
+            await userController.getUserByIdPublic(req, res, next);
+
+            expect(userService.getUserById).toHaveBeenCalledWith(
+                "public-id",
+                true
+            );
+            expect(res.json).toHaveBeenCalledWith({
+                id: mockUser.id,
+                username: mockUser.username,
+                bio: mockUser.bio,
+                createdAt: mockUser.createdAt,
+                stats: mockUser.stats,
+            });
+        });
+
+        it("should return null username, empty bio and null stats if missing", async () => {
+            const mockUser = {
+                id: "public-id",
+                username: undefined,
+                bio: undefined,
+                createdAt: "2023-01-01T00:00:00Z",
+                stats: undefined,
+            };
+
+            req.params.id = "public-id";
+            userService.getUserById.mockResolvedValue(mockUser);
+
+            await userController.getUserByIdPublic(req, res, next);
+
+            expect(res.json).toHaveBeenCalledWith({
+                id: mockUser.id,
+                username: null,
+                bio: "",
+                createdAt: mockUser.createdAt,
+                stats: null,
+            });
+        });
+
+        it("should call next with error on getUserByIdPublic failure", async () => {
+            const error = new Error("Public user fetch failed");
+
+            userService.getUserById.mockRejectedValue(error);
+            req.params.id = "public-id";
+
+            await userController.getUserByIdPublic(req, res, next);
 
             expect(next).toHaveBeenCalledWith(error);
         });

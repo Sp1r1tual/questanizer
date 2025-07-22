@@ -100,14 +100,16 @@ const refresh = async (req, res, next) => {
 const getUserProfile = async (req, res, next) => {
     try {
         const userId = req.user.id;
-        const user = await userService.getUserById(userId);
+        const user = await userService.getUserById(userId, true);
 
         return res.json({
-            id: user._id,
+            id: user.id,
             email: user.email,
             username: user.username ?? null,
             bio: user.bio ?? "",
             isActivated: user.isActivated,
+            createdAt: user.createdAt,
+            stats: user.stats ?? null,
         });
     } catch (error) {
         return next(error);
@@ -140,6 +142,23 @@ const getUsers = async (req, res, next) => {
     }
 };
 
+const getUserByIdPublic = async (req, res, next) => {
+    try {
+        const userId = req.params.id;
+        const user = await userService.getUserById(userId, true);
+
+        return res.json({
+            id: user.id,
+            username: user.username ?? null,
+            bio: user.bio ?? "",
+            createdAt: user.createdAt,
+            stats: user.stats ?? null,
+        });
+    } catch (error) {
+        return next(error);
+    }
+};
+
 export default {
     registration,
     login,
@@ -151,4 +170,5 @@ export default {
     getUserProfile,
     updateUserProfile,
     getUsers,
+    getUserByIdPublic,
 };

@@ -4,13 +4,17 @@ class UserDto {
     isActivated;
     username;
     bio;
+    createdAt;
+    stats;
 
-    constructor(model) {
-        this.id = model._id; // Mongo DB _id
+    constructor(model, stats = null) {
+        this.id = model._id;
         this.email = model.email;
         this.isActivated = model.isActivated;
         this.username = model.username ?? null;
         this.bio = model.bio ?? "";
+        this.createdAt = model.createdAt ?? null;
+        this.stats = stats;
     }
 }
 

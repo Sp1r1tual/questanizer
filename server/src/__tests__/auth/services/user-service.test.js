@@ -21,6 +21,12 @@ jest.unstable_mockModule("../../../auth/models/user-model.js", () => ({
     },
 }));
 
+jest.unstable_mockModule("../../../stats/models/user-stats-model.js", () => ({
+    default: {
+        findOne: jest.fn(),
+    },
+}));
+
 jest.unstable_mockModule("../../../auth/services/mail-service.js", () => ({
     default: {
         sendActivationMail: jest.fn(),
@@ -48,6 +54,9 @@ const uuid = await import("uuid");
 const uuidv4 = uuid.v4;
 
 const UserModel = (await import("../../../auth/models/user-model.js")).default;
+const UserStatsModel = (
+    await import("../../../stats/models/user-stats-model.js")
+).default;
 const mailService = (await import("../../../auth/services/mail-service.js"))
     .default;
 const tokenService = (await import("../../../auth/services/token-service.js"))
@@ -336,13 +345,58 @@ describe("UserService", () => {
     describe("getUserById", () => {
         const userId = "mock-user-id";
         const mockUser = { _id: userId, email: "some@mail.com" };
+        const mockStats = { gamesPlayed: 10, highScore: 200 };
+
+        beforeEach(() => {
+            jest.clearAllMocks();
+        });
 
         it("should return user if found", async () => {
             UserModel.findById.mockResolvedValue(mockUser);
 
             const result = await userService.getUserById(userId);
 
-            expect(result).toBe(mockUser);
+            expect(result).toEqual(
+                expect.objectContaining({
+                    email: mockUser.email,
+                    id: mockUser._id,
+                })
+            );
+        });
+
+        it("should return user with stats when includeStats is true", async () => {
+            UserModel.findById.mockResolvedValue(mockUser);
+            UserStatsModel.findOne.mockReturnValue({
+                lean: jest.fn().mockResolvedValue(mockStats),
+            });
+
+            const result = await userService.getUserById(userId, true);
+
+            expect(UserStatsModel.findOne).toHaveBeenCalledWith({
+                user: userId,
+            });
+            expect(result).toEqual(
+                expect.objectContaining({
+                    email: mockUser.email,
+                    id: mockUser._id,
+                    stats: mockStats,
+                })
+            );
+        });
+
+        it("should return user without stats when includeStats is false", async () => {
+            UserModel.findById.mockResolvedValue(mockUser);
+
+            const result = await userService.getUserById(userId, false);
+
+            expect(UserStatsModel.findOne).not.toHaveBeenCalled();
+            expect(result).toEqual(
+                expect.objectContaining({
+                    email: mockUser.email,
+                    id: mockUser._id,
+                    stats: null,
+                })
+            );
         });
 
         it("should throw if user not found", async () => {

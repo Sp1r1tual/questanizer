@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import { v4 as uuidv4 } from "uuid";
 import UserModel from "../models/user-model.js";
+import UserStatsModel from "../../stats/models/user-stats-model.js";
 import mailService from "./mail-service.js";
 import tokenService from "./token-service.js";
 import UserDto from "../dto/user-dto.js";
@@ -151,10 +152,15 @@ class UserService {
         };
     }
 
-    async getUserById(userId) {
+    async getUserById(userId, includeStats = false) {
         const user = await findUserById(userId);
+        let stats = null;
 
-        return user;
+        if (includeStats) {
+            stats = await UserStatsModel.findOne({ user: user._id }).lean();
+        }
+
+        return new UserDto(user, stats);
     }
 
     async updateUserProfile(userId, updateData) {
