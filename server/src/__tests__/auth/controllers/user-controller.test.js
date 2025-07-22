@@ -11,14 +11,16 @@ beforeAll(() => {
     userService.activate = jest.fn();
     userService.logout = jest.fn();
     userService.refresh = jest.fn();
+    userService.updateUserProfile = jest.fn();
     userService.getAllUsers = jest.fn();
+    userService.getUserById = jest.fn();
 });
 
 describe("User Controller", () => {
     let req, res, next;
 
     beforeEach(() => {
-        req = { body: {}, params: {}, cookies: {} };
+        req = { body: {}, params: {}, cookies: {}, user: { id: "user-id" } };
         res = {
             json: jest.fn(),
             cookie: jest.fn(),
@@ -126,9 +128,6 @@ describe("User Controller", () => {
             await userController.forgotPassword(req, res, next);
 
             expect(next).toHaveBeenCalledWith(error);
-            expect(res.json).toHaveBeenCalledWith({
-                message: RESPONSE_MESSAGES.forgotPassword,
-            });
         });
     });
 
@@ -247,6 +246,151 @@ describe("User Controller", () => {
             await userController.refresh(req, res, next);
 
             expect(next).toHaveBeenCalledWith(error);
+        });
+    });
+
+    describe("getUserProfile", () => {
+        it("should return user profile with username and bio", async () => {
+            const mockUser = {
+                _id: "user-id",
+                email: "test@mail.com",
+                username: "testuser",
+                bio: "User bio",
+                isActivated: true,
+            };
+
+            req.user.id = "user-id";
+            userService.getUserById.mockResolvedValue(mockUser);
+
+            await userController.getUserProfile(req, res, next);
+
+            expect(userService.getUserById).toHaveBeenCalledWith("user-id");
+            expect(res.json).toHaveBeenCalledWith({
+                id: mockUser._id,
+                email: mockUser.email,
+                username: mockUser.username,
+                bio: mockUser.bio,
+                isActivated: mockUser.isActivated,
+            });
+        });
+
+        it("should return user profile with username=null and bio=''", async () => {
+            const mockUser = {
+                _id: "user-id",
+                email: "test@mail.com",
+                username: undefined,
+                bio: undefined,
+                isActivated: true,
+            };
+
+            req.user.id = "user-id";
+            userService.getUserById.mockResolvedValue(mockUser);
+
+            await userController.getUserProfile(req, res, next);
+
+            expect(userService.getUserById).toHaveBeenCalledWith("user-id");
+            expect(res.json).toHaveBeenCalledWith({
+                id: mockUser._id,
+                email: mockUser.email,
+                username: null,
+                bio: "",
+                isActivated: mockUser.isActivated,
+            });
+        });
+
+        it("should call next with error on failure", async () => {
+            const error = new Error("Failed to get user");
+
+            userService.getUserById.mockRejectedValue(error);
+
+            await userController.getUserProfile(req, res, next);
+
+            expect(next).toHaveBeenCalledWith(error);
+        });
+    });
+
+    describe("updateUserProfile", () => {
+        it("should update user profile and return updated user", async () => {
+            const updatedUser = {
+                id: "user-id",
+                username: "newName",
+                bio: "bio",
+            };
+
+            userService.updateUserProfile.mockResolvedValue(updatedUser);
+
+            req.user.id = "user-id";
+            req.body = { username: "newName", bio: "bio" };
+
+            await userController.updateUserProfile(req, res, next);
+
+            expect(userService.updateUserProfile).toHaveBeenCalledWith(
+                "user-id",
+                {
+                    username: "newName",
+                    bio: "bio",
+                }
+            );
+            expect(res.json).toHaveBeenCalledWith(updatedUser);
+        });
+
+        it("should call next with error on updateUserProfile failure", async () => {
+            const error = new Error("Update fail");
+
+            userService.updateUserProfile.mockRejectedValue(error);
+            req.body = { username: "failName" };
+
+            await userController.updateUserProfile(req, res, next);
+
+            expect(next).toHaveBeenCalledWith(error);
+        });
+
+        it("should update only username when bio is undefined", async () => {
+            const updatedUser = {
+                id: "user-id",
+                username: "onlyUsername",
+                bio: undefined,
+            };
+
+            userService.updateUserProfile.mockResolvedValue(updatedUser);
+
+            req.user.id = "user-id";
+            req.body = { username: "onlyUsername" };
+
+            await userController.updateUserProfile(req, res, next);
+
+            expect(userService.updateUserProfile).toHaveBeenCalledWith(
+                "user-id",
+                {
+                    username: "onlyUsername",
+                }
+            );
+
+            expect(res.json).toHaveBeenCalledWith(updatedUser);
+        });
+
+        it("should update only bio when username is undefined", async () => {
+            const updatedUser = {
+                id: "user-id",
+                username: undefined,
+                bio: "only bio updated",
+            };
+
+            userService.updateUserProfile.mockResolvedValue(updatedUser);
+
+            req.user.id = "user-id";
+            req.body = { bio: "only bio updated" };
+
+            await userController.updateUserProfile(req, res, next);
+
+            expect(userService.updateUserProfile).toHaveBeenCalledWith(
+                "user-id",
+                {
+                    bio: "only bio updated",
+                }
+            );
+
+            expect(res.json).toHaveBeenCalledWith(updatedUser);
         });
     });
 

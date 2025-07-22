@@ -5,6 +5,7 @@ import mailService from "./mail-service.js";
 import tokenService from "./token-service.js";
 import UserDto from "../dto/user-dto.js";
 import ApiError from "../../shared/exceptions/api-error.js";
+import { findUserById } from "../helpers/findUserById.js";
 
 class UserService {
     async registration(email, password) {
@@ -112,11 +113,7 @@ class UserService {
             throw ApiError.BadRequest("Invalid or expired reset token");
         }
 
-        const user = await UserModel.findById(userData.id);
-
-        if (!user) {
-            throw ApiError.BadRequest("User not found");
-        }
+        const user = await findUserById(userData.id);
 
         const hashPassword = await bcrypt.hash(newPassword, 5);
 
@@ -152,6 +149,33 @@ class UserService {
             ...tokens,
             user: userDto,
         };
+    }
+
+    async getUserById(userId) {
+        const user = await findUserById(userId);
+
+        return user;
+    }
+
+    async updateUserProfile(userId, updateData) {
+        const user = await findUserById(userId);
+
+        if (updateData.username && updateData.username !== user.username) {
+            const existing = await UserModel.findOne({
+                username: updateData.username,
+            });
+
+            if (existing) {
+                throw ApiError.BadRequest("This username is already taken");
+            }
+        }
+
+        user.username = updateData.username ?? user.username;
+        user.bio = updateData.bio ?? user.bio;
+
+        await user.save();
+
+        return new UserDto(user);
     }
 
     async getAllUsers() {

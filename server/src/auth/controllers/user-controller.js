@@ -35,13 +35,14 @@ const forgotPassword = async (req, res, next) => {
         const { email } = req.body;
 
         await userService.forgotPassword(email);
+
+        return res.json({
+            message: RESPONSE_MESSAGES.forgotPassword,
+        });
     } catch (error) {
         console.error("forgotPassword error:", error);
-        next(error);
+        return next(error);
     }
-    return res.json({
-        message: RESPONSE_MESSAGES.forgotPassword,
-    });
 };
 
 const resetPassword = async (req, res, next) => {
@@ -96,10 +97,43 @@ const refresh = async (req, res, next) => {
     }
 };
 
+const getUserProfile = async (req, res, next) => {
+    try {
+        const userId = req.user.id;
+        const user = await userService.getUserById(userId);
+
+        return res.json({
+            id: user._id,
+            email: user.email,
+            username: user.username ?? null,
+            bio: user.bio ?? "",
+            isActivated: user.isActivated,
+        });
+    } catch (error) {
+        return next(error);
+    }
+};
+
+const updateUserProfile = async (req, res, next) => {
+    try {
+        const userId = req.user.id;
+        const { username, bio } = req.body;
+
+        const update = {};
+        if (username !== undefined) update.username = username;
+        if (bio !== undefined) update.bio = bio;
+
+        const updatedUser = await userService.updateUserProfile(userId, update);
+
+        return res.json(updatedUser);
+    } catch (error) {
+        return next(error);
+    }
+};
+
 const getUsers = async (req, res, next) => {
     try {
         const users = await userService.getAllUsers();
-
         return res.json(users);
     } catch (error) {
         return next(error);
@@ -114,5 +148,7 @@ export default {
     activate,
     logout,
     refresh,
+    getUserProfile,
+    updateUserProfile,
     getUsers,
 };

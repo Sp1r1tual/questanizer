@@ -7,6 +7,7 @@ import {
     forgotPasswordValidation,
     resetPasswordValidation,
 } from "../validations/auth-validations.js";
+import updateUserProfileValidation from "../validations/profile-validations.js";
 
 const router = new Router();
 
@@ -18,7 +19,9 @@ router.post(
 );
 
 router.get("/activate/:link", userController.activate);
+
 router.post("/login", userController.login);
+
 router.post("/logout", userController.logout);
 
 router.post(
@@ -36,6 +39,17 @@ router.post(
 );
 
 router.get("/refresh", userController.refresh);
+
+router.get("/profile", authMiddleware, userController.getUserProfile);
+
+router.patch(
+    "/profile",
+    updateUserProfileValidation,
+    validationMiddleware,
+    authMiddleware,
+    userController.updateUserProfile
+);
+
 router.get("/users", authMiddleware, userController.getUsers);
 
 export default router;
