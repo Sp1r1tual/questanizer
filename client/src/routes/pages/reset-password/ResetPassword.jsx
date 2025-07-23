@@ -29,7 +29,6 @@ const ResetPassword = () => {
             <div className={styles.container}>
                 <h2 className={styles.heading}>Reset Your Password</h2>
                 <form
-                    role="form"
                     onSubmit={handleSubmit}
                     className={styles.form}
                     noValidate
