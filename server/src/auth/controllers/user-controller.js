@@ -35,7 +35,6 @@ const forgotPassword = async (req, res, next) => {
         const { email } = req.body;
 
         await userService.forgotPassword(email);
-
         return res.json({
             message: RESPONSE_MESSAGES.forgotPassword,
         });
@@ -110,6 +109,7 @@ const getUserProfile = async (req, res, next) => {
             isActivated: user.isActivated,
             createdAt: user.createdAt,
             stats: user.stats ?? null,
+            photoUrl: user.photoUrl ?? null,
         });
     } catch (error) {
         return next(error);
@@ -120,10 +120,14 @@ const updateUserProfile = async (req, res, next) => {
     try {
         const userId = req.user.id;
         const { username, bio } = req.body;
-
         const update = {};
+
         if (username !== undefined) update.username = username;
         if (bio !== undefined) update.bio = bio;
+
+        if (req.file) {
+            update.photoUrl = `/public/avatars/${req.file.filename}`;
+        }
 
         const updatedUser = await userService.updateUserProfile(userId, update);
 
@@ -136,6 +140,7 @@ const updateUserProfile = async (req, res, next) => {
 const getUsers = async (req, res, next) => {
     try {
         const users = await userService.getAllUsers();
+
         return res.json(users);
     } catch (error) {
         return next(error);

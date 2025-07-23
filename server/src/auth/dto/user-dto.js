@@ -6,6 +6,7 @@ class UserDto {
     bio;
     createdAt;
     stats;
+    photoUrl;
 
     constructor(model, stats = null) {
         this.id = model._id;
@@ -15,6 +16,10 @@ class UserDto {
         this.bio = model.bio ?? "";
         this.createdAt = model.createdAt ?? null;
         this.stats = stats;
+        this.photoUrl =
+            typeof model.photoUrl === "string" && model.photoUrl.trim()
+                ? model.photoUrl
+                : null;
     }
 }
 

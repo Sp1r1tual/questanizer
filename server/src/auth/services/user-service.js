@@ -1,3 +1,5 @@
+import fs from "fs/promises";
+import path from "path";
 import bcrypt from "bcrypt";
 import { v4 as uuidv4 } from "uuid";
 import UserModel from "../models/user-model.js";
@@ -176,8 +178,35 @@ class UserService {
             }
         }
 
+        const oldAvatarPath = user.photoUrl;
+        const newAvatarPath = updateData.photoUrl;
+
+        if (
+            oldAvatarPath &&
+            newAvatarPath &&
+            oldAvatarPath !== newAvatarPath &&
+            oldAvatarPath.startsWith("/public/avatars/")
+        ) {
+            const absoluteOldPath = path.resolve(
+                "public",
+                "avatars",
+                path.basename(oldAvatarPath)
+            );
+
+            try {
+                await fs.unlink(absoluteOldPath);
+                console.log("Старий аватар видалено:", absoluteOldPath);
+            } catch (err) {
+                console.warn("Не вдалося видалити старий аватар:", err.message);
+            }
+        }
+
         user.username = updateData.username ?? user.username;
         user.bio = updateData.bio ?? user.bio;
+
+        if (newAvatarPath) {
+            user.photoUrl = newAvatarPath;
+        }
 
         await user.save();
 
@@ -186,6 +215,7 @@ class UserService {
 
     async getAllUsers() {
         const users = await UserModel.find();
+
         return users;
     }
 }

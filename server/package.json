@@ -21,6 +21,7 @@
         "jsonwebtoken": "^9.0.2",
         "mongodb": "^6.17.0",
         "mongoose": "^8.16.0",
+        "multer": "^2.0.2",
         "nodemailer": "^7.0.3",
         "uuid": "^11.1.0"
     },

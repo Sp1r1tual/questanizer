@@ -2,6 +2,7 @@ import { Router } from "express";
 import userController from "../controllers/user-controller.js";
 import authMiddleware from "../middlewares/auth-middleware.js";
 import validationMiddleware from "../middlewares/validation-middleware.js";
+import uploadAvatarMiddleware from "../middlewares/upload-middleware.js";
 import {
     registrationValidation,
     forgotPasswordValidation,
@@ -44,9 +45,10 @@ router.get("/profile", authMiddleware, userController.getUserProfile);
 
 router.patch(
     "/profile",
-    updateUserProfileValidation,
-    validationMiddleware,
     authMiddleware,
+    updateUserProfileValidation,
+    uploadAvatarMiddleware.single("photo"),
+    validationMiddleware,
     userController.updateUserProfile
 );
 

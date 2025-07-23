@@ -19,6 +19,10 @@ const UserSchema = new Schema(
             default: "",
             maxlength: 500,
         },
+        photoUrl: {
+            type: String,
+            default: null,
+        },
     },
     { timestamps: true }
 );
