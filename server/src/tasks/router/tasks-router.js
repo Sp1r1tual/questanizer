@@ -2,7 +2,7 @@ import { Router } from "express";
 import tasksController from "../controllers/tasks-controller.js";
 import validateTaskBodyMiddleware from "../middlewares/validate-task-body-middleware.js";
 import validateTaskIdMiddleware from "../middlewares/validate-task-id-middleware.js";
-import authMiddleware from "../../auth/middlewares/auth-middleware.js";
+import authMiddleware from "../../shared/middlewares/auth-middleware.js";
 
 const router = new Router();
 

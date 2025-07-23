@@ -10,6 +10,7 @@ class TokenService {
         const refreshToken = jwt.sign(payload, process.env.JWT_REFRESH_SECRET, {
             expiresIn: "30d",
         });
+
         return {
             accessToken,
             refreshToken,
@@ -20,6 +21,7 @@ class TokenService {
         const resetToken = jwt.sign(payload, process.env.JWT_RESET_SECRET, {
             expiresIn: "15m",
         });
+
         return resetToken;
     }
 
@@ -32,6 +34,7 @@ class TokenService {
         }
 
         const token = await tokenModel.create({ user: userId, refreshToken });
+
         return token;
     }
 
@@ -40,22 +43,26 @@ class TokenService {
             user: userId,
             resetToken,
         });
+
         return token;
     }
 
     async removeToken(refreshToken) {
         const tokenData = await tokenModel.deleteOne({ refreshToken });
+
         return tokenData;
     }
 
     async removeResetToken(resetToken) {
         const tokenData = await resetTokenModel.deleteOne({ resetToken });
+
         return tokenData;
     }
 
     validateAccessToken(token) {
         try {
             const userData = jwt.verify(token, process.env.JWT_ACCESS_SECRET);
+
             return userData;
         } catch (error) {
             return null;
@@ -65,6 +72,7 @@ class TokenService {
     validateRefreshToken(token) {
         try {
             const userData = jwt.verify(token, process.env.JWT_REFRESH_SECRET);
+
             return userData;
         } catch (error) {
             return null;
@@ -74,6 +82,7 @@ class TokenService {
     validateResetToken(token) {
         try {
             const userData = jwt.verify(token, process.env.JWT_RESET_SECRET);
+
             return userData;
         } catch (error) {
             return null;
@@ -82,11 +91,13 @@ class TokenService {
 
     async findToken(refreshToken) {
         const tokenData = await tokenModel.findOne({ refreshToken });
+
         return tokenData;
     }
 
     async findResetToken(resetToken) {
         const tokenData = await resetTokenModel.findOne({ resetToken });
+
         return tokenData;
     }
 }

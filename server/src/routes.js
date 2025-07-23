@@ -1,0 +1,24 @@
+import express from "express";
+import path from "path";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+import authRouter from "./auth/router/auth-router.js";
+import tasksRouter from "./tasks/router/tasks-router.js";
+import userStatsRouter from "./stats/router/user-stats-router.js";
+import bossRouter from "./boss/router/boss-router.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const routes = (app) => {
+    app.use("/api", authRouter);
+    app.use("/api", tasksRouter);
+    app.use("/api", userStatsRouter);
+    app.use("/api", bossRouter);
+    app.use(
+        "/api/public",
+        express.static(path.resolve(__dirname, "../public"))
+    );
+};
+
+export default routes;

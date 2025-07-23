@@ -2,7 +2,7 @@ import ApiError from "../../shared/exceptions/api-error.js";
 import TaskModel from "../models/tasks-model.js";
 import userStatsService from "../../stats/services/user-stats-service.js";
 import bossService from "../../boss/services/boss-service.js";
-import DIFFICULTY_REWARDS from "../../shared/config/user-stats-config.js";
+import DIFFICULTY_REWARDS from "../../shared/configs/user-stats-config.js";
 import {
     validateUserId,
     validateTaskAndUserIds,

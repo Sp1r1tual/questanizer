@@ -1,7 +1,7 @@
 import express from "express";
 import bossController from "../controllers/boss-controller.js";
 import bossMiddleware from "../middlewares/boss-middleware.js";
-import authMiddleware from "../../auth/middlewares/auth-middleware.js";
+import authMiddleware from "../../shared/middlewares/auth-middleware.js";
 
 const router = express.Router();
 

@@ -1,7 +1,7 @@
 import { validationResult } from "express-validator";
-import ApiError from "../../shared/exceptions/api-error.js";
+import ApiError from "../exceptions/api-error.js";
 
-const validationMiddleware = (req, res, next) => {
+const validationErrorsMiddleware = (req, res, next) => {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
@@ -10,4 +10,4 @@ const validationMiddleware = (req, res, next) => {
     next();
 };
 
-export default validationMiddleware;
+export default validationErrorsMiddleware;
