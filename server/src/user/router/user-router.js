@@ -7,19 +7,22 @@ import uploadAvatarMiddleware from "../middlewares/upload-avatar-middleware.js";
 
 const router = new Router();
 
-router.get("/profile", authMiddleware, userController.getUserProfile);
+router.get("/user/:id", userController.getUserByIdPublic);
+
+router.use(authMiddleware);
+
+router.get("/profile", userController.getUserProfile);
 
 router.patch(
     "/profile",
-    authMiddleware,
     updateUserProfileValidation,
     uploadAvatarMiddleware.single("photo"),
     validationErrorsMiddleware,
     userController.updateUserProfile
 );
 
-router.get("/users", authMiddleware, userController.getUsers);
+router.get("/users", userController.getUsers);
 
-router.get("/user/:id", authMiddleware, userController.getUserByIdPublic);
+router.get("/users/search", userController.searchUsers);
 
 export default router;

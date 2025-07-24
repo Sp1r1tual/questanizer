@@ -68,9 +68,29 @@ const getUserByIdPublic = async (req, res, next) => {
     }
 };
 
+const searchUsers = async (req, res, next) => {
+    try {
+        const requesterId = req.user.id;
+        const { query } = req.query;
+
+        if (!query?.trim()) {
+            return res.status(400).json({ message: "Empty request" });
+        }
+
+        const result = await userService.searchUsers(query.trim(), requesterId);
+
+        return res.json({
+            users: result.users,
+        });
+    } catch (error) {
+        return next(error);
+    }
+};
+
 export default {
     getUserProfile,
     updateUserProfile,
     getUsers,
     getUserByIdPublic,
+    searchUsers,
 };

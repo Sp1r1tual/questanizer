@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import UserModel from "../models/user-model.js";
 import UserStatsModel from "../../stats/models/user-stats-model.js";
 import UserDto from "../../shared/dtos/user-dto.js";
@@ -39,6 +40,24 @@ class UserService {
         const users = await UserModel.find();
 
         return users;
+    }
+
+    async searchUsers(query, requesterId) {
+        const regex = new RegExp(query, "i");
+        const conditions = [{ username: regex }];
+
+        if (mongoose.Types.ObjectId.isValid(query)) {
+            conditions.push({ _id: query });
+        }
+
+        const users = await UserModel.find({
+            $or: conditions,
+            _id: { $ne: requesterId },
+        });
+
+        return {
+            users: users.map((user) => new UserDto(user)),
+        };
     }
 }
 

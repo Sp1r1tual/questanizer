@@ -186,4 +186,62 @@ describe("UserService", () => {
             expect(result).toEqual(users);
         });
     });
+
+    describe("searchUsers", () => {
+        it("should return matched users by username", async () => {
+            const mockUsers = [
+                { _id: "u1", username: "TestUser" },
+                { _id: "u2", username: "AnotherUser" },
+            ];
+
+            UserModel.find.mockResolvedValue(mockUsers);
+
+            const result = await userService.searchUsers(
+                "test",
+                "requester123"
+            );
+
+            expect(UserModel.find).toHaveBeenCalledWith({
+                $or: [{ username: /test/i }],
+                _id: { $ne: "requester123" },
+            });
+
+            expect(result.users).toEqual([
+                expect.any(UserDto),
+                expect.any(UserDto),
+            ]);
+        });
+
+        it("should add _id search condition if query is valid ObjectId", async () => {
+            const validId = "64b7c51e961c4b5d6f305c24";
+            const mockUsers = [{ _id: validId, username: "ExactIdUser" }];
+
+            UserModel.find.mockResolvedValue(mockUsers);
+
+            const result = await userService.searchUsers(validId, "otherId");
+
+            expect(UserModel.find).toHaveBeenCalledWith({
+                $or: [{ username: new RegExp(validId, "i") }, { _id: validId }],
+                _id: { $ne: "otherId" },
+            });
+
+            expect(result.users).toEqual([expect.any(UserDto)]);
+        });
+
+        it("should not include _id condition if query is not valid ObjectId", async () => {
+            const invalidId = "not-an-object-id";
+            const mockUsers = [{ _id: "123", username: "not-an-object-id" }];
+
+            UserModel.find.mockResolvedValue(mockUsers);
+
+            const result = await userService.searchUsers(invalidId, "abc");
+
+            expect(UserModel.find).toHaveBeenCalledWith({
+                $or: [{ username: /not-an-object-id/i }],
+                _id: { $ne: "abc" },
+            });
+
+            expect(result.users).toEqual([expect.any(UserDto)]);
+        });
+    });
 });
