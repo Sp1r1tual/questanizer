@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchUserProfile, updateUserProfile } from "./userThunks";
+import { fetchUserProfile, updateUserProfile } from "./userProfileThunks";
 
 const initialState = {
     profile: null,
@@ -11,7 +11,7 @@ const userSlice = createSlice({
     name: "user",
     initialState,
     reducers: {
-        clearUserProfile(state) {
+        clearUserProfileState(state) {
             state.profile = null;
             state.error = null;
         },
@@ -28,6 +28,7 @@ const userSlice = createSlice({
                 const data = action.payload;
 
                 state.profile = {
+                    username: data.username || null,
                     name: data.username || "No name",
                     level: data.stats?.level ?? null,
                     health: data.stats?.hp ?? null,
@@ -44,6 +45,7 @@ const userSlice = createSlice({
                 const data = action.payload;
 
                 state.profile = {
+                    username: data.username || null,
                     name: data.username || "No name",
                     level: data.stats?.level ?? null,
                     health: data.stats?.hp ?? null,
@@ -58,6 +60,6 @@ const userSlice = createSlice({
     },
 });
 
-export const { clearUserProfile } = userSlice.actions;
+export const { clearUserProfileState } = userSlice.actions;
 
 export default userSlice.reducer;

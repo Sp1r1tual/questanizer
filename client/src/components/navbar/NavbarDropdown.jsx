@@ -2,7 +2,9 @@ import { useState, useRef, useEffect } from "react";
 
 import NavbarProfileBtn from "./NavbarProfileBtn";
 import NavbarAuthBtn from "./NavbarAuthBtn";
+import NavbarFriendsBtn from "./NavbarFriendsBtn";
 import UserProfileModal from "../modals/profile/UserProfileModal";
+import UserFriendsModal from "../modals/friends/UserFriendsModal";
 
 import dropdownIcon from "../../assets/nav-dropdown-svgrepo-com.png";
 import dropdownActiveIcon from "../../assets/nav-dropdown-active-svgrepo-com.png";
@@ -12,6 +14,7 @@ import styles from "./NavbarDropdown.module.css";
 const NavbarDropdown = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [showProfileModal, setShowProfileModal] = useState(false);
+    const [showFriendsModal, setShowFriendsModal] = useState(false);
     const dropdownRef = useRef(null);
 
     const toggleDropdown = () => {
@@ -59,6 +62,12 @@ const NavbarDropdown = () => {
                                 setIsOpen(false);
                             }}
                         />
+                        <NavbarFriendsBtn
+                            onClick={() => {
+                                setIsOpen(false);
+                                setShowFriendsModal(true);
+                            }}
+                        />
                         <NavbarAuthBtn />
                     </div>
                 )}
@@ -66,6 +75,10 @@ const NavbarDropdown = () => {
 
             {showProfileModal && (
                 <UserProfileModal onClose={() => setShowProfileModal(false)} />
+            )}
+
+            {showFriendsModal && (
+                <UserFriendsModal onClose={() => setShowFriendsModal(false)} />
             )}
         </>
     );

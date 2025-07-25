@@ -1,0 +1,19 @@
+.friendsListTitle {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: #7d5032;
+    margin-bottom: 0.5rem;
+}
+
+.friendsList {
+    display: grid;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.noFriends {
+    text-align: center;
+    font-style: italic;
+    color: #888;
+    margin-bottom: 1rem;
+}

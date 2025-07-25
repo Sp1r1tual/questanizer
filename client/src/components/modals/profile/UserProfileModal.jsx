@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { fetchUserProfile } from "../../../store/user/userThunks";
+import { fetchUserProfile } from "../../../store/user/userProfileThunks";
 import EditProfileForm from "./EditProfileForm";
 import getAvatarUrl from "../../../utils/user/getAvatarUrl";
 import Loader from "../../ui/Loader";

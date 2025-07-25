@@ -9,7 +9,7 @@ import {
 import {
     updateUserProfile,
     fetchUserProfile,
-} from "../../store/user/userThunks";
+} from "../../store/user/userProfileThunks";
 
 import defaultUserAvatarIcon from "../../assets/avatar-people-user-svgrepo-com.png";
 import getAvatarUrl from "../../utils/user/getAvatarUrl";

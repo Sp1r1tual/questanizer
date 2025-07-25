@@ -5,8 +5,12 @@ class UserService {
         return $api.get("/users");
     }
 
-    static async fetchUserPublic() {
-        return $api.get("/user/:id");
+    static async getUserPublicProfile(id) {
+        return $api.get(`/user/${id}`);
+    }
+
+    static async searchUsers(query) {
+        return $api.get("/users/search", { params: { query } });
     }
 
     static async fetchUserProfile() {
