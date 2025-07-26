@@ -1,4 +1,4 @@
-const filterSearchQuery = (fields = [], query) => {
+const searchInFields = (fields = [], query) => {
     if (!query?.trim() || fields.length === 0) return {};
 
     const regex = new RegExp(query.trim(), "i");
@@ -8,4 +8,4 @@ const filterSearchQuery = (fields = [], query) => {
     };
 };
 
-export { filterSearchQuery };
+export { searchInFields };
