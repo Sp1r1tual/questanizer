@@ -292,26 +292,11 @@ describe("userController", () => {
 
             expect(userService.searchUsers).toHaveBeenCalledWith(
                 "test",
-                "user123"
+                "user123",
+                undefined,
+                undefined
             );
             expect(res.json).toHaveBeenCalledWith({ users: usersMock });
-        });
-
-        it("should return 400 if query is empty", async () => {
-            const req = {
-                user: { id: "user123" },
-                query: { query: "   " },
-            };
-            const res = {
-                status: jest.fn().mockReturnThis(),
-                json: jest.fn(),
-            };
-            const next = jest.fn();
-
-            await userController.searchUsers(req, res, next);
-
-            expect(res.status).toHaveBeenCalledWith(400);
-            expect(res.json).toHaveBeenCalledWith({ message: "Empty request" });
         });
 
         it("should call next with error if searchUsers fails", async () => {
@@ -329,6 +314,30 @@ describe("userController", () => {
             await userController.searchUsers(req, res, next);
 
             expect(next).toHaveBeenCalledWith(expect.any(Error));
+        });
+
+        it("should pass page and limit to searchUsers", async () => {
+            const req = {
+                user: { id: "user123" },
+                query: { query: "test", page: "2", limit: "5" },
+            };
+            const res = { json: jest.fn() };
+            const next = jest.fn();
+            const usersMock = [{ id: "u1", username: "test1" }];
+
+            userService.searchUsers = jest
+                .fn()
+                .mockResolvedValue({ users: usersMock });
+
+            await userController.searchUsers(req, res, next);
+
+            expect(userService.searchUsers).toHaveBeenCalledWith(
+                "test",
+                "user123",
+                "2",
+                "5"
+            );
+            expect(res.json).toHaveBeenCalledWith({ users: usersMock });
         });
     });
 });

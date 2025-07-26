@@ -1,10 +1,11 @@
-import mongoose from "mongoose";
 import UserModel from "../models/user-model.js";
 import UserStatsModel from "../../stats/models/user-stats-model.js";
 import UserDto from "../../shared/dtos/user-dto.js";
 import { findUserById } from "../../shared/helpers/findUserById.js";
+import { paginate } from "../../shared/helpers/paginate.js";
 import validateUsername from "../helpers/validate-username.js";
 import deleteOldAvatarIfNeeded from "../helpers/delete-old-user-avatar.js";
+import { filterSearchQuery } from "../../shared/utils/search-filters/filter-search-query.js";
 
 class UserService {
     async getUserById(userId, includeStats = false) {
@@ -42,21 +43,17 @@ class UserService {
         return users;
     }
 
-    async searchUsers(query, requesterId) {
-        const regex = new RegExp(query, "i");
-        const conditions = [{ username: regex }];
+    async searchUsers(query, requesterId, page, limit) {
+        const filter = {
+            ...filterSearchQuery(["username"], query),
+            ...(requesterId && { _id: { $ne: requesterId } }),
+        };
 
-        if (mongoose.Types.ObjectId.isValid(query)) {
-            conditions.push({ _id: query });
-        }
-
-        const users = await UserModel.find({
-            $or: conditions,
-            _id: { $ne: requesterId },
-        });
+        const paginated = await paginate(UserModel, filter, { page, limit });
 
         return {
-            users: users.map((user) => new UserDto(user)),
+            users: paginated.results.map((user) => new UserDto(user)),
+            ...paginated,
         };
     }
 }

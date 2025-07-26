@@ -71,19 +71,18 @@ const getUserByIdPublic = async (req, res, next) => {
 const searchUsers = async (req, res, next) => {
     try {
         const requesterId = req.user.id;
-        const { query } = req.query;
+        const { query, page, limit } = req.query;
 
-        if (!query?.trim()) {
-            return res.status(400).json({ message: "Empty request" });
-        }
+        const result = await userService.searchUsers(
+            query.trim(),
+            requesterId,
+            page,
+            limit
+        );
 
-        const result = await userService.searchUsers(query.trim(), requesterId);
-
-        return res.json({
-            users: result.users,
-        });
+        return res.json(result);
     } catch (error) {
-        return next(error);
+        next(error);
     }
 };
 
