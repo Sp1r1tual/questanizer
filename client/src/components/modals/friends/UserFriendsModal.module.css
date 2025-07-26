@@ -50,6 +50,30 @@
     color: #2f2f2f;
 }
 
+.modal::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 8px;
+}
+
+.modal::-webkit-scrollbar-thumb {
+    background-color: #7d5032;
+    border-radius: 8px;
+    border: 2px solid #f5f0ea;
+}
+
+.modal::-webkit-scrollbar-thumb:hover {
+    background-color: #7d5032;
+}
+
+.modal {
+    scrollbar-width: thin;
+    scrollbar-color: #7d5032 #f0f0f0;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;

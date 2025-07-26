@@ -3,6 +3,7 @@ import { clearTasksState } from "../../store/tasks/tasksSlice";
 import { clearBossState } from "../../store/boss/bossBattleSlice";
 import { clearUserProfileState } from "../../store/user/userProfileSlice";
 import { clearFriendsState } from "../../store/user/userFriendsSlice";
+import { clearPublicProfileState } from "../../store/user/publicUserProfileSlice";
 
 const clearAllStateHelper = (dispatch) => {
     dispatch(clearStatsState());
@@ -10,6 +11,7 @@ const clearAllStateHelper = (dispatch) => {
     dispatch(clearBossState());
     dispatch(clearUserProfileState());
     dispatch(clearFriendsState());
+    dispatch(clearPublicProfileState());
 };
 
 export default clearAllStateHelper;

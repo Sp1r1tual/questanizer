@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchUserProfile } from "../../../store/user/userProfileThunks";
 import EditProfileForm from "./EditProfileForm";
 import getAvatarUrl from "../../../utils/user/getAvatarUrl";
+import { formatDate } from "../../../utils/date/formatDate";
 import Loader from "../../ui/Loader";
 
 import styles from "./UserProfileModal.module.css";
@@ -23,14 +24,7 @@ const UserProfileModal = ({ onClose }) => {
     }
 
     const { name, level, health, registrationDate, bio, photoUrl } = user;
-    const formattedDate = new Date(registrationDate).toLocaleDateString(
-        "en-US",
-        {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-        }
-    );
+    const formattedDate = formatDate(registrationDate);
 
     const handleSave = () => {
         setIsEditing(false);

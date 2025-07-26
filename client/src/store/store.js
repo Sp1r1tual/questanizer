@@ -5,6 +5,7 @@ import userStatsReducer from "../store/stats/userStatsSlice";
 import bossBattleReducer from "./boss/bossBattleSlice";
 import userProfileReducer from "../store/user/userProfileSlice";
 import userFriendsReducer from "../store/user/userFriendsSlice";
+import publicUserProfileReducer from "../store/user/publicUserProfileSlice";
 
 const store = configureStore({
     reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
         bossBattle: bossBattleReducer,
         user: userProfileReducer,
         friends: userFriendsReducer,
+        publicUser: publicUserProfileReducer,
     },
 });
 
