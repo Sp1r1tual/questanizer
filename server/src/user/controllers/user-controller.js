@@ -62,6 +62,7 @@ const getUserByIdPublic = async (req, res, next) => {
             bio: user.bio ?? "",
             createdAt: user.createdAt,
             stats: user.stats ?? null,
+            photoUrl: user.photoUrl ?? null,
         });
     } catch (error) {
         return next(error);
