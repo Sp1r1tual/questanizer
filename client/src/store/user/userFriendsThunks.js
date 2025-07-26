@@ -12,10 +12,8 @@ const fetchUserFriends = createAsyncThunk(
     "friends/fetchUserFriends",
     async (_, thunkAPI) => {
         try {
-            const [friendsRes, requestsRes] = await Promise.all([
-                FriendsService.fetchUserFriends(),
-                FriendsService.fetchFriendRequests(),
-            ]);
+            const friendsRes = await FriendsService.fetchUserFriends();
+            const requestsRes = await FriendsService.fetchFriendRequests();
 
             const currentUserId = await getCurrentUserId(thunkAPI);
             const friends = transformFriendships(
