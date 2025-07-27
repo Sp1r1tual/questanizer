@@ -12,7 +12,7 @@ import {
 } from "../../store/user/userProfileThunks";
 
 import defaultUserAvatarIcon from "../../assets/avatar-people-user-svgrepo-com.png";
-import getAvatarUrl from "../../utils/user/getAvatarUrl";
+import { getAvatarUrl } from "../../utils/user/getAvatarUrl";
 
 const useUserProfileForm = (user, onSave) => {
     const dispatch = useDispatch();
@@ -126,4 +126,4 @@ const useUserProfileForm = (user, onSave) => {
     };
 };
 
-export default useUserProfileForm;
+export { useUserProfileForm };

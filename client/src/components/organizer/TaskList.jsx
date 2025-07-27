@@ -1,6 +1,6 @@
-import TaskItem from "./TaskItem";
-import DotsLoader from "../ui/DotsLoader";
-import TaskFilters from "./TaskFilters";
+import { TaskItem } from "./TaskItem";
+import { DotsLoader } from "../ui/DotsLoader";
+import { TaskFilters } from "./TaskFilters";
 
 import styles from "./TaskList.module.css";
 
@@ -50,4 +50,4 @@ const TaskList = ({
     );
 };
 
-export default TaskList;
+export { TaskList };

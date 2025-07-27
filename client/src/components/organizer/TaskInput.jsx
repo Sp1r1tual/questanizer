@@ -3,6 +3,7 @@ import styles from "./TaskInput.module.css";
 const TaskInput = ({ onChange, value, isInvalid }) => {
     const inputChangeHandler = (event) => {
         const newValue = event.target.value;
+
         onChange(newValue);
     };
 
@@ -28,4 +29,4 @@ const TaskInput = ({ onChange, value, isInvalid }) => {
     );
 };
 
-export default TaskInput;
+export { TaskInput };

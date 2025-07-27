@@ -7,4 +7,4 @@ const isDateValid = (dateString) => {
     return selectedYear >= currentYear && selectedYear <= 2099;
 };
 
-export default isDateValid;
+export { isDateValid };

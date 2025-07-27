@@ -15,4 +15,4 @@ const validateSearchQuery = (query, currentUsername) => {
     return { valid: true, error: null };
 };
 
-export default validateSearchQuery;
+export { validateSearchQuery };

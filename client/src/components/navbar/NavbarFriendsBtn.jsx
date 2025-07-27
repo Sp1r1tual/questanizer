@@ -17,4 +17,4 @@ const NavbarFriendsBtn = ({ onClick }) => {
     );
 };
 
-export default NavbarFriendsBtn;
+export { NavbarFriendsBtn };

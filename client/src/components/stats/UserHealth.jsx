@@ -22,4 +22,4 @@ const UserHealth = ({ health, maxHealth }) => {
     );
 };
 
-export default UserHealth;
+export { UserHealth };

@@ -31,4 +31,4 @@ const useTaskInput = () => {
     };
 };
 
-export default useTaskInput;
+export { useTaskInput };

@@ -45,4 +45,4 @@ const BossStats = () => {
     );
 };
 
-export default BossStats;
+export { BossStats };

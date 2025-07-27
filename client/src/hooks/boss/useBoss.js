@@ -59,4 +59,4 @@ const useBoss = (tasks = []) => {
     };
 };
 
-export default useBoss;
+export { useBoss };

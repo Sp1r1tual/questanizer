@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-import TaskDropdown from "./TaskDropdown";
-import isTaskOverdue from "../../utils/tasks/isTaskOverdue";
+import { TaskDropdown } from "./TaskDropdown";
+import { isTaskOverdue } from "../../utils/tasks/isTaskOverdue";
 
 import styles from "./TaskItem.module.css";
 
@@ -75,4 +75,4 @@ const TaskItem = ({
     );
 };
 
-export default TaskItem;
+export { TaskItem };

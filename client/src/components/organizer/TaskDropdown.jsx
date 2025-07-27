@@ -1,6 +1,6 @@
-import isTaskOverdue from "../../utils/tasks/isTaskOverdue";
-import countCompletedTasks from "../../utils/tasks/countCompletedTasks";
-import countOverdueTasks from "../../utils/tasks/countOverdueTasks";
+import { isTaskOverdue } from "../../utils/tasks/isTaskOverdue";
+import { countCompletedTasks } from "../../utils/tasks/countCompletedTasks";
+import { countOverdueTasks } from "../../utils/tasks/countOverdueTasks";
 
 import styles from "./TaskDropdown.module.css";
 
@@ -105,4 +105,4 @@ const TaskDropdown = ({
     );
 };
 
-export default TaskDropdown;
+export { TaskDropdown };

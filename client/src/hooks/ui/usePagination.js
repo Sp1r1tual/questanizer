@@ -41,4 +41,4 @@ const usePagination = (initialPage = 1, initialLimit = 5) => {
     };
 };
 
-export default usePagination;
+export { usePagination };

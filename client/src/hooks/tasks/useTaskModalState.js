@@ -1,5 +1,5 @@
 import { useState } from "react";
-import isDateValid from "../../utils/validation/isDateValid";
+import { isDateValid } from "../../utils/validation/isDateValid";
 
 const useTaskModalState = ({
     initialDeadline,
@@ -63,4 +63,4 @@ const useTaskModalState = ({
     };
 };
 
-export default useTaskModalState;
+export { useTaskModalState };

@@ -1,9 +1,9 @@
 import { useState } from "react";
-import useLoginForm from "../../../../hooks/auth/useLoginForm";
-import useAuth from "../../../../hooks/auth/useAuth";
+import { useLoginForm } from "../../../../hooks/auth/useLoginForm";
+import { useAuth } from "../../../../hooks/auth/useAuth";
 import { useNavigate, Link } from "react-router-dom";
 
-import Loader from "../../../../components/ui/Loader";
+import { Loader } from "../../../../components/ui/Loader";
 
 import styles from "./LoginForm.module.css";
 
@@ -130,4 +130,4 @@ const LoginForm = () => {
     );
 };
 
-export default LoginForm;
+export { LoginForm };

@@ -14,4 +14,4 @@ const clearAllStateHelper = (dispatch) => {
     dispatch(clearPublicProfileState());
 };
 
-export default clearAllStateHelper;
+export { clearAllStateHelper };

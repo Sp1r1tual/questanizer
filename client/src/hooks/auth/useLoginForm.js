@@ -1,4 +1,4 @@
-import useForm from "./useForm";
+import { useForm } from "./useForm";
 
 import {
     validateEmail,
@@ -43,4 +43,4 @@ const useLoginForm = ({ onSubmit, clearServerError }) => {
     };
 };
 
-export default useLoginForm;
+export { useLoginForm };

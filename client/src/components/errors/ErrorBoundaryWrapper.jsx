@@ -33,4 +33,4 @@ const ErrorBoundaryWrapper = ({ children }) => {
     );
 };
 
-export default ErrorBoundaryWrapper;
+export { ErrorBoundaryWrapper };

@@ -1,7 +1,7 @@
-import Container from "../../../components/ui/Container";
-import Dashboard from "../../../components/ui/Dashboard";
-import BossBattle from "./components/BossBattle";
-import UserStatsView from "../../../components/stats/UserStatsView";
+import { Container } from "../../../components/ui/Container";
+import { Dashboard } from "../../../components/ui/Dashboard";
+import { BossBattle } from "./components/BossBattle";
+import { UserStatsView } from "../../../components/stats/UserStatsView";
 
 const BossBattlePage = () => {
     return (
@@ -14,4 +14,4 @@ const BossBattlePage = () => {
     );
 };
 
-export default BossBattlePage;
+export { BossBattlePage };

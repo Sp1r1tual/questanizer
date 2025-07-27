@@ -1,8 +1,8 @@
-import useFriendsSearch from "../../../hooks/user/useFriendsSearch";
+import { useFriendsSearch } from "../../../hooks/user/useFriendsSearch";
 
-import FriendItem from "./FriendItem";
-import Loader from "../../ui/Loader";
-import Pagination from "../../ui/pagination/Pagination";
+import { FriendItem } from "./FriendItem";
+import { Loader } from "../../ui/Loader";
+import { Pagination } from "../../ui/pagination/Pagination";
 
 import styles from "./FriendsSearch.module.css";
 
@@ -106,4 +106,4 @@ const FriendsSearch = ({
     );
 };
 
-export default FriendsSearch;
+export { FriendsSearch };

@@ -1,8 +1,8 @@
 import { useSelector, useDispatch } from "react-redux";
-import useTaskModals from "./useTaskModals";
-import useOverdueTasksChecker from "./useOverdueTasksChecker";
-import useTaskInput from "./useTaskInput";
-import useTaskActions from "./useTaskActions";
+import { useTaskModals } from "./useTaskModals";
+import { useOverdueTasksChecker } from "./useOverdueTasksChecker";
+import { useTaskInput } from "./useTaskInput";
+import { useTaskActions } from "./useTaskActions";
 import { addTaskAsync } from "../../store/tasks/tasksThunks";
 
 const useTasks = () => {
@@ -75,4 +75,4 @@ const useTasks = () => {
     };
 };
 
-export default useTasks;
+export { useTasks };

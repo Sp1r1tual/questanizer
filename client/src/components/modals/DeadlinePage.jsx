@@ -77,4 +77,4 @@ const DeadlinePage = ({
     );
 };
 
-export default DeadlinePage;
+export { DeadlinePage };

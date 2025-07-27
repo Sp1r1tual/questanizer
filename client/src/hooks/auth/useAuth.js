@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { clearAuthError } from "../../store/auth/authSlice";
 import { login, register, logout } from "../../store/auth/authThunks";
-import clearAllStateHelper from "../../utils/state/clearAllStateHelper";
+import { clearAllStateHelper } from "../../utils/state/clearAllStateHelper";
 
 const useAuth = () => {
     const dispatch = useDispatch();
@@ -30,4 +30,4 @@ const useAuth = () => {
     };
 };
 
-export default useAuth;
+export { useAuth };

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import useBoss from "../boss/useBoss";
+import { useBoss } from "../boss/useBoss";
 
 import {
     closeConfirmModal,
@@ -109,4 +109,4 @@ const useTaskActions = () => {
     };
 };
 
-export default useTaskActions;
+export { useTaskActions };

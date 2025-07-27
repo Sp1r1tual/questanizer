@@ -1,8 +1,8 @@
-import useUserFriends from "../../../hooks/user/useUserFriends";
+import { useUserFriends } from "../../../hooks/user/useUserFriends";
 
-import FriendsSearch from "./FriendsSearch";
-import FriendsList from "./FriendsList";
-import Loader from "../../ui/Loader";
+import { FriendsSearch } from "./FriendsSearch";
+import { FriendsList } from "./FriendsList";
+import { Loader } from "../../ui/Loader";
 
 import styles from "./UserFriendsModal.module.css";
 
@@ -61,4 +61,4 @@ const UserFriendsModal = ({ onClose }) => {
     );
 };
 
-export default UserFriendsModal;
+export { UserFriendsModal };

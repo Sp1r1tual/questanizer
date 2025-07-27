@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { fetchUserProfile } from "../../../store/user/userProfileThunks";
-import EditProfileForm from "./EditProfileForm";
-import getAvatarUrl from "../../../utils/user/getAvatarUrl";
+import { EditProfileForm } from "./EditProfileForm";
+import { getAvatarUrl } from "../../../utils/user/getAvatarUrl";
 import { formatDate } from "../../../utils/date/formatDate";
-import Loader from "../../ui/Loader";
+import { Loader } from "../../ui/Loader";
 
 import styles from "./UserProfileModal.module.css";
 
@@ -126,4 +126,4 @@ const UserProfileModal = ({ onClose }) => {
     );
 };
 
-export default UserProfileModal;
+export { UserProfileModal };

@@ -14,4 +14,4 @@ const LoginImage = () => {
     );
 };
 
-export default LoginImage;
+export { LoginImage };

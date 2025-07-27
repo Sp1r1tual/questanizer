@@ -1,6 +1,6 @@
-import isTaskOverdue from "./isTaskOverdue";
+import { isTaskOverdue } from "./isTaskOverdue";
 
 const countOverdueTasks = (tasks) =>
     tasks.filter((t) => isTaskOverdue(t)).length;
 
-export default countOverdueTasks;
+export { countOverdueTasks };

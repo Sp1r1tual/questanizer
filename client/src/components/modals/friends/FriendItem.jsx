@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-import getAvatarUrl from "../../../utils/user/getAvatarUrl";
-import PublicUserProfileModal from "../profiles/PublicUserProfileModal";
+import { getAvatarUrl } from "../../../utils/user/getAvatarUrl";
+import { PublicUserProfileModal } from "../profiles/PublicUserProfileModal";
 
 import styles from "./FriendItem.module.css";
 
@@ -105,4 +105,4 @@ const FriendItem = ({ friend, friendStatus, onAdd, onRemove, onAccept }) => {
     );
 };
 
-export default FriendItem;
+export { FriendItem };

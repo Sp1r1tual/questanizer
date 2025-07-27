@@ -1,4 +1,4 @@
-import useForm from "./useForm";
+import { useForm } from "./useForm";
 
 import {
     validateEmail,
@@ -56,4 +56,4 @@ const useRegistrationForm = ({ onSubmit, clearServerError }) => {
     };
 };
 
-export default useRegistrationForm;
+export { useRegistrationForm };

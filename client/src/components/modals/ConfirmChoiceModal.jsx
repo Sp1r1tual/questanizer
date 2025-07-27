@@ -49,4 +49,4 @@ const ConfirmChoiceModal = ({ isOpen, onClose, onConfirm, title, message }) => {
     );
 };
 
-export default ConfirmChoiceModal;
+export { ConfirmChoiceModal };

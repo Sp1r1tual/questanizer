@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import useUserStats from "../../hooks/stats/useUserStats";
-import useAuth from "../../hooks/auth/useAuth";
+import { useUserStats } from "../../hooks/stats/useUserStats";
+import { useAuth } from "../../hooks/auth/useAuth";
 
-import UserExperience from "./UserExperience";
-import UserHealth from "./UserHealth";
-import Container from "../ui/Container";
-import DefeatUserModal from "../modals/DefeatUserModal";
+import { UserExperience } from "./UserExperience";
+import { UserHealth } from "./UserHealth";
+import { Container } from "../ui/Container";
+import { DefeatUserModal } from "../modals/DefeatUserModal";
 import { resetBoss } from "../../store/boss/bossBattleSlice";
 import { fetchStats } from "../../store/stats/userStatsThunks";
 
@@ -51,4 +51,4 @@ const UserStatsView = () => {
     );
 };
 
-export default UserStatsView;
+export { UserStatsView };

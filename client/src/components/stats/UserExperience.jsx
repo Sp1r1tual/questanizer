@@ -23,4 +23,4 @@ const UserExperience = ({ experience, level }) => {
     );
 };
 
-export default UserExperience;
+export { UserExperience };

@@ -1,10 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 
-import NavbarProfileBtn from "./NavbarProfileBtn";
-import NavbarAuthBtn from "./NavbarAuthBtn";
-import NavbarFriendsBtn from "./NavbarFriendsBtn";
-import UserProfileModal from "../modals/profiles/UserProfileModal";
-import UserFriendsModal from "../modals/friends/UserFriendsModal";
+import { NavbarProfileBtn } from "./NavbarProfileBtn";
+import { NavbarAuthBtn } from "./NavbarAuthBtn";
+import { NavbarFriendsBtn } from "./NavbarFriendsBtn";
+import { UserProfileModal } from "../modals/profiles/UserProfileModal";
+import { UserFriendsModal } from "../modals/friends/UserFriendsModal";
 
 import dropdownIcon from "../../assets/nav-dropdown-svgrepo-com.png";
 import dropdownActiveIcon from "../../assets/nav-dropdown-active-svgrepo-com.png";
@@ -84,4 +84,4 @@ const NavbarDropdown = () => {
     );
 };
 
-export default NavbarDropdown;
+export { NavbarDropdown };

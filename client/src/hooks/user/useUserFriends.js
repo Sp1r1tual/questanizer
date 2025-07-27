@@ -84,4 +84,4 @@ const useUserFriends = () => {
     };
 };
 
-export default useUserFriends;
+export { useUserFriends };

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import useForm from "./useForm";
+import { useForm } from "./useForm";
 
 import {
     validatePassword,
@@ -73,4 +73,4 @@ const useResetPassword = () => {
     };
 };
 
-export default useResetPassword;
+export { useResetPassword };

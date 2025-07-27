@@ -10,4 +10,4 @@ const Loader = ({ visible = false }) => {
     );
 };
 
-export default Loader;
+export { Loader };

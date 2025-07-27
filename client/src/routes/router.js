@@ -1,15 +1,15 @@
 import { createBrowserRouter } from "react-router-dom";
-import App from "../App";
-import LoginPage from "./pages/login/LoginPage";
-import RegistrationPage from "./pages/registration/RegistrationPage";
-import AuthenticatedLayout from "../layouts/AuthenticatedLayout";
-import Dashboard from "../components/ui/Dashboard";
-import TasksView from "../components/organizer/TasksView";
-import UserStatsView from "../components/stats/UserStatsView";
-import BossBattlePage from "./pages/boss/BossBattlePage";
-import AnswersPage from "./pages/faq/AnswersPage";
-import ForgotPassword from "./pages/forgot-password/ForgotPassword";
-import ResetPassword from "./pages/reset-password/ResetPassword";
+import { App } from "../App";
+import { LoginPage } from "./pages/login/LoginPage";
+import { RegistrationPage } from "./pages/registration/RegistrationPage";
+import { AuthenticatedLayout } from "../layouts/AuthenticatedLayout";
+import { Dashboard } from "../components/ui/Dashboard";
+import { TasksView } from "../components/organizer/TasksView";
+import { UserStatsView } from "../components/stats/UserStatsView";
+import { BossBattlePage } from "./pages/boss/BossBattlePage";
+import { AnswersPage } from "./pages/faq/AnswersPage";
+import { ForgotPassword } from "./pages/forgot-password/ForgotPassword";
+import { ResetPassword } from "./pages/reset-password/ResetPassword";
 
 const router = createBrowserRouter([
     {
@@ -59,4 +59,4 @@ const router = createBrowserRouter([
     },
 ]);
 
-export default router;
+export { router };

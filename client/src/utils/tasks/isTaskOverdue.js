@@ -4,4 +4,4 @@ const isTaskOverdue = (task) => {
     return new Date(task.deadline) < new Date();
 };
 
-export default isTaskOverdue;
+export { isTaskOverdue };

@@ -58,4 +58,4 @@ const useTaskFilters = () => {
     return { getFilteredTasks };
 };
 
-export default useTaskFilters;
+export { useTaskFilters };

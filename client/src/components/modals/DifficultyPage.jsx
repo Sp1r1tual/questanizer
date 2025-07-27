@@ -43,4 +43,4 @@ const DifficultyPage = ({
     );
 };
 
-export default DifficultyPage;
+export { DifficultyPage };

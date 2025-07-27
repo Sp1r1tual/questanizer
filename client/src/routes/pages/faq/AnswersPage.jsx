@@ -1,5 +1,5 @@
-import Container from "../../../components/ui/Container";
-import Answers from "./components/Answers";
+import { Container } from "../../../components/ui/Container";
+import { Answers } from "./components/Answers";
 
 const AnswersPage = () => {
     return (
@@ -9,4 +9,4 @@ const AnswersPage = () => {
     );
 };
 
-export default AnswersPage;
+export { AnswersPage };

@@ -23,4 +23,4 @@ const BossView = () => {
     );
 };
 
-export default BossView;
+export { BossView };

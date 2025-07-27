@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import useTasks from "../../hooks/tasks/useTasks";
-import useTaskFilters from "../../hooks/tasks/useTaskFilters";
-import useAuth from "../../hooks/auth/useAuth";
+import { useTasks } from "../../hooks/tasks/useTasks";
+import { useTaskFilters } from "../../hooks/tasks/useTaskFilters";
+import { useAuth } from "../../hooks/auth/useAuth";
 
-import Container from "../ui/Container";
-import OrganizerHeader from "./OrganizerHeader";
-import TaskInput from "./TaskInput";
-import AddNewTaskBtn from "./AddNewTaskBtn";
-import TaskList from "./TaskList";
-import TaskModal from "../modals/TaskModal";
-import ConfirmChoiceModal from "../modals/ConfirmChoiceModal";
+import { Container } from "../ui/Container";
+import { OrganizerHeader } from "./OrganizerHeader";
+import { TaskInput } from "./TaskInput";
+import { AddNewTaskBtn } from "./AddNewTaskBtn";
+import { TaskList } from "./TaskList";
+import { TaskModal } from "../modals/TaskModal";
+import { ConfirmChoiceModal } from "../modals/ConfirmChoiceModal";
 import { fetchTasks } from "../../store/tasks/tasksThunks";
 
 const TasksView = () => {
@@ -116,4 +116,4 @@ const TasksView = () => {
     );
 };
 
-export default TasksView;
+export { TasksView };

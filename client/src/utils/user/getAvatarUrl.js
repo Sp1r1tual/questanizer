@@ -20,4 +20,4 @@ const getAvatarUrl = (photoUrl) => {
     return `${baseUrl}${normalizedPath}`;
 };
 
-export default getAvatarUrl;
+export { getAvatarUrl };

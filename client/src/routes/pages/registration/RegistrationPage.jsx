@@ -1,5 +1,5 @@
-import RegistrationForm from "./components/RegistrationForm";
-import Footer from "../../../components/footer/Footer";
+import { RegistrationForm } from "./components/RegistrationForm";
+import { Footer } from "../../../components/footer/Footer";
 
 import styles from "./RegistrationPage.module.css";
 
@@ -16,4 +16,4 @@ const RegistrationPage = () => {
     );
 };
 
-export default RegistrationPage;
+export { RegistrationPage };

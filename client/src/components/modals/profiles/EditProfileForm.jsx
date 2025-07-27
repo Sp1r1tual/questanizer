@@ -1,4 +1,4 @@
-import useUserProfileForm from "../../../hooks/user/useUserProfileForm";
+import { useUserProfileForm } from "../../../hooks/user/useUserProfileForm";
 
 import styles from "./EditProfileForm.module.css";
 
@@ -115,4 +115,4 @@ const EditProfileForm = ({ user, onCancel, onSave }) => {
     );
 };
 
-export default EditProfileForm;
+export { EditProfileForm };

@@ -1,8 +1,8 @@
 import { useState } from "react";
-import usePagination from "../ui/usePagination";
+import { usePagination } from "../ui/usePagination";
 
 import { $api } from "../../http";
-import validateSearchQuery from "../../utils/validation/validateSearchQuery";
+import { validateSearchQuery } from "../../utils/validation/validateSearchQuery";
 
 const useFriendsSearch = (currentUsername) => {
     const [term, setTerm] = useState("");
@@ -97,4 +97,4 @@ const useFriendsSearch = (currentUsername) => {
     };
 };
 
-export default useFriendsSearch;
+export { useFriendsSearch };

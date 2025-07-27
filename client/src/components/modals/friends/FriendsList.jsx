@@ -1,4 +1,4 @@
-import FriendItem from "./FriendItem";
+import { FriendItem } from "./FriendItem";
 
 import styles from "./FriendsList.module.css";
 
@@ -31,4 +31,4 @@ const FriendsList = ({ title, items, type, onAccept, onRemove }) => {
     );
 };
 
-export default FriendsList;
+export { FriendsList };

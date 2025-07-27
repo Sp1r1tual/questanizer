@@ -18,4 +18,4 @@ const AnswerItem = ({ question, answer, isOpen, onToggle }) => {
     );
 };
 
-export default AnswerItem;
+export { AnswerItem };

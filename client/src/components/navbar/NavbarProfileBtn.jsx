@@ -17,4 +17,4 @@ const NavbarProfileBtn = ({ onClick }) => {
     );
 };
 
-export default NavbarProfileBtn;
+export { NavbarProfileBtn };

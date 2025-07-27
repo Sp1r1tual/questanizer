@@ -1,6 +1,6 @@
-import useResetPassword from "../../../hooks/auth/useResetPassword";
+import { useResetPassword } from "../../../hooks/auth/useResetPassword";
 
-import Loader from "../../../components/ui/Loader";
+import { Loader } from "../../../components/ui/Loader";
 
 import styles from "./ResetPassword.module.css";
 
@@ -81,4 +81,4 @@ const ResetPassword = () => {
     );
 };
 
-export default ResetPassword;
+export { ResetPassword };

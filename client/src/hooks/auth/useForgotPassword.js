@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useForm from "./useForm";
+import { useForm } from "./useForm";
 import { AuthService } from "../../services/authService";
 import {
     validateEmail,
@@ -66,4 +66,4 @@ const useForgotPassword = () => {
     };
 };
 
-export default useForgotPassword;
+export { useForgotPassword };

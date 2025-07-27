@@ -40,4 +40,4 @@ const useForm = ({ initialValues, validate, onSubmit }) => {
     };
 };
 
-export default useForm;
+export { useForm };

@@ -1,7 +1,7 @@
-import useTaskModalState from "../../hooks/tasks/useTaskModalState";
+import { useTaskModalState } from "../../hooks/tasks/useTaskModalState";
 
-import DeadlinePage from "./DeadlinePage";
-import DifficultyPage from "./DifficultyPage";
+import { DeadlinePage } from "./DeadlinePage";
+import { DifficultyPage } from "./DifficultyPage";
 
 import styles from "./TaskModal.module.css";
 
@@ -77,4 +77,4 @@ const TaskModal = ({ deadline, setDeadline, onSubmit, onClose, isOpen }) => {
     );
 };
 
-export default TaskModal;
+export { TaskModal };

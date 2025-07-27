@@ -56,4 +56,4 @@ const useOverdueTasksChecker = () => {
     }, [tasks, dispatch, bossId, alreadyRagedTaskIds]);
 };
 
-export default useOverdueTasksChecker;
+export { useOverdueTasksChecker };

@@ -13,4 +13,4 @@ const AddNewTaskBtn = ({ onClick, disabled = false }) => {
     );
 };
 
-export default AddNewTaskBtn;
+export { AddNewTaskBtn };

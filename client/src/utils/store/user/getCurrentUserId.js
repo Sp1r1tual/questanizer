@@ -19,4 +19,4 @@ const getCurrentUserId = async (thunkAPI) => {
     return currentUserId;
 };
 
-export default getCurrentUserId;
+export { getCurrentUserId };

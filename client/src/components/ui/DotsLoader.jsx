@@ -10,4 +10,4 @@ const DotsLoader = () => {
     );
 };
 
-export default DotsLoader;
+export { DotsLoader };

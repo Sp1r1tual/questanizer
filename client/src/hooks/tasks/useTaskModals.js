@@ -48,4 +48,4 @@ const useTaskModals = () => {
     };
 };
 
-export default useTaskModals;
+export { useTaskModals };

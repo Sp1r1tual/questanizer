@@ -8,4 +8,4 @@ const BossBattleStartBtn = ({ onClick }) => {
     );
 };
 
-export default BossBattleStartBtn;
+export { BossBattleStartBtn };

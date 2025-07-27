@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import useBoss from "../../../../hooks/boss/useBoss";
-import useAuth from "../../../../hooks/auth/useAuth";
+import { useBoss } from "../../../../hooks/boss/useBoss";
+import { useAuth } from "../../../../hooks/auth/useAuth";
 
-import BossStats from "./BossStats";
-import BossView from "./BossView";
-import BossBattleStartBtn from "./BossBattleStartBtn";
-import Loader from "../../../../components/ui/Loader";
+import { BossStats } from "./BossStats";
+import { BossView } from "./BossView";
+import { BossBattleStartBtn } from "./BossBattleStartBtn";
+import { Loader } from "../../../../components/ui/Loader";
 import { fetchBoss } from "../../../../store/boss/bossBattleThunks";
 
 import styles from "./BossBattle.module.css";
@@ -44,4 +44,4 @@ const BossBattle = () => {
     );
 };
 
-export default BossBattle;
+export { BossBattle };

@@ -31,4 +31,4 @@ const DefeatUserModal = ({ onRestart }) => {
     );
 };
 
-export default DefeatUserModal;
+export { DefeatUserModal };

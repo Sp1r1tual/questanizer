@@ -119,4 +119,4 @@ const TaskFilters = ({ onFilterChange }) => {
     );
 };
 
-export default TaskFilters;
+export { TaskFilters };

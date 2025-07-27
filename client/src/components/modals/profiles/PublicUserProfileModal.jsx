@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { fetchPublicUserProfile } from "../../../store/user/publicUserProfileThunks";
 import { formatDate } from "../../../utils/date/formatDate";
-import getAvatarUrl from "../../../utils/user/getAvatarUrl";
-import Loader from "../../ui/Loader";
+import { getAvatarUrl } from "../../../utils/user/getAvatarUrl";
+import { Loader } from "../../ui/Loader";
 
 import styles from "./UserProfileModal.module.css";
 
@@ -86,4 +86,4 @@ const PublicUserProfileModal = ({ userId, onClose }) => {
     );
 };
 
-export default PublicUserProfileModal;
+export { PublicUserProfileModal };
