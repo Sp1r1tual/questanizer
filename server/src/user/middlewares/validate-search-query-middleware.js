@@ -1,28 +1,32 @@
+import { ApiError } from "../../shared/exceptions/api-error.js";
+
 const validateSearchQueryMiddleware = (req, res, next) => {
-    const { query, page, limit } = req.query;
+    try {
+        const { query, page, limit } = req.query;
 
-    if (!query?.trim()) {
-        return res
-            .status(400)
-            .json({ message: "Query string cannot be empty." });
+        if (!query?.trim()) {
+            throw ApiError.BadRequest("The 'query' parameter cannot be empty");
+        }
+
+        if (page && (isNaN(page) || parseInt(page) < 1)) {
+            throw ApiError.BadRequest(
+                "The 'page' parameter must be a positive number"
+            );
+        }
+
+        if (
+            limit &&
+            (isNaN(limit) || parseInt(limit) < 1 || parseInt(limit) > 100)
+        ) {
+            throw ApiError.BadRequest(
+                "The 'limit' parameter must be between 1 and 100"
+            );
+        }
+
+        next();
+    } catch (error) {
+        next(error);
     }
-
-    if (page && (isNaN(page) || parseInt(page) < 1)) {
-        return res
-            .status(400)
-            .json({ message: "Page must be a positive number." });
-    }
-
-    if (
-        limit &&
-        (isNaN(limit) || parseInt(limit) < 1 || parseInt(limit) > 100)
-    ) {
-        return res
-            .status(400)
-            .json({ message: "Limit must be between 1 and 100." });
-    }
-
-    next();
 };
 
 export { validateSearchQueryMiddleware };

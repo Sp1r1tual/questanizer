@@ -8,21 +8,26 @@ class MailService {
     }
 
     initializeTransporter() {
-        if (!this.transporter) {
-            this.transporter = nodemailer.createTransport({
-                service: "gmail",
-                auth: {
-                    user: process.env.SMTP_USER,
-                    pass: process.env.SMTP_PASSWORD,
-                },
-            });
+        try {
+            if (!this.transporter) {
+                this.transporter = nodemailer.createTransporter({
+                    service: "gmail",
+                    auth: {
+                        user: process.env.SMTP_USER,
+                        pass: process.env.SMTP_PASSWORD,
+                    },
+                });
+            }
+        } catch (error) {
+            console.error("Error in initializeTransporter:", error);
+            throw error;
         }
     }
 
     async sendActivationMail(to, link) {
-        this.initializeTransporter();
-
         try {
+            this.initializeTransporter();
+
             const info = await this.transporter.sendMail({
                 from: process.env.SMTP_USER,
                 to,
@@ -32,17 +37,17 @@ class MailService {
 
             console.log("Email sent successfully:", info.messageId);
         } catch (error) {
-            console.error("Error sending email:", error);
+            console.error("Error in sendActivationMail:", error);
             throw error;
         }
     }
 
     async sendPasswordResetMail(to, resetToken) {
-        this.initializeTransporter();
-
-        const resetLink = `${process.env.CLIENT_URL}/reset-password/${resetToken}`;
-
         try {
+            this.initializeTransporter();
+
+            const resetLink = `${process.env.CLIENT_URL}/reset-password/${resetToken}`;
+
             const info = await this.transporter.sendMail({
                 from: process.env.SMTP_USER,
                 to,
@@ -55,7 +60,7 @@ class MailService {
                 info.messageId
             );
         } catch (error) {
-            console.error("Error sending password reset email:", error);
+            console.error("Error in sendPasswordResetMail:", error);
             throw error;
         }
     }

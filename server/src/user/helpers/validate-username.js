@@ -2,12 +2,17 @@ import { UserModel } from "../models/user-model.js";
 import { ApiError } from "../../shared/exceptions/api-error.js";
 
 const validateUsername = async (newUsername, currentUsername) => {
-    if (newUsername && newUsername !== currentUsername) {
-        const existing = await UserModel.findOne({ username: newUsername });
+    try {
+        if (newUsername && newUsername !== currentUsername) {
+            const existing = await UserModel.findOne({ username: newUsername });
 
-        if (existing) {
-            throw ApiError.BadRequest("This username is already taken");
+            if (existing) {
+                throw ApiError.BadRequest("This username is already taken");
+            }
         }
+    } catch (error) {
+        console.error("Error in validateUsername:", error);
+        throw error;
     }
 };
 

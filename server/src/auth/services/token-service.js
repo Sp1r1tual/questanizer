@@ -26,37 +26,60 @@ class TokenService {
     }
 
     async saveToken(userId, refreshToken) {
-        const tokenData = await TokenModel.findOne({ user: userId });
+        try {
+            const tokenData = await TokenModel.findOne({ user: userId });
 
-        if (tokenData) {
-            tokenData.refreshToken = refreshToken;
-            return tokenData.save();
+            if (tokenData) {
+                tokenData.refreshToken = refreshToken;
+                return await tokenData.save();
+            }
+
+            const token = await TokenModel.create({
+                user: userId,
+                refreshToken,
+            });
+
+            return token;
+        } catch (error) {
+            console.error("Error in saveToken:", error);
+            throw error;
         }
-
-        const token = await TokenModel.create({ user: userId, refreshToken });
-
-        return token;
     }
 
     async saveResetToken(userId, resetToken) {
-        const token = await ResetTokenModel.create({
-            user: userId,
-            resetToken,
-        });
+        try {
+            const token = await ResetTokenModel.create({
+                user: userId,
+                resetToken,
+            });
 
-        return token;
+            return token;
+        } catch (error) {
+            console.error("Error in saveResetToken:", error);
+            throw error;
+        }
     }
 
     async removeToken(refreshToken) {
-        const tokenData = await TokenModel.deleteOne({ refreshToken });
+        try {
+            const tokenData = await TokenModel.deleteOne({ refreshToken });
 
-        return tokenData;
+            return tokenData;
+        } catch (error) {
+            console.error("Error in removeToken:", error);
+            throw error;
+        }
     }
 
     async removeResetToken(resetToken) {
-        const tokenData = await ResetTokenModel.deleteOne({ resetToken });
+        try {
+            const tokenData = await ResetTokenModel.deleteOne({ resetToken });
 
-        return tokenData;
+            return tokenData;
+        } catch (error) {
+            console.error("Error in removeResetToken:", error);
+            throw error;
+        }
     }
 
     validateAccessToken(token) {
@@ -90,15 +113,25 @@ class TokenService {
     }
 
     async findToken(refreshToken) {
-        const tokenData = await TokenModel.findOne({ refreshToken });
+        try {
+            const tokenData = await TokenModel.findOne({ refreshToken });
 
-        return tokenData;
+            return tokenData;
+        } catch (error) {
+            console.error("Error in findToken:", error);
+            throw error;
+        }
     }
 
     async findResetToken(resetToken) {
-        const tokenData = await ResetTokenModel.findOne({ resetToken });
+        try {
+            const tokenData = await ResetTokenModel.findOne({ resetToken });
 
-        return tokenData;
+            return tokenData;
+        } catch (error) {
+            console.error("Error in findResetToken:", error);
+            throw error;
+        }
     }
 }
 

@@ -22,8 +22,8 @@ userRouter.get("/profile", getUserProfile);
 
 userRouter.patch(
     "/profile",
+    uploadAvatarMiddleware,
     updateUserProfileValidation,
-    uploadAvatarMiddleware.single("photo"),
     validationErrorsMiddleware,
     updateUserProfile
 );
