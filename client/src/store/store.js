@@ -6,6 +6,7 @@ import bossBattleReducer from "./boss/bossBattleSlice";
 import userProfileReducer from "../store/user/userProfileSlice";
 import userFriendsReducer from "../store/user/userFriendsSlice";
 import publicUserProfileReducer from "../store/user/publicUserProfileSlice";
+import faqReducer from "../store/support/faqSlice";
 
 const store = configureStore({
     reducer: {
@@ -16,6 +17,7 @@ const store = configureStore({
         user: userProfileReducer,
         friends: userFriendsReducer,
         publicUser: publicUserProfileReducer,
+        faq: faqReducer,
     },
 });
 
