@@ -26,112 +26,71 @@ class TokenService {
     }
 
     async saveToken(userId, refreshToken) {
-        try {
-            const tokenData = await TokenModel.findOne({ user: userId });
+        const tokenData = await TokenModel.findOne({ user: userId });
 
-            if (tokenData) {
-                tokenData.refreshToken = refreshToken;
-                return await tokenData.save();
-            }
+        if (tokenData) {
+            tokenData.refreshToken = refreshToken;
 
-            const token = await TokenModel.create({
-                user: userId,
-                refreshToken,
-            });
-
-            return token;
-        } catch (error) {
-            console.error("Error in saveToken:", error);
-            throw error;
+            return await tokenData.save();
         }
+
+        const token = await TokenModel.create({
+            user: userId,
+            refreshToken,
+        });
+
+        return token;
     }
 
     async saveResetToken(userId, resetToken) {
-        try {
-            const token = await ResetTokenModel.create({
-                user: userId,
-                resetToken,
-            });
+        const token = await ResetTokenModel.create({
+            user: userId,
+            resetToken,
+        });
 
-            return token;
-        } catch (error) {
-            console.error("Error in saveResetToken:", error);
-            throw error;
-        }
+        return token;
     }
 
     async removeToken(refreshToken) {
-        try {
-            const tokenData = await TokenModel.deleteOne({ refreshToken });
+        const tokenData = await TokenModel.deleteOne({ refreshToken });
 
-            return tokenData;
-        } catch (error) {
-            console.error("Error in removeToken:", error);
-            throw error;
-        }
+        return tokenData;
     }
 
     async removeResetToken(resetToken) {
-        try {
-            const tokenData = await ResetTokenModel.deleteOne({ resetToken });
+        const tokenData = await ResetTokenModel.deleteOne({ resetToken });
 
-            return tokenData;
-        } catch (error) {
-            console.error("Error in removeResetToken:", error);
-            throw error;
-        }
+        return tokenData;
     }
 
     validateAccessToken(token) {
-        try {
-            const userData = jwt.verify(token, process.env.JWT_ACCESS_SECRET);
+        const userData = jwt.verify(token, process.env.JWT_ACCESS_SECRET);
 
-            return userData;
-        } catch (error) {
-            return null;
-        }
+        return userData;
     }
 
     validateRefreshToken(token) {
-        try {
-            const userData = jwt.verify(token, process.env.JWT_REFRESH_SECRET);
+        const userData = jwt.verify(token, process.env.JWT_REFRESH_SECRET);
 
-            return userData;
-        } catch (error) {
-            return null;
-        }
+        return userData;
     }
 
     validateResetToken(token) {
-        try {
-            const userData = jwt.verify(token, process.env.JWT_RESET_SECRET);
+        const userData = jwt.verify(token, process.env.JWT_RESET_SECRET);
 
-            return userData;
-        } catch (error) {
-            return null;
-        }
+        return userData;
     }
 
     async findToken(refreshToken) {
-        try {
-            const tokenData = await TokenModel.findOne({ refreshToken });
+        const tokenData = await TokenModel.findOne({ refreshToken });
 
-            return tokenData;
-        } catch (error) {
-            console.error("Error in findToken:", error);
-            throw error;
-        }
+        return tokenData;
     }
 
     async findResetToken(resetToken) {
-        try {
-            const tokenData = await ResetTokenModel.findOne({ resetToken });
+        const tokenData = await ResetTokenModel.findOne({ resetToken });
 
-            return tokenData;
-        } catch (error) {
-            console.error("Error in findResetToken:", error);
-            throw error;
-        }
+        return tokenData;
     }
 }
 

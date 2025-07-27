@@ -9,175 +9,145 @@ import { findUserById } from "../../shared/helpers/findUserById.js";
 
 class AuthService {
     async registration(email, password) {
-        try {
-            const candidate = await UserModel.findOne({ email });
+        const candidate = await UserModel.findOne({ email });
 
-            if (candidate) {
-                throw ApiError.BadRequest(
-                    `A user with this mailbox: ${email} is already registered.`
-                );
-            }
-
-            const hashPassword = await bcrypt.hash(password, 3);
-            const activationLink = uuidv4();
-
-            const user = await UserModel.create({
-                email,
-                password: hashPassword,
-                activationLink,
-            });
-
-            await mailService.sendActivationMail(
-                email,
-                `${process.env.API_URL}/api/auth/activate/${activationLink}`
+        if (candidate) {
+            throw ApiError.Conflict(
+                `A user with this mailbox: ${email} is already registered.`
             );
-
-            const userDto = new UserDto(user);
-            const tokens = tokenService.generateTokens({ ...userDto });
-
-            await tokenService.saveToken(userDto.id, tokens.refreshToken);
-
-            return {
-                ...tokens,
-                user: userDto,
-            };
-        } catch (error) {
-            console.error("Error in registration:", error);
-            throw error;
         }
+
+        const hashPassword = await bcrypt.hash(password, 3);
+        const activationLink = uuidv4();
+
+        const user = await UserModel.create({
+            email,
+            password: hashPassword,
+            activationLink,
+        });
+
+        await mailService.sendActivationMail(
+            email,
+            `${process.env.API_URL}/api/auth/activate/${activationLink}`
+        );
+
+        const userDto = new UserDto(user);
+        const tokens = tokenService.generateTokens({ ...userDto });
+
+        await tokenService.saveToken(userDto.id, tokens.refreshToken);
+
+        return {
+            ...tokens,
+            user: userDto,
+        };
     }
 
     async activate(activationLink) {
-        try {
-            const user = await UserModel.findOne({ activationLink });
+        const user = await UserModel.findOne({ activationLink });
 
-            if (!user) {
-                throw ApiError.BadRequest("Invalid activation link");
-            }
-
-            user.isActivated = true;
-            await user.save();
-        } catch (error) {
-            console.error("Error in activate:", error);
-            throw error;
+        if (!user) {
+            throw ApiError.NotFound("Invalid activation link");
         }
+
+        user.isActivated = true;
+
+        await user.save();
     }
 
     async login(email, password) {
-        try {
-            const user = await UserModel.findOne({ email });
+        const user = await UserModel.findOne({ email });
 
-            if (!user) {
-                throw ApiError.BadRequest(
-                    "User with this email address was not found"
-                );
-            }
-
-            const isMatch = await bcrypt.compare(password, user.password);
-
-            if (!isMatch) {
-                throw ApiError.BadRequest("Incorrect password");
-            }
-
-            if (!user.isActivated) {
-                throw ApiError.BadRequest(
-                    "Please activate your account via email"
-                );
-            }
-
-            const userDto = new UserDto(user);
-            const tokens = tokenService.generateTokens({ ...userDto });
-
-            await tokenService.saveToken(userDto.id, tokens.refreshToken);
-
-            return {
-                ...tokens,
-                user: userDto,
-            };
-        } catch (error) {
-            console.error("Error in login:", error);
-            throw error;
+        if (!user) {
+            throw ApiError.NotFound(
+                "User with this email address was not found"
+            );
         }
+
+        const isMatch = await bcrypt.compare(password, user.password);
+
+        if (!isMatch) {
+            throw ApiError.UnauthorizedError("Incorrect password");
+        }
+
+        if (!user.isActivated) {
+            throw ApiError.Forbidden("Please activate your account via email");
+        }
+
+        const userDto = new UserDto(user);
+        const tokens = tokenService.generateTokens({ ...userDto });
+
+        await tokenService.saveToken(userDto.id, tokens.refreshToken);
+
+        return {
+            ...tokens,
+            user: userDto,
+        };
     }
 
     async logout(refreshToken) {
-        try {
-            return tokenService.removeToken(refreshToken);
-        } catch (error) {
-            console.error("Error in logout:", error);
-            throw error;
-        }
+        return tokenService.removeToken(refreshToken);
     }
 
     async refresh(refreshToken) {
-        try {
-            if (!refreshToken) throw ApiError.UnauthorizedError();
-
-            const userData = tokenService.validateRefreshToken(refreshToken);
-            const tokenFromDb = await tokenService.findToken(refreshToken);
-
-            if (!userData || !tokenFromDb) {
-                throw ApiError.UnauthorizedError();
-            }
-
-            const user = await UserModel.findById(userData.id);
-            const userDto = new UserDto(user);
-            const tokens = tokenService.generateTokens({ ...userDto });
-
-            await tokenService.saveToken(userDto.id, tokens.refreshToken);
-
-            return {
-                ...tokens,
-                user: userDto,
-            };
-        } catch (error) {
-            console.error("Error in refresh:", error);
-            throw error;
+        if (!refreshToken) {
+            throw ApiError.UnauthorizedError("Token not found in database");
         }
+
+        const userData = tokenService.validateRefreshToken(refreshToken);
+        const tokenFromDb = await tokenService.findToken(refreshToken);
+
+        if (!userData || !tokenFromDb) {
+            throw ApiError.UnauthorizedError(
+                "Token is invalid or not in the database"
+            );
+        }
+
+        const user = await UserModel.findById(userData.id);
+        const userDto = new UserDto(user);
+        const tokens = tokenService.generateTokens({ ...userDto });
+
+        await tokenService.saveToken(userDto.id, tokens.refreshToken);
+
+        return {
+            ...tokens,
+            user: userDto,
+        };
     }
 
     async forgotPassword(email) {
-        try {
-            const user = await UserModel.findOne({ email });
+        const user = await UserModel.findOne({ email });
 
-            if (!user) return;
+        if (!user) return;
 
-            const resetToken = tokenService.generateResetToken({
-                email: user.email,
-                id: user._id,
-            });
+        const resetToken = tokenService.generateResetToken({
+            email: user.email,
+            id: user._id,
+        });
 
-            await tokenService.saveResetToken(user._id, resetToken);
-            await mailService.sendPasswordResetMail(user.email, resetToken);
-        } catch (error) {
-            console.error("Error in forgotPassword:", error);
-            throw error;
-        }
+        await tokenService.saveResetToken(user._id, resetToken);
+        await mailService.sendPasswordResetMail(user.email, resetToken);
     }
 
     async resetPassword(resetToken, newPassword) {
-        try {
-            const userData = tokenService.validateResetToken(resetToken);
+        const userData = tokenService.validateResetToken(resetToken);
 
-            if (!userData)
-                throw ApiError.BadRequest("Invalid or expired reset token");
-
-            const tokenData = await tokenService.findResetToken(resetToken);
-
-            if (!tokenData)
-                throw ApiError.BadRequest("Invalid or expired reset token");
-
-            const user = await findUserById(userData.id);
-            const hashed = await bcrypt.hash(newPassword, 5);
-
-            user.password = hashed;
-            await user.save();
-
-            await tokenService.removeResetToken(resetToken);
-        } catch (error) {
-            console.error("Error in resetPassword:", error);
-            throw error;
+        if (!userData) {
+            throw ApiError.UnauthorizedError("Invalid or expired reset token");
         }
+
+        const tokenData = await tokenService.findResetToken(resetToken);
+
+        if (!tokenData) {
+            throw ApiError.UnauthorizedError("Invalid or expired reset token");
+        }
+
+        const user = await findUserById(userData.id);
+        const hashed = await bcrypt.hash(newPassword, 5);
+
+        user.password = hashed;
+
+        await user.save();
+        await tokenService.removeResetToken(resetToken);
     }
 }
 

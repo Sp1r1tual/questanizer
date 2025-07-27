@@ -5,135 +5,111 @@ import { ApiError } from "../../shared/exceptions/api-error.js";
 
 class FriendsService {
     async getFriends(userId) {
-        try {
-            const accepted = await FriendsModel.find({
-                $or: [{ requester: userId }, { recipient: userId }],
-                status: "accepted",
-            })
-                .populate("requester")
-                .populate("recipient")
-                .lean();
+        const accepted = await FriendsModel.find({
+            $or: [{ requester: userId }, { recipient: userId }],
+            status: "accepted",
+        })
+            .populate("requester")
+            .populate("recipient")
+            .lean();
 
-            return accepted.map((rel) => new FriendDto(rel));
-        } catch (error) {
-            console.error("Error in getFriends:", error);
-            throw error;
-        }
+        return accepted.map((rel) => new FriendDto(rel));
     }
 
     async getFriendRequests(userId) {
-        try {
-            const incoming = await FriendsModel.find({
-                recipient: userId,
-                status: "pending",
-            })
-                .populate("requester")
-                .populate("recipient")
-                .lean();
+        const incoming = await FriendsModel.find({
+            recipient: userId,
+            status: "pending",
+        })
+            .populate("requester")
+            .populate("recipient")
+            .lean();
 
-            const outgoing = await FriendsModel.find({
-                requester: userId,
-                status: "pending",
-            })
-                .populate("requester")
-                .populate("recipient")
-                .lean();
+        const outgoing = await FriendsModel.find({
+            requester: userId,
+            status: "pending",
+        })
+            .populate("requester")
+            .populate("recipient")
+            .lean();
 
-            return {
-                incoming: incoming.map((rel) => new FriendDto(rel)),
-                outgoing: outgoing.map((rel) => new FriendDto(rel)),
-            };
-        } catch (error) {
-            console.error("Error in getFriendRequests:", error);
-            throw error;
-        }
+        return {
+            incoming: incoming.map((rel) => new FriendDto(rel)),
+            outgoing: outgoing.map((rel) => new FriendDto(rel)),
+        };
     }
 
     async sendFriendRequest(requesterId, recipientId) {
+        if (requesterId === recipientId) {
+            throw ApiError.Conflict("Cannot send request to yourself");
+        }
+
+        await findUserById(recipientId);
+
+        const existing = await FriendsModel.findOne({
+            $or: [
+                { requester: requesterId, recipient: recipientId },
+                { requester: recipientId, recipient: requesterId },
+            ],
+        });
+
+        if (existing?.status === "accepted") {
+            throw ApiError.Conflict("Already friends");
+        }
+
+        if (existing) {
+            throw ApiError.Conflict("Friend request already exists");
+        }
+
+        const request = await FriendsModel.create({
+            requester: requesterId,
+            recipient: recipientId,
+            status: "pending",
+        });
+
         try {
-            if (requesterId === recipientId) {
-                throw ApiError.BadRequest("Cannot send request to yourself");
-            }
+            await request.populate(["requester", "recipient"]);
 
-            await findUserById(recipientId);
-
-            const existing = await FriendsModel.findOne({
-                $or: [
-                    { requester: requesterId, recipient: recipientId },
-                    { requester: recipientId, recipient: requesterId },
-                ],
-            });
-
-            if (existing) {
-                if (existing.status === "accepted") {
-                    throw new ApiError(409, "Already friends");
-                }
-
-                throw new ApiError(409, "Friend request already exists");
-            }
-
-            const request = await FriendsModel.create({
-                requester: requesterId,
-                recipient: recipientId,
-                status: "pending",
-            });
-
-            try {
-                await request.populate(["requester", "recipient"]);
-                return new FriendDto(request);
-            } catch (err) {
-                await FriendsModel.deleteOne({ _id: request._id });
-                throw err;
-            }
+            return new FriendDto(request);
         } catch (error) {
-            console.error("Error in sendFriendRequest:", error);
+            await FriendsModel.deleteOne({ _id: request._id });
             throw error;
         }
     }
 
     async acceptFriendRequest(recipientId, requesterId) {
-        try {
-            const request = await FriendsModel.findOneAndUpdate(
-                {
-                    requester: requesterId,
-                    recipient: recipientId,
-                    status: "pending",
-                },
-                { status: "accepted" },
-                { new: true }
-            )
-                .populate("requester")
-                .populate("recipient");
+        const request = await FriendsModel.findOneAndUpdate(
+            {
+                requester: requesterId,
+                recipient: recipientId,
+                status: "pending",
+            },
+            { status: "accepted" },
+            { new: true }
+        )
+            .populate("requester")
+            .populate("recipient");
 
-            if (!request) {
-                throw ApiError.BadRequest("Friend request not found");
-            }
-
-            return new FriendDto(request);
-        } catch (error) {
-            console.error("Error in acceptFriendRequest:", error);
-            throw error;
+        if (!request) {
+            throw ApiError.NotFound("Friend request not found");
         }
+
+        return new FriendDto(request);
     }
 
     async removeFriendOrCancelRequest(userId, otherUserId) {
-        try {
-            const deleted = await FriendsModel.findOneAndDelete({
-                $or: [
-                    { requester: userId, recipient: otherUserId },
-                    { requester: otherUserId, recipient: userId },
-                ],
-            });
+        const deleted = await FriendsModel.findOneAndDelete({
+            $or: [
+                { requester: userId, recipient: otherUserId },
+                { requester: otherUserId, recipient: userId },
+            ],
+        });
 
-            if (!deleted) {
-                throw ApiError.BadRequest("Friendship or request not found");
-            }
-
-            return;
-        } catch (error) {
-            console.error("Error in removeFriendOrCancelRequest:", error);
-            throw error;
+        if (!deleted) {
+            throw ApiError.NotFound("Friendship or request not found");
         }
+
+        return;
     }
 }
 

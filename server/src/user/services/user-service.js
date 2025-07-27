@@ -10,80 +10,61 @@ import { searchInFields } from "../../shared/utils/query/search-in-fields.js";
 
 class UserService {
     async getUserById(userId, includeStats = false) {
-        try {
-            const user = await findUserById(userId);
-            let stats = null;
+        const user = await findUserById(userId);
+        let stats = null;
 
-            if (includeStats) {
-                stats = await UserStatsModel.findOne({ user: user._id }).lean();
-            }
-
-            return new UserDto(user, stats);
-        } catch (error) {
-            console.error("Error in getUserById:", error);
-            throw error;
+        if (includeStats) {
+            stats = await UserStatsModel.findOne({ user: user._id }).lean();
         }
+
+        return new UserDto(user, stats);
     }
 
     async updateUserProfile(userId, updateData) {
-        try {
-            const user = await findUserById(userId);
+        const user = await findUserById(userId);
 
-            await validateUsername(updateData.username, user.username);
-            await deleteOldAvatarIfNeeded(user.photoUrl, updateData.photoUrl);
+        await validateUsername(updateData.username, user.username);
+        await deleteOldAvatarIfNeeded(user.photoUrl, updateData.photoUrl);
 
-            user.username = updateData.username ?? user.username;
-            user.bio = updateData.bio ?? user.bio;
+        user.username = updateData.username ?? user.username;
+        user.bio = updateData.bio ?? user.bio;
 
-            if (updateData.photoUrl) {
-                user.photoUrl = updateData.photoUrl;
-            }
-
-            await user.save();
-
-            return new UserDto(user);
-        } catch (error) {
-            console.error("Error in updateUserProfile:", error);
-            throw error;
+        if (updateData.photoUrl) {
+            user.photoUrl = updateData.photoUrl;
         }
+
+        await user.save();
+
+        return new UserDto(user);
     }
 
     async getAllUsers() {
-        try {
-            const users = await UserModel.find();
-            return users;
-        } catch (error) {
-            console.error("Error in getAllUsers:", error);
-            throw error;
-        }
+        const users = await UserModel.find();
+
+        return users;
     }
 
     async searchUsers(query, requesterId, page, limit) {
-        try {
-            const trimmedQuery = query?.trim() || "";
+        const trimmedQuery = query?.trim() || "";
 
-            const filter = {
-                ...searchInFields(["username"], trimmedQuery),
-                isActivated: true,
-                ...(requesterId && {
-                    _id: { $ne: new mongoose.Types.ObjectId(requesterId) },
-                }),
-            };
+        const filter = {
+            ...searchInFields(["username"], trimmedQuery),
+            isActivated: true,
+            ...(requesterId && {
+                _id: { $ne: new mongoose.Types.ObjectId(requesterId) },
+            }),
+        };
 
-            const paginated = await paginate(UserModel, filter, {
-                page,
-                limit,
-                sortByLengthField: "username",
-            });
+        const paginated = await paginate(UserModel, filter, {
+            page,
+            limit,
+            sortByLengthField: "username",
+        });
 
-            return {
-                users: paginated.results.map((user) => new UserDto(user)),
-                ...paginated,
-            };
-        } catch (error) {
-            console.error("Error in searchUsers:", error);
-            throw error;
-        }
+        return {
+            users: paginated.results.map((user) => new UserDto(user)),
+            ...paginated,
+        };
     }
 }
 

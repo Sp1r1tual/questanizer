@@ -36,7 +36,9 @@ const uploadAvatarMiddleware = (req, res, next) => {
         }
 
         if (err.code === "LIMIT_FILE_SIZE") {
-            return next(ApiError.BadRequest("File size exceeds 2MB limit"));
+            return next(
+                ApiError.PayloadTooLarge("File size exceeds 2MB limit")
+            );
         }
 
         if (err.code === "LIMIT_UNEXPECTED_FILE") {

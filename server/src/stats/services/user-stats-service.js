@@ -8,95 +8,77 @@ import {
 
 class UserStatsService {
     async getOrCreateStats(userId) {
-        try {
-            let stats = await UserStatsModel.findOne({ user: userId });
+        let stats = await UserStatsModel.findOne({ user: userId });
 
-            if (!stats) {
-                stats = await UserStatsModel.create({ user: userId });
-            }
-
-            return stats;
-        } catch (error) {
-            console.error("Error in getOrCreateStats:", error);
-            throw error;
+        if (!stats) {
+            stats = await UserStatsModel.create({ user: userId });
         }
+
+        return stats;
     }
 
     async gainExperience(userId, amount) {
-        try {
-            const stats = await this.getOrCreateStats(userId);
+        const stats = await this.getOrCreateStats(userId);
 
-            const oldLevel = stats.level;
+        const oldLevel = stats.level;
 
-            stats.xp += amount;
+        stats.xp += amount;
 
-            while (stats.xp >= stats.level * 100) {
-                stats.xp -= stats.level * 100;
-                stats.level += 1;
-                stats.hp = stats.maxHp;
-            }
-
-            let message = null;
-
-            if (stats.level > oldLevel) {
-                message = success(`Your level has increased: ${stats.level}!`);
-            }
-
-            await stats.save();
-
-            return { stats, message };
-        } catch (error) {
-            console.error("Error in gainExperience:", error);
-            throw error;
+        while (stats.xp >= stats.level * 100) {
+            stats.xp -= stats.level * 100;
+            stats.level += 1;
+            stats.hp = stats.maxHp;
         }
+
+        let message = null;
+
+        if (stats.level > oldLevel) {
+            message = success(`Your level has increased: ${stats.level}!`);
+        }
+
+        await stats.save();
+
+        return { stats, message };
     }
 
     async takeDamage(userId, amount) {
-        try {
-            const stats = await this.getOrCreateStats(userId);
+        const stats = await this.getOrCreateStats(userId);
 
-            if (stats.hp <= 0) return { stats, message: null };
-
-            stats.hp -= amount;
-
-            if (stats.hp < 0) stats.hp = 0;
-
-            await stats.save();
-
-            let message = null;
-
-            if (stats.hp === 0) {
-                message = error(`Your health dropped to zero!`);
-            }
-
-            return { stats, message };
-        } catch (error) {
-            console.error("Error in takeDamage:", error);
-            throw error;
+        if (stats.hp <= 0) {
+            return { stats, message: null };
         }
+
+        stats.hp -= amount;
+
+        if (stats.hp < 0) stats.hp = 0;
+
+        await stats.save();
+
+        let message = null;
+
+        if (stats.hp === 0) {
+            message = error(`Your health dropped to zero!`);
+        }
+
+        return { stats, message };
     }
 
     async resetUserStats(userId) {
-        try {
-            const stats = await this.getOrCreateStats(userId);
+        const stats = await this.getOrCreateStats(userId);
 
-            stats.xp = 0;
-            stats.level = 1;
-            stats.hp = 100;
-            stats.maxHp = 100;
-            stats.xpToNextLevel = 100;
+        stats.xp = 0;
+        stats.level = 1;
+        stats.hp = 100;
+        stats.maxHp = 100;
+        stats.xpToNextLevel = 100;
 
-            await bossService.resetBoss(userId);
-            await stats.save();
+        await bossService.resetBoss(userId);
+        await stats.save();
 
-            return {
-                stats,
-                message: info(`Player progress reset.`),
-            };
-        } catch (error) {
-            console.error("Error in resetUserStats:", error);
-            throw error;
-        }
+        return {
+            stats,
+            message: info(`Player progress reset.`),
+        };
     }
 }
 

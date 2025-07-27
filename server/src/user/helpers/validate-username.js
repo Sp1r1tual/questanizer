@@ -7,7 +7,7 @@ const validateUsername = async (newUsername, currentUsername) => {
             const existing = await UserModel.findOne({ username: newUsername });
 
             if (existing) {
-                throw ApiError.BadRequest("This username is already taken");
+                throw ApiError.Conflict("This username is already taken");
             }
         }
     } catch (error) {

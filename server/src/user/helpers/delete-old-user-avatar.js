@@ -16,10 +16,9 @@ const deleteOldAvatarIfNeeded = async (oldAvatarPath, newAvatarPath) => {
             );
 
             await fs.unlink(absoluteOldPath);
-            console.log("Old avatar deleted:", absoluteOldPath);
         }
-    } catch (err) {
-        console.warn("Unable to delete old avatar:", err.message);
+    } catch (error) {
+        console.warn("Unable to delete old avatar:", error.message);
     }
 };
 

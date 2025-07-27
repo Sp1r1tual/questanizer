@@ -7,7 +7,9 @@ const hasBossFound = async (userId) => {
 
     const boss = await BossModel.findOne({ user: userId });
 
-    if (!boss) throw ApiError.BadRequest("Boss not found");
+    if (!boss) {
+        throw ApiError.NotFound("Boss not found");
+    }
 
     return boss;
 };

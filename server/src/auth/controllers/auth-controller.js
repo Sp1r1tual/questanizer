@@ -12,6 +12,7 @@ const registration = async (req, res, next) => {
         const userData = await authService.registration(email, password);
 
         setRefreshTokenCookie(res, userData.refreshToken);
+
         return res.json(userData);
     } catch (error) {
         return next(error);
@@ -24,6 +25,7 @@ const login = async (req, res, next) => {
         const userData = await authService.login(email, password);
 
         setRefreshTokenCookie(res, userData.refreshToken);
+
         return res.json(userData);
     } catch (error) {
         return next(error);
@@ -36,6 +38,7 @@ const logout = async (req, res, next) => {
         const token = await authService.logout(refreshToken);
 
         res.clearCookie("refreshToken");
+
         return res.json(token);
     } catch (error) {
         return next(error);
@@ -48,6 +51,7 @@ const refresh = async (req, res, next) => {
         const userData = await authService.refresh(refreshToken);
 
         setRefreshTokenCookie(res, userData.refreshToken);
+
         return res.json(userData);
     } catch (error) {
         return next(error);
@@ -59,6 +63,7 @@ const activate = async (req, res, next) => {
         const activationLink = req.params.link;
 
         await authService.activate(activationLink);
+
         return res.redirect(`${process.env.CLIENT_URL}/login?activated=1`);
     } catch (error) {
         console.error("Activation error:", error);
@@ -75,6 +80,7 @@ const forgotPassword = async (req, res, next) => {
         const { email } = req.body;
 
         await authService.forgotPassword(email);
+
         return res.json({ message: RESPONSE_MESSAGES.forgotPassword });
     } catch (error) {
         console.error("forgotPassword error:", error);
@@ -88,6 +94,7 @@ const resetPassword = async (req, res, next) => {
         const { token } = req.params;
 
         await authService.resetPassword(token, password);
+
         return res.json({ message: RESPONSE_MESSAGES.passwordResetSuccess });
     } catch (error) {
         return next(error);

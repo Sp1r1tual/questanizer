@@ -1,15 +1,15 @@
 import { FaqModel } from "../models/faq-model.js";
+import { ApiError } from "../../shared/exceptions/api-error.js";
 
 class SupportService {
     async getAnswersToQuestions() {
-        try {
-            const faqs = await FaqModel.find().sort({ createdAt: 1 }).lean();
+        const faqs = await FaqModel.find().sort({ createdAt: 1 }).lean();
 
-            return faqs;
-        } catch (error) {
-            console.error("Error in FAQ:", error);
-            throw error;
+        if (!faqs.length) {
+            throw ApiError.NotFound("No FAQs found");
         }
+
+        return faqs;
     }
 }
 
