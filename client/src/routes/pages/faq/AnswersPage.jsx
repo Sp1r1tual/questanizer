@@ -1,4 +1,4 @@
-import { Container } from "../../../components/ui/Container";
+import { Container } from "../../../components/ui/wrappers/Container";
 import { Answers } from "./components/Answers";
 
 const AnswersPage = () => {

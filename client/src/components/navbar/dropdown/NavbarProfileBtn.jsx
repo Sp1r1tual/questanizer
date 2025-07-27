@@ -1,4 +1,4 @@
-import profileIcon from "../../assets/user-profile-svgrepo-com.png";
+import profileIcon from "../../../assets/user-profile-svgrepo-com.png";
 
 import styles from "./NavbarProfileBtn.module.css";
 

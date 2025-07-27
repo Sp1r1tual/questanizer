@@ -1,7 +1,7 @@
 import { useFriendsSearch } from "../../../hooks/user/useFriendsSearch";
 
 import { FriendItem } from "./FriendItem";
-import { Loader } from "../../ui/Loader";
+import { Loader } from "../../ui/loaders/Loader";
 import { Pagination } from "../../ui/pagination/Pagination";
 
 import styles from "./FriendsSearch.module.css";

@@ -1,4 +1,4 @@
-import profileIcon from "../../assets/friends-svgrepo-com.png";
+import profileIcon from "../../../assets/friends-svgrepo-com.png";
 
 import styles from "./NavbarFriendsBtn.module.css";
 

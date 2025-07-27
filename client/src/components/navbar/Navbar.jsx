@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { NavLink } from "react-router-dom";
-import { NavbarDropdown } from "./NavbarDropdown";
+import { NavbarDropdown } from "./dropdown/NavbarDropdown";
 
 import headerImg from "../../assets/questanizer_header.png";
 import burgerIcon from "../../assets/burger-menu-svgrepo-com.png";

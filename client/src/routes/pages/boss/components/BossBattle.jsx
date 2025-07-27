@@ -6,7 +6,7 @@ import { useAuth } from "../../../../hooks/auth/useAuth";
 import { BossStats } from "./BossStats";
 import { BossView } from "./BossView";
 import { BossBattleStartBtn } from "./BossBattleStartBtn";
-import { Loader } from "../../../../components/ui/Loader";
+import { Loader } from "../../../../components/ui/loaders/Loader";
 import { fetchBoss } from "../../../../store/boss/bossBattleThunks";
 
 import styles from "./BossBattle.module.css";

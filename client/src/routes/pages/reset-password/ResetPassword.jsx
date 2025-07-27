@@ -1,6 +1,6 @@
 import { useResetPassword } from "../../../hooks/auth/useResetPassword";
 
-import { Loader } from "../../../components/ui/Loader";
+import { Loader } from "../../../components/ui/loaders/Loader";
 
 import styles from "./ResetPassword.module.css";
 

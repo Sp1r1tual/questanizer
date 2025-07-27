@@ -1,6 +1,6 @@
 import { useForgotPassword } from "../../../hooks/auth/useForgotPassword";
 
-import { Loader } from "../../../components/ui/Loader";
+import { Loader } from "../../../components/ui/loaders/Loader";
 
 import styles from "./ForgotPassword.module.css";
 

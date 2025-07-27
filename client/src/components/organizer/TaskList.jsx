@@ -1,5 +1,5 @@
 import { TaskItem } from "./TaskItem";
-import { DotsLoader } from "../ui/DotsLoader";
+import { DotsLoader } from "../ui/loaders/DotsLoader";
 import { TaskFilters } from "./TaskFilters";
 
 import styles from "./TaskList.module.css";

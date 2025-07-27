@@ -5,7 +5,7 @@ import { fetchUserProfile } from "../../../store/user/userProfileThunks";
 import { EditProfileForm } from "./EditProfileForm";
 import { getAvatarUrl } from "../../../utils/user/getAvatarUrl";
 import { formatDate } from "../../../utils/date/formatDate";
-import { Loader } from "../../ui/Loader";
+import { Loader } from "../../ui/loaders/Loader";
 
 import styles from "./UserProfileModal.module.css";
 

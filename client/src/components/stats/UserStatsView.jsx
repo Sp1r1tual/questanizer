@@ -5,8 +5,8 @@ import { useAuth } from "../../hooks/auth/useAuth";
 
 import { UserExperience } from "./UserExperience";
 import { UserHealth } from "./UserHealth";
-import { Container } from "../ui/Container";
-import { DefeatUserModal } from "../modals/DefeatUserModal";
+import { Container } from "../ui/wrappers/Container";
+import { DefeatUserModal } from "../modals/ui/DefeatUserModal";
 import { resetBoss } from "../../store/boss/bossBattleSlice";
 import { fetchStats } from "../../store/stats/userStatsThunks";
 

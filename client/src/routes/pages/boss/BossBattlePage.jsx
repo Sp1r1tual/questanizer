@@ -1,5 +1,5 @@
-import { Container } from "../../../components/ui/Container";
-import { Dashboard } from "../../../components/ui/Dashboard";
+import { Container } from "../../../components/ui/wrappers/Container";
+import { Dashboard } from "../../../components/ui/wrappers/Dashboard";
 import { BossBattle } from "./components/BossBattle";
 import { UserStatsView } from "../../../components/stats/UserStatsView";
 

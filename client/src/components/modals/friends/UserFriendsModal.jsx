@@ -2,7 +2,7 @@ import { useUserFriends } from "../../../hooks/user/useUserFriends";
 
 import { FriendsSearch } from "./FriendsSearch";
 import { FriendsList } from "./FriendsList";
-import { Loader } from "../../ui/Loader";
+import { Loader } from "../../ui/loaders/Loader";
 
 import styles from "./UserFriendsModal.module.css";
 

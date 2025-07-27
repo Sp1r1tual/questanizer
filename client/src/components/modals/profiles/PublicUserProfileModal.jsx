@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchPublicUserProfile } from "../../../store/user/publicUserProfileThunks";
 import { formatDate } from "../../../utils/date/formatDate";
 import { getAvatarUrl } from "../../../utils/user/getAvatarUrl";
-import { Loader } from "../../ui/Loader";
+import { Loader } from "../../ui/loaders/Loader";
 
 import styles from "./UserProfileModal.module.css";
 

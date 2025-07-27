@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../../../hooks/auth/useAuth";
 import { useRegistrationForm } from "../../../../hooks/auth/useRegistrationForm";
 
-import { Loader } from "../../../../components/ui/Loader";
+import { Loader } from "../../../../components/ui/loaders/Loader";
 
 import styles from "./RegistrationForm.module.css";
 

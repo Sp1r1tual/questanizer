@@ -3,7 +3,7 @@ import { useLoginForm } from "../../../../hooks/auth/useLoginForm";
 import { useAuth } from "../../../../hooks/auth/useAuth";
 import { useNavigate, Link } from "react-router-dom";
 
-import { Loader } from "../../../../components/ui/Loader";
+import { Loader } from "../../../../components/ui/loaders/Loader";
 
 import styles from "./LoginForm.module.css";
 
