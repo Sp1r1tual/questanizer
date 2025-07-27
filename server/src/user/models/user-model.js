@@ -39,4 +39,4 @@ UserSchema.index({ username: "text" });
 
 const UserModel = model("User", UserSchema);
 
-export default UserModel;
+export { UserModel };

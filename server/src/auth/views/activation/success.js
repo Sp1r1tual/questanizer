@@ -75,4 +75,4 @@ const activationSuccessHTML = (loginUrl) => `
 </html>
 `;
 
-export default activationSuccessHTML;
+export { activationSuccessHTML };

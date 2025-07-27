@@ -1,8 +1,8 @@
-import FriendsService from "../services/friends-service.js";
+import { friendsService } from "../services/friends-service.js";
 
 const getFriends = async (req, res, next) => {
     try {
-        const friends = await FriendsService.getFriends(req.user.id);
+        const friends = await friendsService.getFriends(req.user.id);
 
         return res.json(friends);
     } catch (error) {
@@ -12,7 +12,7 @@ const getFriends = async (req, res, next) => {
 
 const getFriendRequests = async (req, res, next) => {
     try {
-        const result = await FriendsService.getFriendRequests(req.user.id);
+        const result = await friendsService.getFriendRequests(req.user.id);
 
         return res.json(result);
     } catch (error) {
@@ -23,7 +23,7 @@ const getFriendRequests = async (req, res, next) => {
 const sendRequest = async (req, res, next) => {
     try {
         const { friendId } = req.body;
-        const request = await FriendsService.sendFriendRequest(
+        const request = await friendsService.sendFriendRequest(
             req.user.id,
             friendId
         );
@@ -37,7 +37,7 @@ const sendRequest = async (req, res, next) => {
 const acceptRequest = async (req, res, next) => {
     try {
         const { requesterId } = req.body;
-        const accepted = await FriendsService.acceptFriendRequest(
+        const accepted = await friendsService.acceptFriendRequest(
             req.user.id,
             requesterId
         );
@@ -52,7 +52,7 @@ const removeFriendOrCancel = async (req, res, next) => {
     try {
         const { friendId } = req.body;
 
-        await FriendsService.removeFriendOrCancelRequest(req.user.id, friendId);
+        await friendsService.removeFriendOrCancelRequest(req.user.id, friendId);
 
         return res.json(friendId);
     } catch (error) {
@@ -60,7 +60,7 @@ const removeFriendOrCancel = async (req, res, next) => {
     }
 };
 
-export default {
+export {
     getFriends,
     getFriendRequests,
     sendRequest,

@@ -15,4 +15,4 @@ const ResetTokenSchema = new Schema({
 
 const ResetTokenModel = model("ResetToken", ResetTokenSchema);
 
-export default ResetTokenModel;
+export { ResetTokenModel };

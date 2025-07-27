@@ -1,7 +1,7 @@
-import bossService from "../services/boss-service.js";
-import bossProgressService from "../services/boss-progress-service.js";
+import { bossService } from "../services/boss-service.js";
+import { bossProgressService } from "../services/boss-progress-service.js";
 
-const getBoss = async (req, res, next) => {
+const getBossController = async (req, res, next) => {
     try {
         const { id: userId } = req.user;
 
@@ -18,7 +18,7 @@ const getBoss = async (req, res, next) => {
     }
 };
 
-const spawnBoss = async (req, res, next) => {
+const spawnBossController = async (req, res, next) => {
     try {
         const { id: userId } = req.user;
         const progress = await bossProgressService.getBossProgress(userId);
@@ -37,7 +37,4 @@ const spawnBoss = async (req, res, next) => {
     }
 };
 
-export default {
-    getBoss,
-    spawnBoss,
-};
+export { getBossController, spawnBossController };

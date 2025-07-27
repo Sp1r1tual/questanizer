@@ -17,4 +17,4 @@ friendsSchema.index({ requester: 1, recipient: 1 }, { unique: true });
 
 const FriendsModel = model("Friends", friendsSchema);
 
-export default FriendsModel;
+export { FriendsModel };

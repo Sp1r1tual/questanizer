@@ -1,4 +1,4 @@
-import ApiError from "../../shared/exceptions/api-error.js";
+import { ApiError } from "../../shared/exceptions/api-error.js";
 
 const validateTaskBodyMiddleware = (req, res, next) => {
     const { text, difficulty } = req.body;
@@ -14,4 +14,4 @@ const validateTaskBodyMiddleware = (req, res, next) => {
     next();
 };
 
-export default validateTaskBodyMiddleware;
+export { validateTaskBodyMiddleware };

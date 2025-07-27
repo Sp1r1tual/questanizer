@@ -1,4 +1,4 @@
-import supportService from "../services/support-service.js";
+import { supportService } from "../services/support-service.js";
 
 const getFaqs = async (req, res, next) => {
     try {
@@ -10,6 +10,4 @@ const getFaqs = async (req, res, next) => {
     }
 };
 
-export default {
-    getFaqs,
-};
+export { getFaqs };

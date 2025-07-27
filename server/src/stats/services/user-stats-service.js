@@ -1,86 +1,85 @@
-import UserStatsModel from "../models/user-stats-model.js";
-import bossService from "../../boss/services/boss-service.js";
+import { UserStatsModel } from "../models/user-stats-model.js";
+import { bossService } from "../../boss/services/boss-service.js";
 import {
     success,
     error,
     info,
 } from "../../shared/utils/notifications/notifications.js";
 
-const getOrCreateStats = async (userId) => {
-    let stats = await UserStatsModel.findOne({ user: userId });
+class UserStatsService {
+    async getOrCreateStats(userId) {
+        let stats = await UserStatsModel.findOne({ user: userId });
 
-    if (!stats) {
-        stats = await UserStatsModel.create({ user: userId });
+        if (!stats) {
+            stats = await UserStatsModel.create({ user: userId });
+        }
+
+        return stats;
     }
 
-    return stats;
-};
+    async gainExperience(userId, amount) {
+        const stats = await getOrCreateStats(userId);
 
-const gainExperience = async (userId, amount) => {
-    const stats = await getOrCreateStats(userId);
+        const oldLevel = stats.level;
 
-    const oldLevel = stats.level;
+        stats.xp += amount;
 
-    stats.xp += amount;
+        while (stats.xp >= stats.level * 100) {
+            stats.xp -= stats.level * 100;
+            stats.level += 1;
+            stats.hp = stats.maxHp;
+        }
 
-    while (stats.xp >= stats.level * 100) {
-        stats.xp -= stats.level * 100;
-        stats.level += 1;
-        stats.hp = stats.maxHp;
+        let message = null;
+
+        if (stats.level > oldLevel) {
+            message = success(`Your level has increased: ${stats.level}!`);
+        }
+
+        await stats.save();
+
+        return { stats, message };
     }
 
-    let message = null;
+    async takeDamage(userId, amount) {
+        const stats = await getOrCreateStats(userId);
 
-    if (stats.level > oldLevel) {
-        message = success(`Your level has increased: ${stats.level}!`);
+        if (stats.hp <= 0) return { stats, message: null };
+
+        stats.hp -= amount;
+
+        if (stats.hp < 0) stats.hp = 0;
+
+        await stats.save();
+
+        let message = null;
+
+        if (stats.hp === 0) {
+            message = error(`Your health dropped to zero!`);
+        }
+
+        return { stats, message };
     }
 
-    await stats.save();
+    async resetUserStats(userId) {
+        const stats = await getOrCreateStats(userId);
 
-    return { stats, message };
-};
+        stats.xp = 0;
+        stats.level = 1;
+        stats.hp = 100;
+        stats.maxHp = 100;
+        stats.xpToNextLevel = 100;
 
-const takeDamage = async (userId, amount) => {
-    const stats = await getOrCreateStats(userId);
+        await bossService.resetBoss(userId);
+        await stats.save();
 
-    if (stats.hp <= 0) return { stats, message: null };
-
-    stats.hp -= amount;
-
-    if (stats.hp < 0) stats.hp = 0;
-
-    await stats.save();
-
-    let message = null;
-
-    if (stats.hp === 0) {
-        message = error(`Your health dropped to zero!`);
+        return {
+            stats,
+            message: info(`Player progress reset.`),
+        };
     }
+}
 
-    return { stats, message };
-};
+const userStatsService = new UserStatsService();
 
-const resetUserStats = async (userId) => {
-    const stats = await getOrCreateStats(userId);
-
-    stats.xp = 0;
-    stats.level = 1;
-    stats.hp = 100;
-    stats.maxHp = 100;
-    stats.xpToNextLevel = 100;
-
-    await bossService.resetBoss(userId);
-    await stats.save();
-
-    return {
-        stats,
-        message: info(`Player progress reset.`),
-    };
-};
-
-export default {
-    getOrCreateStats,
-    gainExperience,
-    takeDamage,
-    resetUserStats,
-};
+export { userStatsService };

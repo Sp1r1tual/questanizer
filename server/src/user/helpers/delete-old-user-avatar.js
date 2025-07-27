@@ -23,4 +23,4 @@ const deleteOldAvatarIfNeeded = async (oldAvatarPath, newAvatarPath) => {
     }
 };
 
-export default deleteOldAvatarIfNeeded;
+export { deleteOldAvatarIfNeeded };

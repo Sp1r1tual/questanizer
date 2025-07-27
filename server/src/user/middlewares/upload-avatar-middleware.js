@@ -1,7 +1,7 @@
 import multer from "multer";
 import path from "path";
 import { v4 as uuidv4 } from "uuid";
-import AVATARS_DIR from "../configs/uploadPaths.js";
+import { AVATARS_DIR } from "../configs/uploadPaths.js";
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => cb(null, AVATARS_DIR),
@@ -23,4 +23,4 @@ const uploadAvatarMiddleware = multer({
     fileFilter,
 });
 
-export default uploadAvatarMiddleware;
+export { uploadAvatarMiddleware };

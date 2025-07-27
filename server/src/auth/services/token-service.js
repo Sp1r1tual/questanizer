@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
-import tokenModel from "../models/token-model.js";
-import resetTokenModel from "../models/reset-token-model.js";
+import { TokenModel } from "../models/token-model.js";
+import { ResetTokenModel } from "../models/reset-token-model.js";
 
 class TokenService {
     generateTokens(payload) {
@@ -26,20 +26,20 @@ class TokenService {
     }
 
     async saveToken(userId, refreshToken) {
-        const tokenData = await tokenModel.findOne({ user: userId });
+        const tokenData = await TokenModel.findOne({ user: userId });
 
         if (tokenData) {
             tokenData.refreshToken = refreshToken;
             return tokenData.save();
         }
 
-        const token = await tokenModel.create({ user: userId, refreshToken });
+        const token = await TokenModel.create({ user: userId, refreshToken });
 
         return token;
     }
 
     async saveResetToken(userId, resetToken) {
-        const token = await resetTokenModel.create({
+        const token = await ResetTokenModel.create({
             user: userId,
             resetToken,
         });
@@ -48,13 +48,13 @@ class TokenService {
     }
 
     async removeToken(refreshToken) {
-        const tokenData = await tokenModel.deleteOne({ refreshToken });
+        const tokenData = await TokenModel.deleteOne({ refreshToken });
 
         return tokenData;
     }
 
     async removeResetToken(resetToken) {
-        const tokenData = await resetTokenModel.deleteOne({ resetToken });
+        const tokenData = await ResetTokenModel.deleteOne({ resetToken });
 
         return tokenData;
     }
@@ -90,16 +90,18 @@ class TokenService {
     }
 
     async findToken(refreshToken) {
-        const tokenData = await tokenModel.findOne({ refreshToken });
+        const tokenData = await TokenModel.findOne({ refreshToken });
 
         return tokenData;
     }
 
     async findResetToken(resetToken) {
-        const tokenData = await resetTokenModel.findOne({ resetToken });
+        const tokenData = await ResetTokenModel.findOne({ resetToken });
 
         return tokenData;
     }
 }
 
-export default new TokenService();
+const tokenService = new TokenService();
+
+export { tokenService };

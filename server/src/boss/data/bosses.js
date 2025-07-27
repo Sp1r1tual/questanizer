@@ -46,4 +46,4 @@ const bosses = [
     },
 ];
 
-export default bosses;
+export { bosses };

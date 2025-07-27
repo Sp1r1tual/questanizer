@@ -1,33 +1,35 @@
 import { Router } from "express";
-import userController from "../controllers/user-controller.js";
-import authMiddleware from "../../shared/middlewares/auth-middleware.js";
-import validationErrorsMiddleware from "../../shared/middlewares/validation-errors-middleware.js";
-import updateUserProfileValidation from "../utils/validations/profile-validations.js";
-import uploadAvatarMiddleware from "../middlewares/upload-avatar-middleware.js";
-import validateSearchQueryMiddleware from "../middlewares/validate-search-query-middleware.js";
+import {
+    getUserProfile,
+    updateUserProfile,
+    getUsers,
+    getUserByIdPublic,
+    searchUsers,
+} from "../controllers/user-controller.js";
+import { authMiddleware } from "../../shared/middlewares/auth-middleware.js";
+import { validationErrorsMiddleware } from "../../shared/middlewares/validation-errors-middleware.js";
+import { updateUserProfileValidation } from "../utils/validations/profile-validations.js";
+import { uploadAvatarMiddleware } from "../middlewares/upload-avatar-middleware.js";
+import { validateSearchQueryMiddleware } from "../middlewares/validate-search-query-middleware.js";
 
-const router = new Router();
+const userRouter = new Router();
 
-router.get("/user/:id", userController.getUserByIdPublic);
+userRouter.get("/user/:id", getUserByIdPublic);
 
-router.use(authMiddleware);
+userRouter.use(authMiddleware);
 
-router.get("/profile", userController.getUserProfile);
+userRouter.get("/profile", getUserProfile);
 
-router.patch(
+userRouter.patch(
     "/profile",
     updateUserProfileValidation,
     uploadAvatarMiddleware.single("photo"),
     validationErrorsMiddleware,
-    userController.updateUserProfile
+    updateUserProfile
 );
 
-router.get("/users", userController.getUsers);
+userRouter.get("/users", getUsers);
 
-router.get(
-    "/users/search",
-    validateSearchQueryMiddleware,
-    userController.searchUsers
-);
+userRouter.get("/users/search", validateSearchQueryMiddleware, searchUsers);
 
-export default router;
+export { userRouter };

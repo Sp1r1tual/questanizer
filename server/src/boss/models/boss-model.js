@@ -18,4 +18,4 @@ const bossSchema = new Schema({
 
 const BossModel = model("Boss", bossSchema);
 
-export default BossModel;
+export { BossModel };

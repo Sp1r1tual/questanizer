@@ -16,4 +16,4 @@ const updateUserProfileValidation = [
         .withMessage("Profile description should not exceed 500 characters"),
 ];
 
-export default updateUserProfileValidation;
+export { updateUserProfileValidation };

@@ -13,4 +13,4 @@ const middlewares = (app) => {
     );
 };
 
-export default middlewares;
+export { middlewares };

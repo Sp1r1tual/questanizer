@@ -1,5 +1,5 @@
-import ApiError from "../exceptions/api-error.js";
-import tokenService from "../../auth/services/token-service.js";
+import { ApiError } from "../exceptions/api-error.js";
+import { tokenService } from "../../auth/services/token-service.js";
 
 const authMiddleware = (req, res, next) => {
     try {
@@ -29,4 +29,4 @@ const authMiddleware = (req, res, next) => {
     }
 };
 
-export default authMiddleware;
+export { authMiddleware };

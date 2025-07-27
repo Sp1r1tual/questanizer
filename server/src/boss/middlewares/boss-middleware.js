@@ -1,4 +1,4 @@
-import BossModel from "../models/boss-model.js";
+import { BossModel } from "../models/boss-model.js";
 
 const bossMiddleware = async (req, res, next) => {
     try {
@@ -9,4 +9,4 @@ const bossMiddleware = async (req, res, next) => {
     }
 };
 
-export default bossMiddleware;
+export { bossMiddleware };

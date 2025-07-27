@@ -12,4 +12,4 @@ const TokenSchema = new Schema({
 
 const TokenModel = model("Token", TokenSchema);
 
-export default TokenModel;
+export { TokenModel };

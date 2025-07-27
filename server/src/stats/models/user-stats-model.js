@@ -14,4 +14,4 @@ const userStatsSchema = new Schema(
 
 const UserStatsModel = model("UserStats", userStatsSchema);
 
-export default UserStatsModel;
+export { UserStatsModel };

@@ -1,9 +1,9 @@
 import { Router } from "express";
 
-import supportController from "../controllers/support-controller.js";
+import { getFaqs } from "../controllers/support-controller.js";
 
-const router = new Router();
+const supportRouter = new Router();
 
-router.get("/faqs", supportController.getFaqs);
+supportRouter.get("/faqs", getFaqs);
 
-export default router;
+export { supportRouter };

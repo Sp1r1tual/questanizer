@@ -2,13 +2,13 @@ import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
-import authRouter from "./auth/router/auth-router.js";
-import tasksRouter from "./tasks/router/tasks-router.js";
-import userStatsRouter from "./stats/router/user-stats-router.js";
-import bossRouter from "./boss/router/boss-router.js";
-import userRouter from "./user/router/user-router.js";
-import friendsRouter from "./user/router/friends-router.js";
-import supportRouter from "./support/router/support-router.js";
+import { authRouter } from "./auth/router/auth-router.js";
+import { tasksRouter } from "./tasks/router/tasks-router.js";
+import { userStatsRouter } from "./stats/router/user-stats-router.js";
+import { bossRouter } from "./boss/router/boss-router.js";
+import { userRouter } from "./user/router/user-router.js";
+import { friendsRouter } from "./user/router/friends-router.js";
+import { supportRouter } from "./support/router/support-router.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -27,4 +27,4 @@ const routes = (app) => {
     app.use("/api", bossRouter);
 };
 
-export default routes;
+export { routes };

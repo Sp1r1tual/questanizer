@@ -37,4 +37,4 @@ const resetPasswordMailTemplate = (resetLink) => {
     `;
 };
 
-export default resetPasswordMailTemplate;
+export { resetPasswordMailTemplate };

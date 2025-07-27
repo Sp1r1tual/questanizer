@@ -23,4 +23,4 @@ class UserDto {
     }
 }
 
-export default UserDto;
+export { UserDto };

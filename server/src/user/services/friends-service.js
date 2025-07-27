@@ -1,7 +1,7 @@
-import FriendsModel from "../models/friends-model.js";
+import { FriendsModel } from "../models/friends-model.js";
 import { findUserById } from "../../shared/helpers/findUserById.js";
-import FriendDto from "../../shared/dtos/friend-dto.js";
-import ApiError from "../../shared/exceptions/api-error.js";
+import { FriendDto } from "../../shared/dtos/friend-dto.js";
+import { ApiError } from "../../shared/exceptions/api-error.js";
 
 class FriendsService {
     async getFriends(userId) {
@@ -112,4 +112,6 @@ class FriendsService {
     }
 }
 
-export default new FriendsService();
+const friendsService = new FriendsService();
+
+export { friendsService };

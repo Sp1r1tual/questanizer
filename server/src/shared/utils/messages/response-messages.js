@@ -4,4 +4,4 @@ const RESPONSE_MESSAGES = {
     passwordResetSuccess: "Password has been reset successfully",
 };
 
-export default RESPONSE_MESSAGES;
+export { RESPONSE_MESSAGES };

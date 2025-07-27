@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import ApiError from "../../shared/exceptions/api-error.js";
+import { ApiError } from "../../shared/exceptions/api-error.js";
 
 const validateTaskIdMiddleware = (req, res, next) => {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
@@ -8,4 +8,4 @@ const validateTaskIdMiddleware = (req, res, next) => {
     next();
 };
 
-export default validateTaskIdMiddleware;
+export { validateTaskIdMiddleware };

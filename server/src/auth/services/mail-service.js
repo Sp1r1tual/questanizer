@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
-import activationMailTemplate from "../views/mail-views/activation-mail.js";
-import resetPasswordMailTemplate from "../views/mail-views/reset-password-mail.js";
+import { activationMailTemplate } from "../views/mail-views/activation-mail.js";
+import { resetPasswordMailTemplate } from "../views/mail-views/reset-password-mail.js";
 
 class MailService {
     constructor() {
@@ -61,4 +61,6 @@ class MailService {
     }
 }
 
-export default new MailService();
+const mailService = new MailService();
+
+export { mailService };

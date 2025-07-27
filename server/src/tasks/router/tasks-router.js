@@ -1,33 +1,35 @@
 import { Router } from "express";
-import tasksController from "../controllers/tasks-controller.js";
-import validateTaskBodyMiddleware from "../middlewares/validate-task-body-middleware.js";
-import validateTaskIdMiddleware from "../middlewares/validate-task-id-middleware.js";
-import authMiddleware from "../../shared/middlewares/auth-middleware.js";
+import {
+    getTasks,
+    addTask,
+    completeTask,
+    deleteTask,
+    takeDamageOverdueTask,
+} from "../controllers/tasks-controller.js";
+import { validateTaskBodyMiddleware } from "../middlewares/validate-task-body-middleware.js";
+import { validateTaskIdMiddleware } from "../middlewares/validate-task-id-middleware.js";
+import { authMiddleware } from "../../shared/middlewares/auth-middleware.js";
 
-const router = new Router();
+const tasksRouter = new Router();
 
-router.use(authMiddleware);
+tasksRouter.use(authMiddleware);
 
-router.get("/tasks", tasksController.getTasks);
+tasksRouter.get("/tasks", getTasks);
 
-router.post("/tasks", validateTaskBodyMiddleware, tasksController.addTask);
+tasksRouter.post("/tasks", validateTaskBodyMiddleware, addTask);
 
-router.patch(
+tasksRouter.patch(
     "/tasks/:id/complete",
     validateTaskIdMiddleware,
-    tasksController.completeTask
+    completeTask
 );
 
-router.patch(
+tasksRouter.patch(
     "/tasks/:id/overdue",
     validateTaskIdMiddleware,
-    tasksController.takeDamageOverdueTask
+    takeDamageOverdueTask
 );
 
-router.delete(
-    "/tasks/:id",
-    validateTaskIdMiddleware,
-    tasksController.deleteTask
-);
+tasksRouter.delete("/tasks/:id", validateTaskIdMiddleware, deleteTask);
 
-export default router;
+export { tasksRouter };

@@ -69,4 +69,4 @@ const activationErrorHTML = (loginUrl, errorMessage) => `
 </html>
 `;
 
-export default activationErrorHTML;
+export { activationErrorHTML };

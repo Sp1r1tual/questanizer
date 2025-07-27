@@ -1,14 +1,17 @@
 import express from "express";
-import bossController from "../controllers/boss-controller.js";
-import bossMiddleware from "../middlewares/boss-middleware.js";
-import authMiddleware from "../../shared/middlewares/auth-middleware.js";
+import {
+    getBossController,
+    spawnBossController,
+} from "../controllers/boss-controller.js";
+import { bossMiddleware } from "../middlewares/boss-middleware.js";
+import { authMiddleware } from "../../shared/middlewares/auth-middleware.js";
 
-const router = express.Router();
+const bossRouter = express.Router();
 
-router.use(authMiddleware);
+bossRouter.use(authMiddleware);
 
-router.get("/boss", bossMiddleware, bossController.getBoss);
+bossRouter.get("/boss", bossMiddleware, getBossController);
 
-router.post("/boss/spawn", bossMiddleware, bossController.spawnBoss);
+bossRouter.post("/boss/spawn", bossMiddleware, spawnBossController);
 
-export default router;
+export { bossRouter };

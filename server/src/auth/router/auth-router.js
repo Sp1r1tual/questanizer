@@ -1,41 +1,49 @@
 import { Router } from "express";
-import authController from "../../auth/controllers/auth-controller.js";
-import validationErrorsMiddleware from "../../shared/middlewares/validation-errors-middleware.js";
+import {
+    registration,
+    login,
+    logout,
+    refresh,
+    activate,
+    forgotPassword,
+    resetPassword,
+} from "../../auth/controllers/auth-controller.js";
+import { validationErrorsMiddleware } from "../../shared/middlewares/validation-errors-middleware.js";
 import {
     registrationValidation,
     forgotPasswordValidation,
     resetPasswordValidation,
 } from "../validations/auth-validations.js";
 
-const router = new Router();
+const authRouter = new Router();
 
-router.post(
+authRouter.post(
     "/registration",
     registrationValidation,
     validationErrorsMiddleware,
-    authController.registration
+    registration
 );
 
-router.post("/login", authController.login);
+authRouter.post("/login", login);
 
-router.post("/logout", authController.logout);
+authRouter.post("/logout", logout);
 
-router.get("/refresh", authController.refresh);
+authRouter.get("/refresh", refresh);
 
-router.get("/activate/:link", authController.activate);
+authRouter.get("/activate/:link", activate);
 
-router.post(
+authRouter.post(
     "/forgot-password",
     forgotPasswordValidation,
     validationErrorsMiddleware,
-    authController.forgotPassword
+    forgotPassword
 );
 
-router.post(
+authRouter.post(
     "/reset-password/:token",
     resetPasswordValidation,
     validationErrorsMiddleware,
-    authController.resetPassword
+    resetPassword
 );
 
-export default router;
+export { authRouter };

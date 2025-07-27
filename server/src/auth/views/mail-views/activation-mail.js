@@ -7,4 +7,4 @@ const activationMailTemplate = (link) => {
     `;
 };
 
-export default activationMailTemplate;
+export { activationMailTemplate };

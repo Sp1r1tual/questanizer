@@ -5,4 +5,4 @@ const DIFFICULTY_REWARDS = {
     critical: { xp: 80, damage: 40 },
 };
 
-export default DIFFICULTY_REWARDS;
+export { DIFFICULTY_REWARDS };

@@ -1,5 +1,5 @@
-import UserModel from "../models/user-model.js";
-import ApiError from "../../shared/exceptions/api-error.js";
+import { UserModel } from "../models/user-model.js";
+import { ApiError } from "../../shared/exceptions/api-error.js";
 
 const validateUsername = async (newUsername, currentUsername) => {
     if (newUsername && newUsername !== currentUsername) {
@@ -11,4 +11,4 @@ const validateUsername = async (newUsername, currentUsername) => {
     }
 };
 
-export default validateUsername;
+export { validateUsername };

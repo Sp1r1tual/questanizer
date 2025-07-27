@@ -1,13 +1,16 @@
 import { Router } from "express";
-import userStatsController from "../controllers/user-stats-controller.js";
-import authMiddleware from "../../shared/middlewares/auth-middleware.js";
+import {
+    getStats,
+    resetUserStats,
+} from "../controllers/user-stats-controller.js";
+import { authMiddleware } from "../../shared/middlewares/auth-middleware.js";
 
-const router = new Router();
+const userStatsRouter = new Router();
 
-router.use(authMiddleware);
+userStatsRouter.use(authMiddleware);
 
-router.get("/stats", userStatsController.getStats);
+userStatsRouter.get("/stats", getStats);
 
-router.patch("/stats/reset", userStatsController.resetUserStats);
+userStatsRouter.patch("/stats/reset", resetUserStats);
 
-export default router;
+export { userStatsRouter };

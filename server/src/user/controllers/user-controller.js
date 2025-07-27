@@ -1,4 +1,4 @@
-import userService from "../services/user-service.js";
+import { userService } from "../services/user-service.js";
 
 const getUserProfile = async (req, res, next) => {
     try {
@@ -87,7 +87,7 @@ const searchUsers = async (req, res, next) => {
     }
 };
 
-export default {
+export {
     getUserProfile,
     updateUserProfile,
     getUsers,

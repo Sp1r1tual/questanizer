@@ -9,4 +9,4 @@ const updateBossFromTemplate = (boss, template) => {
     boss.bossImg = template.bossImg;
 };
 
-export default updateBossFromTemplate;
+export { updateBossFromTemplate };

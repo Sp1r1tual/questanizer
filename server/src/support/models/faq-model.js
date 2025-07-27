@@ -19,4 +19,4 @@ const faqSchema = new Schema(
 
 const FaqModel = model("FAQ", faqSchema);
 
-export default FaqModel;
+export { FaqModel };

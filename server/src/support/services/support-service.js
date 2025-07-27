@@ -1,11 +1,13 @@
-import FaqModel from "../models/faq-model.js";
+import { FaqModel } from "../models/faq-model.js";
 
-const getAnswersToQuestions = async () => {
-    const faqs = await FaqModel.find().sort({ createdAt: 1 }).lean();
+class SupportService {
+    async getAnswersToQuestions() {
+        const faqs = await FaqModel.find().sort({ createdAt: 1 }).lean();
 
-    return faqs;
-};
+        return faqs;
+    }
+}
 
-export default {
-    getAnswersToQuestions,
-};
+const supportService = new SupportService();
+
+export { supportService };

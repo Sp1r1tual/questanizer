@@ -6,4 +6,4 @@ const REFRESH_COOKIE_OPTIONS = {
     maxAge: 30 * 24 * 60 * 60 * 1000,
 };
 
-export default REFRESH_COOKIE_OPTIONS;
+export { REFRESH_COOKIE_OPTIONS };

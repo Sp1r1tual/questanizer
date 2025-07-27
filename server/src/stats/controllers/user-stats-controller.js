@@ -1,4 +1,4 @@
-import userStatsService from "../services/user-stats-service.js";
+import { userStatsService } from "../services/user-stats-service.js";
 
 const getStats = async (req, res, next) => {
     try {
@@ -20,7 +20,4 @@ const resetUserStats = async (req, res, next) => {
     }
 };
 
-export default {
-    getStats,
-    resetUserStats,
-};
+export { getStats, resetUserStats };

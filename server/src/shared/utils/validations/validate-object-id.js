@@ -1,5 +1,5 @@
 import { isValidObjectId } from "mongoose";
-import ApiError from "../../exceptions/api-error.js";
+import { ApiError } from "../../exceptions/api-error.js";
 
 const validateObjectId = (id, label = "ID") => {
     if (!isValidObjectId(id)) {

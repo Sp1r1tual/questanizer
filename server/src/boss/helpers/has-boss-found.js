@@ -1,5 +1,5 @@
-import BossModel from "../../boss/models/boss-model.js";
-import ApiError from "../../shared/exceptions/api-error.js";
+import { BossModel } from "../../boss/models/boss-model.js";
+import { ApiError } from "../../shared/exceptions/api-error.js";
 import { validateObjectId } from "../../shared/utils/validations/validate-object-id.js";
 
 const hasBossFound = async (userId) => {
@@ -12,4 +12,4 @@ const hasBossFound = async (userId) => {
     return boss;
 };
 
-export default hasBossFound;
+export { hasBossFound };

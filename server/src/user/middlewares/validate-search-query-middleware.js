@@ -25,4 +25,4 @@ const validateSearchQueryMiddleware = (req, res, next) => {
     next();
 };
 
-export default validateSearchQueryMiddleware;
+export { validateSearchQueryMiddleware };

@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
-import UserModel from "../models/user-model.js";
-import UserStatsModel from "../../stats/models/user-stats-model.js";
-import UserDto from "../../shared/dtos/user-dto.js";
+import { UserModel } from "../models/user-model.js";
+import { UserStatsModel } from "../../stats/models/user-stats-model.js";
+import { UserDto } from "../../shared/dtos/user-dto.js";
 import { findUserById } from "../../shared/helpers/findUserById.js";
-import validateUsername from "../helpers/validate-username.js";
-import deleteOldAvatarIfNeeded from "../helpers/delete-old-user-avatar.js";
+import { validateUsername } from "../helpers/validate-username.js";
+import { deleteOldAvatarIfNeeded } from "../helpers/delete-old-user-avatar.js";
 import { paginate } from "../../shared/utils/query/paginate.js";
 import { searchInFields } from "../../shared/utils/query/search-in-fields.js";
 
@@ -68,4 +68,6 @@ class UserService {
     }
 }
 
-export default new UserService();
+const userService = new UserService();
+
+export { userService };

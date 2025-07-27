@@ -1,4 +1,4 @@
-import UserDto from "./user-dto.js";
+import { UserDto } from "./user-dto.js";
 
 class FriendDto {
     id;
@@ -16,4 +16,4 @@ class FriendDto {
     }
 }
 
-export default FriendDto;
+export { FriendDto };

@@ -1,4 +1,4 @@
-import tasksService from "../services/tasks-service.js";
+import { tasksService } from "../services/tasks-service.js";
 
 const getTasks = async (req, res, next) => {
     try {
@@ -55,10 +55,4 @@ const takeDamageOverdueTask = async (req, res, next) => {
     }
 };
 
-export default {
-    getTasks,
-    addTask,
-    completeTask,
-    deleteTask,
-    takeDamageOverdueTask,
-};
+export { getTasks, addTask, completeTask, deleteTask, takeDamageOverdueTask };

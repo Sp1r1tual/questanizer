@@ -13,4 +13,4 @@ const bossProgressSchema = new Schema(
 
 const BossProgressModel = model("UserBossProgress", bossProgressSchema);
 
-export default BossProgressModel;
+export { BossProgressModel };
