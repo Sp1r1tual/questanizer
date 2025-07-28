@@ -1,54 +1,52 @@
-import { useState } from "react";
-import { useLoginForm } from "../../../../hooks/auth/useLoginForm";
-import { useAuth } from "../../../../hooks/auth/useAuth";
 import { useNavigate, Link } from "react-router-dom";
+import { useAuth } from "../../../hooks/auth/useAuth";
+import { useForm } from "../../../hooks/auth/useForm";
 
-import { Loader } from "../../../../components/ui/loaders/Loader";
+import { validateLoginForm } from "../../../utils/validation/validateFormFields";
+import { Loader } from "../../../components/ui/loaders/Loader";
 
 import styles from "./LoginForm.module.css";
 
 const LoginForm = () => {
     const { signIn, authError, clearError } = useAuth();
-    const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
-    const onSubmit = async (credentials) => {
-        setIsLoading(true);
-        try {
-            const result = await signIn(credentials);
+    const form = useForm({
+        initialValues: { email: "", password: "" },
+        validate: validateLoginForm,
+    });
 
-            if (result.meta.requestStatus === "fulfilled") {
-                navigate("/", { replace: true });
-            }
-        } catch (error) {
-            console.error("Login failed:", error);
-        } finally {
-            setIsLoading(false);
+    const handleLogin = async (credentials) => {
+        const result = await signIn(credentials);
+
+        if (result.meta.requestStatus === "fulfilled") {
+            navigate("/", { replace: true });
         }
+
+        return result;
     };
 
-    const {
-        email,
-        password,
-        errors,
-        handleEmailChange,
-        handlePasswordChange,
-        handleSubmit,
-    } = useLoginForm({ onSubmit, clearServerError: clearError });
-
     const allErrors = [
-        errors.fillAllFields,
-        errors.email,
-        errors.password,
+        form.errors.fillAllFields,
+        form.errors.email,
+        form.errors.password,
         authError,
     ].filter(Boolean);
 
+    const handleFieldChange = (field) => (event) => {
+        if (authError) {
+            clearError();
+        }
+
+        return form.handleChange(field)(event);
+    };
+
     return (
         <>
-            <Loader visible={isLoading} />
+            <Loader visible={form.isLoading} />
             <div className={styles.contentForm}>
                 <h2 className={styles.formTitle}>Login</h2>
-                <form onSubmit={handleSubmit} noValidate>
+                <form onSubmit={form.handleSubmit(handleLogin)} noValidate>
                     <div className={styles.formGroup}>
                         <label htmlFor="email" className={styles.formLabel}>
                             Email
@@ -56,10 +54,10 @@ const LoginForm = () => {
                         <input
                             type="email"
                             id="email"
-                            value={email}
-                            onChange={handleEmailChange}
+                            value={form.values.email}
+                            onChange={handleFieldChange("email")}
                             className={`${styles.formInput} ${
-                                errors.email || errors.fillAllFields
+                                form.errors.email || form.errors.fillAllFields
                                     ? styles.errorInput
                                     : ""
                             }`}
@@ -75,10 +73,11 @@ const LoginForm = () => {
                         <input
                             type="password"
                             id="password"
-                            value={password}
-                            onChange={handlePasswordChange}
+                            value={form.values.password}
+                            onChange={handleFieldChange("password")}
                             className={`${styles.formInput} ${
-                                errors.password || errors.fillAllFields
+                                form.errors.password ||
+                                form.errors.fillAllFields
                                     ? styles.errorInput
                                     : ""
                             }`}
@@ -97,9 +96,9 @@ const LoginForm = () => {
                         <button
                             type="submit"
                             className={styles.submitButton}
-                            disabled={isLoading}
+                            disabled={form.isLoading}
                         >
-                            Login
+                            {form.isLoading ? "Logging in..." : "Login"}
                         </button>
                     </div>
                 </form>

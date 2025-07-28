@@ -1,5 +1,5 @@
 import { RegistrationForm } from "./components/RegistrationForm";
-import { Footer } from "../../../components/footer/Footer";
+import { Footer } from "../../components/footer/Footer";
 
 import styles from "./RegistrationPage.module.css";
 

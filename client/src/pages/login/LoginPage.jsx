@@ -1,6 +1,6 @@
 import { LoginForm } from "./components/LoginForm";
 import { LoginImage } from "./components/LoginImage";
-import { Footer } from "../../../components/footer/Footer";
+import { Footer } from "../../components/footer/Footer";
 
 import styles from "./LoginPage.module.css";
 

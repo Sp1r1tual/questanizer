@@ -12,9 +12,11 @@ import { fetchUserProfile } from "../../store/user/userProfileThunks";
 const useUserFriends = () => {
     const dispatch = useDispatch();
     const currentUser = useSelector((state) => state.user.profile);
-    const { isLoading, friends, requests } = useSelector(
-        (state) => state.friends
-    );
+    const {
+        isLoading,
+        friends: friendsObj,
+        requests: requestsObj,
+    } = useSelector((state) => state.friends);
 
     useEffect(() => {
         dispatch(fetchUserFriends());
@@ -26,15 +28,18 @@ const useUserFriends = () => {
         }
     }, [dispatch, currentUser]);
 
+    const friends = Object.values(friendsObj);
+    const requests = Object.values(requestsObj).filter((r) => r.user);
+
     const friendStatusMap = new Map();
 
-    for (const f of Object.values(friends)) {
+    for (const f of friends) {
         if (f.user?.id) {
             friendStatusMap.set(f.user.id, "friend");
         }
     }
 
-    for (const r of Object.values(requests)) {
+    for (const r of requests) {
         if (r.user?.id) {
             friendStatusMap.set(r.user.id, r.status);
         }
@@ -45,6 +50,7 @@ const useUserFriends = () => {
     const handleAddFriend = async (friendId) => {
         try {
             await dispatch(sendFriendRequest(friendId)).unwrap();
+
             dispatch(fetchUserFriends());
         } catch (error) {
             console.error("Failed to send friend request", error);
@@ -66,6 +72,7 @@ const useUserFriends = () => {
     const handleRemoveFriendOrCancel = async (id, type = "friend") => {
         try {
             await dispatch(removeFriendOrCancel({ id, type })).unwrap();
+
             dispatch(fetchUserFriends());
         } catch (error) {
             console.error("Failed to remove friend/request", error);
@@ -75,8 +82,8 @@ const useUserFriends = () => {
     return {
         isLoading,
         currentUser,
-        friends: Object.values(friends),
-        requests: Object.values(requests).filter((r) => r.user),
+        friends,
+        requests,
         getFriendStatus,
         handleAddFriend,
         handleAcceptRequest,

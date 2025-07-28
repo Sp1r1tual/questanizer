@@ -34,6 +34,7 @@ const deleteTaskAsync = createAsyncThunk(
     async (_id, thunkAPI) => {
         try {
             await TaskService.deleteTask(_id);
+
             return _id;
         } catch (error) {
             return thunkAPI.rejectWithValue("Failed to delete task");
@@ -48,6 +49,7 @@ const completeTaskAsync = createAsyncThunk(
             const response = await TaskService.completeTask(_id);
 
             thunkAPI.dispatch(fetchStats());
+
             return response.data.task;
         } catch (error) {
             return thunkAPI.rejectWithValue("Failed to perform task");

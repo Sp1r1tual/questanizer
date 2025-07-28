@@ -32,7 +32,9 @@ const useOverdueTasksChecker = () => {
             for (const task of overdueTasks) {
                 try {
                     await TaskService.takeDamageOverdueTask(task._id);
+
                     overdueTaskIds.push(task._id);
+
                     dispatch(markDamageTaken(task._id));
 
                     if (bossId && !alreadyRagedTaskIds.includes(task._id)) {

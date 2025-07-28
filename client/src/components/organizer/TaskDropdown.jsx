@@ -74,7 +74,7 @@ const TaskDropdown = ({
                         Delete
                     </button>
 
-                    {task.isCompleted && completedTasksCount > 2 && (
+                    {task.isCompleted && completedTasksCount >= 2 && (
                         <button
                             data-testid="bulk-delete-completed-button"
                             className={`${styles.dropdownButton} ${styles.bulkDeleteBtn}`}

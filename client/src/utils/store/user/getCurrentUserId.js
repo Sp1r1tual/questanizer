@@ -11,8 +11,7 @@ const getCurrentUserId = async (thunkAPI) => {
 
             currentUserId = profile.id;
         } catch (error) {
-            console.error("Failed to fetch user profile:", error);
-            throw new Error("Unable to determine current user ID");
+            throw new Error("Failed to fetch user current user ID");
         }
     }
 

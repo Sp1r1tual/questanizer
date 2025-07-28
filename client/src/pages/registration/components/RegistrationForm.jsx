@@ -1,59 +1,57 @@
-import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { useAuth } from "../../../../hooks/auth/useAuth";
-import { useRegistrationForm } from "../../../../hooks/auth/useRegistrationForm";
+import { useAuth } from "../../../hooks/auth/useAuth";
+import { useForm } from "../../../hooks/auth/useForm";
 
-import { Loader } from "../../../../components/ui/loaders/Loader";
+import { validateRegistrationForm } from "../../../utils/validation/validateFormFields";
+import { Loader } from "../../../components/ui/loaders/Loader";
 
 import styles from "./RegistrationForm.module.css";
 
 const RegistrationForm = () => {
     const { registerUser, authError, clearError } = useAuth();
-    const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
-    const onSubmit = async ({ email, password }) => {
-        try {
-            setIsLoading(true);
-            const action = await registerUser({ email, password });
+    const form = useForm({
+        initialValues: { email: "", password: "", confirmPassword: "" },
+        validate: validateRegistrationForm,
+    });
 
-            if (action.meta.requestStatus === "fulfilled") {
-                alert(`Activation link was sent to ${email}💌`);
+    const handleRegistration = async ({ email, password }) => {
+        const action = await registerUser({ email, password });
+
+        if (action.meta.requestStatus === "fulfilled") {
+            form.setSuccessMessage(`Activation link was sent to ${email}💌`);
+
+            setTimeout(() => {
                 navigate("/login", { replace: true });
-            }
-        } catch (error) {
-            console.log(error);
-        } finally {
-            setIsLoading(false);
+            }, 2000);
         }
+
+        return action;
     };
 
-    const {
-        email,
-        password,
-        confirmPassword,
-        errors,
-        handleEmailChange,
-        handlePasswordChange,
-        handleConfirmPasswordChange,
-        handleSubmit,
-    } = useRegistrationForm({ onSubmit, clearServerError: clearError });
-
     const allErrors = [
-        errors.fillAllFields,
-        errors.email,
-        errors.password,
-        errors.confirmPassword,
+        form.errors.fillAllFields,
+        form.errors.email,
+        form.errors.password,
+        form.errors.confirmPassword,
         authError,
     ].filter(Boolean);
 
+    const handleFieldChange = (field) => (event) => {
+        if (authError) {
+            clearError();
+        }
+        return form.handleChange(field)(event);
+    };
+
     return (
         <>
-            <Loader visible={isLoading} />
+            <Loader visible={form.isLoading} />
             <div className={styles.contentForm}>
                 <h2 className={styles.formTitle}>Register</h2>
                 <form
-                    onSubmit={handleSubmit}
+                    onSubmit={form.handleSubmit(handleRegistration)}
                     aria-label="registration form"
                     noValidate
                 >
@@ -64,16 +62,19 @@ const RegistrationForm = () => {
                         <input
                             type="email"
                             id="email"
-                            value={email}
-                            onChange={handleEmailChange}
+                            value={form.values.email}
+                            onChange={handleFieldChange("email")}
                             placeholder="Enter your email"
                             className={`${styles.formInput} ${
-                                errors.email || errors.fillAllFields
+                                form.errors.email || form.errors.fillAllFields
                                     ? styles.errorInput
                                     : ""
                             }`}
                             aria-invalid={
-                                !!(errors.email || errors.fillAllFields)
+                                !!(
+                                    form.errors.email ||
+                                    form.errors.fillAllFields
+                                )
                             }
                             autoComplete="email"
                         />
@@ -86,16 +87,20 @@ const RegistrationForm = () => {
                         <input
                             type="password"
                             id="password"
-                            value={password}
-                            onChange={handlePasswordChange}
+                            value={form.values.password}
+                            onChange={handleFieldChange("password")}
                             placeholder="Enter password"
                             className={`${styles.formInput} ${
-                                errors.password || errors.fillAllFields
+                                form.errors.password ||
+                                form.errors.fillAllFields
                                     ? styles.errorInput
                                     : ""
                             }`}
                             aria-invalid={
-                                !!(errors.password || errors.fillAllFields)
+                                !!(
+                                    form.errors.password ||
+                                    form.errors.fillAllFields
+                                )
                             }
                             autoComplete="new-password"
                         />
@@ -111,18 +116,19 @@ const RegistrationForm = () => {
                         <input
                             type="password"
                             id="confirmPassword"
-                            value={confirmPassword}
-                            onChange={handleConfirmPasswordChange}
+                            value={form.values.confirmPassword}
+                            onChange={handleFieldChange("confirmPassword")}
                             placeholder="Repeat password"
                             className={`${styles.formInput} ${
-                                errors.confirmPassword || errors.fillAllFields
+                                form.errors.confirmPassword ||
+                                form.errors.fillAllFields
                                     ? styles.errorInput
                                     : ""
                             }`}
                             aria-invalid={
                                 !!(
-                                    errors.confirmPassword ||
-                                    errors.fillAllFields
+                                    form.errors.confirmPassword ||
+                                    form.errors.fillAllFields
                                 )
                             }
                             autoComplete="new-password"
@@ -135,13 +141,19 @@ const RegistrationForm = () => {
                         </div>
                     )}
 
+                    {form.message && (
+                        <div className={styles.success} role="alert">
+                            <p>{form.message}</p>
+                        </div>
+                    )}
+
                     <div className={styles.buttons}>
                         <button
                             type="submit"
                             className={styles.submitButton}
-                            disabled={isLoading}
+                            disabled={form.isLoading}
                         >
-                            Register
+                            {form.isLoading ? "Registering..." : "Register"}
                         </button>
                     </div>
                 </form>

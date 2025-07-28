@@ -7,7 +7,7 @@ import {
 } from "./userFriendsThunks";
 import {
     removeRequestById,
-    removeMatchingReceivedRequest,
+    removeIncomingRequestByUserId,
 } from "../../utils/store/user/friendRequest";
 
 const initialState = {
@@ -63,13 +63,12 @@ const userFriendsSlice = createSlice({
 
                 if (requestId) {
                     removeRequestById(state.requests, requestId);
-                } else {
-                    console.warn("RequestId not found, cannot remove request");
-
-                    const targetUserId = friendship.user?.id?.toString();
-
-                    removeMatchingReceivedRequest(state.requests, targetUserId);
+                    return;
                 }
+
+                const targetUserId = friendship.user?.id?.toString();
+
+                removeIncomingRequestByUserId(state.requests, targetUserId);
 
                 state.friends[friendship.id] = {
                     id: friendship.id,
@@ -87,9 +86,14 @@ const userFriendsSlice = createSlice({
                 const { id, type } = action.payload;
 
                 if (type === "request") {
-                    delete state.requests[id];
-                } else if (type === "friend") {
-                    delete state.friends[id];
+                    const { [id]: _, ...newRequests } = state.requests;
+                    state.requests = newRequests;
+                    return;
+                }
+
+                if (type === "friend") {
+                    const { [id]: _, ...newFriends } = state.friends;
+                    state.friends = newFriends;
                 }
             })
             .addCase(removeFriendOrCancel.rejected, (state, action) => {

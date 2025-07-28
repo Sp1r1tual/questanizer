@@ -25,6 +25,7 @@ const usePagination = (initialPage = 1, initialLimit = 5) => {
         }
 
         for (let i = start; i <= end; i++) pages.push(i);
+
         return pages;
     };
 

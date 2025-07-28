@@ -5,7 +5,7 @@ import { $api } from "../../http";
 import { validateSearchQuery } from "../../utils/validation/validateSearchQuery";
 
 const useFriendsSearch = (currentUsername) => {
-    const [term, setTerm] = useState("");
+    const [input, setInput] = useState("");
     const [results, setResults] = useState([]);
     const [message, setMessage] = useState(null);
     const [error, setError] = useState(null);
@@ -25,7 +25,7 @@ const useFriendsSearch = (currentUsername) => {
     } = usePagination();
 
     const handleSearch = async (page = 1) => {
-        const query = term.trim();
+        const query = input.trim();
 
         setError(null);
         setMessage(null);
@@ -69,8 +69,8 @@ const useFriendsSearch = (currentUsername) => {
         if (page >= 1 && page <= totalPages) handleSearch(page);
     };
 
-    const onTermChange = (value) => {
-        setTerm(value);
+    const onInputChange = (value) => {
+        setInput(value);
         setError(null);
         setHasSearched(false);
 
@@ -79,7 +79,7 @@ const useFriendsSearch = (currentUsername) => {
     };
 
     return {
-        term,
+        input,
         results,
         message,
         error,
@@ -90,8 +90,8 @@ const useFriendsSearch = (currentUsername) => {
         totalResults,
         hasNext,
         hasPrev,
-        setTerm: onTermChange,
-        handleSearch: () => handleSearch(1),
+        onInputChange,
+        handleSearch,
         handlePageChange,
         getPageNumbers,
     };

@@ -30,12 +30,11 @@ const transformFriendships = (friendships, currentUserId) => {
 
 const findRequestId = (requests, userId) => {
     for (const [id, request] of Object.entries(requests)) {
-        if (
-            request.user?.id?.toString() === userId.toString() &&
-            request.status === "received"
-        ) {
-            return id;
-        }
+        const isMatch =
+            request.status === "received" &&
+            request.user?.id?.toString() === userId.toString();
+
+        if (isMatch) return id;
     }
     return null;
 };

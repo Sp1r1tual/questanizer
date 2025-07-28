@@ -10,6 +10,7 @@ const login = createAsyncThunk(
             const response = await AuthService.login(email, password);
 
             localStorage.setItem("token", response.data.accessToken);
+
             return response.data.user;
         } catch (error) {
             return thunkAPI.rejectWithValue(
@@ -26,6 +27,7 @@ const register = createAsyncThunk(
             const response = await AuthService.registration(email, password);
 
             localStorage.setItem("token", response.data.accessToken);
+
             return response.data.user;
         } catch (error) {
             return thunkAPI.rejectWithValue(
@@ -37,6 +39,7 @@ const register = createAsyncThunk(
 
 const logout = createAsyncThunk("auth/logout", async () => {
     await AuthService.logout();
+
     localStorage.removeItem("token");
 });
 
@@ -47,6 +50,7 @@ const checkAuth = createAsyncThunk("auth/checkAuth", async (_, thunkAPI) => {
         });
 
         localStorage.setItem("token", response.data.accessToken);
+
         return response.data.user;
     } catch (error) {
         return thunkAPI.rejectWithValue(

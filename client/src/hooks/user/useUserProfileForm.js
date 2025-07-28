@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import {
     validateUsername,
     validateBio,
     ERROR_MESSAGES,
-} from "../../utils/validation/validationForm";
+} from "../../utils/validation/validateForm";
 import {
     updateUserProfile,
     fetchUserProfile,
@@ -14,14 +14,15 @@ import {
 import defaultUserAvatarIcon from "../../assets/avatar-people-user-svgrepo-com.png";
 import { getAvatarUrl } from "../../utils/user/getAvatarUrl";
 
-const useUserProfileForm = (user, onSave) => {
+const useUserProfileForm = (onSave) => {
     const dispatch = useDispatch();
+    const user = useSelector((state) => state.user.profile);
 
-    const [name, setName] = useState(user.name || "");
-    const [bio, setBio] = useState(user.bio || "");
+    const [name, setName] = useState(user?.name || "");
+    const [bio, setBio] = useState(user?.bio || "");
     const [avatarFile, setAvatarFile] = useState(null);
     const [avatarPreview, setAvatarPreview] = useState(
-        user.photoUrl ? getAvatarUrl(user.photoUrl) : defaultUserAvatarIcon
+        user?.photoUrl ? getAvatarUrl(user.photoUrl) : defaultUserAvatarIcon
     );
     const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -32,22 +33,22 @@ const useUserProfileForm = (user, onSave) => {
     const handleAvatarChange = (event) => {
         const file = event.target.files[0];
 
-        if (file) {
-            if (file.size > 2 * 1024 * 1024) {
-                setError("Image size must be less than 2MB");
-                return;
-            }
+        if (!file) return;
 
-            setAvatarFile(file);
-            setError("");
-
-            const reader = new FileReader();
-
-            reader.onloadend = () => {
-                setAvatarPreview(reader.result);
-            };
-            reader.readAsDataURL(file);
+        if (file.size > 2 * 1024 * 1024) {
+            setError("Image size must be less than 2MB");
+            return;
         }
+
+        setAvatarFile(file);
+        setError("");
+
+        const reader = new FileReader();
+
+        reader.onloadend = () => {
+            setAvatarPreview(reader.result);
+        };
+        reader.readAsDataURL(file);
     };
 
     const handleSubmit = async (event) => {
@@ -89,9 +90,10 @@ const useUserProfileForm = (user, onSave) => {
         try {
             await dispatch(updateUserProfile(formData)).unwrap();
             await dispatch(fetchUserProfile());
+
             onSave();
-        } catch (err) {
-            setError(err.message || "Failed to update profile");
+        } catch (error) {
+            setError(error.message || "Failed to update profile");
         } finally {
             setIsSubmitting(false);
         }
@@ -99,13 +101,11 @@ const useUserProfileForm = (user, onSave) => {
 
     const onNameChange = (event) => {
         setName(event.target.value);
-
         if (nameError) setNameError("");
     };
 
     const onBioChange = (event) => {
         setBio(event.target.value);
-
         if (bioError) setBioError("");
     };
 

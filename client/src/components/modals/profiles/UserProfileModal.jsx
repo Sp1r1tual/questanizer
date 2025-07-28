@@ -19,7 +19,7 @@ const UserProfileModal = ({ onClose }) => {
         dispatch(fetchUserProfile());
     }, [dispatch]);
 
-    if (!user || isLoading) {
+    if (isLoading) {
         return <Loader visible={true} />;
     }
 
@@ -54,7 +54,6 @@ const UserProfileModal = ({ onClose }) => {
 
                 {isEditing ? (
                     <EditProfileForm
-                        user={user}
                         onCancel={handleCancel}
                         onSave={handleSave}
                     />
@@ -65,12 +64,6 @@ const UserProfileModal = ({ onClose }) => {
                                 src={getAvatarUrl(photoUrl)}
                                 alt={`${name || "User"}'s avatar`}
                                 className={styles.avatar}
-                                onError={() =>
-                                    console.error(
-                                        "Image failed to load:",
-                                        getAvatarUrl(photoUrl)
-                                    )
-                                }
                             />
                             <h2 className={styles.name}>
                                 {name || "Username not set"}
@@ -83,7 +76,7 @@ const UserProfileModal = ({ onClose }) => {
                                     Level:
                                 </strong>
                                 <span className={styles.infoValue}>
-                                    {level ?? "N/A"}
+                                    {level}
                                 </span>
                             </div>
                             <div className={styles.infoItem}>
@@ -91,7 +84,7 @@ const UserProfileModal = ({ onClose }) => {
                                     Health:
                                 </strong>
                                 <span className={styles.infoValue}>
-                                    {health ?? "N/A"}
+                                    {health}
                                 </span>
                             </div>
                             <div className={styles.infoItem}>

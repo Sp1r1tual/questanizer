@@ -14,7 +14,7 @@ const FriendsSearch = ({
     onRemove,
 }) => {
     const {
-        term,
+        input,
         results,
         message,
         error,
@@ -25,7 +25,7 @@ const FriendsSearch = ({
         totalResults,
         hasNext,
         hasPrev,
-        setTerm,
+        onInputChange,
         handleSearch,
         handlePageChange,
         getPageNumbers,
@@ -40,8 +40,8 @@ const FriendsSearch = ({
                     className={`${styles.searchInput} ${
                         error ? styles.searchInputError : ""
                     }`}
-                    value={term}
-                    onChange={(event) => setTerm(event.target.value)}
+                    value={input}
+                    onChange={(event) => onInputChange(event.target.value)}
                     placeholder="Search users to add..."
                     onKeyDown={(event) => {
                         if (event.key === "Enter") {
@@ -49,7 +49,10 @@ const FriendsSearch = ({
                         }
                     }}
                 />
-                <button className={styles.searchButton} onClick={handleSearch}>
+                <button
+                    className={styles.searchButton}
+                    onClick={() => handleSearch(1)}
+                >
                     Search
                 </button>
             </div>

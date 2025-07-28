@@ -2,7 +2,7 @@ import { useUserProfileForm } from "../../../hooks/user/useUserProfileForm";
 
 import styles from "./EditProfileForm.module.css";
 
-const EditProfileForm = ({ user, onCancel, onSave }) => {
+const EditProfileForm = ({ onCancel, onSave }) => {
     const {
         name,
         bio,
@@ -15,7 +15,7 @@ const EditProfileForm = ({ user, onCancel, onSave }) => {
         nameError,
         bioError,
         error,
-    } = useUserProfileForm(user, onSave);
+    } = useUserProfileForm(onSave);
 
     return (
         <form className={styles.form} onSubmit={handleSubmit}>

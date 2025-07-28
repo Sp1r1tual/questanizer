@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { AnswerItem } from "./AnswerItem";
-import { fetchFaqs } from "../../../../store/support/faqThunks";
-import { Loader } from "../../../../components/ui/loaders/Loader";
+import { fetchFaqs } from "../../../store/support/faqThunks";
+import { Loader } from "../../../components/ui/loaders/Loader";
 
 import styles from "./Answers.module.css";
 

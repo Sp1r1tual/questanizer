@@ -25,6 +25,7 @@ const RouteErrorFallback = () => {
             <div role="alert" className={styles.errorAlert}>
                 <p className={styles.errorText}>Something went wrong:</p>
                 <pre className={styles.errorMessage}>{message}</pre>
+
                 <button
                     className={styles.retryButton}
                     onClick={() => navigate("/")}

@@ -100,8 +100,10 @@ const tasksSlice = createSlice({
                     (task) => task._id === action.payload._id
                 );
 
-                if (index !== -1) state.tasks[index] = action.payload;
-                state.confirmModal = initialState.confirmModal;
+                if (index !== -1) {
+                    state.tasks[index] = action.payload;
+                    state.confirmModal = initialState.confirmModal;
+                }
             });
     },
 });

@@ -1,7 +1,7 @@
-import { Container } from "../../../components/ui/wrappers/Container";
-import { Dashboard } from "../../../components/ui/wrappers/Dashboard";
+import { Container } from "../../components/ui/wrappers/Container";
+import { Dashboard } from "../../components/ui/wrappers/Dashboard";
 import { BossBattle } from "./components/BossBattle";
-import { UserStatsView } from "../../../components/stats/UserStatsView";
+import { UserStatsView } from "../../components/stats/UserStatsView";
 
 const BossBattlePage = () => {
     return (

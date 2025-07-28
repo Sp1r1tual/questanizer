@@ -68,11 +68,16 @@
 }
 
 .error {
+    max-width: 268px;
+    width: 100%;
     color: darkred;
     font-weight: bold;
     margin-top: 0.25rem;
     font-size: 0.75rem;
     text-align: left;
+    word-break: break-word;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
 }
 
 .buttons {

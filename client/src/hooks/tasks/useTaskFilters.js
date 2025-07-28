@@ -1,6 +1,7 @@
 const useTaskFilters = () => {
     const getFilteredTasks = (tasks, filters) => {
         let filtered = [...tasks];
+        const now = new Date();
 
         if (filters.status !== "all") {
             filtered = filtered.filter((task) =>
@@ -10,24 +11,26 @@ const useTaskFilters = () => {
             );
         }
 
-        const now = new Date();
-
         if (filters.deadline === "overdue") {
-            filtered = filtered.filter(
+            return filtered.filter(
                 (task) =>
                     task.deadline &&
                     new Date(task.deadline) < now &&
                     !task.isCompleted
             );
-        } else if (filters.deadline === "upcoming") {
-            filtered = filtered.filter(
+        }
+
+        if (filters.deadline === "upcoming") {
+            return filtered.filter(
                 (task) =>
                     task.deadline &&
                     new Date(task.deadline) >= now &&
                     !task.isCompleted
             );
-        } else if (filters.deadline === "none") {
-            filtered = filtered.filter((task) => !task.deadline);
+        }
+
+        if (filters.deadline === "none") {
+            return filtered.filter((task) => !task.deadline);
         }
 
         if (filters.difficulty !== "all") {
@@ -36,20 +39,31 @@ const useTaskFilters = () => {
             );
         }
 
-        if (filters.sortBy === "createdAt") {
-            filtered.sort(
-                (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-            );
-        } else if (filters.sortBy === "deadline") {
-            filtered.sort(
-                (a, b) => new Date(a.deadline || 0) - new Date(b.deadline || 0)
-            );
-        } else if (filters.sortBy === "difficulty") {
-            const order = { easy: 1, medium: 2, hard: 3, critical: 4 };
-            filtered.sort(
-                (a, b) =>
-                    (order[a.difficulty] || 0) - (order[b.difficulty] || 0)
-            );
+        switch (filters.sortBy) {
+            case "createdAt":
+                filtered.sort(
+                    (taskA, taskB) =>
+                        new Date(taskB.createdAt) - new Date(taskA.createdAt)
+                );
+                break;
+            case "deadline":
+                filtered.sort(
+                    (taskA, taskB) =>
+                        new Date(taskA.deadline || 0) -
+                        new Date(taskB.deadline || 0)
+                );
+                break;
+            case "difficulty":
+                const order = { easy: 1, medium: 2, hard: 3, critical: 4 };
+
+                filtered.sort(
+                    (taskA, taskB) =>
+                        (order[taskA.difficulty] || 0) -
+                        (order[taskB.difficulty] || 0)
+                );
+                break;
+            default:
+                break;
         }
 
         return filtered;
