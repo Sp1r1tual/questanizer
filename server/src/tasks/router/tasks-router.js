@@ -12,24 +12,29 @@ import { authMiddleware } from "../../shared/middlewares/auth-middleware.js";
 
 const tasksRouter = new Router();
 
-tasksRouter.use(authMiddleware);
+tasksRouter.get("/tasks", authMiddleware, getTasks);
 
-tasksRouter.get("/tasks", getTasks);
-
-tasksRouter.post("/tasks", validateTaskBodyMiddleware, addTask);
+tasksRouter.post("/tasks", authMiddleware, validateTaskBodyMiddleware, addTask);
 
 tasksRouter.patch(
     "/tasks/:id/complete",
+    authMiddleware,
     validateTaskIdMiddleware,
     completeTask
 );
 
 tasksRouter.patch(
     "/tasks/:id/overdue",
+    authMiddleware,
     validateTaskIdMiddleware,
     takeDamageOverdueTask
 );
 
-tasksRouter.delete("/tasks/:id", validateTaskIdMiddleware, deleteTask);
+tasksRouter.delete(
+    "/tasks/:id",
+    authMiddleware,
+    validateTaskIdMiddleware,
+    deleteTask
+);
 
 export { tasksRouter };

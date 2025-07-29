@@ -1,6 +1,8 @@
 import { authService } from "../services/auth-service.js";
 import { REFRESH_COOKIE_OPTIONS } from "../utils/refresh-cookie-options.js";
 import { RESPONSE_MESSAGES } from "../../shared/utils/messages/response-messages.js";
+import { activationSuccessHTML } from "../views/activation/success.js";
+import { activationErrorHTML } from "../views/activation/error.js";
 
 const setRefreshTokenCookie = (res, token) => {
     res.cookie("refreshToken", token, REFRESH_COOKIE_OPTIONS);
@@ -60,18 +62,20 @@ const refresh = async (req, res, next) => {
 
 const activate = async (req, res, next) => {
     try {
-        const activationLink = req.params.link;
+        await authService.activate(req.params.link);
 
-        await authService.activate(activationLink);
-
-        return res.redirect(`${process.env.CLIENT_URL}/login?activated=1`);
-    } catch (error) {
-        console.error("Activation error:", error);
-        return res.redirect(
-            `${
-                process.env.CLIENT_URL
-            }/login?activated=0&error=${encodeURIComponent(error.message)}`
+        res.type("html").send(
+            activationSuccessHTML(`${process.env.CLIENT_URL}/login`)
         );
+    } catch (error) {
+        res.status(400)
+            .type("html")
+            .send(
+                activationErrorHTML(
+                    `${process.env.CLIENT_URL}/login`,
+                    error.message
+                )
+            );
     }
 };
 

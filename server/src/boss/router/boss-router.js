@@ -8,10 +8,13 @@ import { authMiddleware } from "../../shared/middlewares/auth-middleware.js";
 
 const bossRouter = express.Router();
 
-bossRouter.use(authMiddleware);
+bossRouter.get("/boss", authMiddleware, bossMiddleware, getBossController);
 
-bossRouter.get("/boss", bossMiddleware, getBossController);
-
-bossRouter.post("/boss/spawn", bossMiddleware, spawnBossController);
+bossRouter.post(
+    "/boss/spawn",
+    authMiddleware,
+    bossMiddleware,
+    spawnBossController
+);
 
 export { bossRouter };

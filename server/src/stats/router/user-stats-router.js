@@ -7,10 +7,8 @@ import { authMiddleware } from "../../shared/middlewares/auth-middleware.js";
 
 const userStatsRouter = new Router();
 
-userStatsRouter.use(authMiddleware);
+userStatsRouter.get("/stats", authMiddleware, getStats);
 
-userStatsRouter.get("/stats", getStats);
-
-userStatsRouter.patch("/stats/reset", resetUserStats);
+userStatsRouter.patch("/stats/reset", authMiddleware, resetUserStats);
 
 export { userStatsRouter };

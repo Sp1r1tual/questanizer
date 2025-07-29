@@ -14,22 +14,26 @@ import { validateSearchQueryMiddleware } from "../middlewares/validate-search-qu
 
 const userRouter = new Router();
 
-userRouter.get("/user/:id", getUserByIdPublic);
+userRouter.get("/user/:id", authMiddleware, getUserByIdPublic);
 
-userRouter.use(authMiddleware);
-
-userRouter.get("/profile", getUserProfile);
+userRouter.get("/profile", authMiddleware, getUserProfile);
 
 userRouter.patch(
     "/profile",
+    authMiddleware,
     uploadAvatarMiddleware,
     updateUserProfileValidation,
     validationErrorsMiddleware,
     updateUserProfile
 );
 
-userRouter.get("/users", getUsers);
+userRouter.get("/users", authMiddleware, getUsers);
 
-userRouter.get("/users/search", validateSearchQueryMiddleware, searchUsers);
+userRouter.get(
+    "/users/search",
+    authMiddleware,
+    validateSearchQueryMiddleware,
+    searchUsers
+);
 
 export { userRouter };

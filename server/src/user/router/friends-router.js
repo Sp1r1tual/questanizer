@@ -10,16 +10,14 @@ import { authMiddleware } from "../../shared/middlewares/auth-middleware.js";
 
 const friendsRouter = new Router();
 
-friendsRouter.use(authMiddleware);
+friendsRouter.get("/friends", authMiddleware, getFriends);
 
-friendsRouter.get("/friends", getFriends);
+friendsRouter.get("/friends/requests", authMiddleware, getFriendRequests);
 
-friendsRouter.get("/friends/requests", getFriendRequests);
+friendsRouter.post("/friends/request", authMiddleware, sendRequest);
 
-friendsRouter.post("/friends/request", sendRequest);
+friendsRouter.post("/friends/accept", authMiddleware, acceptRequest);
 
-friendsRouter.post("/friends/accept", acceptRequest);
-
-friendsRouter.post("/friends/remove", removeFriendOrCancel);
+friendsRouter.post("/friends/remove", authMiddleware, removeFriendOrCancel);
 
 export { friendsRouter };
