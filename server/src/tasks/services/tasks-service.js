@@ -68,8 +68,11 @@ class TasksService {
         const reward = DIFFICULTY_REWARDS[task.difficulty] || {
             xp: 0,
             damage: 0,
+            gold: 0,
         };
+
         const xp = !task.deadline ? Math.floor(reward.xp / 5) : reward.xp;
+        const gold = !task.deadline ? Math.floor(reward.gold / 5) : reward.gold;
 
         const now = new Date();
         const boss = await bossService.getBoss(userId);
@@ -87,12 +90,18 @@ class TasksService {
 
         await task.save();
 
+        await userStatsService.gainGold(userId, gold);
+
         const { stats, message: levelUpMessage } =
             await userStatsService.gainExperience(userId, xp);
 
-        const messages = [success(`Task accomplished! Received ${xp} XP`)];
+        const messages = [
+            success(`Task accomplished! Received ${xp} XP`),
+            info(`Received ${gold} gold!`),
+        ];
 
         if (levelUpMessage) messages.push(levelUpMessage);
+
         if (bossResult?.messages) {
             messages.push(
                 ...bossResult.messages.map((msg) =>

@@ -67,6 +67,7 @@ class BossService {
 
         if (isDead) {
             await userStatsService.gainExperience(userId, boss.bossRewardExp);
+            await userStatsService.gainGold(userId, boss.bossRewardGold);
 
             const progress = await bossProgressService.updateBossProgress(
                 userId,
@@ -89,6 +90,7 @@ class BossService {
                         `Congratulations! You defeated the boss ${boss.bossName}!`
                     ),
                     info(`Received ${boss.bossRewardExp} XP!`),
+                    info(`Received ${boss.bossRewardGold} gold!`),
                 ],
             };
         }

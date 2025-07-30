@@ -8,6 +8,7 @@ const userStatsSchema = new Schema(
         hp: { type: Number, default: 100 },
         maxHp: { type: Number, default: 100 },
         xpToNextLevel: { type: Number, default: 100 },
+        gold: { type: Number, default: 0, min: 0 },
     },
     { timestamps: true }
 );

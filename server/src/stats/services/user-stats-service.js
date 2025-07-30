@@ -80,6 +80,16 @@ class UserStatsService {
             message: info(`Player progress reset.`),
         };
     }
+
+    async gainGold(userId, amount) {
+        const stats = await this.getOrCreateStats(userId);
+
+        stats.gold += amount;
+
+        await stats.save();
+
+        return stats;
+    }
 }
 
 const userStatsService = new UserStatsService();
