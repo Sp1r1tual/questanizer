@@ -19,7 +19,7 @@ const UserProfileModal = ({ onClose }) => {
         dispatch(fetchUserProfile());
     }, [dispatch]);
 
-    if (isLoading) {
+    if (isLoading || !user) {
         return <Loader visible={true} />;
     }
 

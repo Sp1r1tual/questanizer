@@ -33,12 +33,12 @@ const LoginForm = () => {
         authError,
     ].filter(Boolean);
 
-    const handleFieldChange = (field) => (event) => {
+    const handleFieldChange = (event) => {
         if (authError) {
             clearError();
         }
 
-        return form.handleChange(field)(event);
+        return form.handleChange(event);
     };
 
     return (
@@ -54,8 +54,9 @@ const LoginForm = () => {
                         <input
                             type="email"
                             id="email"
+                            name="email"
                             value={form.values.email}
-                            onChange={handleFieldChange("email")}
+                            onChange={handleFieldChange}
                             className={`${styles.formInput} ${
                                 form.errors.email || form.errors.fillAllFields
                                     ? styles.errorInput
@@ -73,8 +74,9 @@ const LoginForm = () => {
                         <input
                             type="password"
                             id="password"
+                            name="password"
                             value={form.values.password}
-                            onChange={handleFieldChange("password")}
+                            onChange={handleFieldChange}
                             className={`${styles.formInput} ${
                                 form.errors.password ||
                                 form.errors.fillAllFields

@@ -32,12 +32,12 @@ const ResetPassword = () => {
         form.serverError,
     ].filter(Boolean);
 
-    const handleFieldChange = (field) => (event) => {
+    const handleFieldChange = (event) => {
         if (form.serverError) {
             form.setServerError("");
         }
 
-        return form.handleChange(field)(event);
+        return form.handleChange(event);
     };
 
     return (
@@ -58,8 +58,9 @@ const ResetPassword = () => {
                             <input
                                 type="password"
                                 id="password"
+                                name="password"
                                 value={form.values.password}
-                                onChange={handleFieldChange("password")}
+                                onChange={handleFieldChange}
                                 placeholder="New password"
                                 className={`${styles.input} ${
                                     form.errors.password ||
@@ -87,8 +88,9 @@ const ResetPassword = () => {
                             <input
                                 type="password"
                                 id="confirmPassword"
+                                name="confirmPassword"
                                 value={form.values.confirmPassword}
-                                onChange={handleFieldChange("confirmPassword")}
+                                onChange={handleFieldChange}
                                 placeholder="Confirm password"
                                 className={`${styles.input} ${
                                     form.errors.confirmPassword ||

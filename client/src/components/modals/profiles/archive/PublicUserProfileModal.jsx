@@ -1,12 +1,14 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { fetchPublicUserProfile } from "../../../store/user/publicUserProfileThunks";
-import { formatDate } from "../../../utils/date/formatDate";
-import { getAvatarUrl } from "../../../utils/user/getAvatarUrl";
-import { Loader } from "../../ui/loaders/Loader";
+import { fetchPublicUserProfile } from "../../../../store/user/publicUserProfileThunks";
+import { formatDate } from "../../../../utils/date/formatDate";
+import { getAvatarUrl } from "../../../../utils/user/getAvatarUrl";
+import { Loader } from "../../../ui/loaders/Loader";
 
-import styles from "./UserProfileModal.module.css";
+import backArrow from "../../../assets/back-arrow-svgrepo-com.png";
+
+import styles from "./PublicUserProfileModal.module.css";
 
 const PublicUserProfileModal = ({ userId, onClose }) => {
     const dispatch = useDispatch();
@@ -35,7 +37,11 @@ const PublicUserProfileModal = ({ userId, onClose }) => {
                     onClick={onClose}
                     aria-label="Close profile modal"
                 >
-                    ×
+                    <img
+                        src={backArrow}
+                        alt="Back"
+                        className={styles.backIcon}
+                    />
                 </button>
 
                 <div className={styles.profileHeader}>
@@ -80,6 +86,15 @@ const PublicUserProfileModal = ({ userId, onClose }) => {
                             {bio || "No description provided"}
                         </span>
                     </div>
+
+                    <button
+                        type="button"
+                        className={styles.chatBtn}
+                        aria-label="Cancel editing"
+                        onClick={() => alert("Chat will be available soon")}
+                    >
+                        Send a message
+                    </button>
                 </div>
             </div>
         </div>

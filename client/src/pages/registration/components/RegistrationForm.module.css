@@ -3,7 +3,7 @@
     padding: 1.5rem;
     border-radius: 0.75rem;
     box-shadow: 0 0 15px rgba(80, 50, 40, 0.2);
-    width: 100%;
+    width: 300px;
     font-family: "Georgia", serif;
     position: relative;
     z-index: 1;
@@ -11,7 +11,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, #f7f1ee, #ece1da);
+    background: #f7f1ee;
 }
 
 .formTitle {
@@ -44,13 +44,12 @@
 }
 
 .formInput {
-    padding: 0.75rem 1.25rem;
+    padding: 0.5rem 0.75rem;
     border-radius: 0.4rem;
     border: 1px solid #a89d94;
     background-color: #fffaf7;
-    font-size: 0.95rem;
-    transition: border 0.2s ease, background-color 0.2s ease,
-        box-shadow 0.2s ease;
+    font-size: 0.875rem;
+    transition: border 0.2s ease, background-color 0.2s ease;
     width: 268px;
     box-sizing: border-box;
 }
@@ -59,7 +58,6 @@
     border-color: #7d5032;
     outline: none;
     background-color: #fffaf7;
-    box-shadow: 0 0 5px rgba(125, 80, 50, 0.3);
 }
 
 .formInput.errorInput {
@@ -74,7 +72,7 @@
     font-weight: bold;
     margin-top: 0.25rem;
     font-size: 0.75rem;
-    text-align: left;
+    text-align: center;
     word-break: break-word;
     white-space: pre-wrap;
     overflow-wrap: break-word;
@@ -88,26 +86,25 @@
 }
 
 .submitButton {
-    padding: 0.75rem 1.5rem;
+    padding: 0.5rem 1rem;
     background-color: #7d5032;
     color: white;
     border: none;
     border-radius: 0.4rem;
     font-weight: bold;
-    font-size: 0.95rem;
+    font-size: 0.875rem;
     cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.2s ease;
+    transition: background-color 0.2s ease;
     width: 100%;
 }
 
 .submitButton:hover {
     background-color: #5e3e28;
-    transform: translateY(-2px);
 }
 
 .registerLink {
     text-align: center;
-    margin-top: 1rem;
+    margin-top: 0.75rem;
     font-size: 0.75rem;
     color: #3b2b23;
 }
@@ -125,7 +122,7 @@
 
 @media (max-width: 640px) {
     .contentForm {
-        width: 280px;
+        width: 320px;
         padding: 1rem;
     }
 
@@ -140,11 +137,11 @@
     }
 
     .formInput {
-        padding: 0.5rem 0.75rem;
+        padding: 0.4rem 0.6rem;
     }
 
     .submitButton {
-        padding: 0.5rem 0.75rem;
+        padding: 0.4rem 0.6rem;
     }
 
     .registerLink {
@@ -152,17 +149,31 @@
     }
 }
 
-@media (min-width: 640px) and (max-width: 768px) {
+@media (max-width: 480px) {
     .contentForm {
-        width: 300px;
         padding: 1.25rem;
+        max-width: 100%;
+    }
+
+    .formTitle {
+        font-size: 1.5rem;
+    }
+
+    .formLabel,
+    .formInput,
+    .submitButton {
+        font-size: 0.95rem;
     }
 
     .formInput {
-        padding: 0.6rem 1rem;
+        padding: 0.65rem 0.9rem;
     }
 
     .submitButton {
-        padding: 0.6rem 1.2rem;
+        padding: 0.65rem 0.9rem;
+    }
+
+    .registerLink {
+        font-size: 0.8rem;
     }
 }

@@ -38,16 +38,18 @@ const RegistrationForm = () => {
         authError,
     ].filter(Boolean);
 
-    const handleFieldChange = (field) => (event) => {
+    const handleFieldChange = (event) => {
         if (authError) {
             clearError();
         }
-        return form.handleChange(field)(event);
+
+        return form.handleChange(event);
     };
 
     return (
         <>
             <Loader visible={form.isLoading} />
+
             <div className={styles.contentForm}>
                 <h2 className={styles.formTitle}>Register</h2>
                 <form
@@ -62,8 +64,9 @@ const RegistrationForm = () => {
                         <input
                             type="email"
                             id="email"
+                            name="email"
                             value={form.values.email}
-                            onChange={handleFieldChange("email")}
+                            onChange={handleFieldChange}
                             placeholder="Enter your email"
                             className={`${styles.formInput} ${
                                 form.errors.email || form.errors.fillAllFields
@@ -87,8 +90,9 @@ const RegistrationForm = () => {
                         <input
                             type="password"
                             id="password"
+                            name="password"
                             value={form.values.password}
-                            onChange={handleFieldChange("password")}
+                            onChange={handleFieldChange}
                             placeholder="Enter password"
                             className={`${styles.formInput} ${
                                 form.errors.password ||
@@ -116,8 +120,9 @@ const RegistrationForm = () => {
                         <input
                             type="password"
                             id="confirmPassword"
+                            name="confirmPassword"
                             value={form.values.confirmPassword}
-                            onChange={handleFieldChange("confirmPassword")}
+                            onChange={handleFieldChange}
                             placeholder="Repeat password"
                             className={`${styles.formInput} ${
                                 form.errors.confirmPassword ||

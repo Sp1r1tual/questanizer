@@ -1,9 +1,13 @@
 import { toast } from "react-toastify";
 
+const ALLOWED_NOTIFICATION_ENDPOINTS = ["/stats", "/tasks", "/bosses"];
+
 const showMessage = (msg) => {
     if (typeof msg === "string") {
-        toast(msg);
-    } else if (typeof msg === "object" && msg.text) {
+        return toast(msg);
+    }
+
+    if (typeof msg === "object" && msg.text) {
         switch (msg.type) {
             case "success":
                 toast.success(msg.text);
@@ -22,25 +26,39 @@ const showMessage = (msg) => {
     }
 };
 
+function shouldShowNotification(config) {
+    return ALLOWED_NOTIFICATION_ENDPOINTS.some((endpoint) =>
+        config.url?.includes(endpoint)
+    );
+}
+
 function notificationInterceptor(axiosInstance) {
     axiosInstance.interceptors.response.use(
         (response) => {
             const { message, messages } = response.data;
 
-            if (Array.isArray(messages)) {
-                messages.forEach(showMessage);
-            } else if (message) {
-                showMessage(message);
-            }
+            if (!shouldShowNotification(response.config)) return response;
+
+            if (Array.isArray(messages)) messages.forEach(showMessage);
+
+            if (message) showMessage(message);
 
             return response;
         },
         (error) => {
             const errMsg = error.response?.data?.message;
 
-            if (errMsg) toast.error(errMsg);
+            const status = error.response?.status;
+            const url = error.config?.url || "";
 
-            return Promise.reject(error);
+            const isNotAuthError = status !== 401 && status !== 403;
+            const isAllowed = shouldShowNotification(error.config || { url });
+
+            if (errMsg && isNotAuthError && isAllowed) {
+                toast.error(errMsg);
+            }
+
+            throw error;
         }
     );
 }

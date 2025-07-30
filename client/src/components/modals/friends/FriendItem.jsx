@@ -1,13 +1,15 @@
-import { useState } from "react";
-
 import { getAvatarUrl } from "../../../utils/user/getAvatarUrl";
-import { PublicUserProfileModal } from "../profiles/PublicUserProfileModal";
 
 import styles from "./FriendItem.module.css";
 
-const FriendItem = ({ friend, friendStatus, onAdd, onRemove, onAccept }) => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
-
+const FriendItem = ({
+    friend,
+    friendStatus,
+    onAdd,
+    onRemove,
+    onAccept,
+    onShowProfile,
+}) => {
     if (!friend) return null;
 
     const handleRemove = () => {
@@ -23,85 +25,70 @@ const FriendItem = ({ friend, friendStatus, onAdd, onRemove, onAccept }) => {
     };
 
     const handleProfileClick = () => {
-        setIsModalOpen(true);
+        if (onShowProfile) onShowProfile(friend.id);
     };
 
     return (
-        <>
-            <div className={styles.friendItem}>
-                <img
-                    src={getAvatarUrl(friend.photoUrl)}
-                    alt={`${friend.username || "User"}'s avatar`}
-                    className={styles.friendAvatar}
-                    onClick={handleProfileClick}
-                    onError={(error) => {
-                        error.currentTarget.onerror = null;
-                        error.currentTarget.src = "/default-avatar.png";
-                    }}
-                    style={{ cursor: "pointer" }}
-                />
+        <div className={styles.friendItem}>
+            <img
+                src={getAvatarUrl(friend.photoUrl)}
+                alt={`${friend.username || "User"}'s avatar`}
+                className={styles.friendAvatar}
+                onClick={handleProfileClick}
+                onError={(error) => {
+                    error.currentTarget.onerror = null;
+                    error.currentTarget.src = "/default-avatar.png";
+                }}
+                style={{ cursor: "pointer" }}
+            />
 
-                <div
-                    className={styles.friendInfo}
-                    onClick={handleProfileClick}
-                    style={{ cursor: "pointer" }}
-                >
-                    <div className={styles.friendName}>
-                        {friend.username || friend.email || "Unknown User"}
-                    </div>
+            <div
+                className={styles.friendInfo}
+                onClick={handleProfileClick}
+                style={{ cursor: "pointer" }}
+            >
+                <div className={styles.friendName}>
+                    {friend.username || friend.email || "Unknown User"}
                 </div>
+            </div>
 
-                <div className={styles.friendActions}>
-                    {friendStatus === "friend" && (
+            <div className={styles.friendActions}>
+                {friendStatus === "friend" && (
+                    <button className={styles.removeBtn} onClick={handleRemove}>
+                        Remove
+                    </button>
+                )}
+
+                {friendStatus === "received" && (
+                    <>
+                        <button
+                            className={styles.acceptBtn}
+                            onClick={handleAccept}
+                        >
+                            Accept
+                        </button>
                         <button
                             className={styles.removeBtn}
                             onClick={handleRemove}
                         >
-                            Remove
+                            Decline
                         </button>
-                    )}
+                    </>
+                )}
 
-                    {friendStatus === "received" && (
-                        <>
-                            <button
-                                className={styles.acceptBtn}
-                                onClick={handleAccept}
-                            >
-                                Accept
-                            </button>
-                            <button
-                                className={styles.removeBtn}
-                                onClick={handleRemove}
-                            >
-                                Decline
-                            </button>
-                        </>
-                    )}
+                {friendStatus === "sent" && (
+                    <button className={styles.cancelBtn} onClick={handleRemove}>
+                        Cancel friend request
+                    </button>
+                )}
 
-                    {friendStatus === "sent" && (
-                        <button
-                            className={styles.cancelBtn}
-                            onClick={handleRemove}
-                        >
-                            Cancel friend request
-                        </button>
-                    )}
-
-                    {friendStatus === "none" && (
-                        <button className={styles.addBtn} onClick={handleAdd}>
-                            Add
-                        </button>
-                    )}
-                </div>
+                {friendStatus === "none" && (
+                    <button className={styles.addBtn} onClick={handleAdd}>
+                        Add
+                    </button>
+                )}
             </div>
-
-            {isModalOpen && (
-                <PublicUserProfileModal
-                    userId={friend.id}
-                    onClose={() => setIsModalOpen(false)}
-                />
-            )}
-        </>
+        </div>
     );
 };
 

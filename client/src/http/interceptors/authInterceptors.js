@@ -26,7 +26,11 @@ function authInterceptors(axiosInstance) {
             const isUnauthorized = error.response?.status === 401;
             const canRetry = originalRequest && !originalRequest._retry;
 
-            if (!isUnauthorized || !canRetry) {
+            const isAuthRoute =
+                originalRequest?.url?.includes("/login") ||
+                originalRequest?.url?.includes("/registration");
+
+            if (!isUnauthorized || !canRetry || isAuthRoute) {
                 return Promise.reject(error);
             }
 
@@ -40,6 +44,7 @@ function authInterceptors(axiosInstance) {
 
                     processQueue(null, newToken, pendingRequestsQueue);
                     isRefreshing = false;
+
                     return retryRequestWithNewToken(
                         axiosInstance,
                         originalRequest,
@@ -47,9 +52,10 @@ function authInterceptors(axiosInstance) {
                     );
                 } catch (error) {
                     processQueue(error, null, pendingRequestsQueue);
+
                     localStorage.removeItem("token");
-                    window.location.href = "/login";
                     isRefreshing = false;
+
                     throw error;
                 }
             }

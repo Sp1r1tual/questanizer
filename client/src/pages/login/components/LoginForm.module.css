@@ -107,7 +107,7 @@
 
 @media (max-width: 640px) {
     .contentForm {
-        width: 280px;
+        width: 320px;
         padding: 1rem;
     }
 
@@ -134,9 +134,31 @@
     }
 }
 
-@media (min-width: 640px) and (max-width: 768px) {
+@media (max-width: 480px) {
     .contentForm {
-        width: 300px;
         padding: 1.25rem;
+        max-width: 100%;
+    }
+
+    .formTitle {
+        font-size: 1.5rem;
+    }
+
+    .formLabel,
+    .formInput,
+    .submitButton {
+        font-size: 0.95rem;
+    }
+
+    .formInput {
+        padding: 0.65rem 0.9rem;
+    }
+
+    .submitButton {
+        padding: 0.65rem 0.9rem;
+    }
+
+    .registerLink {
+        font-size: 0.8rem;
     }
 }

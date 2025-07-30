@@ -7,7 +7,8 @@ const useForm = ({ initialValues, validate }) => {
     const [serverError, setServerError] = useState("");
     const [message, setMessage] = useState("");
 
-    const handleChange = (field) => (event) => {
+    const handleChange = (event) => {
+        const field = event.target.name;
         const value = event.target.value;
 
         setValues((prev) => ({ ...prev, [field]: value }));

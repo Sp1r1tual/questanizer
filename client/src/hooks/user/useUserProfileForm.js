@@ -101,11 +101,13 @@ const useUserProfileForm = (onSave) => {
 
     const onNameChange = (event) => {
         setName(event.target.value);
+
         if (nameError) setNameError("");
     };
 
     const onBioChange = (event) => {
         setBio(event.target.value);
+
         if (bioError) setBioError("");
     };
 

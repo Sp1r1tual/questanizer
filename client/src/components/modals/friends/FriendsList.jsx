@@ -2,7 +2,14 @@ import { FriendItem } from "./FriendItem";
 
 import styles from "./FriendsList.module.css";
 
-const FriendsList = ({ title, items, type, onAccept, onRemove }) => {
+const FriendsList = ({
+    title,
+    items,
+    type,
+    onAccept,
+    onRemove,
+    onShowProfile,
+}) => {
     return (
         <div>
             <h3 className={styles.friendsListTitle}>{title}</h3>
@@ -21,6 +28,7 @@ const FriendsList = ({ title, items, type, onAccept, onRemove }) => {
                                     : undefined
                             }
                             onRemove={() => onRemove(item.id, type)}
+                            onShowProfile={() => onShowProfile(item.user.id)}
                         />
                     ))}
                 </div>

@@ -12,6 +12,7 @@ const FriendsSearch = ({
     onAdd,
     onAccept,
     onRemove,
+    onShowProfile,
 }) => {
     const {
         input,
@@ -30,6 +31,10 @@ const FriendsSearch = ({
         handlePageChange,
         getPageNumbers,
     } = useFriendsSearch(currentUser?.username);
+
+    const handleUserClick = (userId) => {
+        if (onShowProfile) onShowProfile(userId);
+    };
 
     return (
         <div>
@@ -85,6 +90,9 @@ const FriendsSearch = ({
                                         onAccept={() => onAccept(user.id)}
                                         onRemove={() =>
                                             onRemove(user.id, "request")
+                                        }
+                                        onShowProfile={() =>
+                                            handleUserClick(user.id)
                                         }
                                     />
                                 ))}

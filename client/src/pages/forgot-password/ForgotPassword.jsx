@@ -28,40 +28,42 @@ const ForgotPassword = () => {
         form.serverError,
     ].filter(Boolean);
 
-    const handleFieldChange = (field) => (event) => {
+    const handleFieldChange = (event) => {
         if (form.serverError) {
             form.setServerError("");
         }
 
-        return form.handleChange(field)(event);
+        return form.handleChange(event);
     };
 
     return (
         <>
             <Loader visible={form.isLoading} />
+
             <div className={styles.forgotPassword}>
-                <div className={styles.container}>
-                    <h2 className={styles.heading}>Forgot your password?</h2>
-                    <form
-                        onSubmit={form.handleSubmit(handleSubmit)}
-                        noValidate
-                        className={styles.form}
-                    >
-                        <input
-                            type="email"
-                            id="email"
-                            value={form.values.email}
-                            onChange={handleFieldChange("email")}
-                            placeholder="Enter your email"
-                            className={styles.input}
-                            aria-invalid={
-                                !!(
+                <div className={styles.contentForm}>
+                    <h2 className={styles.formTitle}>Forgot your password?</h2>
+                    <form onSubmit={form.handleSubmit(handleSubmit)} noValidate>
+                        <div className={styles.formGroup}>
+                            <label htmlFor="email" className={styles.formLabel}>
+                                Email
+                            </label>
+                            <input
+                                type="email"
+                                id="email"
+                                value={form.values.email}
+                                name="email"
+                                onChange={handleFieldChange}
+                                placeholder="Enter your email"
+                                className={`${styles.formInput} ${
                                     form.errors.email ||
                                     form.errors.fillAllFields
-                                )
-                            }
-                            autoComplete="email"
-                        />
+                                        ? styles.errorInput
+                                        : ""
+                                }`}
+                                autoComplete="email"
+                            />
+                        </div>
 
                         {allErrors.length > 0 && (
                             <div className={styles.error} role="alert">
@@ -75,13 +77,17 @@ const ForgotPassword = () => {
                             </div>
                         )}
 
-                        <button
-                            type="submit"
-                            className={styles.button}
-                            disabled={form.isLoading}
-                        >
-                            {form.isLoading ? "Sending..." : "Send reset link"}
-                        </button>
+                        <div className={styles.buttons}>
+                            <button
+                                type="submit"
+                                className={styles.submitButton}
+                                disabled={form.isLoading}
+                            >
+                                {form.isLoading
+                                    ? "Sending..."
+                                    : "Send reset link"}
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>
