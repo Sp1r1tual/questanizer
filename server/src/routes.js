@@ -9,6 +9,7 @@ import { bossRouter } from "./boss/router/boss-router.js";
 import { userRouter } from "./user/router/user-router.js";
 import { friendsRouter } from "./user/router/friends-router.js";
 import { supportRouter } from "./support/router/support-router.js";
+import { marketRouter } from "./market/router/market-router.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -25,6 +26,7 @@ const routes = (app) => {
     app.use("/api", tasksRouter);
     app.use("/api", userStatsRouter);
     app.use("/api", bossRouter);
+    app.use("/api", marketRouter);
 };
 
 export { routes };
