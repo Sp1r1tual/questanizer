@@ -1,4 +1,8 @@
 /node_modules
-/coverage
+
 /public
 .env
+
+/coverage
+/src/__tests__
+/src/__mocks__
