@@ -6,7 +6,7 @@ import { useAuth } from "../../hooks/auth/useAuth";
 import { UserExperience } from "./UserExperience";
 import { UserHealth } from "./UserHealth";
 import { UserGold } from "./UserGold";
-import { DefeatUserModal } from "../modals/ui/DefeatUserModal";
+import { DefeatUserModal } from "./modals/DefeatUserModal";
 import { resetBoss } from "../../store/boss/bossBattleSlice";
 import { fetchStats } from "../../store/stats/userStatsThunks";
 

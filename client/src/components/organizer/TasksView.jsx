@@ -8,8 +8,8 @@ import { OrganizerHeader } from "./OrganizerHeader";
 import { TaskInput } from "./TaskInput";
 import { AddNewTaskBtn } from "./AddNewTaskBtn";
 import { TaskList } from "./TaskList";
-import { TaskModal } from "../modals/tasks/TaskModal";
-import { ConfirmChoiceModal } from "../modals/confirmations/ConfirmChoiceModal";
+import { TaskModal } from "./modals/TaskModal";
+import { ConfirmChoiceModal } from "../confirmations/ConfirmChoiceModal";
 import { fetchTasks } from "../../store/tasks/tasksThunks";
 
 const TasksView = () => {

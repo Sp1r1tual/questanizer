@@ -1,0 +1,62 @@
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import {
+    DndContext,
+    useSensor,
+    useSensors,
+    PointerSensor,
+} from "@dnd-kit/core";
+import { useConstrainOnResize } from "../../hooks/draggable/useConstrainOnResize";
+
+import { openCartModal } from "../../store/market/marketSlice";
+import { fetchCart } from "../../store/market/marketThunks";
+import { constrainPosition } from "../../utils/draggable/constrainPosition";
+import { DraggableCartContent } from "../cart/DraggableCartContent";
+
+const DraggableCart = () => {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(fetchCart());
+    }, [dispatch]);
+
+    const getInitialPosition = () => {
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+
+        if (width < 640) return { x: width - 80, y: height - 130 };
+        if (width < 1024) return { x: width - 100, y: height - 120 };
+
+        return { x: width - 130, y: height - 130 };
+    };
+
+    const [position, setPosition] = useState(getInitialPosition());
+
+    useConstrainOnResize(setPosition, constrainPosition);
+
+    const sensors = useSensors(
+        useSensor(PointerSensor, {
+            activationConstraint: { distance: 8 },
+        })
+    );
+
+    const handleDragEnd = ({ delta }) => {
+        const newPos = {
+            x: position.x + delta.x,
+            y: position.y + delta.y,
+        };
+        setPosition(constrainPosition(newPos));
+    };
+
+    return (
+        <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
+            <DraggableCartContent
+                x={position.x}
+                y={position.y}
+                onClick={() => dispatch(openCartModal())}
+            />
+        </DndContext>
+    );
+};
+
+export { DraggableCart };

@@ -1,17 +1,17 @@
 import { createBrowserRouter } from "react-router-dom";
 import { App } from "./App";
-import { LoginPage } from "./pages/login/LoginPage";
-import { RegistrationPage } from "./pages/registration/RegistrationPage";
+import { LoginPage } from "./pages/LoginPage";
+import { RegistrationPage } from "./pages/RegistrationPage";
 import { AuthenticatedLayout } from "./layouts/AuthenticatedLayout";
 import { Dashboard } from "./components/ui/wrappers/Dashboard";
 import { TasksView } from "./components/organizer/TasksView";
 import { UserStatsView } from "./components/stats/UserStatsView";
-import { BossBattlePage } from "./pages/boss/BossBattlePage";
-import { AnswersPage } from "./pages/faq/AnswersPage";
-import { ForgotPassword } from "./pages/forgot-password/ForgotPassword";
-import { ResetPassword } from "./pages/reset-password/ResetPassword";
+import { BossBattlePage } from "./pages/BossBattlePage";
+import { AnswersPage } from "./pages/AnswersPage";
+import { ForgotPasswordPage } from "./pages/ForgotPasswordPage";
+import { ResetPasswordPage } from "./pages/ResetPasswordPage";
 import { RouteErrorFallback } from "./components/errors/RouteErrorFallback";
-import { MarketPage } from "./pages/market/MarketPage";
+import { MarketPage } from "./pages/MarketPage";
 import { ContainerMedium } from "./components/ui/wrappers/ContainerMedium";
 
 const router = createBrowserRouter([
@@ -30,11 +30,11 @@ const router = createBrowserRouter([
             },
             {
                 path: "forgot-password",
-                element: <ForgotPassword />,
+                element: <ForgotPasswordPage />,
             },
             {
                 path: "reset-password/:token",
-                element: <ResetPassword />,
+                element: <ResetPasswordPage />,
             },
             {
                 path: "/",
