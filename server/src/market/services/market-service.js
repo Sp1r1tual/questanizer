@@ -1,9 +1,12 @@
-import mongoose from "mongoose";
 import { MarketItemModel } from "../models/market-item-model.js";
 import { UserCartModel } from "../models/user-cart-model.js";
 import { UserStatsModel } from "../../stats/models/user-stats-model.js";
 import { UserInventoryModel } from "../../user/models/user-inventory-model.js";
 import { ApiError } from "../../shared/exceptions/api-error.js";
+import {
+    success,
+    info,
+} from "../../shared/utils/notifications/notifications.js";
 
 class MarketService {
     async getAllMarketItems() {
@@ -11,14 +14,25 @@ class MarketService {
     }
 
     async getUserCart(userId) {
-        return UserCartModel.findOne({ user: userId }).populate(
-            "items.equipment"
+        let cart = await UserCartModel.findOne({ user: userId }).populate(
+            "items.item"
         );
+
+        if (!cart) {
+            cart = new UserCartModel({
+                user: userId,
+                items: [],
+            });
+
+            await cart.save();
+        }
+
+        return cart;
     }
 
-    async addToCart(userId, equipmentId, quantity = 1) {
+    async addToCart(userId, itemId, quantity = 1) {
         const marketItem = await MarketItemModel.findOne({
-            _id: equipmentId,
+            _id: itemId,
             isActive: true,
         });
 
@@ -29,7 +43,7 @@ class MarketService {
         const now = new Date();
 
         const newCartItem = {
-            equipment: equipmentId,
+            item: itemId,
             quantity,
             addedAt: now,
         };
@@ -43,12 +57,11 @@ class MarketService {
             });
 
             await cart.save();
-
             return cart;
         }
 
         const existingItem = cart.items.find(
-            (item) => item.equipment.toString() === equipmentId
+            (item) => item.item.toString() === itemId
         );
 
         if (existingItem) {
@@ -59,29 +72,31 @@ class MarketService {
         }
 
         await cart.save();
-
         return cart;
     }
 
-    async removeFromCart(userId, equipmentId) {
-        const cart = await UserCartModel.findOneAndUpdate(
-            { user: userId },
-            {
-                $pull: {
-                    items: {
-                        equipment: new mongoose.Types.ObjectId(equipmentId),
-                    },
-                },
-            },
-            { new: true }
+    async removeFromCart(userId, itemId, quantity = null) {
+        const cart = await UserCartModel.findOne({ user: userId });
+
+        const itemIndex = cart.items.findIndex(
+            (item) => item.item.toString() === itemId
         );
 
+        if (itemIndex === -1) return cart;
+
+        if (quantity === null || cart.items[itemIndex].quantity <= quantity) {
+            cart.items.splice(itemIndex, 1);
+        } else {
+            cart.items[itemIndex].quantity -= quantity;
+        }
+
+        await cart.save();
         return cart;
     }
 
     async checkoutCart(userId) {
         const cart = await UserCartModel.findOne({ user: userId }).populate({
-            path: "items.equipment",
+            path: "items.item",
             model: "MarketItem",
             select: "price",
         });
@@ -93,7 +108,7 @@ class MarketService {
         const userStats = await UserStatsModel.findOne({ user: userId });
 
         const totalPrice = cart.items.reduce((sum, item) => {
-            const price = item.equipment?.price || 0;
+            const price = item.item?.price || 0;
 
             return sum + price * item.quantity;
         }, 0);
@@ -111,16 +126,21 @@ class MarketService {
             inventory = new UserInventoryModel({ user: userId, items: [] });
         }
 
+        const totalItems = cart.items.reduce(
+            (sum, item) => sum + item.quantity,
+            0
+        );
+
         for (const entry of cart.items) {
             const index = inventory.items.findIndex(
-                (i) => i.item.toString() === entry.equipment._id.toString()
+                (i) => i.item.toString() === entry.item._id.toString()
             );
 
             if (index > -1) {
                 inventory.items[index].quantity += entry.quantity;
             } else {
                 inventory.items.push({
-                    item: entry.equipment._id,
+                    item: entry.item._id,
                     quantity: entry.quantity,
                 });
             }
@@ -131,9 +151,18 @@ class MarketService {
         cart.items = [];
         await cart.save();
 
+        const messages = [
+            success(
+                `Purchase completed! Bought ${totalItems} item${
+                    totalItems > 1 ? "s" : ""
+                }`
+            ),
+            info(`Spent ${totalPrice} gold`),
+        ];
+
         return {
             success: true,
-            message: "Purchase completed",
+            messages,
             spentGold: totalPrice,
         };
     }

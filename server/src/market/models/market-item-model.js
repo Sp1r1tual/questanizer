@@ -8,6 +8,7 @@ const marketItemSchema = new Schema(
         price: { type: Number, required: true, min: 0 },
         isActive: { type: Boolean, default: true },
         effect: { type: Map, of: Number, default: {} },
+        itemImg: { type: String, default: null },
     },
     { timestamps: true }
 );

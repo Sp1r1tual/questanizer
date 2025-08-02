@@ -1,6 +1,6 @@
 import { marketService } from "../services/market-service.js";
 
-const getAllMarkets = async (req, res, next) => {
+const getMarketItems = async (req, res, next) => {
     try {
         const items = await marketService.getAllMarketItems();
 
@@ -22,14 +22,14 @@ const getUserCart = async (req, res, next) => {
 
 const addToCart = async (req, res, next) => {
     try {
-        const { equipmentId, quantity } = req.body;
+        const { itemId, quantity } = req.body;
         const cart = await marketService.addToCart(
             req.user.id,
-            equipmentId,
+            itemId,
             quantity
         );
 
-        return res.status(200).json(cart);
+        return res.json(cart);
     } catch (error) {
         next(error);
     }
@@ -38,10 +38,16 @@ const addToCart = async (req, res, next) => {
 const removeFromCart = async (req, res, next) => {
     try {
         const userId = req.user.id;
-        const equipmentId = req.params.equipmentId;
+        const { itemId } = req.params;
+        const { quantity } = req.body;
 
-        const cart = await marketService.removeFromCart(userId, equipmentId);
-        return res.status(200).json(cart);
+        const cart = await marketService.removeFromCart(
+            userId,
+            itemId,
+            quantity
+        );
+
+        return res.json(cart);
     } catch (error) {
         next(error);
     }
@@ -57,4 +63,4 @@ const checkoutCart = async (req, res, next) => {
     }
 };
 
-export { getAllMarkets, getUserCart, addToCart, removeFromCart, checkoutCart };
+export { getMarketItems, getUserCart, addToCart, removeFromCart, checkoutCart };
