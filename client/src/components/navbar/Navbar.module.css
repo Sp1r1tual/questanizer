@@ -83,7 +83,7 @@
     border: none;
     cursor: pointer;
     padding: 0.3rem;
-    display: none; /* Приховуємо за замовчуванням */
+    display: none;
 }
 
 .burgerIcon {
@@ -142,18 +142,18 @@
         height: 40px;
     }
     .navigationButtons {
-        display: none; /* Приховуємо посилання на малих екранах */
+        display: none;
     }
 
     .burgerToggle {
-        display: block; /* Показуємо бургер на малих екранах */
+        display: block;
     }
 
     .dropdownMenu {
-        display: none; /* Приховуємо меню за замовчуванням */
+        display: none;
     }
 
     .dropdownMenu.active {
-        display: flex; /* Показуємо меню при активному стані */
+        display: flex;
     }
 }

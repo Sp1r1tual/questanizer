@@ -3,8 +3,7 @@ import { useDispatch } from "react-redux";
 import { useTasks } from "../../hooks/tasks/useTasks";
 import { useTaskFilters } from "../../hooks/tasks/useTaskFilters";
 import { useAuth } from "../../hooks/auth/useAuth";
-
-import { Container } from "../ui/wrappers/Container";
+import { ContainerMedium } from "../ui/wrappers/ContainerMedium";
 import { OrganizerHeader } from "./OrganizerHeader";
 import { TaskInput } from "./TaskInput";
 import { AddNewTaskBtn } from "./AddNewTaskBtn";
@@ -59,7 +58,7 @@ const TasksView = () => {
     const filteredTasks = getFilteredTasks(tasks, filters);
 
     return (
-        <Container>
+        <ContainerMedium>
             <OrganizerHeader />
             <TaskInput
                 value={inputTask}
@@ -112,7 +111,7 @@ const TasksView = () => {
                     cancelText="No"
                 />
             )}
-        </Container>
+        </ContainerMedium>
     );
 };
 

@@ -6,6 +6,7 @@ const initialState = {
     level: 1,
     health: 100,
     maxHealth: 100,
+    gold: 0,
 };
 
 const statsSlice = createSlice({
@@ -21,6 +22,7 @@ const statsSlice = createSlice({
                 state.level = action.payload.level;
                 state.health = action.payload.hp;
                 state.maxHealth = action.payload.maxHp;
+                state.gold = action.payload.gold;
             })
 
             .addCase(resetStats.fulfilled, (state, action) => {
@@ -30,6 +32,7 @@ const statsSlice = createSlice({
                 state.level = stats.level;
                 state.health = stats.hp;
                 state.maxHealth = stats.maxHp;
+                state.gold = stats.gold;
             });
     },
 });

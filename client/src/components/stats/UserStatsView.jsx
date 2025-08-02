@@ -5,7 +5,7 @@ import { useAuth } from "../../hooks/auth/useAuth";
 
 import { UserExperience } from "./UserExperience";
 import { UserHealth } from "./UserHealth";
-import { Container } from "../ui/wrappers/Container";
+import { UserGold } from "./UserGold";
 import { DefeatUserModal } from "../modals/ui/DefeatUserModal";
 import { resetBoss } from "../../store/boss/bossBattleSlice";
 import { fetchStats } from "../../store/stats/userStatsThunks";
@@ -14,7 +14,7 @@ import styles from "./UserStatsView.module.css";
 
 const UserStatsView = () => {
     const dispatch = useDispatch();
-    const { experience, level, health, maxHealth } = useUserStats();
+    const { experience, level, health, maxHealth, gold } = useUserStats();
     const [isDefeated, setIsDefeated] = useState(false);
     const defeatTriggered = useRef(false);
     const { user } = useAuth();
@@ -41,12 +41,12 @@ const UserStatsView = () => {
     return (
         <>
             {isDefeated && <DefeatUserModal onRestart={handleRestart} />}
-            <Container className={styles.statsContainer}>
-                <div className={styles.statsInner}>
-                    <UserExperience experience={experience} level={level} />
-                    <UserHealth health={health} maxHealth={maxHealth} />
-                </div>
-            </Container>
+
+            <div className={styles.statsInner}>
+                <UserExperience experience={experience} level={level} />
+                <UserHealth health={health} maxHealth={maxHealth} />
+                <UserGold gold={gold} />
+            </div>
         </>
     );
 };

@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 
 const useUserStats = () => {
-    const { experience, level, health, maxHealth } = useSelector(
+    const { experience, level, health, maxHealth, gold } = useSelector(
         (state) => state.stats
     );
 
@@ -10,6 +10,7 @@ const useUserStats = () => {
         level,
         health,
         maxHealth,
+        gold,
     };
 };
 

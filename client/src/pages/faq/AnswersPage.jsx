@@ -1,11 +1,11 @@
-import { Container } from "../../components/ui/wrappers/Container";
+import { ContainerMedium } from "../../components/ui/wrappers/ContainerMedium";
 import { Answers } from "./components/Answers";
 
 const AnswersPage = () => {
     return (
-        <Container>
+        <ContainerMedium>
             <Answers />
-        </Container>
+        </ContainerMedium>
     );
 };
 

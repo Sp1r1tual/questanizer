@@ -1,15 +1,17 @@
-import { Container } from "../../components/ui/wrappers/Container";
 import { Dashboard } from "../../components/ui/wrappers/Dashboard";
 import { BossBattle } from "./components/BossBattle";
 import { UserStatsView } from "../../components/stats/UserStatsView";
+import { ContainerMedium } from "../../components/ui/wrappers/ContainerMedium";
 
 const BossBattlePage = () => {
     return (
         <Dashboard>
-            <UserStatsView />
-            <Container>
+            <ContainerMedium>
+                <UserStatsView />
+            </ContainerMedium>
+            <ContainerMedium>
                 <BossBattle />
-            </Container>
+            </ContainerMedium>
         </Dashboard>
     );
 };

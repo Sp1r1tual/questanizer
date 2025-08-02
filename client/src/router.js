@@ -11,6 +11,8 @@ import { AnswersPage } from "./pages/faq/AnswersPage";
 import { ForgotPassword } from "./pages/forgot-password/ForgotPassword";
 import { ResetPassword } from "./pages/reset-password/ResetPassword";
 import { RouteErrorFallback } from "./components/errors/RouteErrorFallback";
+import { MarketPage } from "./pages/market/MarketPage";
+import { ContainerMedium } from "./components/ui/wrappers/ContainerMedium";
 
 const router = createBrowserRouter([
     {
@@ -42,7 +44,9 @@ const router = createBrowserRouter([
                         index: true,
                         element: (
                             <Dashboard>
-                                <UserStatsView />
+                                <ContainerMedium>
+                                    <UserStatsView />
+                                </ContainerMedium>
                                 <TasksView />
                             </Dashboard>
                         ),
@@ -50,6 +54,10 @@ const router = createBrowserRouter([
                     {
                         path: "boss",
                         element: <BossBattlePage />,
+                    },
+                    {
+                        path: "market",
+                        element: <MarketPage />,
                     },
                     {
                         path: "faq",

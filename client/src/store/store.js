@@ -7,6 +7,7 @@ import userProfileReducer from "../store/user/userProfileSlice";
 import userFriendsReducer from "../store/user/userFriendsSlice";
 import publicUserProfileReducer from "../store/user/publicUserProfileSlice";
 import faqReducer from "../store/support/faqSlice";
+import marketReducer from "../store/market/marketSlice";
 
 const store = configureStore({
     reducer: {
@@ -18,6 +19,7 @@ const store = configureStore({
         friends: userFriendsReducer,
         publicUser: publicUserProfileReducer,
         faq: faqReducer,
+        market: marketReducer,
     },
 });
 

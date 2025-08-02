@@ -1,6 +1,12 @@
 import { toast } from "react-toastify";
 
-const ALLOWED_NOTIFICATION_ENDPOINTS = ["/stats", "/tasks", "/bosses"];
+const ALLOWED_NOTIFICATION_ENDPOINTS = [
+    "/stats",
+    "/tasks",
+    "/bosses",
+    "/market",
+    "/cart",
+];
 
 const showMessage = (msg) => {
     if (typeof msg === "string") {
