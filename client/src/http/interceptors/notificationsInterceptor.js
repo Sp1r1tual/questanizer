@@ -6,6 +6,7 @@ const ALLOWED_NOTIFICATION_ENDPOINTS = [
     "/bosses",
     "/market",
     "/cart",
+    "/inventory",
 ];
 
 const showMessage = (msg) => {

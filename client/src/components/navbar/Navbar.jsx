@@ -61,6 +61,17 @@ const Navbar = () => {
                             Market
                         </NavLink>
                         <NavLink
+                            to="/inventory"
+                            className={({ isActive }) =>
+                                isActive
+                                    ? `${styles.navLink} ${styles.active}`
+                                    : styles.navLink
+                            }
+                            onClick={() => setIsMenuOpen(false)}
+                        >
+                            Inventory
+                        </NavLink>
+                        <NavLink
                             to="/faq"
                             className={({ isActive }) =>
                                 isActive
@@ -122,6 +133,17 @@ const Navbar = () => {
                                 onClick={() => setIsMenuOpen(false)}
                             >
                                 Market
+                            </NavLink>
+                            <NavLink
+                                to="/inventory"
+                                className={({ isActive }) =>
+                                    isActive
+                                        ? `${styles.navLink} ${styles.active}`
+                                        : styles.navLink
+                                }
+                                onClick={() => setIsMenuOpen(false)}
+                            >
+                                Inventory
                             </NavLink>
                             <NavLink
                                 to="/faq"

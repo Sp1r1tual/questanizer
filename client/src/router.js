@@ -12,6 +12,7 @@ import { ForgotPasswordPage } from "./pages/ForgotPasswordPage";
 import { ResetPasswordPage } from "./pages/ResetPasswordPage";
 import { RouteErrorFallback } from "./components/errors/RouteErrorFallback";
 import { MarketPage } from "./pages/MarketPage";
+import { InventoryPage } from "./pages/InventoryPage";
 import { ContainerMedium } from "./components/ui/wrappers/ContainerMedium";
 
 const router = createBrowserRouter([
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
                     {
                         path: "market",
                         element: <MarketPage />,
+                    },
+                    {
+                        path: "inventory",
+                        element: <InventoryPage />,
                     },
                     {
                         path: "faq",

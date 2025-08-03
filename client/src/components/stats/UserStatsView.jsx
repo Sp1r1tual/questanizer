@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useDispatch } from "react-redux";
-import { useUserStats } from "../../hooks/stats/useUserStats";
+import { useSelector, useDispatch } from "react-redux";
 import { useAuth } from "../../hooks/auth/useAuth";
 
 import { UserExperience } from "./UserExperience";
@@ -14,16 +13,17 @@ import styles from "./UserStatsView.module.css";
 
 const UserStatsView = () => {
     const dispatch = useDispatch();
-    const { experience, level, health, maxHealth, gold } = useUserStats();
+    const { experience, level, health, maxHealth, gold, isLoaded } =
+        useSelector((state) => state.stats);
     const [isDefeated, setIsDefeated] = useState(false);
     const defeatTriggered = useRef(false);
     const { user } = useAuth();
 
     useEffect(() => {
-        if (user?.id) {
+        if (user?.id && !isLoaded) {
             dispatch(fetchStats());
         }
-    }, [user, dispatch]);
+    }, [user, isLoaded, dispatch]);
 
     useEffect(() => {
         if (health <= 0 && !defeatTriggered.current) {

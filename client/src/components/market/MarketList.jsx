@@ -14,8 +14,10 @@ const MarketList = () => {
     );
 
     useEffect(() => {
-        dispatch(fetchMarket());
-    }, [dispatch]);
+        if (!marketItems || marketItems.length === 0) {
+            dispatch(fetchMarket());
+        }
+    }, [dispatch, marketItems]);
 
     if (isLoading) {
         return <DotsLoader />;

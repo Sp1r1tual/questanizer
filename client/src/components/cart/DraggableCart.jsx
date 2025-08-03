@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
     DndContext,
     useSensor,
@@ -13,24 +13,26 @@ import { fetchCart } from "../../store/market/marketThunks";
 import { constrainPosition } from "../../utils/draggable/constrainPosition";
 import { DraggableCartContent } from "../cart/DraggableCartContent";
 
+const getInitialPosition = () => {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    if (width < 640) return { x: width - 80, y: height - 130 };
+    if (width < 1024) return { x: width - 100, y: height - 120 };
+
+    return { x: width - 130, y: height - 130 };
+};
+
 const DraggableCart = () => {
     const dispatch = useDispatch();
+    const { cart, isCartLoaded } = useSelector((state) => state.market);
+    const [position, setPosition] = useState(getInitialPosition());
 
     useEffect(() => {
-        dispatch(fetchCart());
-    }, [dispatch]);
-
-    const getInitialPosition = () => {
-        const width = window.innerWidth;
-        const height = window.innerHeight;
-
-        if (width < 640) return { x: width - 80, y: height - 130 };
-        if (width < 1024) return { x: width - 100, y: height - 120 };
-
-        return { x: width - 130, y: height - 130 };
-    };
-
-    const [position, setPosition] = useState(getInitialPosition());
+        if (!isCartLoaded && (!cart || cart.length === 0)) {
+            dispatch(fetchCart());
+        }
+    }, [dispatch, isCartLoaded, cart]);
 
     useConstrainOnResize(setPosition, constrainPosition);
 

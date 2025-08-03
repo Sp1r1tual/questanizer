@@ -12,6 +12,9 @@ const initialState = {
     isInputInvalid: false,
     modalActive: false,
     deadline: "",
+    loading: false,
+    hasLoaded: false,
+    error: null,
     confirmModal: {
         isOpen: false,
         actionType: null,
@@ -75,27 +78,52 @@ const tasksSlice = createSlice({
             .addCase(fetchTasks.fulfilled, (state, action) => {
                 state.loading = false;
                 state.tasks = action.payload;
+                state.hasLoaded = true;
             })
             .addCase(fetchTasks.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
+                state.hasLoaded = true;
             })
 
+            .addCase(addTaskAsync.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
             .addCase(addTaskAsync.fulfilled, (state, action) => {
+                state.loading = false;
                 state.tasks.push(action.payload);
                 state.inputTask = "";
                 state.deadline = "";
                 state.modalActive = false;
             })
+            .addCase(addTaskAsync.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
 
+            .addCase(deleteTaskAsync.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
             .addCase(deleteTaskAsync.fulfilled, (state, action) => {
+                state.loading = false;
                 state.tasks = state.tasks.filter(
                     (task) => task._id !== action.payload
                 );
                 state.confirmModal = initialState.confirmModal;
             })
+            .addCase(deleteTaskAsync.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
 
+            .addCase(completeTaskAsync.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
             .addCase(completeTaskAsync.fulfilled, (state, action) => {
+                state.loading = false;
                 const index = state.tasks.findIndex(
                     (task) => task._id === action.payload._id
                 );
@@ -104,6 +132,10 @@ const tasksSlice = createSlice({
                     state.tasks[index] = action.payload;
                     state.confirmModal = initialState.confirmModal;
                 }
+            })
+            .addCase(completeTaskAsync.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
             });
     },
 });

@@ -5,6 +5,7 @@ import { clearUserProfileState } from "../../store/user/userProfileSlice";
 import { clearFriendsState } from "../../store/user/userFriendsSlice";
 import { clearPublicProfileState } from "../../store/user/publicUserProfileSlice";
 import { clearMarketState } from "../../store/market/marketSlice";
+import { clearInventoryState } from "../../store/user/inventorySlice";
 
 const clearAllStateHelper = (dispatch) => {
     dispatch(clearStatsState());
@@ -14,6 +15,7 @@ const clearAllStateHelper = (dispatch) => {
     dispatch(clearFriendsState());
     dispatch(clearPublicProfileState());
     dispatch(clearMarketState());
+    dispatch(clearInventoryState());
 };
 
 export { clearAllStateHelper };

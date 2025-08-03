@@ -16,6 +16,7 @@ const initialState = {
     isCartModalOpen: false,
     isItemModalOpen: false,
     selectedItem: null,
+    isCartLoaded: false,
 };
 
 const marketSlice = createSlice({
@@ -66,10 +67,12 @@ const marketSlice = createSlice({
             .addCase(fetchCart.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.cart = action.payload?.items || [];
+                state.isCartLoaded = true;
             })
             .addCase(fetchCart.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = action.payload;
+                state.isCartLoaded = true;
             })
 
             .addCase(addToCart.pending, (state) => {

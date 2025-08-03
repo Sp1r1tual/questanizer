@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { MarketService } from "../../services/marketService";
 import { fetchStats } from "../stats/userStatsThunks";
+import { fetchInventory } from "../user/inventoryThunks";
 
 const fetchMarket = createAsyncThunk(
     "market/fetchMarket",
@@ -48,6 +49,7 @@ const checkoutCart = createAsyncThunk(
             const response = await MarketService.checkoutCart();
 
             thunkAPI.dispatch(fetchStats());
+            thunkAPI.dispatch(fetchInventory());
 
             return response.data;
         } catch (error) {

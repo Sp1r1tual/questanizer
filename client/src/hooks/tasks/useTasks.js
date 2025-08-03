@@ -7,8 +7,7 @@ import { addTaskAsync } from "../../store/tasks/tasksThunks";
 
 const useTasks = () => {
     const dispatch = useDispatch();
-    const tasks = useSelector((state) => state.tasks.tasks);
-    const loading = useSelector((state) => state.tasks.loading);
+    const { tasks, loading, hasLoaded } = useSelector((state) => state.tasks);
 
     const {
         modalActive,
@@ -55,6 +54,7 @@ const useTasks = () => {
     return {
         tasks,
         loading,
+        hasLoaded,
         inputTask,
         deadline,
         isInputInvalid,

@@ -17,10 +17,10 @@ const BossBattle = () => {
     const { user } = useAuth();
 
     useEffect(() => {
-        if (user?.id) {
+        if (user?.id && !boss.bossId) {
             dispatch(fetchBoss());
         }
-    }, [dispatch, user]);
+    }, [dispatch, user, boss.bossId]);
 
     const handleStartBattle = () => {
         initBoss();
