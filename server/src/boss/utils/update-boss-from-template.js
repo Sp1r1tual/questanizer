@@ -5,6 +5,7 @@ const updateBossFromTemplate = (boss, template) => {
     boss.maxHealthPoints = template.healthPoints;
     boss.bossPower = template.bossPower;
     boss.bossRewardExp = template.bossRewardExp;
+    boss.bossRewardGold = template.bossRewardGold;
     boss.bossRageBar = template.bossRageBar;
     boss.bossImg = template.bossImg;
 };

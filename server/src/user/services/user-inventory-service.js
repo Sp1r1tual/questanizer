@@ -4,6 +4,10 @@ import { UserStatsModel } from "../../stats/models/user-stats-model.js";
 import { ApiError } from "../../shared/exceptions/api-error.js";
 import { handleItemEffects } from "../handlers/item-effect-handlers.js";
 import { normalizeMessages } from "../../shared/utils/notifications/notifications.js";
+import {
+    success,
+    error,
+} from "../../shared/utils/notifications/notifications.js";
 
 class UserInventoryService {
     async getInventory(userId) {
@@ -25,27 +29,24 @@ class UserInventoryService {
             (entry) => entry.item.toString() === itemId
         );
 
-        if (itemEntryIndex === -1) {
-            throw ApiError.BadRequest("Item not found in inventory");
-        }
-
         const item = await MarketItemModel.findById(itemId);
-
-        if (!item) {
-            throw ApiError.NotFound("Item not found");
-        }
 
         const userStats = await UserStatsModel.findOne({ user: userId });
 
         if (item.type === "potion" && userStats.hp >= userStats.maxHp) {
-            throw ApiError.BadRequest("Cannot use potion: HP is already full");
+            return {
+                success: false,
+                messages: [error("Cannot use potion: HP is already full")],
+                currentHp: userStats.hp,
+                effects: [],
+            };
         }
 
-        const rawEffectMessages = await handleItemEffects({
+        const effectResults = await handleItemEffects({
             userStats,
             effect: item.effect,
         });
-        const effectMessages = normalizeMessages(rawEffectMessages);
+        const normalizedEffects = normalizeMessages(effectResults);
 
         inventory.items[itemEntryIndex].quantity -= 1;
 
@@ -58,9 +59,9 @@ class UserInventoryService {
 
         return {
             success: true,
-            message: `Used ${item.name}`,
+            messages: [success(`Used ${item.name}`)],
             currentHp: userStats.hp,
-            effects: effectMessages,
+            effects: normalizedEffects,
         };
     }
 }

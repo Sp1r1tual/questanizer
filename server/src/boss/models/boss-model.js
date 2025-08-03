@@ -8,6 +8,7 @@ const bossSchema = new Schema({
     maxHealthPoints: { type: Number, default: 0 },
     bossPower: { type: Number, default: 0 },
     bossRewardExp: { type: Number, default: 0 },
+    bossRewardGold: { type: Number, default: 0 },
     bossRageBar: { type: Number, default: 0 },
     rage: { type: Number, default: 0, min: 0 },
     bossImg: { type: String, default: null },

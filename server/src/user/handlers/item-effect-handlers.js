@@ -9,18 +9,20 @@ const itemEffectHandlers = {
 const handleItemEffects = async ({ userStats, effect }) => {
     if (!effect) return [];
 
-    const messages = [];
-    const stringifyEffect = JSON.parse(JSON.stringify(effect));
+    const results = [];
+    const parsedEffect = JSON.parse(JSON.stringify(effect));
 
-    for (const [effectKey, value] of Object.entries(stringifyEffect)) {
-        const handler = itemEffectHandlers[effectKey];
+    for (const [effectType, value] of Object.entries(parsedEffect)) {
+        const handler = itemEffectHandlers[effectType];
 
-        const result = await handler({ userStats, value });
+        if (handler) {
+            const result = await handler({ userStats, value });
 
-        if (result) messages.push(result);
+            if (result) results.push(result);
+        }
     }
 
-    return messages;
+    return results;
 };
 
 export { handleItemEffects };
