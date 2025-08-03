@@ -34,16 +34,15 @@ const TasksView = () => {
         onCloseConfirmModal,
         onConfirmAction,
         loading,
-        hasLoaded,
     } = useTasks();
 
     const { getFilteredTasks } = useTaskFilters();
 
     useEffect(() => {
-        if (user?.id && !hasLoaded) {
+        if (user?.id) {
             dispatch(fetchTasks());
         }
-    }, [user, hasLoaded, dispatch]);
+    }, [user, dispatch]);
 
     const [filters, setFilters] = useState({
         status: "all",

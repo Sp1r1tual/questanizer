@@ -14,6 +14,7 @@ import { RouteErrorFallback } from "./components/errors/RouteErrorFallback";
 import { MarketPage } from "./pages/MarketPage";
 import { InventoryPage } from "./pages/InventoryPage";
 import { ContainerMedium } from "./components/ui/wrappers/ContainerMedium";
+import { Wrapper } from "./components/ui/wrappers/Wrapper";
 
 const router = createBrowserRouter([
     {
@@ -44,12 +45,14 @@ const router = createBrowserRouter([
                     {
                         index: true,
                         element: (
-                            <Dashboard>
-                                <ContainerMedium>
-                                    <UserStatsView />
-                                </ContainerMedium>
-                                <TasksView />
-                            </Dashboard>
+                            <Wrapper>
+                                <Dashboard>
+                                    <ContainerMedium>
+                                        <UserStatsView />
+                                    </ContainerMedium>
+                                    <TasksView />
+                                </Dashboard>
+                            </Wrapper>
                         ),
                     },
                     {

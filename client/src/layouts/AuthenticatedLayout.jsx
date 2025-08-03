@@ -18,8 +18,11 @@ const AuthenticatedLayout = () => {
         return <Navigate to="/login" replace state={{ from: location }} />;
     }
 
+    const isHomeRoute = location.pathname === "/";
+
     return (
         <div className={styles.page}>
+            {isHomeRoute && <div className={styles.fixedBackground} />}
             <Navbar />
             <main className={styles.mainContent}>
                 <Outlet />

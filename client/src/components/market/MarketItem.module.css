@@ -9,7 +9,7 @@
     cursor: pointer;
     transform: translateY(0);
     border: 1px solid transparent;
-    width: 12rem;
+    width: 10rem;
 }
 
 .card:hover {
