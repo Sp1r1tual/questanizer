@@ -1,0 +1,50 @@
+{
+    "shared": {
+        "received": "Erhalten",
+        "xp": "Erfahrung",
+        "gold": "Gold",
+        "golds": "Gold",
+        "items": {
+            "healingPotion": "Heiltrank"
+        }
+    },
+
+    "boss": {
+        "noMoreBosses": "Du hast alle verfügbaren Bosse besiegt!",
+        "defeatBoss": "Glückwunsch! Du hast {{bossName}} besiegt",
+        "dealtDamage": "{{amount}} Schaden am Boss verursacht!",
+        "reward": "Erhalten: {{exp}} Erfahrung und {{gold}} Gold für den Sieg über den Boss!",
+        "increaseRage": "Wut des Bosses um {{value}} erhöht! ({{rage}}/{{rageBar}})",
+        "bossAttacking": "Der Boss greift an! {{bossPower}} Schaden verursacht!",
+        "rage": "Wut",
+        "power": "Kraft",
+        "bosses": {
+            "robberWolf": "Räuberwolf",
+            "goblinAlchemist": "Goblin-Alchemist",
+            "evilWizard": "Böser Zauberer",
+            "darkKnight": "Dunkler Ritter",
+            "doomLord": "Herrscher der Vernichtung"
+        }
+    },
+
+    "market": {
+        "purchase": "Kauf erfolgreich! {{totalItems}} Gegenstand/Gegenstände erworben",
+        "spent": "{{totalPrice}} Gold ausgegeben"
+    },
+
+    "stats": {
+        "levelUp": "Dein Level wurde erhöht: {{level}}!",
+        "defeated": "Deine Gesundheit ist auf null gefallen!",
+        "reset": "Spielerfortschritt wurde zurückgesetzt"
+    },
+
+    "tasks": {
+        "complete": "Aufgabe erledigt! Erhalten: {{xp}} Erfahrung und {{gold}} Gold",
+        "penalty": "Strafe angewendet! {{damage}} Gesundheit verloren"
+    },
+
+    "inventory": {
+        "fullHp": "Heiltrank kann nicht verwendet werden: Gesundheit ist bereits voll",
+        "useItem": "Du hast benutzt: {{item}}"
+    }
+}

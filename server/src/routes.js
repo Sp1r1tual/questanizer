@@ -11,6 +11,7 @@ import { friendsRouter } from "./user/router/friends-router.js";
 import { supportRouter } from "./support/router/support-router.js";
 import { marketRouter } from "./market/router/market-router.js";
 import { userInventoryRouter } from "./user/router/user-inventory-router.js";
+import { localizationRouter } from "./user/router/localization-router.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -22,6 +23,7 @@ const routes = (app) => {
     );
     app.use("/api", supportRouter);
     app.use("/api", authRouter);
+    app.use("/api", localizationRouter);
     app.use("/api", userRouter);
     app.use("/api", friendsRouter);
     app.use("/api", tasksRouter);

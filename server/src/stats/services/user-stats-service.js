@@ -1,10 +1,6 @@
 import { UserStatsModel } from "../models/user-stats-model.js";
 import { bossService } from "../../boss/services/boss-service.js";
-import {
-    success,
-    error,
-    info,
-} from "../../shared/utils/notifications/notifications.js";
+import { statsNotifications } from "../../shared/helpers/messages/notification-factory.js";
 
 class UserStatsService {
     async getOrCreateStats(userId) {
@@ -33,7 +29,7 @@ class UserStatsService {
         let message = null;
 
         if (stats.level > oldLevel) {
-            message = success(`Your level has increased: ${stats.level}!`);
+            message = await statsNotifications.levelUp(userId, stats.level);
         }
 
         await stats.save();
@@ -57,7 +53,7 @@ class UserStatsService {
         let message = null;
 
         if (stats.hp === 0) {
-            message = error(`Your health dropped to zero!`);
+            message = await statsNotifications.defeated(userId);
         }
 
         return { stats, message };
@@ -77,7 +73,7 @@ class UserStatsService {
 
         return {
             stats,
-            message: info(`Player progress reset.`),
+            message: await statsNotifications.reset(userId),
         };
     }
 

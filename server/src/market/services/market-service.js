@@ -3,14 +3,23 @@ import { UserCartModel } from "../models/user-cart-model.js";
 import { UserStatsModel } from "../../stats/models/user-stats-model.js";
 import { UserInventoryModel } from "../../user/models/user-inventory-model.js";
 import { ApiError } from "../../shared/exceptions/api-error.js";
+import { marketNotifications } from "../../shared/helpers/messages/notification-factory.js";
+import { localizeKeys } from "../../shared/utils/localization/localize-keys.js";
 import {
-    success,
-    info,
-} from "../../shared/utils/notifications/notifications.js";
+    localizeNestedItems,
+    localizeSimpleItems,
+} from "../../shared/utils/localization/localize-items.js";
 
 class MarketService {
-    async getAllMarketItems() {
-        return MarketItemModel.find({ isActive: true });
+    async localizeItemName(userId, itemKey) {
+        return await localizeKeys(userId, `shared.items.${itemKey}`);
+    }
+
+    async getAllMarketItems(userId) {
+        const items = await MarketItemModel.find({ isActive: true });
+
+        const localizedItems = await localizeSimpleItems(userId, items);
+        return localizedItems;
     }
 
     async getUserCart(userId) {
@@ -19,15 +28,16 @@ class MarketService {
         );
 
         if (!cart) {
-            cart = new UserCartModel({
-                user: userId,
-                items: [],
-            });
-
+            cart = new UserCartModel({ user: userId, items: [] });
             await cart.save();
         }
 
-        return cart;
+        const localizedItems = await localizeNestedItems(userId, cart.items);
+
+        return {
+            ...cart.toObject(),
+            items: localizedItems,
+        };
     }
 
     async addToCart(userId, itemId, quantity = 1) {
@@ -152,12 +162,8 @@ class MarketService {
         await cart.save();
 
         const messages = [
-            success(
-                `Purchase completed! Bought ${totalItems} item${
-                    totalItems > 1 ? "s" : ""
-                }`
-            ),
-            info(`Spent ${totalPrice} gold`),
+            await marketNotifications.checkout(userId, totalItems),
+            await marketNotifications.spent(userId, totalPrice),
         ];
 
         return {

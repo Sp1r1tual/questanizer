@@ -6,17 +6,28 @@ import { bossProgressService } from "./boss-progress-service.js";
 import { hasBossFound } from "../helpers/has-boss-found.js";
 import { updateBossFromTemplate } from "../utils/update-boss-from-template.js";
 import { validateObjectId } from "../../shared/utils/validations/validate-object-id.js";
-import {
-    success,
-    info,
-    warning,
-} from "../../shared/utils/notifications/notifications.js";
+import { bossNotifications } from "../../shared/helpers/messages/notification-factory.js";
+import { localizeKeys } from "../../shared/utils/localization/localize-keys.js";
 
 class BossService {
+    async localizeBossName(userId, bossKey) {
+        return await localizeKeys(userId, `boss.bosses.${bossKey}`);
+    }
+
     async getBoss(userId) {
         validateObjectId(userId, "user ID");
 
-        return BossModel.findOne({ user: userId });
+        const boss = await BossModel.findOne({ user: userId });
+
+        if (!boss) return null;
+
+        const bossObj = boss.toObject();
+
+        bossObj.bossName = await this.localizeBossName(
+            userId,
+            bossObj.bossName
+        );
+        return bossObj;
     }
 
     async spawnBoss(userId, bossId) {
@@ -27,7 +38,7 @@ class BossService {
         if (!config) {
             return {
                 boss: null,
-                messages: [success("You have defeated all available bosses!")],
+                messages: [await bossNotifications.allDefeated(userId)],
                 allBossesDefeated: true,
             };
         }
@@ -46,8 +57,11 @@ class BossService {
 
         await boss.save();
 
+        const bossObj = boss.toObject();
+        bossObj.bossName = await this.localizeBossName(userId, config.bossName);
+
         return {
-            boss,
+            boss: bossObj,
             allBossesDefeated: false,
         };
     }
@@ -75,6 +89,11 @@ class BossService {
                 boss.bossRewardExp
             );
 
+            const localizedBossName = await this.localizeBossName(
+                userId,
+                boss.bossName
+            );
+
             await boss.deleteOne();
 
             const allBossesDefeated =
@@ -86,11 +105,12 @@ class BossService {
                 rewardExp: boss.bossRewardExp,
                 allBossesDefeated,
                 messages: [
-                    success(
-                        `Congratulations! You defeated the boss ${boss.bossName}!`
+                    await bossNotifications.defeated(userId, localizedBossName),
+                    await bossNotifications.reward(
+                        userId,
+                        boss.bossRewardExp,
+                        boss.bossRewardGold
                     ),
-                    info(`Received ${boss.bossRewardExp} XP!`),
-                    info(`Received ${boss.bossRewardGold} gold!`),
                 ],
             };
         }
@@ -100,7 +120,7 @@ class BossService {
         return {
             healthPoints: boss.healthPoints,
             isDead: false,
-            messages: [info(`Dealt ${amount} damage to boss!`)],
+            messages: [await bossNotifications.damaged(userId, amount)],
         };
     }
 
@@ -125,8 +145,11 @@ class BossService {
 
         if (uniqueNew.length > 0) {
             messages.push(
-                info(
-                    `Boss's Rage increased by ${uniqueNew.length}! (${boss.rage}/${boss.bossRageBar})`
+                await bossNotifications.rage(
+                    userId,
+                    uniqueNew.length,
+                    boss.rage,
+                    boss.bossRageBar
                 )
             );
         }
@@ -142,9 +165,7 @@ class BossService {
             stats = result.stats;
 
             messages.push(
-                warning(
-                    `The boss is attacking! Assigned ${boss.bossPower} damage!`
-                )
+                await bossNotifications.attack(userId, boss.bossPower)
             );
 
             if (result.message) {

@@ -5,12 +5,7 @@ const getBossController = async (req, res, next) => {
     try {
         const { id: userId } = req.user;
 
-        let boss = req.boss;
-
-        if (!boss) {
-            boss = await bossService.getBoss(userId);
-        }
-
+        const boss = await bossService.getBoss(userId);
         const progress = await bossProgressService.getBossProgress(userId);
 
         return res.json({ boss: boss || null, progress });
@@ -32,7 +27,7 @@ const spawnBossController = async (req, res, next) => {
 
         const boss = await bossService.spawnBoss(userId, bossId);
 
-        return res.status(201).json(boss);
+        return res.json(boss);
     } catch (error) {
         next(error);
     }

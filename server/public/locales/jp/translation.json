@@ -1,0 +1,50 @@
+{
+    "shared": {
+        "received": "受け取りました",
+        "xp": "経験値",
+        "gold": "ゴールド",
+        "golds": "ゴールド",
+        "items": {
+            "healingPotion": "回復ポーション"
+        }
+    },
+
+    "boss": {
+        "noMoreBosses": "利用可能なボスをすべて倒しました！",
+        "defeatBoss": "おめでとうございます！{{bossName}}を倒しました",
+        "dealtDamage": "ボスに{{amount}}のダメージを与えました！",
+        "reward": "ボスを倒して{{exp}}経験値と{{gold}}ゴールドを獲得しました！",
+        "increaseRage": "ボスの怒りが{{value}}増加しました！ ({{rage}}/{{rageBar}})",
+        "bossAttacking": "ボスが攻撃しています！{{bossPower}}のダメージを受けました！",
+        "rage": "怒り",
+        "power": "力",
+        "bosses": {
+            "robberWolf": "強盗オオカミ",
+            "goblinAlchemist": "ゴブリン錬金術師",
+            "evilWizard": "邪悪な魔法使い",
+            "darkKnight": "ダークナイト",
+            "doomLord": "破滅の支配者"
+        }
+    },
+
+    "market": {
+        "purchase": "購入成功！{{totalItems}}個のアイテムを購入しました",
+        "spent": "{{totalPrice}}ゴールドを使いました"
+    },
+
+    "stats": {
+        "levelUp": "レベルが{{level}}に上がりました！",
+        "defeated": "あなたの体力が0になりました！",
+        "reset": "プレイヤーの進行状況がリセットされました"
+    },
+
+    "tasks": {
+        "complete": "タスク完了！{{xp}}経験値と{{gold}}ゴールドを獲得しました",
+        "penalty": "ペナルティ適用！{{damage}}の体力を失いました"
+    },
+
+    "inventory": {
+        "fullHp": "ポーションは使用できません：体力はすでに満タンです",
+        "useItem": "使用しました：{{item}}"
+    }
+}

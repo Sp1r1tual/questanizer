@@ -1,12 +1,10 @@
 const itemEffectHandlers = {
-    heal: async ({ userStats, value }) => {
+    heal: async ({ userStats, value, userId }) => {
         userStats.hp = Math.min(userStats.maxHp, userStats.hp + value);
-
-        return `Healed for ${value}`;
     },
 };
 
-const handleItemEffects = async ({ userStats, effect }) => {
+const handleItemEffects = async ({ userStats, effect, userId }) => {
     if (!effect) return [];
 
     const results = [];
@@ -16,7 +14,7 @@ const handleItemEffects = async ({ userStats, effect }) => {
         const handler = itemEffectHandlers[effectType];
 
         if (handler) {
-            const result = await handler({ userStats, value });
+            const result = await handler({ userStats, value, userId });
 
             if (result) results.push(result);
         }

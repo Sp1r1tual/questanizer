@@ -1,25 +1,31 @@
 import { UserInventoryModel } from "../models/user-inventory-model.js";
 import { MarketItemModel } from "../../market/models/market-item-model.js";
 import { UserStatsModel } from "../../stats/models/user-stats-model.js";
-import { ApiError } from "../../shared/exceptions/api-error.js";
 import { handleItemEffects } from "../handlers/item-effect-handlers.js";
 import { normalizeMessages } from "../../shared/utils/notifications/notifications.js";
-import {
-    success,
-    error,
-} from "../../shared/utils/notifications/notifications.js";
+import { inventoryNotifications } from "../../shared/helpers/messages/notification-factory.js";
+import { localizeKeys } from "../../shared/utils/localization/localize-keys.js";
+import { localizeNestedItems } from "../../shared/utils/localization/localize-items.js";
 
 class UserInventoryService {
+    async localizeItemName(userId, itemKey) {
+        return await localizeKeys(userId, `shared.items.${itemKey}`);
+    }
+
     async getInventory(userId) {
         const inventory = await UserInventoryModel.findOne({
             user: userId,
         }).populate("items.item");
 
-        if (!inventory) {
-            throw ApiError.NotFound("Inventory not found");
-        }
+        const localizedItems = await localizeNestedItems(
+            userId,
+            inventory.items
+        );
 
-        return inventory;
+        return {
+            ...inventory.toObject(),
+            items: localizedItems,
+        };
     }
 
     async useItem(userId, itemId) {
@@ -36,7 +42,7 @@ class UserInventoryService {
         if (item.type === "potion" && userStats.hp >= userStats.maxHp) {
             return {
                 success: false,
-                messages: [error("Cannot use potion: HP is already full")],
+                messages: [await inventoryNotifications.fullHp(userId)],
                 currentHp: userStats.hp,
                 effects: [],
             };
@@ -45,6 +51,7 @@ class UserInventoryService {
         const effectResults = await handleItemEffects({
             userStats,
             effect: item.effect,
+            userId,
         });
         const normalizedEffects = normalizeMessages(effectResults);
 
@@ -57,9 +64,16 @@ class UserInventoryService {
         await userStats.save();
         await inventory.save();
 
+        const localizedItemName = await this.localizeItemName(
+            userId,
+            item.name
+        );
+
         return {
             success: true,
-            messages: [success(`Used ${item.name}`)],
+            messages: [
+                await inventoryNotifications.useItem(userId, localizedItemName),
+            ],
             currentHp: userStats.hp,
             effects: normalizedEffects,
         };

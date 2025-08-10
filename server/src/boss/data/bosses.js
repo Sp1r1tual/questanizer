@@ -1,7 +1,7 @@
 const bosses = [
     {
         bossId: 1,
-        bossName: "Robber Wolf",
+        bossName: "robberWolf",
         healthPoints: 100,
         bossPower: 10,
         bossRewardExp: 100,
@@ -11,7 +11,7 @@ const bosses = [
     },
     {
         bossId: 2,
-        bossName: "Goblin Alchemist",
+        bossName: "goblinAlchemist",
         healthPoints: 150,
         bossPower: 12,
         bossRewardExp: 180,
@@ -21,7 +21,7 @@ const bosses = [
     },
     {
         bossId: 3,
-        bossName: "Evil Wizard",
+        bossName: "evilWizard",
         healthPoints: 200,
         bossPower: 15,
         bossRewardExp: 250,
@@ -31,7 +31,7 @@ const bosses = [
     },
     {
         bossId: 4,
-        bossName: "Dark Knight",
+        bossName: "darkKnight",
         healthPoints: 300,
         bossPower: 18,
         bossRewardExp: 400,
@@ -41,7 +41,7 @@ const bosses = [
     },
     {
         bossId: 5,
-        bossName: "Doom Lord",
+        bossName: "doomLord",
         healthPoints: 400,
         bossPower: 22,
         bossRewardExp: 600,

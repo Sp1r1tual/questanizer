@@ -2,7 +2,7 @@ import { marketService } from "../services/market-service.js";
 
 const getMarketItems = async (req, res, next) => {
     try {
-        const items = await marketService.getAllMarketItems();
+        const items = await marketService.getAllMarketItems(req.user.id);
 
         return res.json(items);
     } catch (error) {

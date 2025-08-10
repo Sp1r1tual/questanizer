@@ -7,11 +7,7 @@ import {
     validateUserId,
     validateTaskAndUserIds,
 } from "../../shared/utils/validations/validate-object-id.js";
-import {
-    success,
-    info,
-    warning,
-} from "../../shared/utils/notifications/notifications.js";
+import { tasksNotifications } from "../../shared/helpers/messages/notification-factory.js";
 
 class TasksService {
     async getAllTasks(userId) {
@@ -95,10 +91,7 @@ class TasksService {
         const { stats, message: levelUpMessage } =
             await userStatsService.gainExperience(userId, xp);
 
-        const messages = [
-            success(`Task accomplished! Received ${xp} XP`),
-            info(`Received ${gold} gold!`),
-        ];
+        const messages = [await tasksNotifications.complete(userId, xp, gold)];
 
         if (levelUpMessage) messages.push(levelUpMessage);
 
@@ -134,7 +127,7 @@ class TasksService {
         const { stats, message: hpZeroMessage } =
             await userStatsService.takeDamage(userId, damage);
 
-        const messages = [warning(`Penalty applied! Lost ${damage} HP`)];
+        const messages = [await tasksNotifications.penalty(userId, damage)];
 
         if (hpZeroMessage) messages.push(hpZeroMessage);
 

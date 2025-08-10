@@ -31,6 +31,7 @@ const UserSchema = new Schema(
             type: String,
             default: null,
         },
+        locale: { type: String, default: "en" },
     },
     { timestamps: true }
 );
