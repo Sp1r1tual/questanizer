@@ -1,16 +1,18 @@
 import { useState } from "react";
-import { useUserFriends } from "../../../../hooks/user/useUserFriends";
+import { useUserFriends } from "../../../hooks/user/useUserFriends";
+import { useTranslation } from "react-i18next";
 
 import { PublicUserProfileContent } from "../PublicUserProfileContent";
 import { FriendsSearch } from "../FriendsSearch";
 import { FriendsList } from "../FriendsList";
-import { Loader } from "../../../ui/loaders/Loader";
+import { Loader } from "../../ui/loaders/Loader";
 
 import styles from "./UserFriendsModal.module.css";
 
 const UserFriendsModal = ({ onClose }) => {
     const [currentView, setCurrentView] = useState("friends");
     const [selectedUserId, setSelectedUserId] = useState(null);
+    const { t } = useTranslation();
 
     const {
         isLoading,
@@ -49,7 +51,10 @@ const UserFriendsModal = ({ onClose }) => {
 
                 {currentView === "friends" ? (
                     <>
-                        <h2 className={styles.modalTitle}>Friends</h2>
+                        <h2 className={styles.modalTitle}>
+                            {" "}
+                            {t("friends.friendsTitle")}
+                        </h2>
 
                         <FriendsSearch
                             currentUser={currentUser}
@@ -61,17 +66,13 @@ const UserFriendsModal = ({ onClose }) => {
                         />
 
                         <FriendsList
-                            type="friend"
                             items={friends}
-                            title="Friends"
                             onRemove={handleRemoveFriendOrCancel}
                             onShowProfile={handleShowProfile}
                         />
 
                         <FriendsList
-                            type="request"
                             items={requests}
-                            title="Friend Requests"
                             onAccept={handleAcceptRequest}
                             onRemove={handleRemoveFriendOrCancel}
                             onShowProfile={handleShowProfile}

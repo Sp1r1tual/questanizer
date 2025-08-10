@@ -1,8 +1,9 @@
-import { useFriendsSearch } from "../../../hooks/user/useFriendsSearch";
+import { useFriendsSearch } from "../../hooks/user/useFriendsSearch";
+import { useTranslation } from "react-i18next";
 
 import { FriendItem } from "./FriendItem";
-import { Loader } from "../../ui/loaders/Loader";
-import { Pagination } from "../../ui/pagination/Pagination";
+import { Loader } from "../ui/loaders/Loader";
+import { Pagination } from "../ui/pagination/Pagination";
 
 import styles from "./FriendsSearch.module.css";
 
@@ -31,6 +32,7 @@ const FriendsSearch = ({
         handlePageChange,
         getPageNumbers,
     } = useFriendsSearch(currentUser?.username);
+    const { t } = useTranslation();
 
     const handleUserClick = (userId) => {
         if (onShowProfile) onShowProfile(userId);
@@ -47,7 +49,7 @@ const FriendsSearch = ({
                     }`}
                     value={input}
                     onChange={(event) => onInputChange(event.target.value)}
-                    placeholder="Search users to add..."
+                    placeholder={t("friends.searchPlaceholder")}
                     onKeyDown={(event) => {
                         if (event.key === "Enter") {
                             handleSearch();
@@ -58,7 +60,7 @@ const FriendsSearch = ({
                     className={styles.searchButton}
                     onClick={() => handleSearch(1)}
                 >
-                    Search
+                    {t("friends.searchButton")}
                 </button>
             </div>
 
@@ -67,7 +69,7 @@ const FriendsSearch = ({
             {hasSearched && !isLoading && (
                 <div className={styles.searchResults}>
                     {error ? (
-                        <div className={styles.searchMessage}>{error}</div>
+                        <div className={styles.searchMessage}>{t(error)}</div>
                     ) : message ? (
                         <p className={styles.searchMessage}>{message}</p>
                     ) : results.length > 0 ? (
@@ -109,7 +111,10 @@ const FriendsSearch = ({
                             />
                         </>
                     ) : (
-                        <p className={styles.noResults}>No users found</p>
+                        <p className={styles.noResults}>
+                            {" "}
+                            {t("friends.noSearchResults")}
+                        </p>
                     )}
                 </div>
             )}

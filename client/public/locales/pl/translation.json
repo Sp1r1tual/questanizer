@@ -1,0 +1,242 @@
+{
+    "shared": {
+        "easy": "Łatwy",
+        "medium": "Średni",
+        "hard": "Trudny",
+        "critical": "Krytyczny",
+        "createdAt": "Utworzono:",
+        "deadline": "Termin:",
+        "difficulty": "Trudność:",
+        "completed": "Wykonano",
+        "yes": "Tak",
+        "no": "Nie",
+        "nameLabel": "Imię",
+        "save": "Zapisz",
+        "saving": "Zapisywanie...",
+        "cancel": "Anuluj",
+        "close": "Zamknij",
+        "remove": "Usuń",
+        "bio": "O mnie",
+        "noBio": "Brak opisu",
+        "level": "Poziom",
+        "gold": "Złoto",
+        "golds": "złota",
+        "health": "Zdrowie",
+        "joined": "Dołączył",
+        "quantity": "Ilość",
+        "total": "Razem",
+        "noItems": "Brak dostępnych przedmiotów",
+        "emailLabel": "E-mail",
+        "emailPlaceholder": "Wprowadź e-mail",
+        "passwordLabel": "Hasło",
+        "passwordPlaceholder": "Wprowadź hasło"
+    },
+
+    "footer": {
+        "about": "O nas",
+        "contact": "Kontakt"
+    },
+
+    "organizer": {
+        "addNewTaskBtn": {
+            "addTask": "Dodaj zadanie"
+        },
+        "organizerHeader": "Od czego rozpoczniesz swoją epicką przygodę?",
+        "taskDropdown": {
+            "markAsDone": "Wykonaj",
+            "delete": "Usuń",
+            "deleteAllCompleted": "Usuń wszystkie wykonane",
+            "deleteAllOverdue": "Usuń wszystkie przeterminowane"
+        },
+        "taskFilters": {
+            "status": {
+                "all": "Wszystkie",
+                "completed": "Wykonane",
+                "active": "Aktywne"
+            },
+            "deadline": {
+                "all": "Dowolny termin",
+                "overdue": "Przeterminowane",
+                "upcoming": "Nadchodzące",
+                "none": "Bez terminu"
+            },
+            "difficulty": {
+                "all": "Dowolna trudność",
+                "easy": "Łatwy",
+                "medium": "Średni",
+                "hard": "Trudny",
+                "critical": "Krytyczny"
+            },
+            "sortBy": {
+                "createdAt": "Według daty",
+                "difficulty": "Według trudności",
+                "deadline": "Według terminu"
+            }
+        },
+        "taskInput": {
+            "placeholder": "Wpisz, co planujesz zrobić...",
+            "error": "Proszę wpisać opis zadania"
+        },
+        "taskItem": {
+            "overdueAlert": "PRZETERMINOWANE!"
+        },
+        "taskList": {
+            "noTasks": "Brak dostępnych zadań"
+        },
+        "confirmation": {
+            "deleteTitle": "Usuń zadanie",
+            "completeTitle": "Wykonaj zadanie",
+            "deleteAllCompletedTitle": "Potwierdzenie usunięcia",
+            "defaultTitle": "Potwierdzenie",
+            "deleteMessage": "Czy na pewno chcesz usunąć zadanie \"{{task}}\"?",
+            "completeMessage": "Oznaczyć zadanie \"{{task}}\" jako wykonane?",
+            "deleteAllCompletedMessage": "Czy na pewno chcesz usunąć wszystkie wykonane zadania?",
+            "deleteAllOverdueMessage": "Czy na pewno chcesz usunąć wszystkie przeterminowane zadania?",
+            "defaultMessage": "Potwierdzenie usunięcia"
+        }
+    },
+
+    "navbar": {
+        "taskScheduler": "Zadania",
+        "bossBattle": "Walka z bossem",
+        "market": "Sklep",
+        "inventory": "Ekwipunek",
+        "faq": "Pomoc"
+    },
+
+    "buttons": {
+        "login": "Zaloguj się",
+        "logout": "Wyloguj się",
+        "profile": "Profil",
+        "friends": "Znajomi",
+        "settings": "Ustawienia"
+    },
+
+    "settings": {
+        "settingsHeader": "Ustawienia",
+        "language": "Język interfejsu"
+    },
+
+    "profile": {
+        "closeModal": "Zamknij profil",
+        "noUsername": "Nie podano nazwy użytkownika",
+        "editBtn": "Edytuj profil",
+        "changeAvatar": "Zmień awatar",
+        "namePlaceholder": "Wpisz swoje imię",
+        "bioPlaceholder": "Opowiedz o sobie",
+        "characters": "znaków"
+    },
+
+    "friends": {
+        "sectionTitle": {
+            "friendsSectionTitle": "Znajomi:",
+            "requestsSectionTitle": "Prośby o znajomość:",
+            "friends": "znajomych",
+            "friendsRequests": "prośb o znajomość"
+        },
+        "friendsTitle": "Znajomi",
+        "noAviable": "Brak {{type}}",
+        "accept": "Akceptuj",
+        "decline": "Odrzuć",
+        "cancelRequest": "Anuluj prośbę",
+        "add": "Dodaj",
+        "searchPlaceholder": "Szukaj użytkowników...",
+        "searchButton": "Szukaj",
+        "noSearchResults": "Nie znaleziono użytkowników",
+        "sendMessage": "Wyślij wiadomość",
+        "chatSoon": "Czat będzie dostępny wkrótce"
+    },
+
+    "boss": {
+        "initBossBtn": "Rozpocznij walkę z bossem",
+        "rage": "Wściekłość",
+        "power": "Moc"
+    },
+
+    "defeat": {
+        "title": "Porażka",
+        "message": "Straciłeś całe zdrowie. Zacząć od nowa?",
+        "restartButton": "Rozpocznij nową epicką przygodę!"
+    },
+
+    "market": {
+        "marketHeader": "Mistyczny rynek",
+        "price": "Cena",
+        "addToCart": "Dodaj do koszyka",
+        "cartTitle": "Koszyk",
+        "emptyCart": "Twój koszyk jest pusty",
+        "buyAll": "Kup wszystko",
+        "greetings": {
+            "readyToShop": "Gotowy na zakupy?",
+            "findSomethingUnique": "Znajdź coś wyjątkowego!",
+            "spendTimeWisely": "Spędź czas z pożytkiem!",
+            "somethingInteresting": "Mamy coś ciekawego!",
+            "lookingForTreasures": "Szukasz skarbów?",
+            "bestDeals": "Nie przegap najlepszych ofert!",
+            "cartIsHungry": "Twój koszyk jest głodny!",
+            "shopLikeHero": "Kupuj jak bohater!",
+            "freshDeals": "Codzienne świeże oferty!",
+            "goldWellSpent": "Dobrze wydane złoto to zarobione złoto!"
+        }
+    },
+
+    "inventory": {
+        "inventoryHeader": "Ekwipunek",
+        "use": "Użyj"
+    },
+
+    "auth": {
+        "forgotPassword": {
+            "title": "Zapomniałeś hasła?",
+            "sendLink": "Wyślij link do resetu",
+            "success": "Sprawdź swoją pocztę..."
+        },
+        "resetPassword": {
+            "title": "Resetowanie hasła",
+            "newPassword": "Nowe hasło",
+            "confirmPassword": "Potwierdź nowe hasło",
+            "submit": "Aktualizuj hasło",
+            "success": "Hasło zmienione. Przekierowanie..."
+        },
+        "login": {
+            "title": "Zaloguj się",
+            "loading": "Logowanie...",
+            "forgotQuestion": "Zapomniałeś hasła?",
+            "forgotLink": "Odzyskaj tutaj",
+            "submit": "Zaloguj się",
+            "noAccount": "Nie masz konta?",
+            "registerLink": "Zarejestruj się"
+        },
+        "registration": {
+            "title": "Rejestracja",
+            "confirmLabel": "Potwierdź hasło",
+            "confirmPlaceholder": "Powtórz hasło",
+            "submit": "Zarejestruj się",
+            "loading": "Rejestracja...",
+            "haveAccount": "Masz już konto?",
+            "loginLink": "Zaloguj się"
+        }
+    },
+
+    "validation": {
+        "fillAllFields": "Proszę wypełnić wszystkie pola",
+        "invalidEmail": "Nieprawidłowy format e-mail",
+        "invalidPassword": "Hasło musi mieć 8–32 znaki, zawierać co najmniej jedną wielką literę i składać się z liter łacińskich",
+        "passwordMismatch": "Hasła nie pasują",
+        "invalidUsername": "Nazwa użytkownika musi mieć od 3 do 32 znaków i zawierać tylko litery łacińskie, cyfry, myślniki, kropki lub podkreślenia",
+        "invalidBio": "Opis profilu nie może przekraczać 500 znaków",
+        "searchQueryEmpty": "Zapytanie wyszukiwania nie może być puste",
+        "searchQuerySelf": "Nie możesz wyszukiwać siebie"
+    },
+
+    "support": {
+        "faqTitle": "Najczęściej zadawane pytania"
+    },
+
+    "errors": {
+        "somethingWentWrong": "Coś poszło nie tak",
+        "tryAgain": "Spróbuj ponownie",
+        "goBack": "Wróć",
+        "returnHome": "Powrót do strony głównej"
+    }
+}

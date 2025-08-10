@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { NavLink } from "react-router-dom";
 import { NavbarDropdown } from "./dropdown/NavbarDropdown";
@@ -11,10 +12,13 @@ import styles from "./Navbar.module.css";
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const { t } = useTranslation();
 
     const toggleMenu = () => {
         setIsMenuOpen((prev) => !prev);
     };
+
+    const closeMenu = () => setIsMenuOpen(false);
 
     return (
         <>
@@ -37,7 +41,7 @@ const Navbar = () => {
                                     : styles.navLink
                             }
                         >
-                            Task Scheduler
+                            {t("navbar.taskScheduler")}
                         </NavLink>
                         <NavLink
                             to="/boss"
@@ -47,7 +51,7 @@ const Navbar = () => {
                                     : styles.navLink
                             }
                         >
-                            Boss Battle
+                            {t("navbar.bossBattle")}
                         </NavLink>
                         <NavLink
                             to="/market"
@@ -58,7 +62,7 @@ const Navbar = () => {
                             }
                             onClick={() => setIsMenuOpen(false)}
                         >
-                            Market
+                            {t("navbar.market")}
                         </NavLink>
                         <NavLink
                             to="/inventory"
@@ -69,7 +73,7 @@ const Navbar = () => {
                             }
                             onClick={() => setIsMenuOpen(false)}
                         >
-                            Inventory
+                            {t("navbar.inventory")}
                         </NavLink>
                         <NavLink
                             to="/faq"
@@ -79,13 +83,13 @@ const Navbar = () => {
                                     : styles.navLink
                             }
                         >
-                            FAQ
+                            {t("navbar.faq")}
                         </NavLink>
                     </div>
                 </div>
 
                 <div className={styles.navButtons}>
-                    <NavbarDropdown />
+                    <NavbarDropdown closeMenu={closeMenu} />
                     <button
                         className={styles.burgerToggle}
                         onClick={toggleMenu}
@@ -110,7 +114,7 @@ const Navbar = () => {
                                 }
                                 onClick={() => setIsMenuOpen(false)}
                             >
-                                Task Scheduler
+                                {t("navbar.taskScheduler")}
                             </NavLink>
                             <NavLink
                                 to="/boss"
@@ -121,7 +125,7 @@ const Navbar = () => {
                                 }
                                 onClick={() => setIsMenuOpen(false)}
                             >
-                                Boss Battle
+                                {t("navbar.bossBattle")}
                             </NavLink>
                             <NavLink
                                 to="/market"
@@ -132,7 +136,7 @@ const Navbar = () => {
                                 }
                                 onClick={() => setIsMenuOpen(false)}
                             >
-                                Market
+                                {t("navbar.market")}
                             </NavLink>
                             <NavLink
                                 to="/inventory"
@@ -143,7 +147,7 @@ const Navbar = () => {
                                 }
                                 onClick={() => setIsMenuOpen(false)}
                             >
-                                Inventory
+                                {t("navbar.inventory")}
                             </NavLink>
                             <NavLink
                                 to="/faq"
@@ -154,7 +158,7 @@ const Navbar = () => {
                                 }
                                 onClick={() => setIsMenuOpen(false)}
                             >
-                                FAQ
+                                {t("navbar.faq")}
                             </NavLink>
                         </div>
                     )}

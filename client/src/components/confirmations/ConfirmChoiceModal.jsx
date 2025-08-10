@@ -1,6 +1,10 @@
+import { useTranslation } from "react-i18next";
+
 import styles from "./ConfirmChoiceModal.module.css";
 
 const ConfirmChoiceModal = ({ isOpen, onClose, onConfirm, title, message }) => {
+    const { t } = useTranslation();
+
     if (!isOpen) return null;
 
     const handleBackdropClick = (event) => {
@@ -35,13 +39,13 @@ const ConfirmChoiceModal = ({ isOpen, onClose, onConfirm, title, message }) => {
                         className={`${styles.button} ${styles.confirmBtn}`}
                         onClick={onConfirm}
                     >
-                        Yes
+                        {t("shared.yes")}
                     </button>
                     <button
                         className={`${styles.button} ${styles.cancelBtn}`}
                         onClick={onClose}
                     >
-                        No
+                        {t("shared.no")}
                     </button>
                 </div>
             </div>

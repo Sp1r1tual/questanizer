@@ -1,14 +1,14 @@
-const GREETINGS = [
-    "Ready to shop?",
-    "Find something unique!",
-    "Spend time wisely!",
-    "We have something interesting!",
-    "Looking for treasures?",
-    "Don't miss our best deals!",
-    "Your cart is hungry!",
-    "Shop like a hero!",
-    "Fresh deals daily!",
-    "Gold well spent is gold earned!",
+const greetings = [
+    "market.greetings.readyToShop",
+    "market.greetings.findSomethingUnique",
+    "market.greetings.spendTimeWisely",
+    "market.greetings.somethingInteresting",
+    "market.greetings.lookingForTreasures",
+    "market.greetings.bestDeals",
+    "market.greetings.cartIsHungry",
+    "market.greetings.shopLikeHero",
+    "market.greetings.freshDeals",
+    "market.greetings.goldWellSpent",
 ];
 
-export { GREETINGS };
+export { greetings };

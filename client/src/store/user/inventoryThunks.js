@@ -24,6 +24,7 @@ const applyInventoryItem = createAsyncThunk(
             });
 
             thunkAPI.dispatch(fetchStats());
+            thunkAPI.dispatch(fetchInventory());
 
             return response.data;
         } catch (error) {

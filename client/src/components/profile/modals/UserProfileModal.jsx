@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
-import { fetchUserProfile } from "../../../../store/user/userProfileThunks";
+import { fetchUserProfile } from "../../../store/user/userProfileThunks";
 import { EditProfileForm } from "../EditProfileForm";
-import { getAvatarUrl } from "../../../../utils/user/getAvatarUrl";
-import { formatDate } from "../../../../utils/date/formatDate";
-import { Loader } from "../../../ui/loaders/Loader";
+import { getAvatarUrl } from "../../../utils/user/getAvatarUrl";
+import { formatDate } from "../../../utils/date/formatDate";
+import { Loader } from "../../ui/loaders/Loader";
 
 import styles from "./UserProfileModal.module.css";
 
@@ -14,6 +15,7 @@ const UserProfileModal = ({ onClose }) => {
     const user = useSelector((state) => state.user.profile);
     const isLoading = useSelector((state) => state.user.isLoading);
     const [isEditing, setIsEditing] = useState(false);
+    const { t } = useTranslation();
 
     useEffect(() => {
         dispatch(fetchUserProfile());
@@ -47,7 +49,7 @@ const UserProfileModal = ({ onClose }) => {
                 <button
                     className={styles.closeBtn}
                     onClick={onClose}
-                    aria-label="Close profile modal"
+                    aria-label={t("profile.closeModal")}
                 >
                     ×
                 </button>
@@ -62,18 +64,18 @@ const UserProfileModal = ({ onClose }) => {
                         <div className={styles.profileHeader}>
                             <img
                                 src={getAvatarUrl(photoUrl)}
-                                alt={`${name || "User"}'s avatar`}
+                                alt={`${name || t("profile.noUsername")}`}
                                 className={styles.avatar}
                             />
                             <h2 className={styles.name}>
-                                {name || "Username not set"}
+                                {name || t("profile.noUsername")}
                             </h2>
                         </div>
 
                         <div className={styles.profileInfo}>
                             <div className={styles.infoItem}>
                                 <strong className={styles.infoLabel}>
-                                    Level:
+                                    {t("shared.level")}:
                                 </strong>
                                 <span className={styles.infoValue}>
                                     {level}
@@ -81,7 +83,7 @@ const UserProfileModal = ({ onClose }) => {
                             </div>
                             <div className={styles.infoItem}>
                                 <strong className={styles.infoLabel}>
-                                    Health:
+                                    {t("shared.health")}:
                                 </strong>
                                 <span className={styles.infoValue}>
                                     {health}
@@ -89,7 +91,7 @@ const UserProfileModal = ({ onClose }) => {
                             </div>
                             <div className={styles.infoItem}>
                                 <strong className={styles.infoLabel}>
-                                    Joined:
+                                    {t("shared.joined")}:
                                 </strong>
                                 <span className={styles.infoValue}>
                                     {formattedDate}
@@ -97,10 +99,10 @@ const UserProfileModal = ({ onClose }) => {
                             </div>
                             <div className={styles.infoItem}>
                                 <strong className={styles.infoLabel}>
-                                    Bio:
+                                    {t("shared.bio")}:
                                 </strong>
                                 <span className={styles.infoValue}>
-                                    {bio || "No description provided"}
+                                    {bio || t("profile.noBio")}
                                 </span>
                             </div>
                         </div>
@@ -108,9 +110,9 @@ const UserProfileModal = ({ onClose }) => {
                         <button
                             className={styles.editBtn}
                             onClick={() => setIsEditing(true)}
-                            aria-label="Edit profile"
+                            aria-label={t("profile.editBtn")}
                         >
-                            Edit Profile
+                            {t("profile.editBtn")}
                         </button>
                     </>
                 )}

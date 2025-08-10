@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 import { TaskItem } from "./TaskItem";
 import { DotsLoader } from "../ui/loaders/DotsLoader";
 import { TaskFilters } from "./TaskFilters";
@@ -14,6 +16,8 @@ const TaskList = ({
     filters,
     onFilterChange,
 }) => {
+    const { t } = useTranslation();
+
     if (loading) {
         return <DotsLoader />;
     }
@@ -43,7 +47,7 @@ const TaskList = ({
                         />
                     ))
                 ) : (
-                    <li>No tasks available</li>
+                    <li>{t("organizer.taskList.noTasks")}</li>
                 )}
             </ul>
         </>

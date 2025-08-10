@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import { ErrorBoundary } from "react-error-boundary";
 
@@ -9,12 +10,15 @@ const ErrorBoundaryWrapper = ({ children }) => {
     const navigate = useNavigate();
     const location = useLocation();
     const [resetKey, setResetKey] = useState(0);
+    const { t } = useTranslation();
 
     const fallbackRender = ({ error, resetErrorBoundary }) => {
         return (
             <div className={styles.errorWrapper}>
                 <div role="alert" className={styles.errorAlert}>
-                    <p className={styles.errorText}>Something went wrong:</p>
+                    <p className={styles.errorText}>
+                        {t("errors.somethingWentWrong")}:
+                    </p>
                     <pre className={styles.errorMessage}>{error.message}</pre>
 
                     <div className={styles.buttonGroup}>
@@ -25,13 +29,13 @@ const ErrorBoundaryWrapper = ({ children }) => {
                             }}
                             className={styles.retryButton}
                         >
-                            Try again
+                            {t("errors.tryAgain")}
                         </button>
                         <button
                             onClick={() => navigate(-1)}
                             className={styles.backButton}
                         >
-                            Go back
+                            {t("errors.goBack")}
                         </button>
                     </div>
                 </div>

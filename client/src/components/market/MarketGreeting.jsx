@@ -1,18 +1,20 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
-import { GREETINGS } from "../../data/greetings";
+import { greetings } from "../../data/greetings";
 
 import styles from "./MarketGreeting.module.css";
 
 const MarketGreeting = () => {
     const [message, setMessage] = useState("");
+    const { t } = useTranslation();
 
     useEffect(() => {
         const shouldShow = Math.random() < 0.5;
 
         if (shouldShow) {
             const randomMsg =
-                GREETINGS[Math.floor(Math.random() * GREETINGS.length)];
+                greetings[Math.floor(Math.random() * greetings.length)];
 
             setMessage(randomMsg);
         }
@@ -30,7 +32,7 @@ const MarketGreeting = () => {
 
     if (!message) return null;
 
-    return <div className={styles.greeting}>{message}</div>;
+    return <div className={styles.greeting}>{t(message)}</div>;
 };
 
 export { MarketGreeting };

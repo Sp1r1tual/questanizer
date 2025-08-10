@@ -1,9 +1,11 @@
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import styles from "./BossStats.module.css";
 
 const BossStats = () => {
     const boss = useSelector((state) => state.bossBattle);
+    const { t } = useTranslation();
 
     if (!boss.bossId) return null;
 
@@ -13,7 +15,8 @@ const BossStats = () => {
             <div className={styles.statsContainer}>
                 <div className={styles.statBlock}>
                     <span className={styles.statText}>
-                        💚 Health: {boss.healthPoints}/{boss.maxHealthPoints}
+                        💚 {t("shared.health")}: {boss.healthPoints}/
+                        {boss.maxHealthPoints}
                     </span>
                     <progress
                         className={`${styles.progressBar} ${styles.health}`}
@@ -25,7 +28,7 @@ const BossStats = () => {
 
                 <div className={styles.statBlock}>
                     <span className={styles.statText}>
-                        🔥 Rage: {boss.rage}/{boss.bossRageBar}
+                        🔥 {t("boss.rage")}: {boss.rage}/{boss.bossRageBar}
                     </span>
                     <progress
                         className={`${styles.progressBar} ${styles.rage}`}
@@ -37,7 +40,7 @@ const BossStats = () => {
 
                 <div className={styles.statBlock}>
                     <span className={styles.statText}>
-                        ⚔️ Power: {boss.bossPower}
+                        ⚔️ {t("boss.power")}: {boss.bossPower}
                     </span>
                 </div>
             </div>

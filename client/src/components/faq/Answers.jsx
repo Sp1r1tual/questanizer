@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import { AnswerItem } from "./AnswerItem";
 import { fetchFaqs } from "../../store/support/faqThunks";
@@ -9,6 +10,7 @@ import styles from "./Answers.module.css";
 
 const Answers = () => {
     const dispatch = useDispatch();
+    const { t } = useTranslation();
 
     const [openIndices, setOpenIndices] = useState([]);
 
@@ -32,7 +34,7 @@ const Answers = () => {
 
     return (
         <div className={styles.answersPage}>
-            <h1 className={styles.title}>Frequently asked questions</h1>
+            <h1 className={styles.title}>{t("support.faqTitle")}</h1>
             <Loader visible={loading} />
             <div className={styles.faqList}>
                 {faqs.map((faq, index) => (

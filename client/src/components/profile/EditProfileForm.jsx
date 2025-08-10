@@ -1,4 +1,5 @@
-import { useUserProfileForm } from "../../../hooks/user/useUserProfileForm";
+import { useUserProfileForm } from "../../hooks/user/useUserProfileForm";
+import { useTranslation } from "react-i18next";
 
 import styles from "./EditProfileForm.module.css";
 
@@ -16,13 +17,14 @@ const EditProfileForm = ({ onCancel, onSave }) => {
         bioError,
         error,
     } = useUserProfileForm(onSave);
+    const { t } = useTranslation();
 
     return (
         <form className={styles.form} onSubmit={handleSubmit}>
             <div className={styles.avatarSection}>
                 <img
                     src={avatarPreview}
-                    alt="User avatar preview"
+                    alt="avatar"
                     className={styles.avatar}
                     loading="lazy"
                 />
@@ -34,7 +36,7 @@ const EditProfileForm = ({ onCancel, onSave }) => {
                         document.getElementById("avatarInput").click()
                     }
                 >
-                    Change Avatar
+                    {t("profile.changeAvatar")}
                 </button>
 
                 <input
@@ -43,13 +45,13 @@ const EditProfileForm = ({ onCancel, onSave }) => {
                     accept="image/*"
                     onChange={handleAvatarChange}
                     className={styles.avatarInput}
-                    aria-label="Upload new avatar"
+                    aria-label={t("profile.changeAvatar")}
                 />
             </div>
 
             <div className={styles.fieldGroup}>
                 <label htmlFor="name" className={styles.label}>
-                    Name:
+                    {t("shared.nameLabel")}
                 </label>
                 <input
                     id="name"
@@ -59,7 +61,7 @@ const EditProfileForm = ({ onCancel, onSave }) => {
                     className={`${styles.input} ${
                         nameError ? styles.inputError : ""
                     }`}
-                    placeholder="Enter your name"
+                    placeholder={t("profile.namePlaceholder")}
                     maxLength={50}
                     aria-required="true"
                     disabled={isSubmitting}
@@ -69,7 +71,7 @@ const EditProfileForm = ({ onCancel, onSave }) => {
 
             <div className={styles.fieldGroup}>
                 <label htmlFor="bio" className={styles.label}>
-                    Bio:
+                    {t("shared.bio")}
                 </label>
                 <textarea
                     id="bio"
@@ -78,7 +80,7 @@ const EditProfileForm = ({ onCancel, onSave }) => {
                     className={`${styles.textarea} ${
                         bioError ? styles.inputError : ""
                     }`}
-                    placeholder="Tell us about yourself"
+                    placeholder={t("profile.bioPlaceholder")}
                     rows={4}
                     maxLength={500}
                     aria-describedby="bio-hint"
@@ -86,7 +88,7 @@ const EditProfileForm = ({ onCancel, onSave }) => {
                 />
                 {bioError && <p className={styles.error}>{bioError}</p>}
                 <small id="bio-hint" className={styles.hint}>
-                    {bio.length}/500 characters
+                    {bio.length}/500 {t("profile.characters")}
                 </small>
             </div>
 
@@ -96,19 +98,19 @@ const EditProfileForm = ({ onCancel, onSave }) => {
                 <button
                     type="submit"
                     className={styles.submitBtn}
-                    aria-label="Save profile changes"
+                    aria-label={t("shared.save")}
                     disabled={isSubmitting}
                 >
-                    {isSubmitting ? "Saving..." : "Save"}
+                    {isSubmitting ? t("shared.saving") : t("shared.save")}
                 </button>
                 <button
                     type="button"
                     className={styles.cancelBtn}
                     onClick={onCancel}
-                    aria-label="Cancel editing"
+                    aria-label={t("shared.cancel")}
                     disabled={isSubmitting}
                 >
-                    Cancel
+                    {t("shared.cancel")}
                 </button>
             </div>
         </form>

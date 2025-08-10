@@ -2,7 +2,7 @@ import {
     validateEmail,
     validatePassword,
     validateConfirmPassword,
-    ERROR_MESSAGES,
+    errorMessages,
 } from "./validateForm";
 
 const checkRequiredFields = (values, requiredFields) => {
@@ -11,7 +11,7 @@ const checkRequiredFields = (values, requiredFields) => {
     );
 
     return emptyFields.length > 0
-        ? { fillAllFields: ERROR_MESSAGES.fillAllFields }
+        ? { fillAllFields: errorMessages.fillAllFields }
         : {};
 };
 
@@ -28,11 +28,11 @@ const validateLoginForm = (values) => {
     const errors = {};
 
     if (!validateEmail(values.email)) {
-        errors.email = ERROR_MESSAGES.invalidEmail;
+        errors.email = errorMessages.invalidEmail;
     }
 
     if (!validatePassword(values.password)) {
-        errors.password = ERROR_MESSAGES.invalidPassword;
+        errors.password = errorMessages.invalidPassword;
     }
 
     return errors;
@@ -52,15 +52,15 @@ const validateRegistrationForm = (values) => {
     const errors = {};
 
     if (!validateEmail(values.email)) {
-        errors.email = ERROR_MESSAGES.invalidEmail;
+        errors.email = errorMessages.invalidEmail;
     }
 
     if (!validatePassword(values.password)) {
-        errors.password = ERROR_MESSAGES.invalidPassword;
+        errors.password = errorMessages.invalidPassword;
     }
 
     if (!validateConfirmPassword(values.password, values.confirmPassword)) {
-        errors.confirmPassword = ERROR_MESSAGES.passwordMismatch;
+        errors.confirmPassword = errorMessages.passwordMismatch;
     }
 
     return errors;
@@ -79,11 +79,11 @@ const validateResetPasswordForm = (values) => {
     const errors = {};
 
     if (!validatePassword(values.password)) {
-        errors.password = ERROR_MESSAGES.invalidPassword;
+        errors.password = errorMessages.invalidPassword;
     }
 
     if (!validateConfirmPassword(values.password, values.confirmPassword)) {
-        errors.confirmPassword = ERROR_MESSAGES.passwordMismatch;
+        errors.confirmPassword = errorMessages.passwordMismatch;
     }
 
     return errors;
@@ -93,13 +93,13 @@ const validateForgotPasswordForm = (values) => {
     const requiredFieldsError = checkRequiredFields(values, ["email"]);
 
     if (Object.keys(requiredFieldsError).length > 0) {
-        return { email: ERROR_MESSAGES.fillAllFields };
+        return { email: errorMessages.fillAllFields };
     }
 
     const errors = {};
 
     if (!validateEmail(values.email)) {
-        errors.email = ERROR_MESSAGES.invalidEmail;
+        errors.email = errorMessages.invalidEmail;
     }
 
     return errors;

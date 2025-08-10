@@ -1,6 +1,10 @@
+import { useTranslation } from "react-i18next";
+
 import styles from "./UserExperience.module.css";
 
 const UserExperience = ({ experience, level }) => {
+    const { t } = useTranslation();
+
     const expToNext = level * 100;
     const progressPercent = Math.round((experience / expToNext) * 100);
 
@@ -9,7 +13,7 @@ const UserExperience = ({ experience, level }) => {
             <div className={styles.icon}>⭐</div>
             <div className={styles.info}>
                 <div className={styles.text}>
-                    Level {level}, XP: {experience}/{expToNext}
+                    {t("shared.level")} {level}, XP: {experience}/{expToNext}
                 </div>
                 <div className={styles.bar}>
                     <div

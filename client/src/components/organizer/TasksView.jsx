@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useTasks } from "../../hooks/tasks/useTasks";
 import { useTaskFilters } from "../../hooks/tasks/useTaskFilters";
+import { useConfirmModalTexts } from "../../hooks/tasks/useConfirmModalTexts";
+import { useTranslation } from "react-i18next";
 import { useAuth } from "../../hooks/auth/useAuth";
+
 import { ContainerMedium } from "../ui/wrappers/ContainerMedium";
 import { OrganizerHeader } from "./OrganizerHeader";
 import { TaskInput } from "./TaskInput";
@@ -35,7 +38,8 @@ const TasksView = () => {
         onConfirmAction,
         loading,
     } = useTasks();
-
+    const { t } = useTranslation();
+    const { title, message } = useConfirmModalTexts(confirmModal, t);
     const { getFilteredTasks } = useTaskFilters();
 
     useEffect(() => {
@@ -90,25 +94,10 @@ const TasksView = () => {
                     isOpen={confirmModal.isOpen}
                     onClose={onCloseConfirmModal}
                     onConfirm={onConfirmAction}
-                    title={
-                        confirmModal.actionType === "delete"
-                            ? "Delete Task"
-                            : confirmModal.actionType === "complete"
-                            ? "Complete Task"
-                            : "Confirm deletion"
-                    }
-                    message={
-                        confirmModal.actionType === "delete"
-                            ? `Are you sure you want to delete the task "${confirmModal.taskText}"? This action cannot be undone.`
-                            : confirmModal.actionType === "complete"
-                            ? `Mark the task "${confirmModal.taskText}" as completed?`
-                            : confirmModal.actionType ===
-                              "group-delete-completed"
-                            ? "Are you sure you want to delete all completed tasks?"
-                            : "Are you sure you want to delete all overdue tasks?"
-                    }
-                    confirmText="Yes"
-                    cancelText="No"
+                    title={title}
+                    message={message}
+                    confirmText={t("common.yes")}
+                    cancelText={t("common.no")}
                 />
             )}
         </ContainerMedium>

@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import { InventoryItem } from "./InventoryItem";
 import { fetchInventory } from "../../store/user/inventoryThunks";
@@ -12,6 +13,7 @@ const InventoryList = () => {
     const { inventoryItems, isLoading, hasLoaded, error } = useSelector(
         (state) => state.inventory
     );
+    const { t } = useTranslation();
 
     useEffect(() => {
         if (!hasLoaded) {
@@ -23,12 +25,16 @@ const InventoryList = () => {
         return <DotsLoader />;
     }
 
-    if (!inventoryItems.items?.length) {
-        return <div>No items available</div>;
+    if (error) {
+        return (
+            <div>
+                {t("errors.uploadError")}: {error}
+            </div>
+        );
     }
 
-    if (error) {
-        return <div>Upload error: {error}</div>;
+    if (!inventoryItems.items?.length) {
+        return <div>{t("shared.noItems")}</div>;
     }
 
     return (

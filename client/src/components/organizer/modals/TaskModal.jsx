@@ -17,7 +17,7 @@ const TaskModal = ({ deadline, setDeadline, onSubmit, onClose, isOpen }) => {
         handleFinalSubmit,
         setDifficulty,
     } = useTaskModalState({
-        initialDeadline: deadline,
+        deadline,
         setDeadline,
         onSubmit,
         onClose,
@@ -41,9 +41,9 @@ const TaskModal = ({ deadline, setDeadline, onSubmit, onClose, isOpen }) => {
         >
             <div
                 className={styles.modalContent}
-                onClick={(e) => e.stopPropagation()}
+                onClick={(event) => event.stopPropagation()}
             >
-                <form onSubmit={(e) => e.preventDefault()}>
+                <form onSubmit={(event) => event.preventDefault()}>
                     <h2 id="task-modal-title">{modalTitles[pageModal]}</h2>
 
                     <div id="task-modal-desc" className="visuallyHidden">

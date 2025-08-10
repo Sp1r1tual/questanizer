@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../hooks/auth/useAuth";
+import { useTranslation } from "react-i18next";
 
 import authLoginImg from "../../../assets/user-authentication-svgrepo-login.png";
 import authLoggedInImg from "../../../assets/user-authentication-svgrepo-logged-in.png";
@@ -9,6 +10,7 @@ import styles from "./NavbarAuthBtn.module.css";
 const NavbarAuthBtn = () => {
     const navigate = useNavigate();
     const { isAuthenticated, signOut } = useAuth();
+    const { t } = useTranslation();
 
     const handleAuthBtn = () => {
         if (isAuthenticated) {
@@ -28,7 +30,7 @@ const NavbarAuthBtn = () => {
                 />
             </span>
             <span className={styles.loginText}>
-                {isAuthenticated ? "Logout" : "Login"}
+                {isAuthenticated ? t("buttons.logout") : t("buttons.login")}
             </span>
         </button>
     );

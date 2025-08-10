@@ -9,6 +9,7 @@ import publicUserProfileReducer from "../store/user/publicUserProfileSlice";
 import faqReducer from "../store/support/faqSlice";
 import marketReducer from "../store/market/marketSlice";
 import inventoryReducer from "../store/user/inventorySlice";
+import localizationSlice from "../store/user/localizationSlice";
 
 const store = configureStore({
     reducer: {
@@ -22,6 +23,7 @@ const store = configureStore({
         faq: faqReducer,
         market: marketReducer,
         inventory: inventoryReducer,
+        localization: localizationSlice,
     },
 });
 

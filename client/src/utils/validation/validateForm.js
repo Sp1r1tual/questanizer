@@ -1,12 +1,10 @@
-const ERROR_MESSAGES = {
-    fillAllFields: "Please fill out all fields",
-    invalidEmail: "Invalid email format",
-    invalidPassword:
-        "Password must be 8-32 characters, include an uppercase letter, and be in Latin",
-    passwordMismatch: "Passwords do not match",
-    invalidUsername:
-        "Username must be 3-32 characters and contain only Latin letters, numbers, dashes, periods, or underscores",
-    invalidBio: "Bio must not exceed 500 characters",
+const errorMessages = {
+    fillAllFields: "validation.fillAllFields",
+    invalidEmail: "validation.invalidEmail",
+    invalidPassword: "validation.invalidPassword",
+    passwordMismatch: "validation.passwordMismatch",
+    invalidUsername: "validation.invalidUsername",
+    invalidBio: "validation.invalidBio",
 };
 
 const validateEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
@@ -35,5 +33,5 @@ export {
     validateConfirmPassword,
     validateUsername,
     validateBio,
-    ERROR_MESSAGES,
+    errorMessages,
 };

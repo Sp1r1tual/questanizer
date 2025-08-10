@@ -1,12 +1,15 @@
 import { useForm } from "../hooks/auth/useForm";
+import { useTranslation } from "react-i18next";
 
 import { validateForgotPasswordForm } from "../utils/validation/validateFormFields";
 import { AuthService } from "../services/authService";
 import { Loader } from "../components/ui/loaders/Loader";
+import { ChangeLanguageBtn } from "../components/ui/buttons/changeLanguageBtn";
 
 import styles from "./ForgotPasswordPage.module.css";
 
 const ForgotPasswordPage = () => {
+    const { t } = useTranslation();
     const form = useForm({
         initialValues: { email: "" },
         validate: validateForgotPasswordForm,
@@ -39,14 +42,18 @@ const ForgotPasswordPage = () => {
     return (
         <>
             <Loader visible={form.isLoading} />
-
             <div className={styles.forgotPassword}>
+                <div className={styles.languageBtnWrapper}>
+                    <ChangeLanguageBtn />
+                </div>
                 <div className={styles.contentForm}>
-                    <h2 className={styles.formTitle}>Forgot your password?</h2>
+                    <h2 className={styles.formTitle}>
+                        {t("auth.forgotPassword.title")}
+                    </h2>
                     <form onSubmit={form.handleSubmit(handleSubmit)} noValidate>
                         <div className={styles.formGroup}>
                             <label htmlFor="email" className={styles.formLabel}>
-                                Email
+                                {t("shared.emailLabel")}
                             </label>
                             <input
                                 type="email"
@@ -54,7 +61,7 @@ const ForgotPasswordPage = () => {
                                 value={form.values.email}
                                 name="email"
                                 onChange={handleFieldChange}
-                                placeholder="Enter your email"
+                                placeholder={t("shared.emailLabel")}
                                 className={`${styles.formInput} ${
                                     form.errors.email ||
                                     form.errors.fillAllFields
@@ -67,13 +74,15 @@ const ForgotPasswordPage = () => {
 
                         {allErrors.length > 0 && (
                             <div className={styles.error} role="alert">
-                                <p>{allErrors.join(", ")}</p>
+                                <p>
+                                    {allErrors.map((err) => t(err)).join(", ")}
+                                </p>
                             </div>
                         )}
 
                         {form.message && (
                             <div className={styles.success} role="alert">
-                                <p>{form.message}</p>
+                                <p>{t("auth.forgotPassword.success")}</p>
                             </div>
                         )}
 
@@ -84,8 +93,8 @@ const ForgotPasswordPage = () => {
                                 disabled={form.isLoading}
                             >
                                 {form.isLoading
-                                    ? "Sending..."
-                                    : "Send reset link"}
+                                    ? t("shared.saving")
+                                    : t("auth.forgotPassword.sendLink")}
                             </button>
                         </div>
                     </form>

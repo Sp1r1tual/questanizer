@@ -1,4 +1,6 @@
-import { getAvatarUrl } from "../../../utils/user/getAvatarUrl";
+import { useTranslation } from "react-i18next";
+
+import { getAvatarUrl } from "../../utils/user/getAvatarUrl";
 
 import styles from "./FriendItem.module.css";
 
@@ -10,6 +12,8 @@ const FriendItem = ({
     onAccept,
     onShowProfile,
 }) => {
+    const { t } = useTranslation();
+
     if (!friend) return null;
 
     const handleRemove = () => {
@@ -55,7 +59,7 @@ const FriendItem = ({
             <div className={styles.friendActions}>
                 {friendStatus === "friend" && (
                     <button className={styles.removeBtn} onClick={handleRemove}>
-                        Remove
+                        {t("shared.remove")}
                     </button>
                 )}
 
@@ -65,26 +69,26 @@ const FriendItem = ({
                             className={styles.acceptBtn}
                             onClick={handleAccept}
                         >
-                            Accept
+                            {t("friends.accept")}
                         </button>
                         <button
                             className={styles.removeBtn}
                             onClick={handleRemove}
                         >
-                            Decline
+                            {t("friends.decline")}
                         </button>
                     </>
                 )}
 
                 {friendStatus === "sent" && (
                     <button className={styles.cancelBtn} onClick={handleRemove}>
-                        Cancel friend request
+                        {t("friends.cancelRequest")}
                     </button>
                 )}
 
                 {friendStatus === "none" && (
                     <button className={styles.addBtn} onClick={handleAdd}>
-                        Add
+                        {t("friends.add")}
                     </button>
                 )}
             </div>

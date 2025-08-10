@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import { fetchMarket } from "../../store/market/marketThunks";
 import { MarketItem } from "./MarketItem";
@@ -9,6 +10,7 @@ import styles from "./MarketList.module.css";
 
 const MarketList = () => {
     const dispatch = useDispatch();
+    const { t } = useTranslation();
     const { marketItems, isLoading, error } = useSelector(
         (state) => state.market
     );
@@ -24,11 +26,15 @@ const MarketList = () => {
     }
 
     if (error) {
-        return <div className={styles.error}>Upload error: {error}</div>;
+        return (
+            <div className={styles.error}>
+                {t("errors.somethingWentWrong")}: {error}
+            </div>
+        );
     }
 
     if (!marketItems.length) {
-        return <div className={styles.empty}>No items available</div>;
+        return <div className={styles.empty}>{t("shared.noItems")}</div>;
     }
 
     return (

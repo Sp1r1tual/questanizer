@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 import { isTaskOverdue } from "../../utils/tasks/isTaskOverdue";
 import { countCompletedTasks } from "../../utils/tasks/countCompletedTasks";
 import { countOverdueTasks } from "../../utils/tasks/countOverdueTasks";
@@ -13,6 +15,7 @@ const TaskDropdown = ({
     groupDeleteCompleted,
     groupDeleteOverdue,
 }) => {
+    const { t } = useTranslation();
     const completedTasksCount = countCompletedTasks(tasks);
     const overdueTasksCount = countOverdueTasks(tasks);
     const overdue = isTaskOverdue(task);
@@ -32,15 +35,16 @@ const TaskDropdown = ({
             <div className={styles.dropdown}>
                 <div className={styles.dropdownInfo}>
                     <div className={styles.infoItem}>
-                        📅 Created:{" "}
+                        📅 {t("shared.createdAt")}{" "}
                         {new Date(task.createdAt).toLocaleDateString("uk-UA")}
                     </div>
                     <div className={styles.infoItem}>
-                        ⚔️ Difficulty: {task.difficulty}
+                        ⚔️ {t("shared.difficulty")}{" "}
+                        {t(`shared.${task.difficulty}`)}
                     </div>
                     {task.deadline && (
                         <div className={styles.infoItem}>
-                            ⏰ Deadline:{" "}
+                            ⏰ {t("shared.deadline")}{" "}
                             {new Date(task.deadline).toLocaleDateString(
                                 "uk-UA"
                             )}
@@ -63,7 +67,9 @@ const TaskDropdown = ({
                         }
                         disabled={task.isCompleted || overdue}
                     >
-                        {task.isCompleted ? "Completed" : "Mark as Done"}
+                        {task.isCompleted
+                            ? t("shared.completed")
+                            : t("organizer.taskDropdown.markAsDone")}
                     </button>
 
                     <button
@@ -71,7 +77,7 @@ const TaskDropdown = ({
                         className={`${styles.dropdownButton} ${styles.deleteBtn}`}
                         onClick={() => handleAction(onDeleteTask)}
                     >
-                        Delete
+                        {t("organizer.taskDropdown.delete")}
                     </button>
 
                     {task.isCompleted && completedTasksCount >= 2 && (
@@ -83,11 +89,11 @@ const TaskDropdown = ({
                                 onClose();
                             }}
                         >
-                            Delete all completed tasks
+                            {t("organizer.taskDropdown.deleteAllCompleted")}
                         </button>
                     )}
 
-                    {overdue && overdueTasksCount > 2 && (
+                    {overdue && overdueTasksCount >= 2 && (
                         <button
                             data-testid="bulk-delete-overdue-button"
                             className={`${styles.dropdownButton} ${styles.bulkDeleteBtn}`}
@@ -96,7 +102,7 @@ const TaskDropdown = ({
                                 onClose();
                             }}
                         >
-                            Delete all overdue tasks
+                            {t("organizer.taskDropdown.deleteAllOverdue")}
                         </button>
                     )}
                 </div>

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import { closeItemModal } from "../../../store/market/marketSlice";
 import { addToCart } from "../../../store/market/marketThunks";
@@ -10,6 +11,7 @@ const MarketItemModal = () => {
     const dispatch = useDispatch();
     const { selectedItem } = useSelector((state) => state.market);
     const [quantity, setQuantity] = useState(1);
+    const { t } = useTranslation();
 
     if (!selectedItem) return null;
 
@@ -58,10 +60,14 @@ const MarketItemModal = () => {
                     className={styles.image}
                 />
                 <p className={styles.description}>{selectedItem.description}</p>
-                <p className={styles.price}>Price: {totalPrice} 🪙</p>
+                <p className={styles.price}>
+                    {t("market.price")}: {totalPrice} 🪙
+                </p>
 
                 <div className={styles.quantitySection}>
-                    <label className={styles.quantityLabel}>Quantity:</label>
+                    <label className={styles.quantityLabel}>
+                        {t("shared.quantity")}:
+                    </label>
                     <div className={styles.quantityControls}>
                         <button
                             className={styles.quantityBtn}
@@ -88,10 +94,10 @@ const MarketItemModal = () => {
 
                 <div className={styles.actions}>
                     <button className={styles.btnAdd} onClick={handleAddToCart}>
-                        Add to cart
+                        {t("market.addToCart")}
                     </button>
                     <button className={styles.btnClose} onClick={handleClose}>
-                        Close
+                        {t("shared.close")}
                     </button>
                 </div>
             </div>

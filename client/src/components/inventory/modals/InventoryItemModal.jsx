@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import { closeInventoryItemModal } from "../../../store/user/inventorySlice";
 import { applyInventoryItem } from "../../../store/user/inventoryThunks";
@@ -10,6 +11,7 @@ const InventoryItemModal = () => {
     const { selectedItem, isInventoryItemModalOpen } = useSelector(
         (state) => state.inventory
     );
+    const { t } = useTranslation();
 
     if (!isInventoryItemModalOpen || !selectedItem) return null;
 
@@ -41,14 +43,14 @@ const InventoryItemModal = () => {
                     {selectedItem.item.description}
                 </p>
                 <div className={styles.price}>
-                    Available: {selectedItem.quantity}
+                    {t("shared.quantity")}: {selectedItem.quantity}
                 </div>
                 <div className={styles.actions}>
                     <button className={styles.btnAdd} onClick={handleUseItem}>
-                        Use
+                        {t("inventory.use")}
                     </button>
                     <button className={styles.btnClose} onClick={handleClose}>
-                        Close
+                        {t("shared.close")}
                     </button>
                 </div>
             </div>

@@ -1,4 +1,5 @@
 import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import { resetStats } from "../../../store/stats/userStatsThunks";
 import { resetBoss } from "../../../store/boss/bossBattleSlice";
@@ -7,6 +8,7 @@ import styles from "./DefeatUserModal.module.css";
 
 const DefeatUserModal = ({ onRestart }) => {
     const dispatch = useDispatch();
+    const { t } = useTranslation();
 
     const handleRestart = async () => {
         try {
@@ -21,10 +23,10 @@ const DefeatUserModal = ({ onRestart }) => {
     return (
         <div className={styles.overlay}>
             <div className={styles.modal}>
-                <h2>Defeat</h2>
-                <p>You have lost all your HP❤️. Can we start again?⚡</p>
+                <h2>{t("defeat.title")}</h2>
+                <p>{t("defeat.message")}</p>
                 <button onClick={handleRestart} className={styles.button}>
-                    Start a new epic adventure🧭
+                    {t("defeat.restartButton")}
                 </button>
             </div>
         </div>

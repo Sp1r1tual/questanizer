@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
-import { fetchPublicUserProfile } from "../../../store/user/publicUserProfileThunks";
-import { formatDate } from "../../../utils/date/formatDate";
-import { getAvatarUrl } from "../../../utils/user/getAvatarUrl";
-import { Loader } from "../../ui/loaders/Loader";
+import { fetchPublicUserProfile } from "../../store/user/publicUserProfileThunks";
+import { formatDate } from "../../utils/date/formatDate";
+import { getAvatarUrl } from "../../utils/user/getAvatarUrl";
+import { Loader } from "../ui/loaders/Loader";
 
-import backArrow from "../../../assets/back-arrow-svgrepo-com.png";
+import backArrow from "../../assets/back-arrow-svgrepo-com.png";
 
 import styles from "./PublicUserProfileModalContent.module.css";
 
@@ -14,6 +15,7 @@ const PublicUserProfileContent = ({ userId, onBack }) => {
     const dispatch = useDispatch();
     const publicProfile = useSelector((state) => state.publicUser.profile);
     const isLoading = useSelector((state) => state.publicUser.isLoading);
+    const { t } = useTranslation();
 
     useEffect(() => {
         if (userId) {
@@ -58,31 +60,39 @@ const PublicUserProfileContent = ({ userId, onBack }) => {
 
             <div className={styles.profileInfo}>
                 <div className={styles.infoItem}>
-                    <strong className={styles.infoLabel}>Level:</strong>
+                    <strong className={styles.infoLabel}>
+                        {t("shared.level")}:
+                    </strong>
                     <span className={styles.infoValue}>{level ?? "N/A"}</span>
                 </div>
                 <div className={styles.infoItem}>
-                    <strong className={styles.infoLabel}>Health:</strong>
+                    <strong className={styles.infoLabel}>
+                        {t("shared.health")}:
+                    </strong>
                     <span className={styles.infoValue}>{health ?? "N/A"}</span>
                 </div>
                 <div className={styles.infoItem}>
-                    <strong className={styles.infoLabel}>Joined:</strong>
+                    <strong className={styles.infoLabel}>
+                        {t("shared.joined")}:
+                    </strong>
                     <span className={styles.infoValue}>{formattedDate}</span>
                 </div>
                 <div className={styles.infoItem}>
-                    <strong className={styles.infoLabel}>Bio:</strong>
+                    <strong className={styles.infoLabel}>
+                        {t("shared.bio")}:
+                    </strong>
                     <span className={styles.infoValue}>
-                        {bio || "No description provided"}
+                        {bio || t("shared.noBio")}
                     </span>
                 </div>
 
                 <button
                     type="button"
                     className={styles.chatBtn}
-                    aria-label="Send message"
-                    onClick={() => alert("Chat will be available soon")}
+                    aria-label={t("friends.sendMessage")}
+                    onClick={() => alert(t("friends.chatSoon"))}
                 >
-                    Send a message
+                    {t("friends.sendMessage")}
                 </button>
             </div>
         </>

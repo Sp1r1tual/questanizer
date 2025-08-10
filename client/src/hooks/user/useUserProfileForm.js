@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
     validateUsername,
     validateBio,
-    ERROR_MESSAGES,
+    errorMessages,
 } from "../../utils/validation/validateForm";
 import {
     updateUserProfile,
@@ -63,12 +63,12 @@ const useUserProfileForm = (onSave) => {
         let hasError = false;
 
         if (!validateUsername(trimmedName)) {
-            setNameError(ERROR_MESSAGES.invalidUsername);
+            setNameError(errorMessages.invalidUsername);
             hasError = true;
         }
 
         if (!validateBio(trimmedBio)) {
-            setBioError(ERROR_MESSAGES.invalidBio);
+            setBioError(errorMessages.invalidBio);
             hasError = true;
         }
 

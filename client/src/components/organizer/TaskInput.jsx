@@ -1,6 +1,10 @@
+import { useTranslation } from "react-i18next";
+
 import styles from "./TaskInput.module.css";
 
 const TaskInput = ({ onChange, value, isInvalid }) => {
+    const { t } = useTranslation();
+
     const inputChangeHandler = (event) => {
         const newValue = event.target.value;
 
@@ -16,13 +20,13 @@ const TaskInput = ({ onChange, value, isInvalid }) => {
                 className={`${styles.taskInput} ${
                     isInvalid ? styles.invalidInput : ""
                 }`}
-                placeholder="Enter what you plan to do..."
+                placeholder={t("organizer.taskInput.placeholder")}
                 onChange={inputChangeHandler}
                 value={value}
             />
             {isInvalid && (
                 <div className={styles.errorMessage}>
-                    Please enter a task description
+                    {t("organizer.taskInput.error")}
                 </div>
             )}
         </div>

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import styles from "./TaskFilters.module.css";
 
@@ -7,6 +8,7 @@ const TaskFilters = ({ onFilterChange }) => {
     const [deadline, setDeadline] = useState("all");
     const [difficulty, setDifficulty] = useState("all");
     const [sortBy, setSortBy] = useState("createdAt");
+    const { t } = useTranslation();
 
     const handleStatusChange = (event) => {
         setStatus(event.target.value);
@@ -60,14 +62,17 @@ const TaskFilters = ({ onFilterChange }) => {
                 onChange={handleStatusChange}
                 className={styles.select}
             >
-                <option value="all">All</option>
-                <option value="completed">Completed</option>
-                <option value="active">Active</option>
+                <option value="all">
+                    {t("organizer.taskFilters.status.all")}
+                </option>
+                <option value="completed">
+                    {t("organizer.taskFilters.status.completed")}
+                </option>
+                <option value="active">
+                    {t("organizer.taskFilters.status.active")}
+                </option>
             </select>
 
-            <label className={styles.visuallyHidden} htmlFor="deadline-select">
-                Filter tasks by deadline
-            </label>
             <select
                 id="deadline-select"
                 name="deadline"
@@ -75,18 +80,20 @@ const TaskFilters = ({ onFilterChange }) => {
                 onChange={handleDeadlineChange}
                 className={styles.select}
             >
-                <option value="all">Any deadline</option>
-                <option value="overdue">Overdue</option>
-                <option value="upcoming">Future</option>
-                <option value="none">No deadline</option>
+                <option value="all">
+                    {t("organizer.taskFilters.deadline.all")}
+                </option>
+                <option value="overdue">
+                    {t("organizer.taskFilters.deadline.overdue")}
+                </option>
+                <option value="upcoming">
+                    {t("organizer.taskFilters.deadline.upcoming")}
+                </option>
+                <option value="none">
+                    {t("organizer.taskFilters.deadline.none")}
+                </option>
             </select>
 
-            <label
-                className={styles.visuallyHidden}
-                htmlFor="difficulty-select"
-            >
-                Filter tasks by difficulty
-            </label>
             <select
                 id="difficulty-select"
                 name="difficulty"
@@ -94,16 +101,23 @@ const TaskFilters = ({ onFilterChange }) => {
                 onChange={handleDifficultyChange}
                 className={styles.select}
             >
-                <option value="all">Any difficulty</option>
-                <option value="easy">Easy</option>
-                <option value="medium">Medium</option>
-                <option value="hard">Hard</option>
-                <option value="critical">Critical</option>
+                <option value="all">
+                    {t("organizer.taskFilters.difficulty.all")}
+                </option>
+                <option value="easy">
+                    {t("organizer.taskFilters.difficulty.easy")}
+                </option>
+                <option value="medium">
+                    {t("organizer.taskFilters.difficulty.medium")}
+                </option>
+                <option value="hard">
+                    {t("organizer.taskFilters.difficulty.hard")}
+                </option>
+                <option value="critical">
+                    {t("organizer.taskFilters.difficulty.critical")}
+                </option>
             </select>
 
-            <label className={styles.visuallyHidden} htmlFor="sortBy-select">
-                Sort tasks by
-            </label>
             <select
                 id="sortBy-select"
                 name="sortBy"
@@ -111,9 +125,15 @@ const TaskFilters = ({ onFilterChange }) => {
                 onChange={handleSortByChange}
                 className={styles.select}
             >
-                <option value="createdAt">By creation date</option>
-                <option value="deadline">By deadline</option>
-                <option value="difficulty">By difficulty</option>
+                <option value="createdAt">
+                    {t("organizer.taskFilters.sortBy.createdAt")}
+                </option>
+                <option value="deadline">
+                    {t("organizer.taskFilters.sortBy.deadline")}
+                </option>
+                <option value="difficulty">
+                    {t("organizer.taskFilters.sortBy.difficulty")}
+                </option>
             </select>
         </div>
     );

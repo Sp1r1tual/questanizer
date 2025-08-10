@@ -10,7 +10,7 @@ const App = () => {
             <ErrorBoundaryWrapper>
                 <Outlet />
             </ErrorBoundaryWrapper>
-            <ToastContainer position="top-right" autoClose={3000} />
+            <ToastContainer position="top-right" autoClose={5000} />
         </>
     );
 };

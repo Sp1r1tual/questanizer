@@ -3,11 +3,11 @@ import { useDispatch } from "react-redux";
 import { useBoss } from "../../hooks/boss/useBoss";
 import { useAuth } from "../../hooks/auth/useAuth";
 
+import { fetchBoss } from "../../store/boss/bossBattleThunks";
 import { BossStats } from "./BossStats";
 import { BossView } from "./BossView";
 import { BossBattleStartBtn } from "./BossBattleStartBtn";
 import { Loader } from "../ui/loaders/Loader";
-import { fetchBoss } from "../../store/boss/bossBattleThunks";
 
 import styles from "./BossBattle.module.css";
 

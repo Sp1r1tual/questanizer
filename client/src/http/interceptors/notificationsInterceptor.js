@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 const ALLOWED_NOTIFICATION_ENDPOINTS = [
     "/stats",
     "/tasks",
-    "/bosses",
+    "/boss",
     "/market",
     "/cart",
     "/inventory",

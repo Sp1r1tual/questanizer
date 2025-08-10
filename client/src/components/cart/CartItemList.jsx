@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 import { DotsLoader } from "../../components/ui/loaders/DotsLoader";
 
 import styles from "./CartItemList.module.css";
@@ -10,6 +12,8 @@ const CartItemList = ({
     onChangeQuantity,
     isLoading,
 }) => {
+    const { t } = useTranslation();
+
     if (isLoading) {
         return <DotsLoader />;
     }
@@ -29,7 +33,7 @@ const CartItemList = ({
                     <div className={styles.itemInfo}>
                         <h3 className={styles.itemName}>{item.item.name}</h3>
                         <div className={styles.itemPrice}>
-                            {item.item.price} gold
+                            {item.item.price} 🪙
                         </div>
                     </div>
 
@@ -67,7 +71,7 @@ const CartItemList = ({
                                 className={styles.removeBtn}
                                 onClick={() => onRemove(item.item._id)}
                             >
-                                Remove
+                                {t("shared.remove")}
                             </button>
                         </div>
                     </div>

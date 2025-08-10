@@ -1,15 +1,18 @@
+import { useTranslation } from "react-i18next";
 import { useParams, useNavigate } from "react-router-dom";
 import { useForm } from "../hooks/auth/useForm";
 
 import { validateResetPasswordForm } from "../utils/validation/validateFormFields";
 import { AuthService } from "../services/authService";
 import { Loader } from "../components/ui/loaders/Loader";
+import { ChangeLanguageBtn } from "../components/ui/buttons/changeLanguageBtn";
 
 import styles from "./ResetPasswordPage.module.css";
 
 const ResetPasswordPage = () => {
     const { token } = useParams();
     const navigate = useNavigate();
+    const { t } = useTranslation();
 
     const form = useForm({
         initialValues: { password: "", confirmPassword: "" },
@@ -44,8 +47,13 @@ const ResetPasswordPage = () => {
         <>
             <Loader visible={form.isLoading} />
             <div className={styles.resetPassword}>
+                <div className={styles.languageBtnWrapper}>
+                    <ChangeLanguageBtn />
+                </div>
                 <div className={styles.container}>
-                    <h2 className={styles.heading}>Reset Your Password</h2>
+                    <h2 className={styles.heading}>
+                        {t("auth.resetPassword.title")}
+                    </h2>
                     <form
                         onSubmit={form.handleSubmit(handleSubmit)}
                         className={styles.form}
@@ -53,7 +61,7 @@ const ResetPasswordPage = () => {
                     >
                         <div className={styles.formGroup}>
                             <label htmlFor="password" className={styles.label}>
-                                New Password
+                                {t("auth.resetPassword.newPassword")}
                             </label>
                             <input
                                 type="password"
@@ -61,7 +69,9 @@ const ResetPasswordPage = () => {
                                 name="password"
                                 value={form.values.password}
                                 onChange={handleFieldChange}
-                                placeholder="New password"
+                                placeholder={t(
+                                    "auth.resetPassword.newPassword"
+                                )}
                                 className={`${styles.input} ${
                                     form.errors.password ||
                                     form.errors.fillAllFields
@@ -83,7 +93,7 @@ const ResetPasswordPage = () => {
                                 htmlFor="confirmPassword"
                                 className={styles.label}
                             >
-                                Confirm New Password
+                                {t("auth.resetPassword.confirmPassword")}
                             </label>
                             <input
                                 type="password"
@@ -91,7 +101,9 @@ const ResetPasswordPage = () => {
                                 name="confirmPassword"
                                 value={form.values.confirmPassword}
                                 onChange={handleFieldChange}
-                                placeholder="Confirm password"
+                                placeholder={t(
+                                    "auth.resetPassword.confirmPassword"
+                                )}
                                 className={`${styles.input} ${
                                     form.errors.confirmPassword ||
                                     form.errors.fillAllFields
@@ -110,13 +122,15 @@ const ResetPasswordPage = () => {
 
                         {allErrors.length > 0 && (
                             <div className={styles.error} role="alert">
-                                <p>{allErrors.join(", ")}</p>
+                                <p>
+                                    {allErrors.map((err) => t(err)).join(", ")}
+                                </p>
                             </div>
                         )}
 
                         {form.message && (
                             <div className={styles.success} role="alert">
-                                <p>{form.message}</p>
+                                <p>{t("auth.resetPassword.success")}</p>
                             </div>
                         )}
 
@@ -127,8 +141,8 @@ const ResetPasswordPage = () => {
                                 disabled={form.isLoading}
                             >
                                 {form.isLoading
-                                    ? "Processing..."
-                                    : "Reset Password"}
+                                    ? t("shared.saving")
+                                    : t("auth.resetPassword.submit")}
                             </button>
                         </div>
                     </form>

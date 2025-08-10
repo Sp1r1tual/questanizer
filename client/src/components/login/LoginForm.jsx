@@ -1,6 +1,7 @@
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../hooks/auth/useAuth";
 import { useForm } from "../../hooks/auth/useForm";
+import { useTranslation } from "react-i18next";
 
 import { validateLoginForm } from "../../utils/validation/validateFormFields";
 import { Loader } from "../../components/ui/loaders/Loader";
@@ -10,6 +11,7 @@ import styles from "./LoginForm.module.css";
 const LoginForm = () => {
     const { signIn, authError, clearError } = useAuth();
     const navigate = useNavigate();
+    const { t } = useTranslation();
 
     const form = useForm({
         initialValues: { email: "", password: "" },
@@ -45,11 +47,11 @@ const LoginForm = () => {
         <>
             <Loader visible={form.isLoading} />
             <div className={styles.contentForm}>
-                <h2 className={styles.formTitle}>Login</h2>
+                <h2 className={styles.formTitle}>{t("auth.login.title")}</h2>
                 <form onSubmit={form.handleSubmit(handleLogin)} noValidate>
                     <div className={styles.formGroup}>
                         <label htmlFor="email" className={styles.formLabel}>
-                            Email
+                            {t("shared.emailLabel")}
                         </label>
                         <input
                             type="email"
@@ -62,14 +64,14 @@ const LoginForm = () => {
                                     ? styles.errorInput
                                     : ""
                             }`}
-                            placeholder="Enter email"
+                            placeholder={t("shared.emailPlaceholder")}
                             autoComplete="email"
                         />
                     </div>
 
                     <div className={styles.formGroup}>
                         <label htmlFor="password" className={styles.formLabel}>
-                            Password
+                            {t("shared.passwordLabel")}
                         </label>
                         <input
                             type="password"
@@ -83,14 +85,14 @@ const LoginForm = () => {
                                     ? styles.errorInput
                                     : ""
                             }`}
-                            placeholder="Enter password"
+                            placeholder={t("shared.passwordPlaceholder")}
                             autoComplete="current-password"
                         />
                     </div>
 
                     {allErrors.length > 0 && (
                         <div className={styles.error} role="alert">
-                            <p>{allErrors.join(", ")}</p>
+                            <p>{allErrors.map((err) => t(err)).join(", ")}</p>
                         </div>
                     )}
 
@@ -100,30 +102,32 @@ const LoginForm = () => {
                             className={styles.submitButton}
                             disabled={form.isLoading}
                         >
-                            {form.isLoading ? "Logging in..." : "Login"}
+                            {form.isLoading
+                                ? t("auth.login.loading")
+                                : t("auth.login.submit")}
                         </button>
                     </div>
                 </form>
 
                 <p className={styles.registerLink}>
-                    Forgot your password?{" "}
+                    {t("auth.login.forgotQuestion")}{" "}
                     <Link
                         to="/forgot-password"
                         className={styles.link}
                         onClick={clearError}
                     >
-                        Recover it here
+                        {t("auth.login.forgotLink")}
                     </Link>
                 </p>
 
                 <p className={styles.registerLink}>
-                    Don't have an account?{" "}
+                    {t("auth.login.noAccount")}{" "}
                     <Link
                         to="/registration"
                         className={styles.link}
                         onClick={clearError}
                     >
-                        Register here
+                        {t("auth.login.registerLink")}
                     </Link>
                 </p>
             </div>

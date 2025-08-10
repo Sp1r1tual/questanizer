@@ -2,23 +2,32 @@ import { useState, useRef, useEffect } from "react";
 
 import { NavbarProfileBtn } from "./NavbarProfileBtn";
 import { NavbarAuthBtn } from "./NavbarAuthBtn";
+import { SettingsBtn } from "./SettingsBtn";
 import { NavbarFriendsBtn } from "./NavbarFriendsBtn";
-import { UserProfileModal } from "../../user/profiles/modals/UserProfileModal";
-import { UserFriendsModal } from "../../user/friends/modals/UserFriendsModal";
+import { UserProfileModal } from "../../profile/modals/UserProfileModal";
+import { UserFriendsModal } from "../../friends/modals/UserFriendsModal";
+import { SettingsModal } from "../../settings/modals/SettingsModal";
 
 import dropdownIcon from "../../../assets/nav-dropdown-svgrepo-com.png";
 import dropdownActiveIcon from "../../../assets/nav-dropdown-active-svgrepo-com.png";
 
 import styles from "./NavbarDropdown.module.css";
 
-const NavbarDropdown = () => {
+const NavbarDropdown = ({ closeMenu }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [showProfileModal, setShowProfileModal] = useState(false);
     const [showFriendsModal, setShowFriendsModal] = useState(false);
+    const [showSettingsModal, setShowSettingsModal] = useState(false);
     const dropdownRef = useRef(null);
 
     const toggleDropdown = () => {
-        setIsOpen((prev) => !prev);
+        setIsOpen((prev) => {
+            const newState = !prev;
+
+            if (newState && closeMenu) closeMenu();
+
+            return newState;
+        });
     };
 
     useEffect(() => {
@@ -69,6 +78,12 @@ const NavbarDropdown = () => {
                                 setShowFriendsModal(true);
                             }}
                         />
+                        <SettingsBtn
+                            onClick={() => {
+                                setIsOpen(false);
+                                setShowSettingsModal(true);
+                            }}
+                        />
                         <NavbarAuthBtn />
                     </div>
                 )}
@@ -80,6 +95,10 @@ const NavbarDropdown = () => {
 
             {showFriendsModal && (
                 <UserFriendsModal onClose={() => setShowFriendsModal(false)} />
+            )}
+
+            {showSettingsModal && (
+                <SettingsModal onClose={() => setShowSettingsModal(false)} />
             )}
         </>
     );

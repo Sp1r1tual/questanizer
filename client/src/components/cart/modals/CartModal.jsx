@@ -1,4 +1,5 @@
 import { useCartModal } from "../../../hooks/market/useCartModal";
+import { useTranslation } from "react-i18next";
 
 import { CartItemList } from "../CartItemList";
 
@@ -18,6 +19,7 @@ const CartModal = () => {
         handleBackdropClick,
         isLoading,
     } = useCartModal();
+    const { t } = useTranslation();
 
     if (!isCartModalOpen) return null;
 
@@ -28,10 +30,12 @@ const CartModal = () => {
                     ×
                 </button>
 
-                <h2 className={styles.title}>Cart</h2>
+                <h2 className={styles.title}>{t("market.cartTitle")}</h2>
 
                 {cart.length === 0 ? (
-                    <div className={styles.emptyCart}>Your cart is empty</div>
+                    <div className={styles.emptyCart}>
+                        {t("market.emptyCart")}
+                    </div>
                 ) : (
                     <>
                         <CartItemList
@@ -45,7 +49,8 @@ const CartModal = () => {
 
                         <div className={styles.totalSection}>
                             <div className={styles.totalPrice}>
-                                Total: {totalPrice} 🪙
+                                {t("shared.total")}: {totalPrice}{" "}
+                                {t("shared.golds")}
                             </div>
                         </div>
                     </>
@@ -57,11 +62,11 @@ const CartModal = () => {
                             className={styles.btnCheckout}
                             onClick={handleCheckout}
                         >
-                            Buy all
+                            {t("market.buyAll")}
                         </button>
                     )}
                     <button className={styles.btnClose} onClick={closeModal}>
-                        Close
+                        {t("shared.close")}
                     </button>
                 </div>
             </div>

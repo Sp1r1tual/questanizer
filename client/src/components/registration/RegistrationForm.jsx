@@ -1,6 +1,7 @@
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../hooks/auth/useAuth";
 import { useForm } from "../../hooks/auth/useForm";
+import { useTranslation } from "react-i18next";
 
 import { validateRegistrationForm } from "../../utils/validation/validateFormFields";
 import { Loader } from "../ui/loaders/Loader";
@@ -10,6 +11,7 @@ import styles from "./RegistrationForm.module.css";
 const RegistrationForm = () => {
     const { registerUser, authError, clearError } = useAuth();
     const navigate = useNavigate();
+    const { t } = useTranslation();
 
     const form = useForm({
         initialValues: { email: "", password: "", confirmPassword: "" },
@@ -49,9 +51,10 @@ const RegistrationForm = () => {
     return (
         <>
             <Loader visible={form.isLoading} />
-
             <div className={styles.contentForm}>
-                <h2 className={styles.formTitle}>Register</h2>
+                <h2 className={styles.formTitle}>
+                    {t("auth.registration.title")}
+                </h2>
                 <form
                     onSubmit={form.handleSubmit(handleRegistration)}
                     aria-label="registration form"
@@ -59,7 +62,7 @@ const RegistrationForm = () => {
                 >
                     <div className={styles.formGroup}>
                         <label htmlFor="email" className={styles.formLabel}>
-                            Email
+                            {t("shared.emailLabel")}
                         </label>
                         <input
                             type="email"
@@ -67,7 +70,7 @@ const RegistrationForm = () => {
                             name="email"
                             value={form.values.email}
                             onChange={handleFieldChange}
-                            placeholder="Enter your email"
+                            placeholder={t("shared.emailPlaceholder")}
                             className={`${styles.formInput} ${
                                 form.errors.email || form.errors.fillAllFields
                                     ? styles.errorInput
@@ -85,7 +88,7 @@ const RegistrationForm = () => {
 
                     <div className={styles.formGroup}>
                         <label htmlFor="password" className={styles.formLabel}>
-                            Password
+                            {t("shared.passwordLabel")}
                         </label>
                         <input
                             type="password"
@@ -93,7 +96,7 @@ const RegistrationForm = () => {
                             name="password"
                             value={form.values.password}
                             onChange={handleFieldChange}
-                            placeholder="Enter password"
+                            placeholder={t("shared.passwordPlaceholder")}
                             className={`${styles.formInput} ${
                                 form.errors.password ||
                                 form.errors.fillAllFields
@@ -115,7 +118,7 @@ const RegistrationForm = () => {
                             htmlFor="confirmPassword"
                             className={styles.formLabel}
                         >
-                            Confirm Password
+                            {t("auth.registration.confirmLabel")}
                         </label>
                         <input
                             type="password"
@@ -123,7 +126,9 @@ const RegistrationForm = () => {
                             name="confirmPassword"
                             value={form.values.confirmPassword}
                             onChange={handleFieldChange}
-                            placeholder="Repeat password"
+                            placeholder={t(
+                                "auth.registration.confirmPlaceholder"
+                            )}
                             className={`${styles.formInput} ${
                                 form.errors.confirmPassword ||
                                 form.errors.fillAllFields
@@ -142,7 +147,7 @@ const RegistrationForm = () => {
 
                     {allErrors.length > 0 && (
                         <div className={styles.error} role="alert">
-                            <p>{allErrors.join(", ")}</p>
+                            <p>{allErrors.map((err) => t(err)).join(", ")}</p>
                         </div>
                     )}
 
@@ -158,19 +163,21 @@ const RegistrationForm = () => {
                             className={styles.submitButton}
                             disabled={form.isLoading}
                         >
-                            {form.isLoading ? "Registering..." : "Register"}
+                            {form.isLoading
+                                ? t("auth.registration.loading")
+                                : t("auth.registration.submit")}
                         </button>
                     </div>
                 </form>
 
                 <p className={styles.registerLink}>
-                    Already have an account?{" "}
+                    {t("auth.registration.haveAccount")}{" "}
                     <Link
                         to="/login"
                         className={styles.link}
                         onClick={clearError}
                     >
-                        Login here
+                        {t("auth.registration.loginLink")}
                     </Link>
                 </p>
             </div>

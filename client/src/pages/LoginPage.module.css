@@ -11,6 +11,13 @@
     height: 100vh;
 }
 
+.languageBtnWrapper {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1000;
+}
+
 .authContentWrapper {
     flex: 1;
     display: flex;
