@@ -1,7 +1,7 @@
 import defaultUserAvatarIcon from "../../assets/avatar-people-user-svgrepo-com.png";
 
 const getAvatarUrl = (photoUrl) => {
-    const baseUrl = process.env.REACT_APP_API_URL?.replace(/\/+$/, "");
+    const baseUrl = import.meta.env.VITE_API_URL?.replace(/\/+$/, "");
 
     if (!photoUrl || typeof photoUrl !== "string" || !photoUrl.trim()) {
         return defaultUserAvatarIcon;
