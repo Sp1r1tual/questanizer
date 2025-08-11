@@ -1,0 +1,33 @@
+services:
+    mongo:
+        image: mongo
+        ports:
+            - "27017:27017"
+        volumes:
+            - mongo-data:/data/db
+
+    backend:
+        build:
+            context: ./server
+        env_file:
+            - ./server/.env
+        ports:
+            - "${PORT}:${PORT}"
+        depends_on:
+            - mongo
+
+    frontend:
+        build:
+            context: ./client
+            args:
+                - VITE_API_URL=${VITE_API_URL}
+        env_file:
+            - ./client/.env
+        ports:
+            - "3000:4173"
+        depends_on:
+            - backend
+
+volumes:
+    mongo-data:
+        external: true
