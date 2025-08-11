@@ -1,13 +1,16 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { TaskService } from "../../services/tasksService";
-import { markDamageTaken } from "../../store/tasks/tasksSlice";
-import { markTaskAsRaged } from "../../store/boss/bossBattleSlice";
-import { fetchStats } from "../../store/stats/userStatsThunks";
+import { TaskService } from "@/services/tasksService";
+
+import { markDamageTaken } from "@/store/tasks/tasksSlice";
+import { markTaskAsRaged } from "@/store/boss/bossBattleSlice";
+
+import { fetchStats } from "@/store/stats/userStatsThunks";
 
 const useOverdueTasksChecker = () => {
     const dispatch = useDispatch();
+
     const tasks = useSelector((state) => state.tasks.tasks);
     const bossId = useSelector((state) => state.bossBattle.bossId);
     const alreadyRagedTaskIds = useSelector(
@@ -17,6 +20,7 @@ const useOverdueTasksChecker = () => {
     useEffect(() => {
         const checkOverdueTasks = async () => {
             const now = new Date();
+
             const overdueTasks = tasks.filter(
                 (t) =>
                     !t.isCompleted &&

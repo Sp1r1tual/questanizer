@@ -1,4 +1,4 @@
-import { $api } from "../http";
+import { $api } from "@/http";
 
 class FriendsService {
     static async fetchUserFriends() {

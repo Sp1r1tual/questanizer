@@ -1,6 +1,7 @@
 const useTaskFilters = () => {
     const getFilteredTasks = (tasks, filters) => {
         let filtered = [...tasks];
+
         const now = new Date();
 
         if (filters.status !== "all") {

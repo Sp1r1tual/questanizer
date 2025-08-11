@@ -2,19 +2,23 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
-import { fetchPublicUserProfile } from "../../store/user/publicUserProfileThunks";
-import { formatDate } from "../../utils/date/formatDate";
-import { getAvatarUrl } from "../../utils/user/getAvatarUrl";
 import { Loader } from "../ui/loaders/Loader";
 
-import backArrow from "../../assets/back-arrow-svgrepo-com.png";
+import { fetchPublicUserProfile } from "@/store/user/publicUserProfileThunks";
+
+import { formatDate } from "@/utils/date/formatDate";
+import { getAvatarUrl } from "@/utils/user/getAvatarUrl";
+
+import backArrow from "@/assets/back-arrow-svgrepo-com.png";
 
 import styles from "./PublicUserProfileModalContent.module.css";
 
 const PublicUserProfileContent = ({ userId, onBack }) => {
     const dispatch = useDispatch();
+
     const publicProfile = useSelector((state) => state.publicUser.profile);
     const isLoading = useSelector((state) => state.publicUser.isLoading);
+
     const { t } = useTranslation();
 
     useEffect(() => {

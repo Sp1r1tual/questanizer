@@ -1,4 +1,5 @@
 import axios from "axios";
+
 import { authInterceptors } from "./interceptors/authInterceptors.js";
 import { notificationInterceptor } from "./interceptors/notificationsInterceptor.js";
 

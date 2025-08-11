@@ -2,19 +2,24 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
-import { fetchUserProfile } from "../../../store/user/userProfileThunks";
-import { EditProfileForm } from "../EditProfileForm";
-import { getAvatarUrl } from "../../../utils/user/getAvatarUrl";
-import { formatDate } from "../../../utils/date/formatDate";
 import { Loader } from "../../ui/loaders/Loader";
+import { EditProfileForm } from "../EditProfileForm";
+
+import { fetchUserProfile } from "@/store/user/userProfileThunks";
+
+import { getAvatarUrl } from "@/utils/user/getAvatarUrl";
+import { formatDate } from "@/utils/date/formatDate";
 
 import styles from "./UserProfileModal.module.css";
 
 const UserProfileModal = ({ onClose }) => {
     const dispatch = useDispatch();
+
     const user = useSelector((state) => state.user.profile);
     const isLoading = useSelector((state) => state.user.isLoading);
+
     const [isEditing, setIsEditing] = useState(false);
+
     const { t } = useTranslation();
 
     useEffect(() => {

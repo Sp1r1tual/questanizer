@@ -1,8 +1,10 @@
 import { useState } from "react";
+
 import { usePagination } from "../ui/usePagination";
 
-import { $api } from "../../http";
-import { validateSearchQuery } from "../../utils/validation/validateSearchQuery";
+import { $api } from "@/http";
+
+import { validateSearchQuery } from "@/utils/validation/validateSearchQuery";
 
 const useFriendsSearch = (currentUsername) => {
     const [input, setInput] = useState("");

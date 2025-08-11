@@ -14,16 +14,3 @@
     width: 100%;
     justify-content: space-between;
 }
-
-.fixedBackground {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-image: url("../assets/main-background.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    z-index: -1;
-}

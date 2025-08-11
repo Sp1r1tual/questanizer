@@ -1,19 +1,21 @@
-import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 
-import { changeUserLanguage } from "../../store/user/localizationThunks";
-import { setLanguage } from "../../store/user/localizationSlice";
-import { LANGUAGES } from "../../data/languages";
+import { setLanguage } from "@/store/user/localizationSlice";
+
+import { changeUserLanguage } from "@/store/user/localizationThunks";
+
+import { LANGUAGES } from "@/data/languages";
 
 const useLanguageChange = () => {
-    const { i18n } = useTranslation();
     const dispatch = useDispatch();
+
+    const { i18n } = useTranslation();
 
     const currentLang =
         useSelector((state) => state.localization.language) ||
         i18n.language ||
         "en";
-
     const loading = useSelector((state) => state.localization.loading);
 
     const changeLanguage = (languageCode) => {

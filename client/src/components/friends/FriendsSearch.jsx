@@ -1,9 +1,10 @@
-import { useFriendsSearch } from "../../hooks/user/useFriendsSearch";
 import { useTranslation } from "react-i18next";
 
-import { FriendItem } from "./FriendItem";
+import { useFriendsSearch } from "@/hooks/user/useFriendsSearch";
+
 import { Loader } from "../ui/loaders/Loader";
 import { Pagination } from "../ui/pagination/Pagination";
+import { FriendItem } from "./FriendItem";
 
 import styles from "./FriendsSearch.module.css";
 
@@ -32,6 +33,7 @@ const FriendsSearch = ({
         handlePageChange,
         getPageNumbers,
     } = useFriendsSearch(currentUser?.username);
+
     const { t } = useTranslation();
 
     const handleUserClick = (userId) => {

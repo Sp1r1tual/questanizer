@@ -1,22 +1,29 @@
 import { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useAuth } from "../../hooks/auth/useAuth";
+
+import { useAuth } from "@/hooks/auth/useAuth";
 
 import { UserExperience } from "./UserExperience";
 import { UserHealth } from "./UserHealth";
 import { UserGold } from "./UserGold";
 import { DefeatUserModal } from "./modals/DefeatUserModal";
-import { resetBoss } from "../../store/boss/bossBattleSlice";
-import { fetchStats } from "../../store/stats/userStatsThunks";
+
+import { resetBoss } from "@/store/boss/bossBattleSlice";
+
+import { fetchStats } from "@/store/stats/userStatsThunks";
 
 import styles from "./UserStatsView.module.css";
 
 const UserStatsView = () => {
     const dispatch = useDispatch();
+
+    const [isDefeated, setIsDefeated] = useState(false);
+
+    const defeatTriggered = useRef(false);
+
     const { experience, level, health, maxHealth, gold, isLoaded } =
         useSelector((state) => state.stats);
-    const [isDefeated, setIsDefeated] = useState(false);
-    const defeatTriggered = useRef(false);
+
     const { user } = useAuth();
 
     useEffect(() => {

@@ -5,6 +5,7 @@ import styles from "./BossStats.module.css";
 
 const BossStats = () => {
     const boss = useSelector((state) => state.bossBattle);
+
     const { t } = useTranslation();
 
     if (!boss.bossId) return null;

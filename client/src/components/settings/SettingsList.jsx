@@ -6,6 +6,7 @@ import styles from "./SettingsList.module.css";
 
 const SettingsList = () => {
     const { t } = useTranslation();
+
     return (
         <div className={styles.settingsList}>
             <div className={styles.wrapper}>

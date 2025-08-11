@@ -8,6 +8,7 @@ const TaskFilters = ({ onFilterChange }) => {
     const [deadline, setDeadline] = useState("all");
     const [difficulty, setDifficulty] = useState("all");
     const [sortBy, setSortBy] = useState("createdAt");
+
     const { t } = useTranslation();
 
     const handleStatusChange = (event) => {

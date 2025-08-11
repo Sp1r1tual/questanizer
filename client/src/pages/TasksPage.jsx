@@ -2,16 +2,16 @@ import { Wrapper } from "@/components/ui/wrappers/Wrapper";
 import { Dashboard } from "@/components/ui/wrappers/Dashboard";
 import { ContainerMedium } from "@/components/ui/wrappers/ContainerMedium";
 import { UserStatsView } from "@/components/stats/UserStatsView";
-import { BossBattle } from "@/components/boos/BossBattle";
+import { TasksView } from "@/components/organizer/TasksView";
 
-import backgroundImg from "@/assets/boss-fight-background.png";
+import backgroundImg from "@/assets/main-background.png";
 
-import styles from "./BossBattlePage.module.css";
+import styles from "./TasksPage.module.css";
 
-const BossBattlePage = () => {
+const TasksPage = () => {
     return (
         <div
-            className={styles.bossWrapper}
+            className={styles.tasksWrapper}
             style={{ backgroundImage: `url(${backgroundImg})` }}
         >
             <Wrapper>
@@ -19,13 +19,11 @@ const BossBattlePage = () => {
                     <ContainerMedium>
                         <UserStatsView />
                     </ContainerMedium>
-                    <ContainerMedium>
-                        <BossBattle />
-                    </ContainerMedium>
+                    <TasksView />
                 </Dashboard>
             </Wrapper>
         </div>
     );
 };
 
-export { BossBattlePage };
+export { TasksPage };

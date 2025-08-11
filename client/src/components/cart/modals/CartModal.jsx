@@ -1,5 +1,6 @@
-import { useCartModal } from "../../../hooks/market/useCartModal";
 import { useTranslation } from "react-i18next";
+
+import { useCartModal } from "@/hooks/market/useCartModal";
 
 import { CartItemList } from "../CartItemList";
 
@@ -19,6 +20,7 @@ const CartModal = () => {
         handleBackdropClick,
         isLoading,
     } = useCartModal();
+
     const { t } = useTranslation();
 
     if (!isCartModalOpen) return null;

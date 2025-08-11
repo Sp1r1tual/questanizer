@@ -1,21 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
+
 import { useBoss } from "../boss/useBoss";
 
-import {
-    closeConfirmModal,
-    openConfirmModal,
-} from "../../store/tasks/tasksSlice";
-import {
-    deleteTaskAsync,
-    completeTaskAsync,
-} from "../../store/tasks/tasksThunks";
+import { closeConfirmModal, openConfirmModal } from "@/store/tasks/tasksSlice";
+
+import { deleteTaskAsync, completeTaskAsync } from "@/store/tasks/tasksThunks";
 
 const useTaskActions = () => {
     const dispatch = useDispatch();
-    const { handleTaskCompleted } = useBoss();
 
     const tasks = useSelector((state) => state.tasks.tasks);
     const confirmModal = useSelector((state) => state.tasks.confirmModal);
+
+    const { handleTaskCompleted } = useBoss();
 
     const findTask = (id) => tasks.find((t) => t._id === id);
 

@@ -1,12 +1,15 @@
 import { useSelector, useDispatch } from "react-redux";
+
 import { useTaskModals } from "./useTaskModals";
 import { useOverdueTasksChecker } from "./useOverdueTasksChecker";
 import { useTaskInput } from "./useTaskInput";
 import { useTaskActions } from "./useTaskActions";
-import { addTaskAsync } from "../../store/tasks/tasksThunks";
+
+import { addTaskAsync } from "@/store/tasks/tasksThunks";
 
 const useTasks = () => {
     const dispatch = useDispatch();
+
     const { tasks, loading, hasLoaded } = useSelector((state) => state.tasks);
 
     const {

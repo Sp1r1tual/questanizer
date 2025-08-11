@@ -1,5 +1,6 @@
-import { $api } from "../http";
 import i18n from "i18next";
+
+import { $api } from "@/http";
 
 class SupportService {
     static async getFaqs() {

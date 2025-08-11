@@ -33,13 +33,13 @@ const showMessage = (msg) => {
     }
 };
 
-function shouldShowNotification(config) {
+const shouldShowNotification = (config) => {
     return ALLOWED_NOTIFICATION_ENDPOINTS.some((endpoint) =>
         config.url?.includes(endpoint)
     );
-}
+};
 
-function notificationInterceptor(axiosInstance) {
+const notificationInterceptor = (axiosInstance) => {
     axiosInstance.interceptors.response.use(
         (response) => {
             const { message, messages } = response.data;
@@ -68,6 +68,6 @@ function notificationInterceptor(axiosInstance) {
             throw error;
         }
     );
-}
+};
 
 export { notificationInterceptor };

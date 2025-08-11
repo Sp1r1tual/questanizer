@@ -1,4 +1,4 @@
-import { fetchUserProfile } from "../../../store/user/userProfileThunks";
+import { fetchUserProfile } from "@/store/user/userProfileThunks";
 
 const getCurrentUserId = async (thunkAPI) => {
     let currentUserId = thunkAPI.getState().user.profile?.id;

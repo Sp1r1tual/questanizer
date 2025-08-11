@@ -1,13 +1,16 @@
-import { $api } from "../../http";
 import { useDispatch, useSelector } from "react-redux";
+
+import { $api } from "@/http";
+
 import {
     setActiveBoss,
     setBossLoading,
     resetBoss,
-} from "../../store/boss/bossBattleSlice";
+} from "@/store/boss/bossBattleSlice";
 
 const useBoss = (tasks = []) => {
     const dispatch = useDispatch();
+
     const boss = useSelector((state) => state.bossBattle);
     const loading = useSelector((state) => state.bossBattle.loading);
 
@@ -20,6 +23,7 @@ const useBoss = (tasks = []) => {
             const foundBoss = response.data?.boss || response.data;
 
             const now = new Date();
+
             const initiallyOverdue = tasks
                 .filter(
                     (task) =>

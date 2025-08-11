@@ -1,16 +1,19 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 
-import { closeInventoryItemModal } from "../../../store/user/inventorySlice";
-import { applyInventoryItem } from "../../../store/user/inventoryThunks";
+import { closeInventoryItemModal } from "@/store/user/inventorySlice";
+
+import { applyInventoryItem } from "@/store/user/inventoryThunks";
 
 import styles from "./InventoryItemModal.module.css";
 
 const InventoryItemModal = () => {
     const dispatch = useDispatch();
+
     const { selectedItem, isInventoryItemModalOpen } = useSelector(
         (state) => state.inventory
     );
+
     const { t } = useTranslation();
 
     if (!isInventoryItemModalOpen || !selectedItem) return null;

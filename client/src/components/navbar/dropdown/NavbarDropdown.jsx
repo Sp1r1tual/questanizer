@@ -1,15 +1,15 @@
 import { useState, useRef, useEffect } from "react";
 
+import { UserProfileModal } from "../../profile/modals/UserProfileModal";
+import { UserFriendsModal } from "../../friends/modals/UserFriendsModal";
+import { SettingsModal } from "../../settings/modals/SettingsModal";
 import { NavbarProfileBtn } from "./NavbarProfileBtn";
 import { NavbarAuthBtn } from "./NavbarAuthBtn";
 import { SettingsBtn } from "./SettingsBtn";
 import { NavbarFriendsBtn } from "./NavbarFriendsBtn";
-import { UserProfileModal } from "../../profile/modals/UserProfileModal";
-import { UserFriendsModal } from "../../friends/modals/UserFriendsModal";
-import { SettingsModal } from "../../settings/modals/SettingsModal";
 
-import dropdownIcon from "../../../assets/nav-dropdown-svgrepo-com.png";
-import dropdownActiveIcon from "../../../assets/nav-dropdown-active-svgrepo-com.png";
+import dropdownIcon from "@/assets/nav-dropdown-svgrepo-com.png";
+import dropdownActiveIcon from "@/assets/nav-dropdown-active-svgrepo-com.png";
 
 import styles from "./NavbarDropdown.module.css";
 
@@ -18,6 +18,7 @@ const NavbarDropdown = ({ closeMenu }) => {
     const [showProfileModal, setShowProfileModal] = useState(false);
     const [showFriendsModal, setShowFriendsModal] = useState(false);
     const [showSettingsModal, setShowSettingsModal] = useState(false);
+
     const dropdownRef = useRef(null);
 
     const toggleDropdown = () => {

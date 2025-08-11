@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 
-import { isTaskOverdue } from "../../utils/tasks/isTaskOverdue";
-import { countCompletedTasks } from "../../utils/tasks/countCompletedTasks";
-import { countOverdueTasks } from "../../utils/tasks/countOverdueTasks";
+import { isTaskOverdue } from "@/utils/tasks/isTaskOverdue";
+import { countCompletedTasks } from "@/utils/tasks/countCompletedTasks";
+import { countOverdueTasks } from "@/utils/tasks/countOverdueTasks";
 
 import styles from "./TaskDropdown.module.css";
 
@@ -16,6 +16,7 @@ const TaskDropdown = ({
     groupDeleteOverdue,
 }) => {
     const { t } = useTranslation();
+
     const completedTasksCount = countCompletedTasks(tasks);
     const overdueTasksCount = countOverdueTasks(tasks);
     const overdue = isTaskOverdue(task);

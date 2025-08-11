@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useTasks } from "../../hooks/tasks/useTasks";
-import { useTaskFilters } from "../../hooks/tasks/useTaskFilters";
-import { useConfirmModalTexts } from "../../hooks/tasks/useConfirmModalTexts";
 import { useTranslation } from "react-i18next";
-import { useAuth } from "../../hooks/auth/useAuth";
+
+import { useTasks } from "@/hooks/tasks/useTasks";
+import { useTaskFilters } from "@/hooks/tasks/useTaskFilters";
+import { useConfirmModalTexts } from "@/hooks/tasks/useConfirmModalTexts";
+import { useAuth } from "@/hooks/auth/useAuth";
 
 import { ContainerMedium } from "../ui/wrappers/ContainerMedium";
 import { OrganizerHeader } from "./OrganizerHeader";
@@ -13,11 +14,14 @@ import { AddNewTaskBtn } from "./AddNewTaskBtn";
 import { TaskList } from "./TaskList";
 import { TaskModal } from "./modals/TaskModal";
 import { ConfirmChoiceModal } from "../confirmations/ConfirmChoiceModal";
-import { fetchTasks } from "../../store/tasks/tasksThunks";
+
+import { fetchTasks } from "@/store/tasks/tasksThunks";
 
 const TasksView = () => {
     const dispatch = useDispatch();
+
     const { user } = useAuth();
+
     const {
         tasks,
         inputTask,
@@ -38,9 +42,12 @@ const TasksView = () => {
         onConfirmAction,
         loading,
     } = useTasks();
-    const { t } = useTranslation();
-    const { title, message } = useConfirmModalTexts(confirmModal, t);
+
     const { getFilteredTasks } = useTaskFilters();
+
+    const { t } = useTranslation();
+
+    const { title, message } = useConfirmModalTexts(confirmModal, t);
 
     useEffect(() => {
         if (user?.id) {

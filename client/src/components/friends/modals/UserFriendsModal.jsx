@@ -1,17 +1,19 @@
 import { useState } from "react";
-import { useUserFriends } from "../../../hooks/user/useUserFriends";
 import { useTranslation } from "react-i18next";
 
+import { useUserFriends } from "@/hooks/user/useUserFriends";
+
+import { Loader } from "../../ui/loaders/Loader";
 import { PublicUserProfileContent } from "../PublicUserProfileContent";
 import { FriendsSearch } from "../FriendsSearch";
 import { FriendsList } from "../FriendsList";
-import { Loader } from "../../ui/loaders/Loader";
 
 import styles from "./UserFriendsModal.module.css";
 
 const UserFriendsModal = ({ onClose }) => {
     const [currentView, setCurrentView] = useState("friends");
     const [selectedUserId, setSelectedUserId] = useState(null);
+
     const { t } = useTranslation();
 
     const {

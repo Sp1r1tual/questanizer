@@ -4,10 +4,11 @@ import {
     setInputTask,
     setDeadline,
     setIsInputInvalid,
-} from "../../store/tasks/tasksSlice";
+} from "@/store/tasks/tasksSlice";
 
 const useTaskInput = () => {
     const dispatch = useDispatch();
+
     const { inputTask, deadline, isInputInvalid } = useSelector(
         (state) => state.tasks
     );

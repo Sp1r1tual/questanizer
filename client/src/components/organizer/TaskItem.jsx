@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { TaskDropdown } from "./TaskDropdown";
-import { isTaskOverdue } from "../../utils/tasks/isTaskOverdue";
+
+import { isTaskOverdue } from "@/utils/tasks/isTaskOverdue";
 
 import styles from "./TaskItem.module.css";
 
@@ -15,8 +16,10 @@ const TaskItem = ({
     onGroupDeleteOverdue,
 }) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
     const overdue = isTaskOverdue(task);
     const deadlineDate = task.deadline ? new Date(task.deadline) : null;
+
     const { t } = useTranslation();
 
     return (

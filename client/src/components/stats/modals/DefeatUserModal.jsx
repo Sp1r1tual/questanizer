@@ -1,13 +1,15 @@
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 
-import { resetStats } from "../../../store/stats/userStatsThunks";
-import { resetBoss } from "../../../store/boss/bossBattleSlice";
+import { resetBoss } from "@/store/boss/bossBattleSlice";
+
+import { resetStats } from "@/store/stats/userStatsThunks";
 
 import styles from "./DefeatUserModal.module.css";
 
 const DefeatUserModal = ({ onRestart }) => {
     const dispatch = useDispatch();
+
     const { t } = useTranslation();
 
     const handleRestart = async () => {

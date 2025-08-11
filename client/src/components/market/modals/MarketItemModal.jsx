@@ -2,15 +2,17 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 
-import { closeItemModal } from "../../../store/market/marketSlice";
-import { addToCart } from "../../../store/market/marketThunks";
+import { closeItemModal } from "@/store/market/marketSlice";
+import { addToCart } from "@/store/market/marketThunks";
 
 import styles from "./MarketItemModal.module.css";
 
 const MarketItemModal = () => {
     const dispatch = useDispatch();
+
     const { selectedItem } = useSelector((state) => state.market);
     const [quantity, setQuantity] = useState(1);
+
     const { t } = useTranslation();
 
     if (!selectedItem) return null;

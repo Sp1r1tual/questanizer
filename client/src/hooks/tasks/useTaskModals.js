@@ -1,14 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
+
 import {
     setModalActive,
     closeModal,
     openConfirmModal,
     closeConfirmModal,
     setIsInputInvalid,
-} from "../../store/tasks/tasksSlice";
+} from "@/store/tasks/tasksSlice";
 
 const useTaskModals = () => {
     const dispatch = useDispatch();
+
     const inputTask = useSelector((state) => state.tasks.inputTask);
     const modalActive = useSelector((state) => state.tasks.modalActive);
     const confirmModal = useSelector((state) => state.tasks.confirmModal);

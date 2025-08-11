@@ -1,4 +1,4 @@
-import defaultUserAvatarIcon from "../../assets/avatar-people-user-svgrepo-com.png";
+import defaultUserAvatarIcon from "@/assets/avatar-people-user-svgrepo-com.png";
 
 const getAvatarUrl = (photoUrl) => {
     const baseUrl = import.meta.env.VITE_API_URL?.replace(/\/+$/, "");

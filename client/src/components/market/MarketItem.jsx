@@ -1,12 +1,13 @@
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 
-import { openItemModal } from "../../store/market/marketSlice";
+import { openItemModal } from "@/store/market/marketSlice";
 
 import styles from "./MarketItem.module.css";
 
 const MarketItem = ({ item }) => {
     const dispatch = useDispatch();
+
     const { t } = useTranslation();
 
     const handleViewDetails = () => {

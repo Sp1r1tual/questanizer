@@ -1,11 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./i18n";
 import { Provider } from "react-redux";
+import { RouterProvider } from "react-router-dom";
+
+import "./i18n";
+
 import { store } from "./store/store";
 import { checkAuth } from "./store/auth/authThunks";
 import { setAuthChecked } from "./store/auth/authSlice";
-import { RouterProvider } from "react-router-dom";
+
 import { router } from "./router";
 
 import "./index.css";

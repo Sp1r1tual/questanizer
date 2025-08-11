@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 
-import { TaskItem } from "./TaskItem";
 import { DotsLoader } from "../ui/loaders/DotsLoader";
+import { TaskItem } from "./TaskItem";
 import { TaskFilters } from "./TaskFilters";
 
 import styles from "./TaskList.module.css";

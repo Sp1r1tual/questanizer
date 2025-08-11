@@ -1,12 +1,12 @@
-import { InventoryItemModal } from "../components/inventory/modals/InventoryItemModal";
-import { InventoryList } from "../components/inventory/InventoryList";
-import { Dashboard } from "../components/ui/wrappers/Dashboard";
-import { ContainerMedium } from "../components/ui/wrappers/ContainerMedium";
-import { InventoryHeader } from "../components/inventory/InventoryHeader";
-import { UserStatsView } from "../components/stats/UserStatsView";
-import { Wrapper } from "../components/ui/wrappers/Wrapper";
+import { Wrapper } from "@/components/ui/wrappers/Wrapper";
+import { InventoryItemModal } from "@/components/inventory/modals/InventoryItemModal";
+import { Dashboard } from "@/components/ui/wrappers/Dashboard";
+import { ContainerMedium } from "@/components/ui/wrappers/ContainerMedium";
+import { UserStatsView } from "@/components/stats/UserStatsView";
+import { InventoryHeader } from "@/components/inventory/InventoryHeader";
+import { InventoryList } from "@/components/inventory/InventoryList";
 
-import backgroundImg from "../assets/inventory-background.png";
+import backgroundImg from "@/assets/inventory-background.png";
 
 import styles from "./InventoryPage.module.css";
 

@@ -17,6 +17,7 @@ const usePagination = (initialPage = 1, initialLimit = 5) => {
 
     const getPageNumbers = (maxVisible = 5) => {
         const pages = [];
+
         let start = Math.max(1, currentPage - Math.floor(maxVisible / 2));
         let end = Math.min(totalPages, start + maxVisible - 1);
 

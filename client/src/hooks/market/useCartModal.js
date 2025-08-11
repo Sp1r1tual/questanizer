@@ -2,15 +2,16 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
-    fetchCart,
     addToCart,
-    removeFromCart,
     checkoutCart,
-} from "../../store/market/marketThunks";
-import { closeCartModal } from "../../store/market/marketSlice";
+    fetchCart,
+    removeFromCart,
+} from "@/store/market/marketThunks";
+import { closeCartModal } from "@/store/market/marketSlice";
 
 const useCartModal = () => {
     const dispatch = useDispatch();
+
     const { isCartModalOpen, cart, isLoading } = useSelector(
         (state) => state.market
     );

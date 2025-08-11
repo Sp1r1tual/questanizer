@@ -2,18 +2,21 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 
-import { fetchMarket } from "../../store/market/marketThunks";
-import { MarketItem } from "./MarketItem";
 import { DotsLoader } from "../ui/loaders/DotsLoader";
+import { MarketItem } from "./MarketItem";
+
+import { fetchMarket } from "@/store/market/marketThunks";
 
 import styles from "./MarketList.module.css";
 
 const MarketList = () => {
     const dispatch = useDispatch();
-    const { t } = useTranslation();
+
     const { marketItems, isLoading, error } = useSelector(
         (state) => state.market
     );
+
+    const { t } = useTranslation();
 
     useEffect(() => {
         if (!marketItems || marketItems.length === 0) {

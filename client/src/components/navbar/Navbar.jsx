@@ -1,17 +1,18 @@
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-import { NavLink } from "react-router-dom";
 import { NavbarDropdown } from "./dropdown/NavbarDropdown";
 
-import headerImg from "../../assets/questanizer_header.png";
-import burgerIcon from "../../assets/burger-menu-svgrepo-com.png";
-import burgerActiveIcon from "../../assets/burger-menu-active-svgrepo-com.png";
+import headerImg from "@/assets/questanizer_header.png";
+import burgerIcon from "@/assets/burger-menu-svgrepo-com.png";
+import burgerActiveIcon from "@/assets/burger-menu-active-svgrepo-com.png";
 
 import styles from "./Navbar.module.css";
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+
     const { t } = useTranslation();
 
     const toggleMenu = () => {

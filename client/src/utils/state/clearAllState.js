@@ -1,11 +1,11 @@
-import { clearStatsState } from "../../store/stats/userStatsSlice";
-import { clearTasksState } from "../../store/tasks/tasksSlice";
-import { clearBossState } from "../../store/boss/bossBattleSlice";
-import { clearUserProfileState } from "../../store/user/userProfileSlice";
-import { clearFriendsState } from "../../store/user/userFriendsSlice";
-import { clearPublicProfileState } from "../../store/user/publicUserProfileSlice";
-import { clearMarketState } from "../../store/market/marketSlice";
-import { clearInventoryState } from "../../store/user/inventorySlice";
+import { clearStatsState } from "@/store/stats/userStatsSlice";
+import { clearTasksState } from "@/store/tasks/tasksSlice";
+import { clearBossState } from "@/store/boss/bossBattleSlice";
+import { clearUserProfileState } from "@/store/user/userProfileSlice";
+import { clearFriendsState } from "@/store/user/userFriendsSlice";
+import { clearPublicProfileState } from "@/store/user/publicUserProfileSlice";
+import { clearMarketState } from "@/store/market/marketSlice";
+import { clearInventoryState } from "@/store/user/inventorySlice";
 
 const clearAllState = (dispatch) => {
     dispatch(clearStatsState());

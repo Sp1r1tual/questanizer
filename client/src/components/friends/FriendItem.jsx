@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 
-import { getAvatarUrl } from "../../utils/user/getAvatarUrl";
+import { getAvatarUrl } from "@/utils/user/getAvatarUrl";
 
 import styles from "./FriendItem.module.css";
 

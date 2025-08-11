@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { greetings } from "../../data/greetings";
+import { greetings } from "@/data/greetings";
 
 import styles from "./MarketGreeting.module.css";
 
 const MarketGreeting = () => {
     const [message, setMessage] = useState("");
+
     const { t } = useTranslation();
 
     useEffect(() => {

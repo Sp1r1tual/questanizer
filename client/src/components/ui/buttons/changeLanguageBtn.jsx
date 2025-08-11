@@ -1,4 +1,4 @@
-import { useLanguageChange } from "../../../hooks/user/useLanguageChange";
+import { useLanguageChange } from "@/hooks/user/useLanguageChange";
 
 import styles from "./changeLanguageBtn.module.css";
 

@@ -1,5 +1,6 @@
-import { useUserProfileForm } from "../../hooks/user/useUserProfileForm";
 import { useTranslation } from "react-i18next";
+
+import { useUserProfileForm } from "@/hooks/user/useUserProfileForm";
 
 import styles from "./EditProfileForm.module.css";
 
@@ -17,6 +18,7 @@ const EditProfileForm = ({ onCancel, onSave }) => {
         bioError,
         error,
     } = useUserProfileForm(onSave);
+
     const { t } = useTranslation();
 
     return (

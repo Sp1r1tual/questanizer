@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { isDateValid } from "../../utils/validation/isDateValid";
+
+import { isDateValid } from "@/utils/validation/isDateValid";
 
 const useTaskModalState = ({ deadline, setDeadline, onSubmit, onClose }) => {
     const [isDateInvalid, setIsDateInvalid] = useState(false);

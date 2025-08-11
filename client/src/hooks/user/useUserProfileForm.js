@@ -2,20 +2,22 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
+    updateUserProfile,
+    fetchUserProfile,
+} from "@/store/user/userProfileThunks";
+
+import {
     validateUsername,
     validateBio,
     errorMessages,
-} from "../../utils/validation/validateForm";
-import {
-    updateUserProfile,
-    fetchUserProfile,
-} from "../../store/user/userProfileThunks";
+} from "@/utils/validation/validateForm";
+import { getAvatarUrl } from "@/utils/user/getAvatarUrl";
 
-import defaultUserAvatarIcon from "../../assets/avatar-people-user-svgrepo-com.png";
-import { getAvatarUrl } from "../../utils/user/getAvatarUrl";
+import defaultUserAvatarIcon from "@/assets/avatar-people-user-svgrepo-com.png";
 
 const useUserProfileForm = (onSave) => {
     const dispatch = useDispatch();
+
     const user = useSelector((state) => state.user.profile);
 
     const [name, setName] = useState(user?.name || "");

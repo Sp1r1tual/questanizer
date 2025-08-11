@@ -1,4 +1,4 @@
-import { $api } from "../http";
+import { $api } from "@/http";
 
 class BossService {
     static async getBoss() {

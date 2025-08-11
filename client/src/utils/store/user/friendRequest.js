@@ -1,6 +1,8 @@
 const removeRequestById = (requests, id) => {
     if (!(id in requests)) return requests;
+
     const { [id]: _, ...rest } = requests;
+
     return rest;
 };
 

@@ -4,6 +4,7 @@ import styles from "./AddNewTaskBtn.module.css";
 
 const AddNewTaskBtn = ({ onClick, disabled = false }) => {
     const { t } = useTranslation();
+
     return (
         <button
             className={`${styles.addTask} ${disabled ? styles.disabled : ""}`}

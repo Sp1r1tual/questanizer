@@ -1,16 +1,17 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import { fetchUserProfile } from "@/store/user/userProfileThunks";
 import {
     fetchUserFriends,
     sendFriendRequest,
     acceptFriendRequest,
     removeFriendOrCancel,
-} from "../../store/user/userFriendsThunks";
-import { fetchUserProfile } from "../../store/user/userProfileThunks";
+} from "@/store/user/userFriendsThunks";
 
 const useUserFriends = () => {
     const dispatch = useDispatch();
+
     const currentUser = useSelector((state) => state.user.profile);
     const {
         isLoading,

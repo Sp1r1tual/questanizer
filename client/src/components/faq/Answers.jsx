@@ -2,19 +2,21 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 
-import { AnswerItem } from "./AnswerItem";
-import { fetchFaqs } from "../../store/support/faqThunks";
 import { Loader } from "../ui/loaders/Loader";
+import { AnswerItem } from "./AnswerItem";
+
+import { fetchFaqs } from "@/store/support/faqThunks";
 
 import styles from "./Answers.module.css";
 
 const Answers = () => {
     const dispatch = useDispatch();
-    const { t } = useTranslation();
 
     const [openIndices, setOpenIndices] = useState([]);
 
     const { data: faqs, loading, error } = useSelector((state) => state.faq);
+
+    const { t } = useTranslation();
 
     useEffect(() => {
         if (!faqs.length) {

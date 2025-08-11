@@ -6,12 +6,16 @@ import {
     useSensors,
     PointerSensor,
 } from "@dnd-kit/core";
-import { useConstrainOnResize } from "../../hooks/draggable/useConstrainOnResize";
 
-import { openCartModal } from "../../store/market/marketSlice";
-import { fetchCart } from "../../store/market/marketThunks";
-import { constrainPosition } from "../../utils/draggable/constrainPosition";
+import { useConstrainOnResize } from "@/hooks/draggable/useConstrainOnResize";
+
 import { DraggableCartContent } from "../cart/DraggableCartContent";
+
+import { openCartModal } from "@/store/market/marketSlice";
+
+import { fetchCart } from "@/store/market/marketThunks";
+
+import { constrainPosition } from "@/utils/draggable/constrainPosition";
 
 const getInitialPosition = () => {
     const width = window.innerWidth;
@@ -25,8 +29,10 @@ const getInitialPosition = () => {
 
 const DraggableCart = () => {
     const dispatch = useDispatch();
-    const { cart, isCartLoaded } = useSelector((state) => state.market);
+
     const [position, setPosition] = useState(getInitialPosition());
+
+    const { cart, isCartLoaded } = useSelector((state) => state.market);
 
     useEffect(() => {
         if (!isCartLoaded && (!cart || cart.length === 0)) {

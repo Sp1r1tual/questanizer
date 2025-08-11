@@ -1,16 +1,20 @@
 import { useNavigate, Link } from "react-router-dom";
-import { useAuth } from "../../hooks/auth/useAuth";
-import { useForm } from "../../hooks/auth/useForm";
 import { useTranslation } from "react-i18next";
 
-import { validateRegistrationForm } from "../../utils/validation/validateFormFields";
+import { useAuth } from "@/hooks/auth/useAuth";
+import { useForm } from "@/hooks/auth/useForm";
+
 import { Loader } from "../ui/loaders/Loader";
+
+import { validateRegistrationForm } from "@/utils/validation/validateFormFields";
 
 import styles from "./RegistrationForm.module.css";
 
 const RegistrationForm = () => {
     const { registerUser, authError, clearError } = useAuth();
+
     const navigate = useNavigate();
+
     const { t } = useTranslation();
 
     const form = useForm({

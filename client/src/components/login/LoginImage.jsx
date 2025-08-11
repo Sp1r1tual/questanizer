@@ -1,4 +1,4 @@
-import questanizerLoginImg from "../../assets/questanizer_login.png";
+import questanizerLoginImg from "@/assets/questanizer_login.png";
 
 import styles from "./LoginImage.module.css";
 
@@ -8,7 +8,7 @@ const LoginImage = () => {
             <img
                 className={styles.mainImg}
                 src={questanizerLoginImg}
-                alt="Questanizer login scene"
+                alt="Questanizer image"
             />
         </div>
     );

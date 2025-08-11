@@ -2,7 +2,7 @@ import { useDraggable } from "@dnd-kit/core";
 
 import { CartCounter } from "./CartCounter";
 
-import cartImg from "../../assets/cart-questanizer.png";
+import cartImg from "@/assets/cart-questanizer.png";
 
 import styles from "./DraggableCartContent.module.css";
 

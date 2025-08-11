@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+
 import { ErrorBoundaryWrapper } from "./components/errors/ErrorBoundaryWrapper";
 
 import "react-toastify/dist/ReactToastify.css";

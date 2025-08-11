@@ -7,7 +7,7 @@ import {
 let pendingRequestsQueue = [];
 let isRefreshing = false;
 
-function authInterceptors(axiosInstance) {
+const authInterceptors = (axiosInstance) => {
     axiosInstance.interceptors.request.use((config) => {
         const token = localStorage.getItem("token");
 
@@ -67,6 +67,6 @@ function authInterceptors(axiosInstance) {
             );
         }
     );
-}
+};
 
 export { authInterceptors };

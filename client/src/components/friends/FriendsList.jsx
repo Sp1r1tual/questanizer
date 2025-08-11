@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+
 import { FriendItem } from "./FriendItem";
 
 import styles from "./FriendsList.module.css";

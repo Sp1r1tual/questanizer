@@ -1,4 +1,4 @@
-import { changeUserLanguage } from "../../store/user/localizationThunks";
+import { changeUserLanguage } from "@/store/user/localizationThunks";
 
 const syncUserLanguage = async (thunkAPI) => {
     const preferredLang = localStorage.getItem("preferredLanguage");

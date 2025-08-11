@@ -1,4 +1,4 @@
-import { useTaskModalState } from "../../../hooks/tasks/useTaskModalState";
+import { useTaskModalState } from "@/hooks/tasks/useTaskModalState";
 
 import { DeadlinePage } from "./DeadlinePage";
 import { DifficultyPage } from "./DifficultyPage";

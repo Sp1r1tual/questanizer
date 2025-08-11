@@ -1,7 +1,7 @@
 import { MarketGreeting } from "../market/MarketGreeting";
 
-import marketBannerDesktopImg from "../../assets/market-banner-desktop.jpeg";
-import marketBannerMobileImg from "../../assets/market-banner-mobile.png";
+import marketBannerDesktopImg from "@/assets/market-banner-desktop.jpeg";
+import marketBannerMobileImg from "@/assets/market-banner-mobile.png";
 
 import styles from "./MarketBanner.module.css";
 

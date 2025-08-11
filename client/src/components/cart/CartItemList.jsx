@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 
-import { DotsLoader } from "../../components/ui/loaders/DotsLoader";
+import { DotsLoader } from "../ui/loaders/DotsLoader";
 
 import styles from "./CartItemList.module.css";
 
