@@ -1,4 +1,5 @@
 import { Router } from "express";
+
 import {
     getFriends,
     getFriendRequests,
@@ -6,6 +7,7 @@ import {
     acceptRequest,
     removeFriendOrCancel,
 } from "../controllers/friends-controller.js";
+
 import { authMiddleware } from "../../shared/middlewares/auth-middleware.js";
 
 const friendsRouter = new Router();

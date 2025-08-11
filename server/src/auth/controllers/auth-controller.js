@@ -1,6 +1,8 @@
 import { authService } from "../services/auth-service.js";
-import { REFRESH_COOKIE_OPTIONS } from "../utils/refresh-cookie-options.js";
+
 import { RESPONSE_MESSAGES } from "../../shared/utils/messages/response-messages.js";
+import { REFRESH_COOKIE_OPTIONS } from "../utils/refresh-cookie-options.js";
+
 import { activationSuccessHTML } from "../views/activation/success.js";
 import { activationErrorHTML } from "../views/activation/error.js";
 

@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+
 import { activationMailTemplate } from "../views/mail-views/activation-mail.js";
 import { resetPasswordMailTemplate } from "../views/mail-views/reset-password-mail.js";
 

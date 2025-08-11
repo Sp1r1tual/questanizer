@@ -1,12 +1,15 @@
 import bcrypt from "bcrypt";
 import { v4 as uuidv4 } from "uuid";
+
 import { UserModel } from "../../user/models/user-model.js";
 import { UserInventoryModel } from "../../user/models/user-inventory-model.js";
+
 import { mailService } from "./mail-service.js";
 import { tokenService } from "./token-service.js";
-import { UserDto } from "../../shared/dtos/user-dto.js";
+
 import { ApiError } from "../../shared/exceptions/api-error.js";
 import { findUserById } from "../../shared/helpers/findUserById.js";
+import { UserDto } from "../../shared/dtos/user-dto.js";
 
 class AuthService {
     async registration(email, password) {

@@ -1,4 +1,5 @@
 import { Router } from "express";
+
 import {
     getUserProfile,
     updateUserProfile,
@@ -6,6 +7,7 @@ import {
     getUserByIdPublic,
     searchUsers,
 } from "../controllers/user-controller.js";
+
 import { authMiddleware } from "../../shared/middlewares/auth-middleware.js";
 import { validationErrorsMiddleware } from "../../shared/middlewares/validation-errors-middleware.js";
 import { updateUserProfileValidation } from "../utils/validations/profile-validations.js";

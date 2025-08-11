@@ -1,10 +1,12 @@
 import express from "express";
+
 import {
     getBossController,
     spawnBossController,
 } from "../controllers/boss-controller.js";
-import { bossMiddleware } from "../middlewares/boss-middleware.js";
+
 import { authMiddleware } from "../../shared/middlewares/auth-middleware.js";
+import { bossMiddleware } from "../middlewares/boss-middleware.js";
 
 const bossRouter = express.Router();
 

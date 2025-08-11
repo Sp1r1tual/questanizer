@@ -1,12 +1,14 @@
-import { ApiError } from "../../shared/exceptions/api-error.js";
 import { BossModel } from "../models/boss-model.js";
-import { bosses } from "../data/bosses.js";
-import { userStatsService } from "../../stats/services/user-stats-service.js";
+
 import { bossProgressService } from "./boss-progress-service.js";
+import { userStatsService } from "../../stats/services/user-stats-service.js";
+
+import { bosses } from "../data/bosses.js";
+import { ApiError } from "../../shared/exceptions/api-error.js";
 import { hasBossFound } from "../helpers/has-boss-found.js";
-import { updateBossFromTemplate } from "../utils/update-boss-from-template.js";
-import { validateObjectId } from "../../shared/utils/validations/validate-object-id.js";
 import { bossNotifications } from "../../shared/helpers/messages/notification-factory.js";
+import { validateObjectId } from "../../shared/utils/validations/validate-object-id.js";
+import { updateBossFromTemplate } from "../utils/update-boss-from-template.js";
 import { localizeKeys } from "../../shared/utils/localization/localize-keys.js";
 
 class BossService {

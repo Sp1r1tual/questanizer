@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+
 import { TokenModel } from "../models/token-model.js";
 import { ResetTokenModel } from "../models/reset-token-model.js";
 

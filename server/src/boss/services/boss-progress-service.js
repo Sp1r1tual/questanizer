@@ -1,4 +1,5 @@
 import { BossProgressModel } from "../models/boss-progress-model.js";
+
 import { validateUserId } from "../../shared/utils/validations/validate-object-id.js";
 
 class BossProgressService {

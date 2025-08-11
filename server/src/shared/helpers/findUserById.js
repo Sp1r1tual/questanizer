@@ -1,4 +1,5 @@
 import { UserModel } from "../../user/models/user-model.js";
+
 import { ApiError } from "../../shared/exceptions/api-error.js";
 
 const findUserById = async (id) => {

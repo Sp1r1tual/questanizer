@@ -1,4 +1,5 @@
 import { Router } from "express";
+
 import {
     registration,
     login,
@@ -8,7 +9,9 @@ import {
     forgotPassword,
     resetPassword,
 } from "../../auth/controllers/auth-controller.js";
+
 import { validationErrorsMiddleware } from "../../shared/middlewares/validation-errors-middleware.js";
+
 import {
     registrationValidation,
     forgotPasswordValidation,

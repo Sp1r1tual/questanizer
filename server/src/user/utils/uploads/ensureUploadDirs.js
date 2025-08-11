@@ -1,4 +1,5 @@
 import fs from "fs";
+
 import { AVATARS_DIR } from "../../configs/uploadPaths.js";
 
 const ensureUploadDirs = () => {

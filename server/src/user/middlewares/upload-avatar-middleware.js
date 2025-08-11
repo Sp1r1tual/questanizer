@@ -1,6 +1,7 @@
 import multer from "multer";
 import path from "path";
 import { v4 as uuidv4 } from "uuid";
+
 import { AVATARS_DIR } from "../configs/uploadPaths.js";
 import { ApiError } from "../../shared/exceptions/api-error.js";
 

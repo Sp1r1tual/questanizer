@@ -1,5 +1,7 @@
 import { UserStatsModel } from "../models/user-stats-model.js";
+
 import { bossService } from "../../boss/services/boss-service.js";
+
 import { statsNotifications } from "../../shared/helpers/messages/notification-factory.js";
 
 class UserStatsService {

@@ -1,4 +1,5 @@
 import { FaqModel } from "../models/faq-model.js";
+
 import { ApiError } from "../../shared/exceptions/api-error.js";
 
 class SupportService {

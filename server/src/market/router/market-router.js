@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { authMiddleware } from "../../shared/middlewares/auth-middleware.js";
+
 import {
     getMarketItems,
     getUserCart,
@@ -7,6 +7,8 @@ import {
     removeFromCart,
     checkoutCart,
 } from "../controllers/market-controller.js";
+
+import { authMiddleware } from "../../shared/middlewares/auth-middleware.js";
 
 const marketRouter = new Router();
 

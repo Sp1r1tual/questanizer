@@ -1,4 +1,5 @@
 import { Router } from "express";
+
 import {
     getTasks,
     addTask,
@@ -6,9 +7,10 @@ import {
     deleteTask,
     takeDamageOverdueTask,
 } from "../controllers/tasks-controller.js";
+
+import { authMiddleware } from "../../shared/middlewares/auth-middleware.js";
 import { validateTaskBodyMiddleware } from "../middlewares/validate-task-body-middleware.js";
 import { validateTaskIdMiddleware } from "../middlewares/validate-task-id-middleware.js";
-import { authMiddleware } from "../../shared/middlewares/auth-middleware.js";
 
 const tasksRouter = new Router();
 

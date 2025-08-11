@@ -1,9 +1,11 @@
 import { Router } from "express";
-import { authMiddleware } from "../../shared/middlewares/auth-middleware.js";
+
 import {
     getUserInventory,
     useUserInventoryItem,
 } from "../controllers/user-inventory-controller.js";
+
+import { authMiddleware } from "../../shared/middlewares/auth-middleware.js";
 
 const userInventoryRouter = new Router();
 
