@@ -13,6 +13,7 @@ import { supportRouter } from "./support/router/support-router.js";
 import { marketRouter } from "./market/router/market-router.js";
 import { userInventoryRouter } from "./user/router/user-inventory-router.js";
 import { localizationRouter } from "./user/router/localization-router.js";
+import { chatRouter } from "./chat/router/chat-router.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -32,6 +33,7 @@ const routes = (app) => {
     app.use("/api", bossRouter);
     app.use("/api", marketRouter);
     app.use("/api", userInventoryRouter);
+    app.use("/api", chatRouter);
 };
 
 export { routes };
