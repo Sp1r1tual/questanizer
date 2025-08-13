@@ -1,108 +1,125 @@
+import { socketErrorMiddleware } from "../../shared/middlewares/socket-error-middleware.js";
+
+import { ApiError } from "../../shared/exceptions/api-error.js";
+
 import { chatService } from "../services/chat-service.js";
 
-const clients = new Map();
+import { getUserName } from "../utils/get-user-name.js";
+import { formatMessage } from "../utils/format-message.js";
 
 const socketController = (io) => {
     io.on("connection", (socket) => {
         const userId = String(socket.request.user.id);
 
-        clients.set(userId, socket);
+        chatService.addClient(userId, socket);
 
-        socket.on("private_message", async ({ to, text }, callback) => {
-            try {
+        socket.on(
+            "get_chat_history",
+            socketErrorMiddleware(async ({ withUserId }, callback) => {
+                const history = await chatService.getChatHistory(
+                    userId,
+                    withUserId
+                );
+                const userName = await getUserName(withUserId);
+
+                const historyPayload = history.map((msg) =>
+                    formatMessage(msg, userName)
+                );
+
+                socket.emit("chat_history", {
+                    withUserId,
+                    withUserName: userName,
+                    messages: historyPayload,
+                });
+
+                callback?.({
+                    status: "ok",
+                    messages: historyPayload,
+                });
+            })
+        );
+
+        socket.on(
+            "private_message",
+            socketErrorMiddleware(async ({ to, text }, callback) => {
+                if (!text)
+                    throw ApiError.BadRequest("Message text is required");
+
                 const savedMessage = await chatService.saveMessage({
                     from: userId,
                     to,
                     text,
                 });
+                const senderName = await getUserName(userId);
+                const messagePayload = formatMessage(savedMessage, senderName);
 
-                const receiverSocket = clients.get(String(to));
+                socket.emit("private_message", messagePayload);
+
+                const receiverSocket = chatService.getClient(String(to));
 
                 if (receiverSocket) {
-                    receiverSocket.emit("private_message", {
-                        from: userId,
-                        text,
-                        createdAt: savedMessage.createdAt,
-                    });
+                    receiverSocket.emit("private_message", messagePayload);
                 }
 
-                if (callback) callback({ status: "ok" });
-            } catch (error) {
-                if (callback)
-                    callback({ status: "error", message: error.message });
-            }
-        });
+                callback?.({
+                    status: "ok",
+                    message: messagePayload,
+                });
+            })
+        );
 
-        socket.on("message_read", async ({ messageId }, callback) => {
-            try {
+        socket.on(
+            "message_read",
+            socketErrorMiddleware(async ({ messageId }, callback) => {
                 const updatedMessage = await chatService.markMessageAsRead(
-                    messageId
+                    messageId,
+                    userId
                 );
 
-                if (!updatedMessage) {
-                    if (callback)
-                        return callback({
-                            status: "error",
-                            message: "Message not found",
-                        });
-                    return;
-                }
+                if (!updatedMessage)
+                    throw ApiError.NotFound("Message not found");
 
-                const senderId = updatedMessage.from;
-                const readerId = socket.request.user.id;
-
-                const senderSocket = clients.get(senderId);
+                const senderSocket = chatService.getClient(
+                    String(updatedMessage.from)
+                );
 
                 if (senderSocket) {
                     senderSocket.emit("message_read", {
                         messageId,
-                        readerId,
+                        readerId: userId,
                         readAt: updatedMessage.readAt,
                     });
                 }
 
-                if (callback) callback({ status: "ok" });
-            } catch (error) {
-                if (callback)
-                    callback({ status: "error", message: error.message });
-            }
-        });
+                callback?.({ status: "ok" });
+            })
+        );
 
-        socket.on("delete_message", async ({ messageId }, callback) => {
-            try {
+        socket.on(
+            "delete_message",
+            socketErrorMiddleware(async ({ messageId }, callback) => {
                 const message = await chatService.getMessageById(messageId);
 
-                if (!message) {
-                    if (callback)
-                        return callback({
-                            status: "error",
-                            message: "Message not found",
-                        });
-                    return;
-                }
+                if (!message) throw ApiError.NotFound("Message not found");
+
+                if (String(message.from) !== userId) throw ApiError.Forbidden();
 
                 await chatService.deleteMessage(messageId);
 
-                const senderSocket = clients.get(String(message.from));
-                const receiverSocket = clients.get(String(message.to));
+                [message.from, message.to].forEach((id) => {
+                    const clientSocket = chatService.getClient(String(id));
 
-                const deletePayload = { messageId };
+                    if (clientSocket) {
+                        clientSocket.emit("message_deleted", { messageId });
+                    }
+                });
 
-                if (senderSocket)
-                    senderSocket.emit("message_deleted", deletePayload);
-
-                if (receiverSocket)
-                    receiverSocket.emit("message_deleted", deletePayload);
-
-                if (callback) callback({ status: "ok" });
-            } catch (error) {
-                if (callback)
-                    callback({ status: "error", message: error.message });
-            }
-        });
+                callback?.({ status: "ok" });
+            })
+        );
 
         socket.on("disconnect", () => {
-            clients.delete(userId);
+            chatService.removeClient(userId);
         });
     });
 };

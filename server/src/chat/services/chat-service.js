@@ -1,15 +1,23 @@
 import { MessageModel } from "../models/chat-model.js";
 
 class ChatService {
-    async saveMessage({ from, to, text }) {
-        const message = new MessageModel({ from, to, text });
-
-        await message.save();
-
-        return message;
+    constructor() {
+        this.clients = new Map();
     }
 
-    async getChatHistory(userId1, userId2) {
+    addClient(userId, socket) {
+        this.clients.set(userId, socket);
+    }
+
+    removeClient(userId) {
+        this.clients.delete(userId);
+    }
+
+    getClient(userId) {
+        return this.clients.get(userId);
+    }
+
+    async getChatHistory(userId1, userId2, limit = 100) {
         return MessageModel.find({
             $or: [
                 { from: userId1, to: userId2 },
@@ -17,15 +25,35 @@ class ChatService {
             ],
         })
             .sort({ createdAt: 1 })
+            .limit(limit)
             .exec();
     }
 
-    async markMessageAsRead(messageId) {
-        return MessageModel.findByIdAndUpdate(
-            messageId,
-            { read: true, readAt: new Date() },
-            { new: true }
-        );
+    async saveMessage({ from, to, text }) {
+        const message = new MessageModel({
+            from,
+            to,
+            text,
+            readBy: [],
+            read: false,
+        });
+        await message.save();
+        return message;
+    }
+
+    async markMessageAsRead(messageId, readerId) {
+        const message = await MessageModel.findById(messageId);
+
+        if (!message) return null;
+
+        if (!message.readBy.includes(readerId)) message.readBy.push(readerId);
+
+        message.read = true;
+        message.readAt = new Date();
+
+        await message.save();
+
+        return message;
     }
 
     async deleteMessage(messageId) {
@@ -33,7 +61,7 @@ class ChatService {
     }
 
     async getMessageById(messageId) {
-        return MessageModel.findById(messageId).exec();
+        return MessageModel.findById(messageId);
     }
 }
 

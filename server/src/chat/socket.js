@@ -6,7 +6,11 @@ import { socketController } from "./controllers/socket-controller.js";
 
 const initChatSocket = (server) => {
     const io = new Server(server, {
-        cors: { origin: process.env.CLIENT_URL, credentials: true },
+        cors: {
+            origin: process.env.CLIENT_URL,
+            credentials: true,
+        },
+        path: "/chat/socket.io",
     });
 
     io.use((socket, next) => {
