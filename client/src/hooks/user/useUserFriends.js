@@ -65,6 +65,8 @@ const useUserFriends = () => {
             }
 
             await dispatch(acceptFriendRequest(userId)).unwrap();
+
+            await dispatch(fetchUserFriends());
         } catch (error) {
             console.error("Failed to accept friend request", error);
         }
