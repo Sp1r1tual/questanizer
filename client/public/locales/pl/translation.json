@@ -233,7 +233,25 @@
         "faqTitle": "Najczęściej zadawane pytania"
     },
 
+    "chat": {
+        "chatWith": "Czat z",
+        "writeMessage": "Napisz wiadomość",
+        "deleteFromBoth": "Usuń u obu",
+        "noMessages": "Brak wiadomości",
+        "failedToSendMessage": "Błąd wysyłania",
+        "failedToDeleteMessage": "Błąd usuwania",
+        "failedToLoadChatHistory": "Błąd podczas ładowania czatu",
+        "failedToMarkAsRead": "Błąd podczas oznaczania jako przeczytane"
+    },
+
+    "socket": {
+        "tokenExpired": "Błąd autoryzacji, proszę zalogować się ponownie",
+        "socketNotConnected": "Socket nie jest podłączony",
+        "connectionTimeout": "Nie udało się połączyć z serwerem"
+    },
+
     "errors": {
+        "error": "Pomyłka:",
         "somethingWentWrong": "Coś poszło nie tak",
         "tryAgain": "Spróbuj ponownie",
         "goBack": "Wróć",

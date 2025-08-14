@@ -13,7 +13,7 @@ import backArrow from "@/assets/back-arrow-svgrepo-com.png";
 
 import styles from "./PublicUserProfileModalContent.module.css";
 
-const PublicUserProfileContent = ({ userId, onBack }) => {
+const PublicUserProfileContent = ({ userId, onBack, onOpenChat }) => {
     const dispatch = useDispatch();
 
     const publicProfile = useSelector((state) => state.publicUser.profile);
@@ -94,7 +94,7 @@ const PublicUserProfileContent = ({ userId, onBack }) => {
                     type="button"
                     className={styles.chatBtn}
                     aria-label={t("friends.sendMessage")}
-                    onClick={() => alert(t("friends.chatSoon"))}
+                    onClick={() => onOpenChat(userId)}
                 >
                     {t("friends.sendMessage")}
                 </button>
