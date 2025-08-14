@@ -233,7 +233,25 @@
         "faqTitle": "よくある質問"
     },
 
+    "chat": {
+        "chatWith": "チャット相手",
+        "writeMessage": "メッセージを書く",
+        "deleteFromBoth": "両方から削除",
+        "noMessages": "メッセージがありません",
+        "failedToSendMessage": "送信エラー",
+        "failedToDeleteMessage": "削除エラー",
+        "failedToLoadChatHistory": "チャット履歴の読み込みエラー",
+        "failedToMarkAsRead": "既読にする際のエラー"
+    },
+
+    "socket": {
+        "tokenExpired": "認証エラー。再度ログインしてください",
+        "socketNotConnected": "ソケットが接続されていません",
+        "connectionTimeout": "サーバーへの接続に失敗しました"
+    },
+
     "errors": {
+        "error": "エラー：",
         "somethingWentWrong": "問題が発生しました",
         "tryAgain": "再試行してください",
         "goBack": "戻る",

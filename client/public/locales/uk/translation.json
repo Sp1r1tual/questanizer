@@ -232,10 +232,28 @@
         "faqTitle": "Популярні запитання"
     },
 
+    "chat": {
+        "chatWith": "Чат з",
+        "writeMessage": "Напишіть повідомлення",
+        "deleteFromBoth": "Видалити у обох",
+        "noMessages": "Немає повідослень",
+        "failedToSendMessage": "Помилка відправлення",
+        "failedToDeleteMessage": "Помилка видалення",
+        "failedToLoadChatHistory": "Помилка при завантаженні чату",
+        "failedToMarkAsRead": "Помилка при прочитанні"
+    },
+
+    "socket": {
+        "tokenExpired": "Помилка авторизації, будь ласка, перезайдіть",
+        "socketNotConnected": "Сокет не підключено",
+        "connectionTimeout": "Не вдалося підключитися до сервера"
+    },
+
     "errors": {
+        "error": "Помилка:",
         "somethingWentWrong": "Щось пішло не так",
         "tryAgain": "Спробувати ще раз",
         "goBack": "Повернутися назад",
-        "returnHome": "Повернутись на головну сторінку"
+        "returnHome": "На головну сторінку"
     }
 }

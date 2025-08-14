@@ -1,0 +1,233 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.modalContainer {
+    background: linear-gradient(145deg, #ffffff, #ede6e3);
+    border-radius: 0.5rem;
+    max-width: 70rem;
+    width: 90vw;
+    height: 80vh;
+    max-height: 600px;
+    min-height: 400px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+        0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    font-size: 1.125rem;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 0.5rem;
+}
+
+.closeBtn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #7d5032;
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+    transition: all 0.2s;
+}
+
+.closeBtn:hover {
+    color: #503a24;
+    background-color: #f3f4f6;
+}
+
+.messagesContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    background-color: #fafafa;
+}
+
+.loadingContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.errorContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.errorMessage {
+    color: #ef4444;
+    text-align: center;
+}
+
+.retryButton {
+    padding: 0.5rem 1rem;
+    background-color: #7d5032;
+    color: white;
+    border: none;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    text-decoration: none;
+}
+
+.retryButton:hover {
+    background-color: #503a24;
+}
+
+.inputContainer {
+    margin-top: 1rem;
+}
+
+.inputError {
+    background-color: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 0.375rem;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.875rem;
+    color: #dc2626;
+}
+
+.closeErrorBtn {
+    background: none;
+    border: none;
+    color: #dc2626;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0 0.25rem;
+}
+
+.inputRow {
+    display: flex;
+}
+
+.inputField {
+    flex: 1;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem 0 0 0.375rem;
+    padding: 0.75rem;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.inputField:focus {
+    border-color: #7d5032;
+}
+
+.inputField:disabled {
+    background-color: #f3f4f6;
+    cursor: not-allowed;
+}
+
+.sendButton {
+    background-color: #7d5032;
+    color: white;
+    padding: 0 1.5rem;
+    border-radius: 0 0.375rem 0.375rem 0;
+    border: none;
+    cursor: pointer;
+    font-size: 1.25rem;
+    line-height: 1;
+    transition: background-color 0.2s;
+    min-width: 60px;
+}
+
+.sendButton:hover:not(:disabled) {
+    background-color: #503a24;
+}
+
+.sendButton:disabled {
+    background-color: #9ca3af;
+    cursor: not-allowed;
+}
+
+@media (max-width: 640px) {
+    .modalContainer {
+        width: 100vw;
+        height: 100vh;
+        max-width: none;
+        max-height: none;
+        min-height: auto;
+        border-radius: 0;
+        padding: 0.5rem;
+    }
+
+    .modalHeader {
+        font-size: 1rem;
+        padding-bottom: 0.25rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .inputField {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    .sendButton {
+        min-width: 50px;
+        padding: 0 1rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .modalHeader {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+    }
+
+    .inputRow {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .inputField {
+        border-radius: 0.375rem;
+        min-height: 3rem;
+    }
+
+    .sendButton {
+        border-radius: 0.375rem;
+        width: 100%;
+        min-height: 3rem;
+    }
+}

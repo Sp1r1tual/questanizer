@@ -1,29 +1,31 @@
 import express from "express";
+import http from "http";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 
 import { routes } from "./routes.js";
-import { ensureUploadDirs } from "./user/utils/uploads/ensureUploadDirs.js";
+import { initChatSocket } from "./chat/socket.js";
 import { middlewares } from "./middlewares.js";
 import { errorMiddleware } from "./shared/middlewares/error-middleware.js";
+import { ensureUploadDirs } from "./user/utils/uploads/ensureUploadDirs.js";
 
 const PORT = process.env.PORT || 5000;
 const app = express();
+const server = http.createServer(app);
 
 dotenv.config();
-
 ensureUploadDirs();
-
 middlewares(app);
-
 routes(app);
-
 app.use(errorMiddleware);
+
+initChatSocket(server);
 
 const start = async () => {
     try {
         await mongoose.connect(process.env.DB_URL);
-        app.listen(PORT, () => {
+
+        server.listen(PORT, () => {
             console.log(`Server started on PORT: ${PORT}`);
         });
     } catch (error) {

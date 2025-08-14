@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+
 import tasksReducer from "../store/tasks/tasksSlice";
 import authReducer from "../store/auth/authSlice";
 import userStatsReducer from "../store/stats/userStatsSlice";
@@ -9,7 +10,9 @@ import publicUserProfileReducer from "../store/user/publicUserProfileSlice";
 import faqReducer from "../store/support/faqSlice";
 import marketReducer from "../store/market/marketSlice";
 import inventoryReducer from "../store/user/inventorySlice";
-import localizationSlice from "../store/user/localizationSlice";
+import localizationReducer from "../store/user/localizationSlice";
+import chatReducer from "../store/chat/chatSlice";
+import chatSocketReducer from "../store/chat/chatSocketSlice";
 
 const store = configureStore({
     reducer: {
@@ -23,7 +26,9 @@ const store = configureStore({
         faq: faqReducer,
         market: marketReducer,
         inventory: inventoryReducer,
-        localization: localizationSlice,
+        localization: localizationReducer,
+        chat: chatReducer,
+        chatSocket: chatSocketReducer,
     },
 });
 
