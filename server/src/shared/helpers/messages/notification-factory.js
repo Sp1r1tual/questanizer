@@ -58,6 +58,9 @@ const marketNotifications = {
 
     spent: (userId, totalPrice) =>
         localizationMessages(userId, "info", "market.spent", { totalPrice }),
+
+    notEnoughtGold: (userId) =>
+        localizationMessages(userId, "error", "market.notEnoughtGold"),
 };
 
 const tasksNotifications = {

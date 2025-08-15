@@ -29,7 +29,8 @@
 
     "market": {
         "purchase": "Покупка успішна! Придбано {{totalItems}} предмет(ів)",
-        "spent": "Витрачено {{totalPrice}} золота"
+        "spent": "Витрачено {{totalPrice}} золота",
+        "notEnoughtGold": "Недостатньо золота для покупки"
     },
 
     "stats": {

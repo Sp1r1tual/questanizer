@@ -125,7 +125,10 @@ class MarketService {
         }, 0);
 
         if (userStats.gold < totalPrice) {
-            throw ApiError.BadRequest("Not enough gold to complete purchase");
+            return {
+                success: false,
+                messages: [await marketNotifications.notEnoughtGold(userId)],
+            };
         }
 
         userStats.gold -= totalPrice;
