@@ -2,16 +2,25 @@ import axios from "axios";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
+let refreshPromise = null;
+
 const refreshToken = async () => {
-    const response = await axios.get(`${API_URL}/refresh`, {
-        withCredentials: true,
-    });
+    if (!refreshPromise) {
+        refreshPromise = axios
+            .get(`${API_URL}/refresh`, { withCredentials: true })
+            .then((response) => {
+                const newToken = response.data.accessToken;
 
-    const newToken = response.data.accessToken;
+                localStorage.setItem("token", newToken);
 
-    localStorage.setItem("token", newToken);
+                return newToken;
+            })
+            .finally(() => {
+                refreshPromise = null;
+            });
+    }
 
-    return newToken;
+    return refreshPromise;
 };
 
 const authInterceptors = (axiosInstance) => {
@@ -42,7 +51,6 @@ const authInterceptors = (axiosInstance) => {
                     return axiosInstance(originalRequest);
                 } catch (error) {
                     localStorage.removeItem("token");
-
                     return Promise.reject(error);
                 }
             }
