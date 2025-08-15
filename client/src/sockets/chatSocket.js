@@ -14,7 +14,7 @@ import {
     removeMessage,
 } from "../store/chat/chatSlice";
 
-import { refreshToken } from "@/http/utils/tokenUtils";
+import { refreshToken } from "../http/interceptors/authInterceptors";
 
 let socket = null;
 let reconnectTimeout = null;

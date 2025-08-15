@@ -1,11 +1,18 @@
-import {
-    refreshToken,
-    processQueue,
-    retryRequestWithNewToken,
-} from "../utils/tokenUtils.js";
+import axios from "axios";
 
-let pendingRequestsQueue = [];
-let isRefreshing = false;
+const API_URL = import.meta.env.VITE_API_URL;
+
+const refreshToken = async () => {
+    const response = await axios.get(`${API_URL}/refresh`, {
+        withCredentials: true,
+    });
+
+    const newToken = response.data.accessToken;
+
+    localStorage.setItem("token", newToken);
+
+    return newToken;
+};
 
 const authInterceptors = (axiosInstance) => {
     axiosInstance.interceptors.request.use((config) => {
@@ -23,50 +30,26 @@ const authInterceptors = (axiosInstance) => {
         (response) => response,
         async (error) => {
             const originalRequest = error.config;
-            const isUnauthorized = error.response?.status === 401;
-            const canRetry = originalRequest && !originalRequest._retry;
 
-            const isAuthRoute =
-                originalRequest?.url?.includes("/login") ||
-                originalRequest?.url?.includes("/registration");
-
-            if (!isUnauthorized || !canRetry || isAuthRoute) {
-                return Promise.reject(error);
-            }
-
-            originalRequest._retry = true;
-
-            if (!isRefreshing) {
-                isRefreshing = true;
+            if (error.response?.status === 401 && !originalRequest._retry) {
+                originalRequest._retry = true;
 
                 try {
                     const newToken = await refreshToken();
 
-                    processQueue(null, newToken, pendingRequestsQueue);
-                    isRefreshing = false;
+                    originalRequest.headers.Authorization = `Bearer ${newToken}`;
 
-                    return retryRequestWithNewToken(
-                        axiosInstance,
-                        originalRequest,
-                        newToken
-                    );
+                    return axiosInstance(originalRequest);
                 } catch (error) {
-                    processQueue(error, null, pendingRequestsQueue);
-
                     localStorage.removeItem("token");
-                    isRefreshing = false;
 
-                    throw error;
+                    return Promise.reject(error);
                 }
             }
 
-            return new Promise((resolve, reject) => {
-                pendingRequestsQueue.push({ resolve, reject });
-            }).then((token) =>
-                retryRequestWithNewToken(axiosInstance, originalRequest, token)
-            );
+            return Promise.reject(error);
         }
     );
 };
 
-export { authInterceptors };
+export { authInterceptors, refreshToken };
