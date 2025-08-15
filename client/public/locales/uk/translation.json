@@ -8,11 +8,13 @@
         "deadline": "Термін:",
         "difficulty": "Складність:",
         "completed": "Виконано",
+        "notCompleted": "Не виконано",
         "yes": "Так",
         "no": "Ні",
         "nameLabel": "Ім’я",
         "save": "Зберегти",
         "saving": "Збереження...",
+        "confirm": "Підтвердити",
         "cancel": "Скасувати",
         "close": "Закрити",
         "remove": "Видалити",
@@ -92,6 +94,12 @@
             "deleteAllCompletedMessage": "Ви впевнені, що хочете видалити всі виконані завдання?",
             "deleteAllOverdueMessage": "Ви впевнені, що хочете видалити всі протерміновані завдання?",
             "defaultMessage": "Підтвердження видалення"
+        },
+
+        "confirmOverdueTasks": {
+            "overdueTasks": "Протерміновані завдання",
+            "beHonest": "Будьте чесні самі з собою",
+            "checkIfCompleted": "Уточніть, чи виконали Ви ці завдання:"
         }
     },
 

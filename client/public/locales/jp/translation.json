@@ -8,12 +8,14 @@
         "deadline": "締め切り：",
         "difficulty": "難易度：",
         "completed": "完了",
+        "notCompleted": "未完了",
         "yes": "はい",
         "no": "いいえ",
         "nameLabel": "名前",
         "save": "保存",
         "saving": "保存中...",
         "cancel": "キャンセル",
+        "confirm": "確認",
         "close": "閉じる",
         "remove": "削除",
         "bio": "自己紹介",
@@ -93,6 +95,12 @@
             "deleteAllCompletedMessage": "すべての完了したタスクを削除してもよろしいですか？",
             "deleteAllOverdueMessage": "すべての期限切れタスクを削除してもよろしいですか？",
             "defaultMessage": "削除を確認してください"
+        },
+
+        "confirmOverdueTasks": {
+            "overdueTasks": "期限切れのタスク",
+            "beHonest": "自分に正直でいてください",
+            "checkIfCompleted": "これらのタスクを完了したかどうか確認してください:"
         }
     },
 

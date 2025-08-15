@@ -1,7 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 
 import { useTaskModals } from "./useTaskModals";
-import { useOverdueTasksChecker } from "./useOverdueTasksChecker";
 import { useTaskInput } from "./useTaskInput";
 import { useTaskActions } from "./useTaskActions";
 
@@ -31,8 +30,6 @@ const useTasks = () => {
     } = useTaskInput();
 
     const { onDeleteTask, onCompleteTask, onConfirmAction } = useTaskActions();
-
-    useOverdueTasksChecker();
 
     const onAddTask = ({ hasDeadline, difficulty }) => {
         const trimmed = inputTask.trim();

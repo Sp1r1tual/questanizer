@@ -8,11 +8,13 @@
         "deadline": "Deadline:",
         "difficulty": "Difficulty:",
         "completed": "Completed",
+        "notCompleted": "Not completed",
         "yes": "Yes",
         "no": "No",
         "nameLabel": "Name",
         "save": "Save",
         "saving": "Saving...",
+        "confirm": "Confirm",
         "cancel": "Cancel",
         "close": "Close",
         "remove": "Remove",
@@ -93,6 +95,12 @@
             "deleteAllCompletedMessage": "Are you sure you want to delete all completed tasks?",
             "deleteAllOverdueMessage": "Are you sure you want to delete all overdue tasks?",
             "defaultMessage": "Confirm deletion"
+        },
+
+        "confirmOverdueTasks": {
+            "overdueTasks": "Overdue tasks",
+            "beHonest": "Be honest with yourself",
+            "checkIfCompleted": "Please specify if you have completed these tasks:"
         }
     },
 

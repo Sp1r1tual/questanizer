@@ -8,12 +8,14 @@
         "deadline": "Fecha límite:",
         "difficulty": "Dificultad:",
         "completed": "Completado",
+        "notCompleted": "No completado",
         "yes": "Sí",
         "no": "No",
         "nameLabel": "Nombre",
         "save": "Guardar",
         "saving": "Guardando...",
         "cancel": "Cancelar",
+        "confirm": "Confirmar",
         "close": "Cerrar",
         "remove": "Eliminar",
         "bio": "Acerca de mí",
@@ -93,6 +95,12 @@
             "deleteAllCompletedMessage": "¿Estás seguro de que quieres eliminar todas las tareas completadas?",
             "deleteAllOverdueMessage": "¿Estás seguro de que quieres eliminar todas las tareas atrasadas?",
             "defaultMessage": "Confirmar eliminación"
+        },
+
+        "confirmOverdueTasks": {
+            "overdueTasks": "Tareas vencidas",
+            "beHonest": "Sé honesto contigo mismo",
+            "checkIfCompleted": "Especifique si ha completado estas tareas:"
         }
     },
 

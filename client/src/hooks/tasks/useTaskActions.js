@@ -2,9 +2,18 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { useBoss } from "../boss/useBoss";
 
-import { closeConfirmModal, openConfirmModal } from "@/store/tasks/tasksSlice";
+import { TaskService } from "@/services/tasksService";
+
+import {
+    closeConfirmModal,
+    openConfirmModal,
+    markDamageTaken,
+} from "@/store/tasks/tasksSlice";
+import { markTaskAsRaged } from "@/store/boss/bossBattleSlice";
 
 import { deleteTaskAsync, completeTaskAsync } from "@/store/tasks/tasksThunks";
+import { fetchStats } from "@/store/stats/userStatsThunks";
+import { fetchBoss } from "@/store/boss/bossBattleThunks";
 
 const useTaskActions = () => {
     const dispatch = useDispatch();
@@ -54,7 +63,7 @@ const useTaskActions = () => {
         const task = findTask(taskId);
 
         if (task) {
-            dispatch(completeTaskAsync(taskId)).then(() => {
+            return dispatch(completeTaskAsync(taskId)).then(() => {
                 handleTaskCompleted(task.difficulty, !!task.deadline);
             });
         }
@@ -64,6 +73,44 @@ const useTaskActions = () => {
         tasks
             .filter(filterFn)
             .forEach((task) => dispatch(deleteTaskAsync(task._id)));
+    };
+
+    const handleOverdueConfirm = async ({
+        completedTaskIds,
+        uncompletedTaskIds,
+        bossId,
+        alreadyRagedTaskIds,
+    }) => {
+        for (const taskId of completedTaskIds) {
+            try {
+                await handleComplete(taskId);
+            } catch (error) {
+                console.error("Error completing task:", taskId, error);
+            }
+        }
+
+        const overdueTaskIds = [];
+
+        for (const taskId of uncompletedTaskIds) {
+            try {
+                await TaskService.takeDamageOverdueTask(taskId);
+
+                overdueTaskIds.push(taskId);
+
+                dispatch(markDamageTaken(taskId));
+
+                if (bossId && !alreadyRagedTaskIds.includes(taskId)) {
+                    dispatch(markTaskAsRaged(taskId));
+                    dispatch(fetchBoss());
+                }
+            } catch (error) {
+                console.error("Overdue damage error:", taskId, error);
+            }
+        }
+
+        if (overdueTaskIds.length) {
+            dispatch(fetchStats());
+        }
     };
 
     const onConfirmAction = () => {
@@ -88,11 +135,9 @@ const useTaskActions = () => {
                         new Date(t.deadline) < now
                 );
                 break;
-
             default:
-                console.warn("Unknown action type:", actionType);
+                console.error("Unknown action type:", actionType);
         }
-
         dispatch(closeConfirmModal());
     };
 
@@ -103,6 +148,7 @@ const useTaskActions = () => {
         handleDelete,
         handleComplete,
         handleGroupDelete,
+        handleOverdueConfirm,
     };
 };
 

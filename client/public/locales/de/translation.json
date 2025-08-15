@@ -8,12 +8,14 @@
         "deadline": "Frist:",
         "difficulty": "Schwierigkeitsgrad:",
         "completed": "Erledigt",
+        "notCompleted": "Nicht erledigt",
         "yes": "Ja",
         "no": "Nein",
         "nameLabel": "Name",
         "save": "Speichern",
         "saving": "Speichert...",
         "cancel": "Abbrechen",
+        "confirm": "Bestätigen",
         "close": "Schließen",
         "remove": "Entfernen",
         "bio": "Über mich",
@@ -93,6 +95,12 @@
             "deleteAllCompletedMessage": "Bist du sicher, dass du alle erledigten Aufgaben löschen möchtest?",
             "deleteAllOverdueMessage": "Bist du sicher, dass du alle überfälligen Aufgaben löschen möchtest?",
             "defaultMessage": "Löschbestätigung"
+        },
+
+        "confirmOverdueTasks": {
+            "overdueTasks": "Überfällige Aufgaben",
+            "beHonest": "Seien Sie ehrlich zu sich selbst",
+            "checkIfCompleted": "Bitte geben Sie an, ob Sie diese Aufgaben erledigt haben:"
         }
     },
 

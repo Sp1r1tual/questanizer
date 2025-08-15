@@ -8,12 +8,14 @@
         "deadline": "Termin:",
         "difficulty": "Trudność:",
         "completed": "Wykonano",
+        "notCompleted": "Nie wykonano",
         "yes": "Tak",
         "no": "Nie",
         "nameLabel": "Imię",
         "save": "Zapisz",
         "saving": "Zapisywanie...",
         "cancel": "Anuluj",
+        "confirm": "Potwierdź",
         "close": "Zamknij",
         "remove": "Usuń",
         "bio": "O mnie",
@@ -177,6 +179,12 @@
             "shopLikeHero": "Kupuj jak bohater!",
             "freshDeals": "Codzienne świeże oferty!",
             "goldWellSpent": "Dobrze wydane złoto to zarobione złoto!"
+        },
+
+        "confirmOverdueTasks": {
+            "overdueTasks": "Zaległe zadania",
+            "beHonest": "Bądź szczery wobec siebie",
+            "checkIfCompleted": "Określ, czy wykonałeś te zadania:"
         }
     },
 

@@ -3,6 +3,7 @@ import { Dashboard } from "@/components/ui/wrappers/Dashboard";
 import { ContainerMedium } from "@/components/ui/wrappers/ContainerMedium";
 import { UserStatsView } from "@/components/stats/UserStatsView";
 import { TasksView } from "@/components/organizer/TasksView";
+import { ConfirmOverdueTasksModal } from "@/components/organizer/modals/ConfirmOverdueTasksModal";
 
 import backgroundImg from "@/assets/main-background.png";
 
@@ -15,6 +16,7 @@ const TasksPage = () => {
             style={{ backgroundImage: `url(${backgroundImg})` }}
         >
             <Wrapper>
+                <ConfirmOverdueTasksModal />
                 <Dashboard>
                     <ContainerMedium>
                         <UserStatsView />
