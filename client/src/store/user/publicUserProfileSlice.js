@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+
 import { fetchPublicUserProfile } from "./publicUserProfileThunks";
 
 const publicUserProfileSlice = createSlice({

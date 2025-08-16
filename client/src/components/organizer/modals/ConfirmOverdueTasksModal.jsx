@@ -35,7 +35,7 @@ const ConfirmOverdueTasksModal = () => {
                                     {task.text}
                                 </span>
                                 <span className={styles.taskDeadline}>
-                                    Дедлайн:{" "}
+                                    {t("shared.deadline")}{" "}
                                     {new Date(task.deadline).toLocaleDateString(
                                         "uk-UA"
                                     )}

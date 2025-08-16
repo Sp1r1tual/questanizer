@@ -1,8 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { AuthService } from "../../services/authService";
-import { API_URL } from "../../http";
-import { syncUserLanguage } from "../../utils/state/syncUserLanguage";
+
+import { AuthService } from "@/services/authService";
+import { API_URL } from "@/http";
+
+import { syncUserLanguage } from "@/utils/state/syncUserLanguage";
 
 const login = createAsyncThunk(
     "auth/login",

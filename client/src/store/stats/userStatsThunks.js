@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { StatsService } from "../../services/statsService";
+
+import { StatsService } from "@/services/statsService";
 
 const fetchStats = createAsyncThunk("stats/fetchStats", async () => {
     const response = await StatsService.getStats();

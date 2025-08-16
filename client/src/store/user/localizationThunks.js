@@ -1,6 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { LocalizationService } from "../../services/localizationService";
-import { fetchLanguage } from "../../utils/state/fetchLanguage";
+
+import { LocalizationService } from "@/services/localizationService";
+
+import { fetchLanguage } from "@/utils/state/fetchLanguage";
 
 const fetchUserLanguage = createAsyncThunk(
     "localization/fetchUserLanguage",

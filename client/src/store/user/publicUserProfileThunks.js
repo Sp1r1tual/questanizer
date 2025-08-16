@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { UserService } from "../../services/userService";
+
+import { UserService } from "@/services/userService";
 
 const fetchPublicUserProfile = createAsyncThunk(
     "publicUser/fetchPublicUserProfile",

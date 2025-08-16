@@ -1,6 +1,6 @@
 import styles from "./DifficultyPage.module.css";
 
-const DifficultyPage = ({
+const DifficultyContent = ({
     difficulty,
     onSelectDifficulty,
     onBack,
@@ -43,4 +43,4 @@ const DifficultyPage = ({
     );
 };
 
-export { DifficultyPage };
+export { DifficultyContent };

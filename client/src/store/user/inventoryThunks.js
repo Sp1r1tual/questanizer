@@ -1,5 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { InventoryService } from "../../services/inventoryService";
+
+import { InventoryService } from "@/services/inventoryService";
+
 import { fetchStats } from "../stats/userStatsThunks";
 
 const fetchInventory = createAsyncThunk(

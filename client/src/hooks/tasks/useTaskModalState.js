@@ -4,7 +4,7 @@ import { isDateValid } from "@/utils/validation/isDateValid";
 
 const useTaskModalState = ({ deadline, setDeadline, onSubmit, onClose }) => {
     const [isDateInvalid, setIsDateInvalid] = useState(false);
-    const [pageModal, setPageModal] = useState("deadline");
+    const [modalContent, setModalContent] = useState("deadline");
     const [difficulty, setDifficulty] = useState(null);
 
     const handleDateChange = (event) => {
@@ -19,17 +19,17 @@ const useTaskModalState = ({ deadline, setDeadline, onSubmit, onClose }) => {
             setIsDateInvalid(true);
             return;
         }
-        setPageModal("difficulty");
+        setModalContent("difficulty");
     };
 
     const handleAddWithoutDeadline = () => {
         setDeadline("");
         setIsDateInvalid(false);
-        setPageModal("difficulty");
+        setModalContent("difficulty");
     };
 
     const handleBack = () => {
-        setPageModal("deadline");
+        setModalContent("deadline");
         setDifficulty(null);
     };
 
@@ -48,7 +48,7 @@ const useTaskModalState = ({ deadline, setDeadline, onSubmit, onClose }) => {
 
     return {
         isDateInvalid,
-        pageModal,
+        modalContent,
         difficulty,
         handleDateChange,
         handleAddWithDeadline,

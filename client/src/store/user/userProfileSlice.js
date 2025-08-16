@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
+
 import { fetchUserProfile, updateUserProfile } from "./userProfileThunks";
-import { mapToUserProfile } from "../../utils/store/user/userProfileMapper";
+
+import { normalizeUserProfile } from "@/utils/store/user/normalizeUserProfile";
 
 const initialState = {
     profile: null,
@@ -25,7 +27,7 @@ const userSlice = createSlice({
             })
             .addCase(fetchUserProfile.fulfilled, (state, action) => {
                 state.isLoading = false;
-                state.profile = mapToUserProfile(action.payload);
+                state.profile = normalizeUserProfile(action.payload);
             })
             .addCase(fetchUserProfile.rejected, (state, action) => {
                 state.isLoading = false;
@@ -33,7 +35,7 @@ const userSlice = createSlice({
             })
 
             .addCase(updateUserProfile.fulfilled, (state, action) => {
-                state.profile = mapToUserProfile(action.payload);
+                state.profile = normalizeUserProfile(action.payload);
             })
             .addCase(updateUserProfile.rejected, (state, action) => {
                 state.error = action.payload;

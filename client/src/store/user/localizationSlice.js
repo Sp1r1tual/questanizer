@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+
 import { fetchUserLanguage, changeUserLanguage } from "./localizationThunks";
 
 const initialState = {

@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { BossService } from "../../services/bossService";
+
+import { BossService } from "@/services/bossService";
 
 const fetchBoss = createAsyncThunk("boss/fetchBoss", async (_, thunkAPI) => {
     try {

@@ -1,4 +1,4 @@
-const mapToUserProfile = (data) => ({
+const normalizeUserProfile = (data) => ({
     username: data.username || null,
     name: data.username || "No name",
     level: data.stats?.level ?? null,
@@ -8,4 +8,4 @@ const mapToUserProfile = (data) => ({
     photoUrl: data.photoUrl || null,
 });
 
-export { mapToUserProfile };
+export { normalizeUserProfile };

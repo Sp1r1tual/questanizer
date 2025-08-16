@@ -1,14 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
+
 import {
     fetchUserFriends,
     sendFriendRequest,
     acceptFriendRequest,
     removeFriendOrCancel,
 } from "./userFriendsThunks";
+
 import {
     removeRequestById,
     removeIncomingRequestByUserId,
-} from "../../utils/store/user/friendRequest";
+} from "@/utils/store/user/friendRequest";
 
 const initialState = {
     friends: {},

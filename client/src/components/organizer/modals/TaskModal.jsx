@@ -1,14 +1,14 @@
 import { useTaskModalState } from "@/hooks/tasks/useTaskModalState";
 
-import { DeadlinePage } from "./DeadlinePage";
-import { DifficultyPage } from "./DifficultyPage";
+import { DeadlineContent } from "./DeadlineContent";
+import { DifficultyContent } from "./DifficultyContent";
 
 import styles from "./TaskModal.module.css";
 
 const TaskModal = ({ deadline, setDeadline, onSubmit, onClose, isOpen }) => {
     const {
         isDateInvalid,
-        pageModal,
+        modalContent,
         difficulty,
         handleDateChange,
         handleAddWithDeadline,
@@ -44,16 +44,16 @@ const TaskModal = ({ deadline, setDeadline, onSubmit, onClose, isOpen }) => {
                 onClick={(event) => event.stopPropagation()}
             >
                 <form onSubmit={(event) => event.preventDefault()}>
-                    <h2 id="task-modal-title">{modalTitles[pageModal]}</h2>
+                    <h2 id="task-modal-title">{modalTitles[modalContent]}</h2>
 
                     <div id="task-modal-desc" className="visuallyHidden">
-                        {pageModal === "deadline"
+                        {modalContent === "deadline"
                             ? "Select a deadline date for your task."
                             : "Select the difficulty level for your task."}
                     </div>
 
-                    {pageModal === "deadline" && (
-                        <DeadlinePage
+                    {modalContent === "deadline" && (
+                        <DeadlineContent
                             deadline={deadline}
                             isDateInvalid={isDateInvalid}
                             onDateChange={handleDateChange}
@@ -63,8 +63,8 @@ const TaskModal = ({ deadline, setDeadline, onSubmit, onClose, isOpen }) => {
                         />
                     )}
 
-                    {pageModal === "difficulty" && (
-                        <DifficultyPage
+                    {modalContent === "difficulty" && (
+                        <DifficultyContent
                             difficulty={difficulty}
                             onSelectDifficulty={setDifficulty}
                             onBack={handleBack}

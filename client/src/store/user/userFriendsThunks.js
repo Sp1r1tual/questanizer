@@ -1,12 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { FriendsService } from "../../services/friendsService";
-import { getCurrentUserId } from "../../utils/store/user/getCurrentUserId";
+
+import { FriendsService } from "@/services/friendsService";
+
+import { getCurrentUserId } from "@/utils/store/user/getCurrentUserId";
 import {
     mapFriendRequests,
     transformFriendships,
     findRequestId,
     getUserIdFromFriendState,
-} from "../../utils/store/user/friendTransformers";
+} from "@/utils/store/user/friendTransformers";
 
 const fetchUserFriends = createAsyncThunk(
     "friends/fetchUserFriends",

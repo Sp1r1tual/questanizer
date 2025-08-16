@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+
 import { fetchFaqs } from "./faqThunks";
 
 const faqSlice = createSlice({

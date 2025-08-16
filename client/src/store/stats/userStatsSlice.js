@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+
 import { fetchStats, resetStats } from "./userStatsThunks";
 
 const initialState = {

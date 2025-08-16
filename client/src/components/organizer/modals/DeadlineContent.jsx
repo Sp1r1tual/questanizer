@@ -2,7 +2,7 @@ import { useRef } from "react";
 
 import styles from "./DeadlinePage.module.css";
 
-const DeadlinePage = ({
+const DeadlineContent = ({
     deadline,
     isDateInvalid,
     onDateChange,
@@ -77,4 +77,4 @@ const DeadlinePage = ({
     );
 };
 
-export { DeadlinePage };
+export { DeadlineContent };

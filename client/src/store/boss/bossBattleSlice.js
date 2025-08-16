@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+
 import { fetchBoss } from "./bossBattleThunks";
 
 const initialState = {
