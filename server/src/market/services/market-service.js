@@ -4,6 +4,8 @@ import { UserStatsModel } from "../../stats/models/user-stats-model.js";
 import { UserInventoryModel } from "../../user/models/user-inventory-model.js";
 
 import { ApiError } from "../../shared/exceptions/api-error.js";
+
+import { marketItems } from "../data/marketItems.js";
 import { marketNotifications } from "../../shared/utils/notifications/notification-factory.js";
 import { localizeKeys } from "../../shared/utils/localization/localize-keys.js";
 import {
@@ -14,6 +16,18 @@ import {
 class MarketService {
     async localizeItemName(userId, itemKey) {
         return await localizeKeys(userId, `shared.items.${itemKey}`);
+    }
+
+    async initializeMarketCollection() {
+        try {
+            const count = await MarketItemModel.countDocuments();
+
+            if (count === 0) {
+                await MarketItemModel.insertMany(marketItems);
+            }
+        } catch (error) {
+            console.error("Error initializing market collection:", error);
+        }
     }
 
     async getAllMarketItems(userId) {
