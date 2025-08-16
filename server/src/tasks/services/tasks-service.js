@@ -9,7 +9,7 @@ import {
     validateUserId,
     validateTaskAndUserIds,
 } from "../../shared/utils/validations/validate-object-id.js";
-import { tasksNotifications } from "../../shared/helpers/messages/notification-factory.js";
+import { tasksNotifications } from "../../shared/utils/notifications/notification-factory.js";
 
 class TasksService {
     async getAllTasks(userId) {
@@ -122,7 +122,6 @@ class TasksService {
         }
 
         task.damageTaken = true;
-
         await task.save();
 
         const { damage = 0 } = DIFFICULTY_REWARDS[task.difficulty] || {};
@@ -134,21 +133,19 @@ class TasksService {
         if (hpZeroMessage) messages.push(hpZeroMessage);
 
         const boss = await bossService.getBoss(userId);
-
         const createdAfterBossSpawned =
             boss && task.deadline && task.createdAt > boss.spawnedAt;
 
-        if (!createdAfterBossSpawned) return;
+        if (createdAfterBossSpawned) {
+            const rageResult = await bossService.addRage(userId, [taskId]);
 
-        const rageResult = await bossService.addRage(userId, [taskId]);
-
-        if (!rageResult.messages?.length) return;
-
-        const formattedMessages = rageResult.messages.map((msg) =>
-            typeof msg === "string" ? info(msg) : msg
-        );
-
-        messages.push(...formattedMessages);
+            if (rageResult.messages?.length) {
+                const formattedMessages = rageResult.messages.map((msg) =>
+                    typeof msg === "string" ? info(msg) : msg
+                );
+                messages.push(...formattedMessages);
+            }
+        }
 
         return { task, stats, messages };
     }

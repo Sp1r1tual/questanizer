@@ -1,7 +1,8 @@
 import { FriendsModel } from "../models/friends-model.js";
-import { findUserById } from "../../shared/helpers/findUserById.js";
-import { FriendDto } from "../../shared/dtos/friend-dto.js";
+
 import { ApiError } from "../../shared/exceptions/api-error.js";
+import { findUserById } from "../../shared/utils/findUserById.js";
+import { FriendDto } from "../../shared/dtos/friend-dto.js";
 
 class FriendsService {
     async getFriends(userId) {

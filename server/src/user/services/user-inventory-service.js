@@ -1,9 +1,11 @@
 import { UserInventoryModel } from "../models/user-inventory-model.js";
 import { MarketItemModel } from "../../market/models/market-item-model.js";
 import { UserStatsModel } from "../../stats/models/user-stats-model.js";
+
 import { handleItemEffects } from "../handlers/item-effect-handlers.js";
+
 import { normalizeMessages } from "../../shared/utils/notifications/notifications.js";
-import { inventoryNotifications } from "../../shared/helpers/messages/notification-factory.js";
+import { inventoryNotifications } from "../../shared/utils/notifications/notification-factory.js";
 import { localizeKeys } from "../../shared/utils/localization/localize-keys.js";
 import { localizeNestedItems } from "../../shared/utils/localization/localize-items.js";
 

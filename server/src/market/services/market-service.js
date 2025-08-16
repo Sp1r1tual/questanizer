@@ -4,7 +4,7 @@ import { UserStatsModel } from "../../stats/models/user-stats-model.js";
 import { UserInventoryModel } from "../../user/models/user-inventory-model.js";
 
 import { ApiError } from "../../shared/exceptions/api-error.js";
-import { marketNotifications } from "../../shared/helpers/messages/notification-factory.js";
+import { marketNotifications } from "../../shared/utils/notifications/notification-factory.js";
 import { localizeKeys } from "../../shared/utils/localization/localize-keys.js";
 import {
     localizeNestedItems,

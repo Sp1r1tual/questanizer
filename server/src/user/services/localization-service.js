@@ -1,5 +1,6 @@
 import i18next from "../../i18n.js";
-import { findUserById } from "../../shared/helpers/findUserById.js";
+
+import { findUserById } from "../../shared/utils/findUserById.js";
 
 class LocalizationService {
     async getUserLanguage(userId) {

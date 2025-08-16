@@ -1,4 +1,4 @@
-import { localizationMessages } from "../../utils/localization/localize-messages.js";
+import { localizationMessages } from "../localization/localize-messages.js";
 
 const bossNotifications = {
     allDefeated: (userId) =>
@@ -23,7 +23,7 @@ const bossNotifications = {
 
     attack: (userId, bossPower) =>
         localizationMessages(userId, "warning", "boss.bossAttacking", {
-            boss: { bossPower },
+            bossPower,
         }),
 
     reward: (userId, exp, gold) =>

@@ -8,7 +8,7 @@ import { mailService } from "./mail-service.js";
 import { tokenService } from "./token-service.js";
 
 import { ApiError } from "../../shared/exceptions/api-error.js";
-import { findUserById } from "../../shared/helpers/findUserById.js";
+import { findUserById } from "../../shared/utils/findUserById.js";
 import { UserDto } from "../../shared/dtos/user-dto.js";
 
 class AuthService {
