@@ -19,11 +19,15 @@
         "rage": "怒り",
         "power": "力",
         "bosses": {
+            "timeThiefRabbit": "時間泥棒ウサギ",
             "robberWolf": "強盗オオカミ",
             "goblinAlchemist": "ゴブリン錬金術師",
             "evilWizard": "邪悪な魔法使い",
             "darkKnight": "ダークナイト",
-            "doomLord": "破滅の支配者"
+            "boneDragon": "骨のドラゴン",
+            "hydra": "ヒドラ",
+            "doomLord": "破滅の王",
+            "voidOverlord": "虚無の支配者"
         }
     },
 

@@ -19,11 +19,15 @@
         "rage": "Ira",
         "power": "Poder",
         "bosses": {
-            "robberWolf": "Lobo bandido",
-            "goblinAlchemist": "Alquimista goblin",
-            "evilWizard": "Mago malvado",
-            "darkKnight": "Caballero oscuro",
-            "doomLord": "Señor de la perdición"
+            "timeThiefRabbit": "Conejo Ladrón del Tiempo",
+            "robberWolf": "Lobo Ladrón",
+            "goblinAlchemist": "Duende Alquimista",
+            "evilWizard": "Mago Malvado",
+            "darkKnight": "Caballero Oscuro",
+            "boneDragon": "Dragón de Hueso",
+            "hydra": "Hidra",
+            "doomLord": "Señor de la Perdición",
+            "voidOverlord": "Señor del Vacío"
         }
     },
 

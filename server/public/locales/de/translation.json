@@ -19,11 +19,15 @@
         "rage": "Wut",
         "power": "Kraft",
         "bosses": {
-            "robberWolf": "Räuberwolf",
+            "timeThiefRabbit": "Zeitdieb Kaninchen",
+            "robberWolf": "Räuber Wolf",
             "goblinAlchemist": "Goblin-Alchemist",
             "evilWizard": "Böser Zauberer",
             "darkKnight": "Dunkler Ritter",
-            "doomLord": "Herrscher der Vernichtung"
+            "boneDragon": "Knochendrache",
+            "hydra": "Hydra",
+            "doomLord": "Herr des Verderbens",
+            "voidOverlord": "Herrscher der Leere"
         }
     },
 

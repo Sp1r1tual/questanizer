@@ -19,11 +19,15 @@
         "rage": "Rage",
         "power": "Power",
         "bosses": {
+            "timeThiefRabbit": "Time Thief Rabbit",
             "robberWolf": "Robber Wolf",
             "goblinAlchemist": "Goblin Alchemist",
             "evilWizard": "Evil Wizard",
             "darkKnight": "Dark Knight",
-            "doomLord": "Doom Lord"
+            "boneDragon": "Bone Dragon",
+            "hydra": "Hydra",
+            "doomLord": "Doom Lord",
+            "voidOverlord": "Void Overlord"
         }
     },
 

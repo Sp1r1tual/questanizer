@@ -19,11 +19,15 @@
         "rage": "Gniew",
         "power": "Siła",
         "bosses": {
-            "robberWolf": "Wilk rozbójnik",
-            "goblinAlchemist": "Goblin alchemik",
-            "evilWizard": "Zły czarodziej",
-            "darkKnight": "Mroczny rycerz",
-            "doomLord": "Władca zagłady"
+            "timeThiefRabbit": "Królik Złodziej Czasu",
+            "robberWolf": "Wilk Rabuś",
+            "goblinAlchemist": "Goblin Alchemik",
+            "evilWizard": "Zły Czarnoksiężnik",
+            "darkKnight": "Mroczny Rycerz",
+            "boneDragon": "Kościany Smok",
+            "hydra": "Hydra",
+            "doomLord": "Pan Zguby",
+            "voidOverlord": "Władca Pustki"
         }
     },
 

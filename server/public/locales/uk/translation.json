@@ -19,11 +19,15 @@
         "rage": "Лють",
         "power": "Сила",
         "bosses": {
+            "timeThiefRabbit": "Кролик Крадій Часу",
             "robberWolf": "Розбійник Вовк",
             "goblinAlchemist": "Гоблін Алхімік",
             "evilWizard": "Злий Чаклун",
             "darkKnight": "Темний Лицар",
-            "doomLord": "Повелитель Руйнації"
+            "boneDragon": "Кістяний Дракон",
+            "hydra": "Гідра",
+            "doomLord": "Повелитель Руйнації",
+            "voidOverlord": "Повелитель Пустоти"
         }
     },
 
