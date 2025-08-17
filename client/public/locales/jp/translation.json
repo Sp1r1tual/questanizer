@@ -263,6 +263,11 @@
         "somethingWentWrong": "問題が発生しました",
         "tryAgain": "再試行してください",
         "goBack": "戻る",
-        "returnHome": "ホームに戻る"
+        "returnHome": "ホームに戻る",
+        "auth": {
+            "registration": "登録に失敗しました",
+            "login": "ログイン試行に失敗しました",
+            "expired": "もう一度ログインしてください"
+        }
     }
 }

@@ -263,6 +263,11 @@
         "somethingWentWrong": "Etwas ist schiefgelaufen",
         "tryAgain": "Erneut versuchen",
         "goBack": "Zurückgehen",
-        "returnHome": "Zur Startseite"
+        "returnHome": "Zur Startseite",
+        "auth": {
+            "registration": "Registrierung fehlgeschlagen",
+            "login": "Anmeldeversuch fehlgeschlagen",
+            "expired": "Bitte melden Sie sich erneut an"
+        }
     }
 }

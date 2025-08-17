@@ -263,6 +263,11 @@
         "somethingWentWrong": "Coś poszło nie tak",
         "tryAgain": "Spróbuj ponownie",
         "goBack": "Wróć",
-        "returnHome": "Powrót do strony głównej"
+        "returnHome": "Powrót do strony głównej",
+        "auth": {
+            "registration": "Rejestracja nieudana",
+            "login": "Nieudana próba logowania",
+            "expired": "Zaloguj się ponownie"
+        }
     }
 }

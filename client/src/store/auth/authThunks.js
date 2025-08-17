@@ -18,9 +18,7 @@ const login = createAsyncThunk(
 
             return response.data.user;
         } catch (error) {
-            return thunkAPI.rejectWithValue(
-                error.response?.data?.message || "Login failed"
-            );
+            return thunkAPI.rejectWithValue("errors.auth.login");
         }
     }
 );
@@ -35,9 +33,7 @@ const register = createAsyncThunk(
 
             return response.data.user;
         } catch (error) {
-            return thunkAPI.rejectWithValue(
-                error.response?.data?.message || "Registration failed"
-            );
+            return thunkAPI.rejectWithValue("errors.auth.registration");
         }
     }
 );
@@ -58,9 +54,7 @@ const checkAuth = createAsyncThunk("auth/checkAuth", async (_, thunkAPI) => {
 
         return response.data.user;
     } catch (error) {
-        return thunkAPI.rejectWithValue(
-            error.response?.data?.message || "Session expired"
-        );
+        return thunkAPI.rejectWithValue("errors.auth.expired");
     }
 });
 

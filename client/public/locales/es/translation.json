@@ -263,6 +263,11 @@
         "somethingWentWrong": "Algo salió mal",
         "tryAgain": "Intentar de nuevo",
         "goBack": "Regresar",
-        "returnHome": "Volver a la página principal"
+        "returnHome": "Volver a la página principal",
+        "auth": {
+            "registration": "Error en el registro",
+            "login": "Error en el intento de inicio de sesión",
+            "expired": "Por favor, inicie sesión de nuevo"
+        }
     }
 }
