@@ -73,6 +73,54 @@
     gap: 1rem;
 }
 
+.userId {
+    margin: 0;
+    font-size: smaller;
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+}
+
+.userId[data-copied="true"]::after {
+    content: attr(data-tooltip-text);
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 1;
+    animation: fadeInOut 2s ease-in-out forwards;
+    z-index: 1000;
+}
+
+.userId[data-copied="true"]::before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #333;
+    z-index: 1000;
+}
+
+@keyframes fadeInOut {
+    0%,
+    15% {
+        opacity: 1;
+    }
+    85%,
+    100% {
+        opacity: 0;
+    }
+}
+
 .infoItem {
     display: flex;
     align-items: flex-start;

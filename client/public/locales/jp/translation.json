@@ -31,7 +31,9 @@
         "emailLabel": "メールアドレス",
         "emailPlaceholder": "メールアドレスを入力してください",
         "passwordLabel": "パスワード",
-        "passwordPlaceholder": "パスワードを入力してください"
+        "passwordPlaceholder": "パスワードを入力してください",
+        "copied": "コピーしました",
+        "seconds": "秒"
     },
 
     "footer": {

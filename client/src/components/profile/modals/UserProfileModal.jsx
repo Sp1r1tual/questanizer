@@ -15,10 +15,12 @@ import styles from "./UserProfileModal.module.css";
 const UserProfileModal = ({ onClose }) => {
     const dispatch = useDispatch();
 
+    const currentUserId = useSelector((state) => state.auth.user.id);
     const user = useSelector((state) => state.user.profile);
     const isLoading = useSelector((state) => state.user.isLoading);
 
     const [isEditing, setIsEditing] = useState(false);
+    const [copied, setCopied] = useState(false);
 
     const { t } = useTranslation();
 
@@ -40,6 +42,11 @@ const UserProfileModal = ({ onClose }) => {
 
     const handleCancel = () => {
         setIsEditing(false);
+    };
+
+    const handleCopy = async () => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
     };
 
     return (
@@ -75,6 +82,14 @@ const UserProfileModal = ({ onClose }) => {
                             <h2 className={styles.name}>
                                 {name || t("profile.noUsername")}
                             </h2>
+                            <p
+                                className={styles.userId}
+                                onClick={handleCopy}
+                                data-copied={copied}
+                                data-tooltip-text={t("shared.copied")}
+                            >
+                                ID: {currentUserId}
+                            </p>
                         </div>
 
                         <div className={styles.profileInfo}>

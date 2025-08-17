@@ -31,7 +31,9 @@
         "emailLabel": "E-mail",
         "emailPlaceholder": "Wprowadź e-mail",
         "passwordLabel": "Hasło",
-        "passwordPlaceholder": "Wprowadź hasło"
+        "passwordPlaceholder": "Wprowadź hasło",
+        "copied": "Skopiowano",
+        "seconds": "s"
     },
 
     "footer": {

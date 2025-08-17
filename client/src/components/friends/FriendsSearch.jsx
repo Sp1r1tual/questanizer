@@ -9,7 +9,6 @@ import { FriendItem } from "./FriendItem";
 import styles from "./FriendsSearch.module.css";
 
 const FriendsSearch = ({
-    currentUser,
     getFriendStatus,
     onAdd,
     onAccept,
@@ -32,7 +31,7 @@ const FriendsSearch = ({
         handleSearch,
         handlePageChange,
         getPageNumbers,
-    } = useFriendsSearch(currentUser?.username);
+    } = useFriendsSearch();
 
     const { t } = useTranslation();
 

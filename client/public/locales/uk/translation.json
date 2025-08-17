@@ -31,7 +31,9 @@
         "emailLabel": "Електронна пошта",
         "emailPlaceholder": "Введіть електронну пошту",
         "passwordLabel": "Пароль",
-        "passwordPlaceholder": "Введіть пароль"
+        "passwordPlaceholder": "Введіть пароль",
+        "copied": "Скопійовано",
+        "seconds": "с"
     },
 
     "footer": {
