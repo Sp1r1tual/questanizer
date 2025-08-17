@@ -239,7 +239,13 @@
     },
 
     "support": {
-        "faqTitle": "よくある質問"
+        "faqTitle": "よくある質問",
+        "feedback": "フィードバック",
+        "bugReport": "バグを報告",
+        "getSupport": "サポートに連絡",
+        "suggestIdea": "アイデアを提案",
+        "writeHere": "ここにメッセージを入力してください...",
+        "send": "送信"
     },
 
     "chat": {

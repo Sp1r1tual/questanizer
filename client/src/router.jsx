@@ -10,7 +10,7 @@ import { RegistrationPage } from "./pages/RegistrationPage";
 import { ForgotPasswordPage } from "./pages/ForgotPasswordPage";
 import { ResetPasswordPage } from "./pages/ResetPasswordPage";
 import { BossBattlePage } from "./pages/BossBattlePage";
-import { AnswersPage } from "./pages/AnswersPage";
+import { SupportPage } from "./pages/SupportPage";
 import { MarketPage } from "./pages/MarketPage";
 import { InventoryPage } from "./pages/InventoryPage";
 import { TasksPage } from "./pages/TasksPage";
@@ -59,7 +59,7 @@ const router = createBrowserRouter([
                     },
                     {
                         path: "faq",
-                        element: <AnswersPage />,
+                        element: <SupportPage />,
                     },
                 ],
             },

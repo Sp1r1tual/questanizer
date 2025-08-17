@@ -1,9 +1,13 @@
 import { useTranslation } from "react-i18next";
 
+import { CONTACTS } from "../../data/contacts";
+
 import styles from "./Footer.module.css";
 
 const Footer = () => {
     const { t } = useTranslation();
+
+    const mail = CONTACTS.email;
 
     return (
         <footer className={styles.footer}>
@@ -24,10 +28,7 @@ const Footer = () => {
                     >
                         {t("footer.about")}
                     </a>
-                    <a
-                        href="mailto:questanizer@gmail.com"
-                        className={styles.link}
-                    >
+                    <a href={`mailto:${mail}`} className={styles.link}>
                         {t("footer.contact")}
                     </a>
                 </div>

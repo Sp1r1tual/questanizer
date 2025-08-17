@@ -1,13 +1,14 @@
 import { Wrapper } from "@/components/ui/wrappers/Wrapper";
 import { Dashboard } from "@/components/ui/wrappers/Dashboard";
 import { ContainerMedium } from "@/components/ui/wrappers/ContainerMedium";
-import { Answers } from "@/components/faq/Answers";
+import { Answers } from "@/components/support/Answers";
+import { Feedback } from "../components/support/Feedback";
 
 import backgroundImg from "@/assets/support-background.png";
 
-import styles from "./AnswersPage.module.css";
+import styles from "./SupportPage.module.css";
 
-const AnswersPage = () => {
+const SupportPage = () => {
     return (
         <div
             className={styles.supportWrapper}
@@ -18,10 +19,13 @@ const AnswersPage = () => {
                     <ContainerMedium>
                         <Answers />
                     </ContainerMedium>
+                    <ContainerMedium>
+                        <Feedback />
+                    </ContainerMedium>
                 </Dashboard>
             </Wrapper>
         </div>
     );
 };
 
-export { AnswersPage };
+export { SupportPage };

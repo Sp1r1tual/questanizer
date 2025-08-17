@@ -1,0 +1,101 @@
+.feedbackWrapper {
+    background-color: #f9f9f9;
+    padding: 22px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+
+.feedbackTitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.feedbackOptions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.feedbackOption {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.95rem;
+    user-select: none;
+    min-width: 120px;
+    justify-content: center;
+}
+
+.feedbackRadio {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    margin-right: 8px;
+    position: relative;
+}
+
+.feedbackRadio:checked::before {
+    content: "";
+    display: block;
+    width: 8px;
+    height: 8px;
+    background-color: #7d5032;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.feedbackTextarea {
+    width: 100%;
+    height: 120px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    resize: none;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.feedbackButton {
+    margin-top: 16px;
+    width: 100%;
+    padding: 12px;
+    background-color: #7d5032;
+    color: white;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.feedbackButton:hover {
+    background-color: #5e3e28;
+}
+
+@media (max-width: 480px) {
+    .feedbackWrapper {
+        padding: 15px;
+    }
+
+    .feedbackOptions {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .feedbackOption {
+        min-width: 0;
+        justify-content: flex-start;
+    }
+}

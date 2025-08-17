@@ -239,7 +239,13 @@
     },
 
     "support": {
-        "faqTitle": "Frequently Asked Questions"
+        "faqTitle": "Frequently Asked Questions",
+        "feedback": "Feedback",
+        "bugReport": "Report a Bug",
+        "getSupport": "Contact Support",
+        "suggestIdea": "Suggest an Idea",
+        "writeHere": "Write your message here...",
+        "send": "Send"
     },
 
     "chat": {
