@@ -50,13 +50,20 @@ class UserService {
     async searchUsers(query, requesterId, page, limit) {
         const trimmedQuery = query?.trim() || "";
 
-        const filter = {
-            ...searchInFields(["username"], trimmedQuery),
-            isActivated: true,
-            ...(requesterId && {
-                _id: { $ne: new mongoose.Types.ObjectId(requesterId) },
-            }),
-        };
+        let filter = { isActivated: true };
+
+        if (requesterId) {
+            filter._id = { $ne: new mongoose.Types.ObjectId(requesterId) };
+        }
+
+        if (mongoose.Types.ObjectId.isValid(trimmedQuery)) {
+            filter._id = {
+                ...filter._id,
+                $eq: new mongoose.Types.ObjectId(trimmedQuery),
+            };
+        } else if (trimmedQuery) {
+            Object.assign(filter, searchInFields(["username"], trimmedQuery));
+        }
 
         const paginated = await paginate(UserModel, filter, {
             page,
