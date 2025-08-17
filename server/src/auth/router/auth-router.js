@@ -10,6 +10,7 @@ import {
     resetPassword,
 } from "../../auth/controllers/auth-controller.js";
 
+import { rateLimiterMiddleware } from "../../shared/middlewares/rate-limiter-middleware.js";
 import { validationErrorsMiddleware } from "../../shared/middlewares/validation-errors-middleware.js";
 
 import {
@@ -37,6 +38,7 @@ authRouter.get("/activate/:link", activate);
 
 authRouter.post(
     "/forgot-password",
+    rateLimiterMiddleware(1),
     forgotPasswordValidation,
     validationErrorsMiddleware,
     forgotPassword
