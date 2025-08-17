@@ -197,7 +197,8 @@
         "forgotPassword": {
             "title": "Passwort vergessen?",
             "sendLink": "Link zum Zurücksetzen senden",
-            "success": "Überprüfe deine E-Mail..."
+            "success": "Überprüfe deine E-Mail...",
+            "resendIn": "Sie können erneut anfragen in:"
         },
         "resetPassword": {
             "title": "Passwort zurücksetzen",

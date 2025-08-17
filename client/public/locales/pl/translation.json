@@ -197,7 +197,8 @@
         "forgotPassword": {
             "title": "Zapomniałeś hasła?",
             "sendLink": "Wyślij link do resetu",
-            "success": "Sprawdź swoją pocztę..."
+            "success": "Sprawdź swoją pocztę...",
+            "resendIn": "Możesz ponownie wysłać żądanie za:"
         },
         "resetPassword": {
             "title": "Resetowanie hasła",

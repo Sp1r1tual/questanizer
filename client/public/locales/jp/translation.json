@@ -197,7 +197,8 @@
         "forgotPassword": {
             "title": "パスワードを忘れた？",
             "sendLink": "リセットリンクを送信",
-            "success": "メールを確認してください..."
+            "success": "メールを確認してください...",
+            "resendIn": "再リクエストできるまで:"
         },
         "resetPassword": {
             "title": "パスワードをリセット",

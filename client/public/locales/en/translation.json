@@ -197,7 +197,8 @@
         "forgotPassword": {
             "title": "Forgot Password?",
             "sendLink": "Send Reset Link",
-            "success": "Check your email..."
+            "success": "Check your email...",
+            "resendIn": "You can request again in:"
         },
         "resetPassword": {
             "title": "Reset Password",

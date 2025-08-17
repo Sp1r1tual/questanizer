@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import { useForm } from "@/hooks/auth/useForm";
@@ -14,6 +15,8 @@ import backgroundImg from "@/assets/login-background.png";
 import styles from "./ForgotPasswordPage.module.css";
 
 const ForgotPasswordPage = () => {
+    const [cooldown, setCooldown] = useState(0);
+
     const form = useForm({
         initialValues: { email: "" },
         validate: validateForgotPasswordForm,
@@ -21,12 +24,26 @@ const ForgotPasswordPage = () => {
 
     const { t } = useTranslation();
 
+    useEffect(() => {
+        let timer;
+
+        if (cooldown > 0) {
+            timer = setInterval(() => {
+                setCooldown((prev) => prev - 1);
+            }, 1000);
+        }
+
+        return () => clearInterval(timer);
+    }, [cooldown]);
+
     const handleSubmit = async ({ email }) => {
         const response = await AuthService.requestPasswordReset(email);
 
         form.setMessage(
             response.data.message || "Check your email for the reset link"
         );
+
+        setCooldown(60);
 
         return response;
     };
@@ -106,10 +123,14 @@ const ForgotPasswordPage = () => {
                                 <button
                                     type="submit"
                                     className={styles.submitButton}
-                                    disabled={form.isLoading}
+                                    disabled={form.isLoading || cooldown > 0}
                                 >
                                     {form.isLoading
                                         ? t("shared.saving")
+                                        : cooldown > 0
+                                        ? `${t(
+                                              "auth.forgotPassword.resendIn"
+                                          )} ${cooldown}s`
                                         : t("auth.forgotPassword.sendLink")}
                                 </button>
                             </div>
