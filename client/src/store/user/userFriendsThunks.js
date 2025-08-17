@@ -2,7 +2,6 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { FriendsService } from "@/services/friendsService";
 
-import { getCurrentUserId } from "@/utils/store/user/getCurrentUserId";
 import {
     mapFriendRequests,
     transformFriendships,
@@ -17,7 +16,8 @@ const fetchUserFriends = createAsyncThunk(
             const friendsRes = await FriendsService.fetchUserFriends();
             const requestsRes = await FriendsService.fetchFriendRequests();
 
-            const currentUserId = await getCurrentUserId(thunkAPI);
+            const currentUserId = thunkAPI.getState().auth.user.id;
+
             const friends = transformFriendships(
                 friendsRes.data || [],
                 currentUserId
@@ -60,7 +60,8 @@ const acceptFriendRequest = createAsyncThunk(
             const response = await FriendsService.acceptFriendRequest(
                 requesterId
             );
-            const currentUserId = await getCurrentUserId(thunkAPI);
+
+            const currentUserId = thunkAPI.getState().auth.user.id;
 
             const requests = thunkAPI.getState().friends.requests;
             const requestId = findRequestId(requests, requesterId);

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 import { usePagination } from "../ui/usePagination";
 
@@ -6,13 +7,16 @@ import { $api } from "@/http";
 
 import { validateSearchQuery } from "@/utils/validation/validateSearchQuery";
 
-const useFriendsSearch = (currentUsername) => {
+const useFriendsSearch = () => {
     const [input, setInput] = useState("");
     const [results, setResults] = useState([]);
     const [message, setMessage] = useState(null);
     const [error, setError] = useState(null);
     const [isLoading, setLoading] = useState(false);
     const [hasSearched, setHasSearched] = useState(false);
+
+    const currentUserId = useSelector((state) => state.auth.user.id);
+    const currentUserName = useSelector((state) => state.auth.user.username);
 
     const {
         currentPage,
@@ -37,7 +41,8 @@ const useFriendsSearch = (currentUsername) => {
 
         const { valid, error: validationError } = validateSearchQuery(
             query,
-            currentUsername
+            currentUserId,
+            currentUserName
         );
 
         if (!valid) return validationError && setError(validationError);

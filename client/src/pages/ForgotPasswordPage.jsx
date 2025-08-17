@@ -130,7 +130,7 @@ const ForgotPasswordPage = () => {
                                         : cooldown > 0
                                         ? `${t(
                                               "auth.forgotPassword.resendIn"
-                                          )} ${cooldown}s`
+                                          )} ${cooldown}${t("shared.seconds")}`
                                         : t("auth.forgotPassword.sendLink")}
                                 </button>
                             </div>
