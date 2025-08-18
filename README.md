@@ -61,6 +61,6 @@
 Install and run the app in development mode:
 
 ```bash
-npm run install:all   # installs both client and server deps
+npm install           # installs both client and server deps
 npm run dev           # starts both client and server concurrently
 ```

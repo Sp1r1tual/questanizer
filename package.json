@@ -1,0 +1,27 @@
+{
+  "name": "questanizer",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Andrii Zub",
+  "license": "ISC",
+  "scripts": {
+  "lint:client": "cd client; npx prettier --write .; npx eslint --fix .",
+  "lint:server": "cd server; npx prettier --write .; npx eslint --fix .",
+  "postinstall": "npm install --prefix client && npm install --prefix server",
+  "dev": "concurrently \"npm run dev --prefix client\" \"npm run dev --prefix server\"",
+  "prepare": "husky"
+},
+  "lint-staged": {
+  "client/**/*.{js,jsx,css}": [
+    "npx --prefix ./client prettier --write"
+  ],
+  "server/**/*.{js}": [
+    "npx --prefix ./server prettier --write"
+  ]
+},
+  "devDependencies": {
+    "concurrently": "^9.2.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.5"
+  }
+}
