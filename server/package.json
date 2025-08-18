@@ -1,39 +1,45 @@
 {
-    "name": "server",
-    "version": "1.0.0",
-    "main": "index.js",
-    "type": "module",
-    "scripts": {
-        "start": "node src/index.js",
-        "dev": "nodemon src/index.js",
-        "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --coverage"
-    },
-    "keywords": [],
-    "author": "Andrii Zub",
-    "license": "ISC",
-    "description": "",
-    "dependencies": {
-        "bcrypt": "^6.0.0",
-        "cookie-parser": "^1.4.7",
-        "cors": "^2.8.5",
-        "dotenv": "^16.5.0",
-        "express": "^5.1.0",
-        "express-rate-limit": "^8.0.1",
-        "express-validator": "^7.2.1",
-        "i18next": "^25.3.2",
-        "i18next-fs-backend": "^2.6.0",
-        "jsonwebtoken": "^9.0.2",
-        "mongodb": "^6.17.0",
-        "mongoose": "^8.16.0",
-        "multer": "^2.0.2",
-        "nodemailer": "^7.0.3",
-        "socket.io": "^4.8.1",
-        "uuid": "^11.1.0"
-    },
-    "devDependencies": {
-        "@jest/environment": "^30.0.4",
-        "@jest/globals": "^30.0.4",
-        "jest": "^30.0.4",
-        "nodemon": "^3.1.10"
-    }
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "lint": "eslint . --report-unused-disable-directives --max-warnings 0",
+    "format": "prettier --write .",
+    "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --coverage"
+  },
+  "keywords": [],
+  "author": "Andrii Zub",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.0.1",
+    "express-validator": "^7.2.1",
+    "i18next": "^25.3.2",
+    "i18next-fs-backend": "^2.6.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.17.0",
+    "mongoose": "^8.16.0",
+    "multer": "^2.0.2",
+    "nodemailer": "^7.0.3",
+    "socket.io": "^4.8.1",
+    "uuid": "^11.1.0"
+  },
+  "devDependencies": {
+    "@jest/environment": "^30.0.4",
+    "@jest/globals": "^30.0.4",
+    "eslint": "^9.33.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "jest": "^30.0.4",
+    "nodemon": "^3.1.10",
+    "prettier": "^3.6.2"
+  }
 }
