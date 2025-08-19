@@ -1,85 +1,80 @@
 import { localizationMessages } from "../localization/localize-messages.js";
 
 const bossNotifications = {
-    allDefeated: (userId) =>
-        localizationMessages(userId, "success", "boss.noMoreBosses"),
+  allDefeated: (userId) => localizationMessages(userId, "success", "boss.noMoreBosses"),
 
-    defeated: (userId, bossName) =>
-        localizationMessages(userId, "success", "boss.defeatBoss", {
-            bossName,
-        }),
+  defeated: (userId, bossName) =>
+    localizationMessages(userId, "success", "boss.defeatBoss", {
+      bossName,
+    }),
 
-    damaged: (userId, amount) =>
-        localizationMessages(userId, "info", "boss.dealtDamage", {
-            amount,
-        }),
+  damaged: (userId, amount) =>
+    localizationMessages(userId, "info", "boss.dealtDamage", {
+      amount,
+    }),
 
-    rage: (userId, value, rage, rageBar) =>
-        localizationMessages(userId, "info", "boss.increaseRage", {
-            value,
-            rage,
-            rageBar,
-        }),
+  rage: (userId, value, rage, rageBar) =>
+    localizationMessages(userId, "info", "boss.increaseRage", {
+      value,
+      rage,
+      rageBar,
+    }),
 
-    attack: (userId, bossPower) =>
-        localizationMessages(userId, "warning", "boss.bossAttacking", {
-            bossPower,
-        }),
+  attack: (userId, bossPower) =>
+    localizationMessages(userId, "warning", "boss.bossAttacking", {
+      bossPower,
+    }),
 
-    reward: (userId, exp, gold) =>
-        localizationMessages(userId, "success", "boss.reward", { exp, gold }),
+  reward: (userId, exp, gold) =>
+    localizationMessages(userId, "success", "boss.reward", { exp, gold }),
 };
 
 const statsNotifications = {
-    levelUp: (userId, level) =>
-        localizationMessages(userId, "success", "stats.levelUp", { level }),
+  levelUp: (userId, level) => localizationMessages(userId, "success", "stats.levelUp", { level }),
 
-    defeated: (userId) =>
-        localizationMessages(userId, "error", "stats.defeated"),
+  defeated: (userId) => localizationMessages(userId, "error", "stats.defeated"),
 
-    reset: (userId) => localizationMessages(userId, "info", "stats.reset"),
+  reset: (userId) => localizationMessages(userId, "info", "stats.reset"),
 };
 
 const inventoryNotifications = {
-    useItem: (userId, item) =>
-        localizationMessages(userId, "success", "inventory.useItem", {
-            item,
-        }),
+  useItem: (userId, item) =>
+    localizationMessages(userId, "success", "inventory.useItem", {
+      item,
+    }),
 
-    fullHp: (userId) =>
-        localizationMessages(userId, "error", "inventory.fullHp"),
+  fullHp: (userId) => localizationMessages(userId, "error", "inventory.fullHp"),
 };
 
 const marketNotifications = {
-    checkout: (userId, totalItems) =>
-        localizationMessages(userId, "success", "market.purchase", {
-            totalItems,
-        }),
+  checkout: (userId, totalItems) =>
+    localizationMessages(userId, "success", "market.purchase", {
+      totalItems,
+    }),
 
-    spent: (userId, totalPrice) =>
-        localizationMessages(userId, "info", "market.spent", { totalPrice }),
+  spent: (userId, totalPrice) =>
+    localizationMessages(userId, "info", "market.spent", { totalPrice }),
 
-    notEnoughtGold: (userId) =>
-        localizationMessages(userId, "error", "market.notEnoughtGold"),
+  notEnoughtGold: (userId) => localizationMessages(userId, "error", "market.notEnoughtGold"),
 };
 
 const tasksNotifications = {
-    complete: (userId, xp, gold) =>
-        localizationMessages(userId, "success", "tasks.complete", {
-            xp,
-            gold,
-        }),
+  complete: (userId, xp, gold) =>
+    localizationMessages(userId, "success", "tasks.complete", {
+      xp,
+      gold,
+    }),
 
-    penalty: (userId, damage) =>
-        localizationMessages(userId, "warning", "tasks.penalty", {
-            damage,
-        }),
+  penalty: (userId, damage) =>
+    localizationMessages(userId, "warning", "tasks.penalty", {
+      damage,
+    }),
 };
 
 export {
-    bossNotifications,
-    statsNotifications,
-    inventoryNotifications,
-    marketNotifications,
-    tasksNotifications,
+  bossNotifications,
+  statsNotifications,
+  inventoryNotifications,
+  marketNotifications,
+  tasksNotifications,
 };

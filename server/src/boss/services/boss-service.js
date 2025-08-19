@@ -12,208 +12,185 @@ import { updateBossFromTemplate } from "../utils/update-boss-from-template.js";
 import { localizeKeys } from "../../shared/utils/localization/localize-keys.js";
 
 class BossService {
-    async localizeBossName(userId, bossKey) {
-        return await localizeKeys(userId, `boss.bosses.${bossKey}`);
+  async localizeBossName(userId, bossKey) {
+    return await localizeKeys(userId, `boss.bosses.${bossKey}`);
+  }
+
+  async getBoss(userId) {
+    validateObjectId(userId, "user ID");
+
+    const boss = await BossModel.findOne({ user: userId });
+
+    if (!boss) return null;
+
+    const bossObj = boss.toObject();
+
+    bossObj.bossName = await this.localizeBossName(userId, bossObj.bossName);
+    return bossObj;
+  }
+
+  async spawnBoss(userId, bossId) {
+    validateObjectId(userId, "user ID");
+
+    const config = bosses.find((boss) => boss.bossId === bossId);
+
+    if (!config) {
+      return {
+        boss: null,
+        messages: [await bossNotifications.allDefeated(userId)],
+        allBossesDefeated: true,
+      };
     }
 
-    async getBoss(userId) {
-        validateObjectId(userId, "user ID");
+    let boss = await BossModel.findOne({ user: userId });
 
-        const boss = await BossModel.findOne({ user: userId });
+    if (!boss) boss = new BossModel({ user: userId });
 
-        if (!boss) return null;
+    updateBossFromTemplate(boss, config);
+    Object.assign(boss, {
+      rage: 0,
+      alreadyRagedTaskIds: [],
+      currentBossIndex: bossId - 1,
+      spawnedAt: new Date(),
+    });
 
-        const bossObj = boss.toObject();
+    await boss.save();
 
-        bossObj.bossName = await this.localizeBossName(
-            userId,
-            bossObj.bossName
-        );
-        return bossObj;
+    const bossObj = boss.toObject();
+    bossObj.bossName = await this.localizeBossName(userId, config.bossName);
+
+    return {
+      boss: bossObj,
+      allBossesDefeated: false,
+    };
+  }
+
+  async damageBoss(userId, amount) {
+    validateObjectId(userId, "user ID");
+
+    if (typeof amount !== "number" || amount <= 0) {
+      throw ApiError.BadRequest("Invalid damage amount");
     }
 
-    async spawnBoss(userId, bossId) {
-        validateObjectId(userId, "user ID");
+    const boss = await hasBossFound(userId);
 
-        const config = bosses.find((boss) => boss.bossId === bossId);
+    boss.healthPoints = Math.max(0, boss.healthPoints - amount);
 
-        if (!config) {
-            return {
-                boss: null,
-                messages: [await bossNotifications.allDefeated(userId)],
-                allBossesDefeated: true,
-            };
-        }
+    const isDead = boss.healthPoints <= 0;
 
-        let boss = await BossModel.findOne({ user: userId });
+    if (isDead) {
+      await userStatsService.gainExperience(userId, boss.bossRewardExp);
+      await userStatsService.gainGold(userId, boss.bossRewardGold);
 
-        if (!boss) boss = new BossModel({ user: userId });
+      const progress = await bossProgressService.updateBossProgress(
+        userId,
+        boss.bossId,
+        boss.bossRewardExp,
+      );
 
-        updateBossFromTemplate(boss, config);
-        Object.assign(boss, {
-            rage: 0,
-            alreadyRagedTaskIds: [],
-            currentBossIndex: bossId - 1,
-            spawnedAt: new Date(),
-        });
+      const localizedBossName = await this.localizeBossName(userId, boss.bossName);
 
-        await boss.save();
+      await boss.deleteOne();
 
-        const bossObj = boss.toObject();
-        bossObj.bossName = await this.localizeBossName(userId, config.bossName);
+      const allBossesDefeated = progress.currentAvailableBossId > bosses.length;
 
-        return {
-            boss: bossObj,
-            allBossesDefeated: false,
-        };
+      return {
+        healthPoints: 0,
+        isDead: true,
+        rewardExp: boss.bossRewardExp,
+        allBossesDefeated,
+        messages: [
+          await bossNotifications.defeated(userId, localizedBossName),
+          await bossNotifications.reward(userId, boss.bossRewardExp, boss.bossRewardGold),
+        ],
+      };
     }
 
-    async damageBoss(userId, amount) {
-        validateObjectId(userId, "user ID");
+    await boss.save();
 
-        if (typeof amount !== "number" || amount <= 0) {
-            throw ApiError.BadRequest("Invalid damage amount");
-        }
+    return {
+      healthPoints: boss.healthPoints,
+      isDead: false,
+      messages: [await bossNotifications.damaged(userId, amount)],
+    };
+  }
 
-        const boss = await hasBossFound(userId);
+  async addRage(userId, newTaskIds = []) {
+    validateObjectId(userId, "user ID");
 
-        boss.healthPoints = Math.max(0, boss.healthPoints - amount);
-
-        const isDead = boss.healthPoints <= 0;
-
-        if (isDead) {
-            await userStatsService.gainExperience(userId, boss.bossRewardExp);
-            await userStatsService.gainGold(userId, boss.bossRewardGold);
-
-            const progress = await bossProgressService.updateBossProgress(
-                userId,
-                boss.bossId,
-                boss.bossRewardExp
-            );
-
-            const localizedBossName = await this.localizeBossName(
-                userId,
-                boss.bossName
-            );
-
-            await boss.deleteOne();
-
-            const allBossesDefeated =
-                progress.currentAvailableBossId > bosses.length;
-
-            return {
-                healthPoints: 0,
-                isDead: true,
-                rewardExp: boss.bossRewardExp,
-                allBossesDefeated,
-                messages: [
-                    await bossNotifications.defeated(userId, localizedBossName),
-                    await bossNotifications.reward(
-                        userId,
-                        boss.bossRewardExp,
-                        boss.bossRewardGold
-                    ),
-                ],
-            };
-        }
-
-        await boss.save();
-
-        return {
-            healthPoints: boss.healthPoints,
-            isDead: false,
-            messages: [await bossNotifications.damaged(userId, amount)],
-        };
+    if (!Array.isArray(newTaskIds)) {
+      throw ApiError.BadRequest("newTaskIds must be an array");
     }
 
-    async addRage(userId, newTaskIds = []) {
-        validateObjectId(userId, "user ID");
+    const boss = await hasBossFound(userId);
+    const uniqueNew = newTaskIds.filter((id) => !boss.alreadyRagedTaskIds.includes(id));
 
-        if (!Array.isArray(newTaskIds)) {
-            throw ApiError.BadRequest("newTaskIds must be an array");
-        }
+    boss.alreadyRagedTaskIds.push(...uniqueNew);
+    boss.rage += uniqueNew.length;
 
-        const boss = await hasBossFound(userId);
-        const uniqueNew = newTaskIds.filter(
-            (id) => !boss.alreadyRagedTaskIds.includes(id)
-        );
+    let shouldAttack = false;
+    let stats = null;
+    const messages = [];
 
-        boss.alreadyRagedTaskIds.push(...uniqueNew);
-        boss.rage += uniqueNew.length;
-
-        let shouldAttack = false;
-        let stats = null;
-        const messages = [];
-
-        if (uniqueNew.length > 0) {
-            messages.push(
-                await bossNotifications.rage(
-                    userId,
-                    uniqueNew.length,
-                    boss.rage,
-                    boss.bossRageBar
-                )
-            );
-        }
-
-        if (boss.rage >= boss.bossRageBar) {
-            boss.rage = 0;
-            shouldAttack = true;
-
-            const result = await userStatsService.takeDamage(
-                userId,
-                boss.bossPower
-            );
-            stats = result.stats;
-
-            messages.push(
-                await bossNotifications.attack(userId, boss.bossPower)
-            );
-
-            if (result.message) {
-                messages.push(result.message);
-            }
-        }
-
-        await boss.save();
-
-        return {
-            rage: boss.rage,
-            shouldAttack,
-            stats,
-            messages,
-        };
+    if (uniqueNew.length > 0) {
+      messages.push(
+        await bossNotifications.rage(userId, uniqueNew.length, boss.rage, boss.bossRageBar),
+      );
     }
 
-    async markTaskAsRaged(userId, taskId) {
-        validateObjectId(userId, "user ID");
+    if (boss.rage >= boss.bossRageBar) {
+      boss.rage = 0;
+      shouldAttack = true;
 
-        const boss = await hasBossFound(userId);
+      const result = await userStatsService.takeDamage(userId, boss.bossPower);
+      stats = result.stats;
 
-        if (!boss.alreadyRagedTaskIds.includes(taskId)) {
-            boss.alreadyRagedTaskIds.push(taskId);
-            await boss.save();
-        }
+      messages.push(await bossNotifications.attack(userId, boss.bossPower));
 
-        return {
-            alreadyRagedTaskIds: boss.alreadyRagedTaskIds,
-        };
+      if (result.message) {
+        messages.push(result.message);
+      }
     }
 
-    async resetBoss(userId) {
-        const boss = await BossModel.findOne({ user: userId });
+    await boss.save();
 
-        if (boss) {
-            await boss.deleteOne();
-        }
+    return {
+      rage: boss.rage,
+      shouldAttack,
+      stats,
+      messages,
+    };
+  }
 
-        await bossProgressService.resetBossProgress(userId);
+  async markTaskAsRaged(userId, taskId) {
+    validateObjectId(userId, "user ID");
 
-        return {
-            boss: null,
-            rewardGiven: false,
-        };
+    const boss = await hasBossFound(userId);
+
+    if (!boss.alreadyRagedTaskIds.includes(taskId)) {
+      boss.alreadyRagedTaskIds.push(taskId);
+      await boss.save();
     }
+
+    return {
+      alreadyRagedTaskIds: boss.alreadyRagedTaskIds,
+    };
+  }
+
+  async resetBoss(userId) {
+    const boss = await BossModel.findOne({ user: userId });
+
+    if (boss) {
+      await boss.deleteOne();
+    }
+
+    await bossProgressService.resetBossProgress(userId);
+
+    return {
+      boss: null,
+      rewardGiven: false,
+    };
+  }
 }
 
 const bossService = new BossService();

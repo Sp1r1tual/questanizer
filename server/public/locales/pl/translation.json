@@ -1,54 +1,54 @@
 {
-    "shared": {
-        "received": "Otrzymano",
-        "xp": "Doświadczenie",
-        "gold": "złoto",
-        "golds": "złoto",
-        "items": {
-            "healingPotion": "Mikstura lecznicza"
-        }
-    },
-
-    "boss": {
-        "noMoreBosses": "Pokonałeś wszystkich dostępnych bossów!",
-        "defeatBoss": "Gratulacje! Pokonałeś {{bossName}}",
-        "dealtDamage": "Zadałeś {{amount}} obrażeń bossowi!",
-        "reward": "Otrzymałeś {{exp}} doświadczenia i {{gold}} złota za pokonanie bossa!",
-        "increaseRage": "Gniew bossa zwiększony o {{value}}! ({{rage}}/{{rageBar}})",
-        "bossAttacking": "Boss atakuje! Zadał {{bossPower}} obrażeń!",
-        "rage": "Gniew",
-        "power": "Siła",
-        "bosses": {
-            "timeThiefRabbit": "Królik Złodziej Czasu",
-            "robberWolf": "Wilk Rabuś",
-            "goblinAlchemist": "Goblin Alchemik",
-            "evilWizard": "Zły Czarnoksiężnik",
-            "darkKnight": "Mroczny Rycerz",
-            "boneDragon": "Kościany Smok",
-            "hydra": "Hydra",
-            "doomLord": "Pan Zguby",
-            "voidOverlord": "Władca Pustki"
-        }
-    },
-
-    "market": {
-        "purchase": "Zakup udany! Kupiono {{totalItems}} przedmiot(ów)",
-        "spent": "Wydano {{totalPrice}} złota"
-    },
-
-    "stats": {
-        "levelUp": "Awansowałeś na poziom {{level}}!",
-        "defeated": "Twoje zdrowie spadło do zera!",
-        "reset": "Postęp gracza został zresetowany"
-    },
-
-    "tasks": {
-        "complete": "Zadanie wykonane! Otrzymałeś {{xp}} doświadczenia i {{gold}} złota",
-        "penalty": "Nałożona kara! Straciłeś {{damage}} zdrowia"
-    },
-
-    "inventory": {
-        "fullHp": "Nie można użyć mikstury: zdrowie jest już pełne",
-        "useItem": "Użyłeś: {{item}}"
+  "shared": {
+    "received": "Otrzymano",
+    "xp": "Doświadczenie",
+    "gold": "złoto",
+    "golds": "złoto",
+    "items": {
+      "healingPotion": "Mikstura lecznicza"
     }
+  },
+
+  "boss": {
+    "noMoreBosses": "Pokonałeś wszystkich dostępnych bossów!",
+    "defeatBoss": "Gratulacje! Pokonałeś {{bossName}}",
+    "dealtDamage": "Zadałeś {{amount}} obrażeń bossowi!",
+    "reward": "Otrzymałeś {{exp}} doświadczenia i {{gold}} złota za pokonanie bossa!",
+    "increaseRage": "Gniew bossa zwiększony o {{value}}! ({{rage}}/{{rageBar}})",
+    "bossAttacking": "Boss atakuje! Zadał {{bossPower}} obrażeń!",
+    "rage": "Gniew",
+    "power": "Siła",
+    "bosses": {
+      "timeThiefRabbit": "Królik Złodziej Czasu",
+      "robberWolf": "Wilk Rabuś",
+      "goblinAlchemist": "Goblin Alchemik",
+      "evilWizard": "Zły Czarnoksiężnik",
+      "darkKnight": "Mroczny Rycerz",
+      "boneDragon": "Kościany Smok",
+      "hydra": "Hydra",
+      "doomLord": "Pan Zguby",
+      "voidOverlord": "Władca Pustki"
+    }
+  },
+
+  "market": {
+    "purchase": "Zakup udany! Kupiono {{totalItems}} przedmiot(ów)",
+    "spent": "Wydano {{totalPrice}} złota"
+  },
+
+  "stats": {
+    "levelUp": "Awansowałeś na poziom {{level}}!",
+    "defeated": "Twoje zdrowie spadło do zera!",
+    "reset": "Postęp gracza został zresetowany"
+  },
+
+  "tasks": {
+    "complete": "Zadanie wykonane! Otrzymałeś {{xp}} doświadczenia i {{gold}} złota",
+    "penalty": "Nałożona kara! Straciłeś {{damage}} zdrowia"
+  },
+
+  "inventory": {
+    "fullHp": "Nie można użyć mikstury: zdrowie jest już pełne",
+    "useItem": "Użyłeś: {{item}}"
+  }
 }

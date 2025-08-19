@@ -1,23 +1,23 @@
 import { Schema, model } from "mongoose";
 
 const userInventorySchema = new Schema({
-    user: {
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+    unique: true,
+  },
+  items: [
+    {
+      item: {
         type: Schema.Types.ObjectId,
-        ref: "User",
+        ref: "MarketItem",
         required: true,
-        unique: true,
+      },
+      quantity: { type: Number, default: 1 },
     },
-    items: [
-        {
-            item: {
-                type: Schema.Types.ObjectId,
-                ref: "MarketItem",
-                required: true,
-            },
-            quantity: { type: Number, default: 1 },
-        },
-        { timestamps: true },
-    ],
+    { timestamps: true },
+  ],
 });
 
 const UserInventoryModel = model("Inventory", userInventorySchema);

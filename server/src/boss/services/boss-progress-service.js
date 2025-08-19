@@ -3,62 +3,62 @@ import { BossProgressModel } from "../models/boss-progress-model.js";
 import { validateUserId } from "../../shared/utils/validations/validate-object-id.js";
 
 class BossProgressService {
-    async createDefaultProgress(userId) {
-        return BossProgressModel.create({
-            user: userId,
-            lastDefeatedBossId: 0,
-            currentAvailableBossId: 1,
-            totalBossesDefeated: 0,
-            totalExpFromBosses: 0,
-        });
+  createDefaultProgress(userId) {
+    return BossProgressModel.create({
+      user: userId,
+      lastDefeatedBossId: 0,
+      currentAvailableBossId: 1,
+      totalBossesDefeated: 0,
+      totalExpFromBosses: 0,
+    });
+  }
+
+  async getBossProgress(userId) {
+    validateUserId(userId);
+
+    let progress = await BossProgressModel.findOne({ user: userId });
+
+    if (!progress) {
+      progress = await this.createDefaultProgress(userId);
     }
 
-    async getBossProgress(userId) {
-        validateUserId(userId);
+    return progress;
+  }
 
-        let progress = await BossProgressModel.findOne({ user: userId });
+  async updateBossProgress(userId, defeatedBossId, expGained) {
+    validateUserId(userId);
 
-        if (!progress) {
-            progress = await this.createDefaultProgress(userId);
-        }
+    const progress = await this.getBossProgress(userId);
 
-        return progress;
-    }
+    Object.assign(progress, {
+      lastDefeatedBossId: defeatedBossId,
+      currentAvailableBossId: defeatedBossId + 1,
+      totalBossesDefeated: progress.totalBossesDefeated + 1,
+      totalExpFromBosses: progress.totalExpFromBosses + expGained,
+    });
 
-    async updateBossProgress(userId, defeatedBossId, expGained) {
-        validateUserId(userId);
+    await progress.save();
 
-        const progress = await this.getBossProgress(userId);
+    return progress;
+  }
 
-        Object.assign(progress, {
-            lastDefeatedBossId: defeatedBossId,
-            currentAvailableBossId: defeatedBossId + 1,
-            totalBossesDefeated: progress.totalBossesDefeated + 1,
-            totalExpFromBosses: progress.totalExpFromBosses + expGained,
-        });
+  async resetBossProgress(userId) {
+    validateUserId(userId);
 
-        await progress.save();
+    const progress = await BossProgressModel.findOne({ user: userId });
 
-        return progress;
-    }
+    if (progress) await progress.deleteOne();
 
-    async resetBossProgress(userId) {
-        validateUserId(userId);
+    return true;
+  }
 
-        const progress = await BossProgressModel.findOne({ user: userId });
+  async getAvailableBossId(userId) {
+    validateUserId(userId);
 
-        if (progress) await progress.deleteOne();
+    const progress = await this.getBossProgress(userId);
 
-        return true;
-    }
-
-    async getAvailableBossId(userId) {
-        validateUserId(userId);
-
-        const progress = await this.getBossProgress(userId);
-
-        return progress.currentAvailableBossId;
-    }
+    return progress.currentAvailableBossId;
+  }
 }
 
 const bossProgressService = new BossProgressService();

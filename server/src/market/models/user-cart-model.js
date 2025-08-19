@@ -1,18 +1,18 @@
 import { Schema, model } from "mongoose";
 
 const userCartSchema = new Schema({
-    user: { type: Schema.Types.ObjectId, ref: "User", required: true },
-    items: [
-        {
-            item: {
-                type: Schema.Types.ObjectId,
-                ref: "MarketItem",
-                required: true,
-            },
-            quantity: { type: Number, default: 1 },
-            addedAt: { type: Date, default: Date.now },
-        },
-    ],
+  user: { type: Schema.Types.ObjectId, ref: "User", required: true },
+  items: [
+    {
+      item: {
+        type: Schema.Types.ObjectId,
+        ref: "MarketItem",
+        required: true,
+      },
+      quantity: { type: Number, default: 1 },
+      addedAt: { type: Date, default: Date.now },
+    },
+  ],
 });
 
 const UserCartModel = model("Cart", userCartSchema);

@@ -1,32 +1,27 @@
 import { Router } from "express";
 
 import {
-    registration,
-    login,
-    logout,
-    refresh,
-    activate,
-    forgotPassword,
-    resetPassword,
+  registration,
+  login,
+  logout,
+  refresh,
+  activate,
+  forgotPassword,
+  resetPassword,
 } from "../../auth/controllers/auth-controller.js";
 
 import { rateLimiterMiddleware } from "../../shared/middlewares/rate-limiter-middleware.js";
 import { validationErrorsMiddleware } from "../../shared/middlewares/validation-errors-middleware.js";
 
 import {
-    registrationValidation,
-    forgotPasswordValidation,
-    resetPasswordValidation,
+  registrationValidation,
+  forgotPasswordValidation,
+  resetPasswordValidation,
 } from "../validations/auth-validations.js";
 
 const authRouter = new Router();
 
-authRouter.post(
-    "/registration",
-    registrationValidation,
-    validationErrorsMiddleware,
-    registration
-);
+authRouter.post("/registration", registrationValidation, validationErrorsMiddleware, registration);
 
 authRouter.post("/login", login);
 
@@ -37,18 +32,18 @@ authRouter.get("/refresh", refresh);
 authRouter.get("/activate/:link", activate);
 
 authRouter.post(
-    "/forgot-password",
-    rateLimiterMiddleware(1),
-    forgotPasswordValidation,
-    validationErrorsMiddleware,
-    forgotPassword
+  "/forgot-password",
+  rateLimiterMiddleware(1),
+  forgotPasswordValidation,
+  validationErrorsMiddleware,
+  forgotPassword,
 );
 
 authRouter.post(
-    "/reset-password/:token",
-    resetPasswordValidation,
-    validationErrorsMiddleware,
-    resetPassword
+  "/reset-password/:token",
+  resetPasswordValidation,
+  validationErrorsMiddleware,
+  resetPassword,
 );
 
 export { authRouter };

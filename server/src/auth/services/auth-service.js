@@ -12,155 +12,149 @@ import { findUserById } from "../../shared/utils/findUserById.js";
 import { UserDto } from "../../shared/dtos/user-dto.js";
 
 class AuthService {
-    async registration(email, password) {
-        const candidate = await UserModel.findOne({ email });
+  async registration(email, password) {
+    const candidate = await UserModel.findOne({ email });
 
-        if (candidate) {
-            throw ApiError.Conflict(
-                `A user with this mailbox: ${email} is already registered.`
-            );
-        }
-
-        const hashPassword = await bcrypt.hash(password, 3);
-        const activationLink = uuidv4();
-
-        const user = await UserModel.create({
-            email,
-            password: hashPassword,
-            activationLink,
-        });
-
-        await mailService.sendActivationMail(
-            email,
-            `${process.env.API_URL}/api/activate/${activationLink}`
-        );
-
-        const userDto = new UserDto(user);
-        const tokens = tokenService.generateTokens({ ...userDto });
-
-        await tokenService.saveToken(userDto.id, tokens.refreshToken);
-
-        return {
-            ...tokens,
-            user: userDto,
-        };
+    if (candidate) {
+      throw ApiError.Conflict(`A user with this mailbox: ${email} is already registered.`);
     }
 
-    async activate(activationLink) {
-        const user = await UserModel.findOne({ activationLink });
+    const hashPassword = await bcrypt.hash(password, 3);
+    const activationLink = uuidv4();
 
-        if (!user) {
-            throw ApiError.NotFound("Invalid activation link");
-        }
+    const user = await UserModel.create({
+      email,
+      password: hashPassword,
+      activationLink,
+    });
 
-        user.isActivated = true;
+    await mailService.sendActivationMail(
+      email,
+      `${process.env.API_URL}/api/activate/${activationLink}`,
+    );
 
-        await user.save();
+    const userDto = new UserDto(user);
+    const tokens = tokenService.generateTokens({ ...userDto });
+
+    await tokenService.saveToken(userDto.id, tokens.refreshToken);
+
+    return {
+      ...tokens,
+      user: userDto,
+    };
+  }
+
+  async activate(activationLink) {
+    const user = await UserModel.findOne({ activationLink });
+
+    if (!user) {
+      throw ApiError.NotFound("Invalid activation link");
     }
 
-    async login(email, password) {
-        const user = await UserModel.findOne({ email });
+    user.isActivated = true;
 
-        if (!user) {
-            throw ApiError.NotFound(
-                "User with this email address was not found"
-            );
-        }
+    await user.save();
+  }
 
-        const isMatch = await bcrypt.compare(password, user.password);
+  async login(email, password) {
+    const user = await UserModel.findOne({ email });
 
-        if (!isMatch) {
-            throw ApiError.UnauthorizedError("Incorrect password");
-        }
-
-        if (!user.isActivated) {
-            throw ApiError.Forbidden("Please activate your account via email");
-        }
-
-        const userDto = new UserDto(user);
-        const tokens = tokenService.generateTokens({ ...userDto });
-
-        await tokenService.saveToken(userDto.id, tokens.refreshToken);
-
-        const existingInventory = await UserInventoryModel.findOne({
-            user: user._id,
-        });
-
-        if (!existingInventory) {
-            await UserInventoryModel.create({ user: user._id });
-        }
-
-        return {
-            ...tokens,
-            user: userDto,
-        };
+    if (!user) {
+      throw ApiError.NotFound("User with this email address was not found");
     }
 
-    async logout(refreshToken) {
-        return tokenService.removeToken(refreshToken);
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      throw ApiError.UnauthorizedError("Incorrect password");
     }
 
-    async refresh(refreshToken) {
-        if (!refreshToken) {
-            throw ApiError.UnauthorizedError("Token not found in database");
-        }
-
-        const userData = tokenService.validateRefreshToken(refreshToken);
-        const tokenFromDb = await tokenService.findToken(refreshToken);
-
-        if (!userData || !tokenFromDb) {
-            throw ApiError.UnauthorizedError(
-                "Token is invalid or not in the database"
-            );
-        }
-
-        const user = await UserModel.findById(userData.id);
-        const userDto = new UserDto(user);
-        const tokens = tokenService.generateTokens({ ...userDto });
-
-        await tokenService.saveToken(userDto.id, tokens.refreshToken);
-
-        return {
-            ...tokens,
-            user: userDto,
-        };
+    if (!user.isActivated) {
+      throw ApiError.Forbidden("Please activate your account via email");
     }
 
-    async forgotPassword(email) {
-        const user = await UserModel.findOne({ email });
+    const userDto = new UserDto(user);
+    const tokens = tokenService.generateTokens({ ...userDto });
 
-        if (!user) return;
+    await tokenService.saveToken(userDto.id, tokens.refreshToken);
 
-        const resetToken = tokenService.generateResetToken({
-            email: user.email,
-            id: user._id,
-        });
+    const existingInventory = await UserInventoryModel.findOne({
+      user: user._id,
+    });
 
-        await tokenService.saveResetToken(user._id, resetToken);
-        await mailService.sendPasswordResetMail(user.email, resetToken);
+    if (!existingInventory) {
+      await UserInventoryModel.create({ user: user._id });
     }
 
-    async resetPassword(resetToken, newPassword) {
-        const userData = tokenService.validateResetToken(resetToken);
+    return {
+      ...tokens,
+      user: userDto,
+    };
+  }
 
-        if (!userData) {
-            throw ApiError.UnauthorizedError("Invalid or expired reset token");
-        }
+  async logout(refreshToken) {
+    return await tokenService.removeToken(refreshToken);
+  }
 
-        const tokenData = await tokenService.findResetToken(resetToken);
-
-        if (!tokenData) {
-            throw ApiError.UnauthorizedError("Invalid or expired reset token");
-        }
-
-        const user = await findUserById(userData.id);
-        const hashed = await bcrypt.hash(newPassword, 5);
-
-        user.password = hashed;
-
-        await user.save();
-        await tokenService.removeResetToken(resetToken);
+  async refresh(refreshToken) {
+    if (!refreshToken) {
+      throw ApiError.UnauthorizedError("Token not found in database");
     }
+
+    const userData = tokenService.validateRefreshToken(refreshToken);
+    const tokenFromDb = await tokenService.findToken(refreshToken);
+
+    if (!userData || !tokenFromDb) {
+      throw ApiError.UnauthorizedError("Token is invalid or not in the database");
+    }
+
+    const user = await UserModel.findById(userData.id);
+    const userDto = new UserDto(user);
+    const tokens = tokenService.generateTokens({ ...userDto });
+
+    await tokenService.saveToken(userDto.id, tokens.refreshToken);
+
+    return {
+      ...tokens,
+      user: userDto,
+    };
+  }
+
+  async forgotPassword(email) {
+    const user = await UserModel.findOne({ email });
+
+    if (!user) return;
+
+    const resetToken = tokenService.generateResetToken({
+      email: user.email,
+      id: user._id,
+    });
+
+    await tokenService.saveResetToken(user._id, resetToken);
+    await mailService.sendPasswordResetMail(user.email, resetToken);
+  }
+
+  async resetPassword(resetToken, newPassword) {
+    const userData = tokenService.validateResetToken(resetToken);
+
+    if (!userData) {
+      throw ApiError.UnauthorizedError("Invalid or expired reset token");
+    }
+
+    const tokenData = await tokenService.findResetToken(resetToken);
+
+    if (!tokenData) {
+      throw ApiError.UnauthorizedError("Invalid or expired reset token");
+    }
+
+    const user = await findUserById(userData.id);
+    const hashed = await bcrypt.hash(newPassword, 5);
+
+    user.password = hashed;
+
+    await user.save();
+    await tokenService.removeResetToken(resetToken);
+  }
 }
 
 const authService = new AuthService();

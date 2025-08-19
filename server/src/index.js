@@ -27,19 +27,19 @@ app.use(errorMiddleware);
 initChatSocket(server);
 
 const start = async () => {
-    try {
-        await mongoose.connect(process.env.DB_URL);
+  try {
+    await mongoose.connect(process.env.DB_URL);
 
-        await supportService.initializeFaqCollection();
-        await marketService.initializeMarketCollection();
+    await supportService.initializeFaqCollection();
+    await marketService.initializeMarketCollection();
 
-        server.listen(PORT, () => {
-            console.log(`Server started on PORT: ${PORT}`);
-        });
-    } catch (error) {
-        console.error("Error starting server:", error);
-        process.exit(1);
-    }
+    server.listen(PORT, () => {
+      console.log(`Server started on PORT: ${PORT}`);
+    });
+  } catch (error) {
+    console.error("Error starting server:", error);
+    process.exit(1);
+  }
 };
 
 start();

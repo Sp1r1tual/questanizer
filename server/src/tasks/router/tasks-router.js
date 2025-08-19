@@ -1,11 +1,11 @@
 import { Router } from "express";
 
 import {
-    getTasks,
-    addTask,
-    completeTask,
-    deleteTask,
-    takeDamageOverdueTask,
+  getTasks,
+  addTask,
+  completeTask,
+  deleteTask,
+  takeDamageOverdueTask,
 } from "../controllers/tasks-controller.js";
 
 import { authMiddleware } from "../../shared/middlewares/auth-middleware.js";
@@ -18,25 +18,15 @@ tasksRouter.get("/tasks", authMiddleware, getTasks);
 
 tasksRouter.post("/tasks", authMiddleware, validateTaskBodyMiddleware, addTask);
 
-tasksRouter.patch(
-    "/tasks/:id/complete",
-    authMiddleware,
-    validateTaskIdMiddleware,
-    completeTask
-);
+tasksRouter.patch("/tasks/:id/complete", authMiddleware, validateTaskIdMiddleware, completeTask);
 
 tasksRouter.patch(
-    "/tasks/:id/overdue",
-    authMiddleware,
-    validateTaskIdMiddleware,
-    takeDamageOverdueTask
+  "/tasks/:id/overdue",
+  authMiddleware,
+  validateTaskIdMiddleware,
+  takeDamageOverdueTask,
 );
 
-tasksRouter.delete(
-    "/tasks/:id",
-    authMiddleware,
-    validateTaskIdMiddleware,
-    deleteTask
-);
+tasksRouter.delete("/tasks/:id", authMiddleware, validateTaskIdMiddleware, deleteTask);
 
 export { tasksRouter };

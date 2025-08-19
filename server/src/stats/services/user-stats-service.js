@@ -5,89 +5,89 @@ import { bossService } from "../../boss/services/boss-service.js";
 import { statsNotifications } from "../../shared/utils/notifications/notification-factory.js";
 
 class UserStatsService {
-    async getOrCreateStats(userId) {
-        let stats = await UserStatsModel.findOne({ user: userId });
+  async getOrCreateStats(userId) {
+    let stats = await UserStatsModel.findOne({ user: userId });
 
-        if (!stats) {
-            stats = await UserStatsModel.create({ user: userId });
-        }
-
-        return stats;
+    if (!stats) {
+      stats = await UserStatsModel.create({ user: userId });
     }
 
-    async gainExperience(userId, amount) {
-        const stats = await this.getOrCreateStats(userId);
+    return stats;
+  }
 
-        const oldLevel = stats.level;
+  async gainExperience(userId, amount) {
+    const stats = await this.getOrCreateStats(userId);
 
-        stats.xp += amount;
+    const oldLevel = stats.level;
 
-        while (stats.xp >= stats.level * 100) {
-            stats.xp -= stats.level * 100;
-            stats.level += 1;
-            stats.hp = stats.maxHp;
-        }
+    stats.xp += amount;
 
-        let message = null;
-
-        if (stats.level > oldLevel) {
-            message = await statsNotifications.levelUp(userId, stats.level);
-        }
-
-        await stats.save();
-
-        return { stats, message };
+    while (stats.xp >= stats.level * 100) {
+      stats.xp -= stats.level * 100;
+      stats.level += 1;
+      stats.hp = stats.maxHp;
     }
 
-    async takeDamage(userId, amount) {
-        const stats = await this.getOrCreateStats(userId);
+    let message = null;
 
-        if (stats.hp <= 0) {
-            return { stats, message: null };
-        }
-
-        stats.hp -= amount;
-
-        if (stats.hp < 0) stats.hp = 0;
-
-        await stats.save();
-
-        let message = null;
-
-        if (stats.hp === 0) {
-            message = await statsNotifications.defeated(userId);
-        }
-
-        return { stats, message };
+    if (stats.level > oldLevel) {
+      message = await statsNotifications.levelUp(userId, stats.level);
     }
 
-    async resetUserStats(userId) {
-        const stats = await this.getOrCreateStats(userId);
+    await stats.save();
 
-        stats.xp = 0;
-        stats.level = 1;
-        stats.hp = 100;
-        stats.maxHp = 100;
-        stats.xpToNextLevel = 100;
+    return { stats, message };
+  }
 
-        await bossService.resetBoss(userId);
-        await stats.save();
+  async takeDamage(userId, amount) {
+    const stats = await this.getOrCreateStats(userId);
 
-        return {
-            stats,
-            message: await statsNotifications.reset(userId),
-        };
+    if (stats.hp <= 0) {
+      return { stats, message: null };
     }
 
-    async gainGold(userId, amount) {
-        const stats = await this.getOrCreateStats(userId);
+    stats.hp -= amount;
 
-        stats.gold += amount;
+    if (stats.hp < 0) stats.hp = 0;
 
-        await stats.save();
+    await stats.save();
 
-        return stats;
+    let message = null;
+
+    if (stats.hp === 0) {
+      message = await statsNotifications.defeated(userId);
     }
+
+    return { stats, message };
+  }
+
+  async resetUserStats(userId) {
+    const stats = await this.getOrCreateStats(userId);
+
+    stats.xp = 0;
+    stats.level = 1;
+    stats.hp = 100;
+    stats.maxHp = 100;
+    stats.xpToNextLevel = 100;
+
+    await bossService.resetBoss(userId);
+    await stats.save();
+
+    return {
+      stats,
+      message: await statsNotifications.reset(userId),
+    };
+  }
+
+  async gainGold(userId, amount) {
+    const stats = await this.getOrCreateStats(userId);
+
+    stats.gold += amount;
+
+    await stats.save();
+
+    return stats;
+  }
 }
 
 const userStatsService = new UserStatsService();

@@ -1,11 +1,11 @@
 import { Router } from "express";
 
 import {
-    getFriends,
-    getFriendRequests,
-    sendRequest,
-    acceptRequest,
-    removeFriendOrCancel,
+  getFriends,
+  getFriendRequests,
+  sendRequest,
+  acceptRequest,
+  removeFriendOrCancel,
 } from "../controllers/friends-controller.js";
 
 import { authMiddleware } from "../../shared/middlewares/auth-middleware.js";

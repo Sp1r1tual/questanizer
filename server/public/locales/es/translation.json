@@ -1,54 +1,54 @@
 {
-    "shared": {
-        "received": "Recibido",
-        "xp": "Experiencia",
-        "gold": "oro",
-        "golds": "oro",
-        "items": {
-            "healingPotion": "Poción de curación"
-        }
-    },
-
-    "boss": {
-        "noMoreBosses": "¡Has derrotado a todos los jefes disponibles!",
-        "defeatBoss": "¡Felicidades! Has derrotado a {{bossName}}",
-        "dealtDamage": "¡Has causado {{amount}} de daño al jefe!",
-        "reward": "¡Has recibido {{exp}} de experiencia y {{gold}} de oro por vencer al jefe!",
-        "increaseRage": "¡La ira del jefe ha aumentado en {{value}}! ({{rage}}/{{rageBar}})",
-        "bossAttacking": "¡El jefe está atacando! ¡Causó {{bossPower}} de daño!",
-        "rage": "Ira",
-        "power": "Poder",
-        "bosses": {
-            "timeThiefRabbit": "Conejo Ladrón del Tiempo",
-            "robberWolf": "Lobo Ladrón",
-            "goblinAlchemist": "Duende Alquimista",
-            "evilWizard": "Mago Malvado",
-            "darkKnight": "Caballero Oscuro",
-            "boneDragon": "Dragón de Hueso",
-            "hydra": "Hidra",
-            "doomLord": "Señor de la Perdición",
-            "voidOverlord": "Señor del Vacío"
-        }
-    },
-
-    "market": {
-        "purchase": "¡Compra exitosa! Has adquirido {{totalItems}} artículo(s)",
-        "spent": "Has gastado {{totalPrice}} de oro"
-    },
-
-    "stats": {
-        "levelUp": "¡Has subido al nivel {{level}}!",
-        "defeated": "¡Tu salud ha caído a cero!",
-        "reset": "Progreso del jugador reiniciado"
-    },
-
-    "tasks": {
-        "complete": "¡Tarea completada! Has recibido {{xp}} de experiencia y {{gold}} de oro",
-        "penalty": "¡Se aplicó penalización! Has perdido {{damage}} de salud"
-    },
-
-    "inventory": {
-        "fullHp": "No se puede usar la poción: la salud ya está completa",
-        "useItem": "Has usado: {{item}}"
+  "shared": {
+    "received": "Recibido",
+    "xp": "Experiencia",
+    "gold": "oro",
+    "golds": "oro",
+    "items": {
+      "healingPotion": "Poción de curación"
     }
+  },
+
+  "boss": {
+    "noMoreBosses": "¡Has derrotado a todos los jefes disponibles!",
+    "defeatBoss": "¡Felicidades! Has derrotado a {{bossName}}",
+    "dealtDamage": "¡Has causado {{amount}} de daño al jefe!",
+    "reward": "¡Has recibido {{exp}} de experiencia y {{gold}} de oro por vencer al jefe!",
+    "increaseRage": "¡La ira del jefe ha aumentado en {{value}}! ({{rage}}/{{rageBar}})",
+    "bossAttacking": "¡El jefe está atacando! ¡Causó {{bossPower}} de daño!",
+    "rage": "Ira",
+    "power": "Poder",
+    "bosses": {
+      "timeThiefRabbit": "Conejo Ladrón del Tiempo",
+      "robberWolf": "Lobo Ladrón",
+      "goblinAlchemist": "Duende Alquimista",
+      "evilWizard": "Mago Malvado",
+      "darkKnight": "Caballero Oscuro",
+      "boneDragon": "Dragón de Hueso",
+      "hydra": "Hidra",
+      "doomLord": "Señor de la Perdición",
+      "voidOverlord": "Señor del Vacío"
+    }
+  },
+
+  "market": {
+    "purchase": "¡Compra exitosa! Has adquirido {{totalItems}} artículo(s)",
+    "spent": "Has gastado {{totalPrice}} de oro"
+  },
+
+  "stats": {
+    "levelUp": "¡Has subido al nivel {{level}}!",
+    "defeated": "¡Tu salud ha caído a cero!",
+    "reset": "Progreso del jugador reiniciado"
+  },
+
+  "tasks": {
+    "complete": "¡Tarea completada! Has recibido {{xp}} de experiencia y {{gold}} de oro",
+    "penalty": "¡Se aplicó penalización! Has perdido {{damage}} de salud"
+  },
+
+  "inventory": {
+    "fullHp": "No se puede usar la poción: la salud ya está completa",
+    "useItem": "Has usado: {{item}}"
+  }
 }

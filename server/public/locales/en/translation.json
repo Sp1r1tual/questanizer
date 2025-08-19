@@ -1,54 +1,54 @@
 {
-    "shared": {
-        "received": "Received",
-        "xp": "Experience",
-        "gold": "gold",
-        "golds": "gold",
-        "items": {
-            "healingPotion": "Healing Potion"
-        }
-    },
-
-    "boss": {
-        "noMoreBosses": "You have defeated all available bosses!",
-        "defeatBoss": "Congratulations! You defeated {{bossName}}",
-        "dealtDamage": "Dealt {{amount}} damage to the boss!",
-        "reward": "Received {{exp}} experience and {{gold}} gold for defeating the boss!",
-        "increaseRage": "Boss rage increased by {{value}}! ({{rage}}/{{rageBar}})",
-        "bossAttacking": "Boss is attacking! Dealt {{bossPower}} damage!",
-        "rage": "Rage",
-        "power": "Power",
-        "bosses": {
-            "timeThiefRabbit": "Time Thief Rabbit",
-            "robberWolf": "Robber Wolf",
-            "goblinAlchemist": "Goblin Alchemist",
-            "evilWizard": "Evil Wizard",
-            "darkKnight": "Dark Knight",
-            "boneDragon": "Bone Dragon",
-            "hydra": "Hydra",
-            "doomLord": "Doom Lord",
-            "voidOverlord": "Void Overlord"
-        }
-    },
-
-    "market": {
-        "purchase": "Purchase successful! Bought {{totalItems}} item(s)",
-        "spent": "Spent {{totalPrice}} gold"
-    },
-
-    "stats": {
-        "levelUp": "Your level has increased to {{level}}!",
-        "defeated": "Your health has dropped to zero!",
-        "reset": "Player progress has been reset"
-    },
-
-    "tasks": {
-        "complete": "Task completed! Received {{xp}} experience and {{gold}} gold",
-        "penalty": "Penalty applied! Lost {{damage}} health"
-    },
-
-    "inventory": {
-        "fullHp": "Cannot use potion: health is already full",
-        "useItem": "You used: {{item}}"
+  "shared": {
+    "received": "Received",
+    "xp": "Experience",
+    "gold": "gold",
+    "golds": "gold",
+    "items": {
+      "healingPotion": "Healing Potion"
     }
+  },
+
+  "boss": {
+    "noMoreBosses": "You have defeated all available bosses!",
+    "defeatBoss": "Congratulations! You defeated {{bossName}}",
+    "dealtDamage": "Dealt {{amount}} damage to the boss!",
+    "reward": "Received {{exp}} experience and {{gold}} gold for defeating the boss!",
+    "increaseRage": "Boss rage increased by {{value}}! ({{rage}}/{{rageBar}})",
+    "bossAttacking": "Boss is attacking! Dealt {{bossPower}} damage!",
+    "rage": "Rage",
+    "power": "Power",
+    "bosses": {
+      "timeThiefRabbit": "Time Thief Rabbit",
+      "robberWolf": "Robber Wolf",
+      "goblinAlchemist": "Goblin Alchemist",
+      "evilWizard": "Evil Wizard",
+      "darkKnight": "Dark Knight",
+      "boneDragon": "Bone Dragon",
+      "hydra": "Hydra",
+      "doomLord": "Doom Lord",
+      "voidOverlord": "Void Overlord"
+    }
+  },
+
+  "market": {
+    "purchase": "Purchase successful! Bought {{totalItems}} item(s)",
+    "spent": "Spent {{totalPrice}} gold"
+  },
+
+  "stats": {
+    "levelUp": "Your level has increased to {{level}}!",
+    "defeated": "Your health has dropped to zero!",
+    "reset": "Player progress has been reset"
+  },
+
+  "tasks": {
+    "complete": "Task completed! Received {{xp}} experience and {{gold}} gold",
+    "penalty": "Penalty applied! Lost {{damage}} health"
+  },
+
+  "inventory": {
+    "fullHp": "Cannot use potion: health is already full",
+    "useItem": "You used: {{item}}"
+  }
 }

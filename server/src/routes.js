@@ -1,7 +1,6 @@
 import express from "express";
-import path from "path";
+import path, { dirname } from "path";
 import { fileURLToPath } from "url";
-import { dirname } from "path";
 
 import { authRouter } from "./auth/router/auth-router.js";
 import { tasksRouter } from "./tasks/router/tasks-router.js";
@@ -18,20 +17,17 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const routes = (app) => {
-    app.use(
-        "/api/public",
-        express.static(path.resolve(__dirname, "../public"))
-    );
-    app.use("/api", supportRouter);
-    app.use("/api", authRouter);
-    app.use("/api", localizationRouter);
-    app.use("/api", userRouter);
-    app.use("/api", friendsRouter);
-    app.use("/api", tasksRouter);
-    app.use("/api", userStatsRouter);
-    app.use("/api", bossRouter);
-    app.use("/api", marketRouter);
-    app.use("/api", userInventoryRouter);
+  app.use("/api/public", express.static(path.resolve(__dirname, "../public")));
+  app.use("/api", supportRouter);
+  app.use("/api", authRouter);
+  app.use("/api", localizationRouter);
+  app.use("/api", userRouter);
+  app.use("/api", friendsRouter);
+  app.use("/api", tasksRouter);
+  app.use("/api", userStatsRouter);
+  app.use("/api", bossRouter);
+  app.use("/api", marketRouter);
+  app.use("/api", userInventoryRouter);
 };
 
 export { routes };

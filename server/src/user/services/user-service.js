@@ -12,70 +12,70 @@ import { searchInFields } from "../../shared/utils/query/search-in-fields.js";
 import { UserDto } from "../../shared/dtos/user-dto.js";
 
 class UserService {
-    async getUserById(userId, includeStats = false) {
-        const user = await findUserById(userId);
-        let stats = null;
+  async getUserById(userId, includeStats = false) {
+    const user = await findUserById(userId);
+    let stats = null;
 
-        if (includeStats) {
-            stats = await UserStatsModel.findOne({ user: user._id }).lean();
-        }
-
-        return new UserDto(user, stats);
+    if (includeStats) {
+      stats = await UserStatsModel.findOne({ user: user._id }).lean();
     }
 
-    async updateUserProfile(userId, updateData) {
-        const user = await findUserById(userId);
+    return new UserDto(user, stats);
+  }
 
-        await validateUsername(updateData.username, user.username);
-        await deleteOldAvatarIfNeeded(user.photoUrl, updateData.photoUrl);
+  async updateUserProfile(userId, updateData) {
+    const user = await findUserById(userId);
 
-        user.username = updateData.username ?? user.username;
-        user.bio = updateData.bio ?? user.bio;
+    await validateUsername(updateData.username, user.username);
+    await deleteOldAvatarIfNeeded(user.photoUrl, updateData.photoUrl);
 
-        if (updateData.photoUrl) {
-            user.photoUrl = updateData.photoUrl;
-        }
+    user.username = updateData.username ?? user.username;
+    user.bio = updateData.bio ?? user.bio;
 
-        await user.save();
-
-        return new UserDto(user);
+    if (updateData.photoUrl) {
+      user.photoUrl = updateData.photoUrl;
     }
 
-    async getAllUsers() {
-        const users = await UserModel.find();
+    await user.save();
 
-        return users;
+    return new UserDto(user);
+  }
+
+  async getAllUsers() {
+    const users = await UserModel.find();
+
+    return users;
+  }
+
+  async searchUsers(query, requesterId, page, limit) {
+    const trimmedQuery = query?.trim() || "";
+
+    const filter = { isActivated: true };
+
+    if (requesterId) {
+      filter._id = { $ne: new mongoose.Types.ObjectId(requesterId) };
     }
 
-    async searchUsers(query, requesterId, page, limit) {
-        const trimmedQuery = query?.trim() || "";
-
-        let filter = { isActivated: true };
-
-        if (requesterId) {
-            filter._id = { $ne: new mongoose.Types.ObjectId(requesterId) };
-        }
-
-        if (mongoose.Types.ObjectId.isValid(trimmedQuery)) {
-            filter._id = {
-                ...filter._id,
-                $eq: new mongoose.Types.ObjectId(trimmedQuery),
-            };
-        } else if (trimmedQuery) {
-            Object.assign(filter, searchInFields(["username"], trimmedQuery));
-        }
-
-        const paginated = await paginate(UserModel, filter, {
-            page,
-            limit,
-            sortByLengthField: "username",
-        });
-
-        return {
-            users: paginated.results.map((user) => new UserDto(user)),
-            ...paginated,
-        };
+    if (mongoose.Types.ObjectId.isValid(trimmedQuery)) {
+      filter._id = {
+        ...filter._id,
+        $eq: new mongoose.Types.ObjectId(trimmedQuery),
+      };
+    } else if (trimmedQuery) {
+      Object.assign(filter, searchInFields(["username"], trimmedQuery));
     }
+
+    const paginated = await paginate(UserModel, filter, {
+      page,
+      limit,
+      sortByLengthField: "username",
+    });
+
+    return {
+      users: paginated.results.map((user) => new UserDto(user)),
+      ...paginated,
+    };
+  }
 }
 
 const userService = new UserService();

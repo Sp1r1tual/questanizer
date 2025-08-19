@@ -1,11 +1,11 @@
 import { Router } from "express";
 
 import {
-    getUserProfile,
-    updateUserProfile,
-    getUsers,
-    getUserByIdPublic,
-    searchUsers,
+  getUserProfile,
+  updateUserProfile,
+  getUsers,
+  getUserByIdPublic,
+  searchUsers,
 } from "../controllers/user-controller.js";
 
 import { authMiddleware } from "../../shared/middlewares/auth-middleware.js";
@@ -21,21 +21,16 @@ userRouter.get("/user/:id", authMiddleware, getUserByIdPublic);
 userRouter.get("/profile", authMiddleware, getUserProfile);
 
 userRouter.patch(
-    "/profile",
-    authMiddleware,
-    uploadAvatarMiddleware,
-    updateUserProfileValidation,
-    validationErrorsMiddleware,
-    updateUserProfile
+  "/profile",
+  authMiddleware,
+  uploadAvatarMiddleware,
+  updateUserProfileValidation,
+  validationErrorsMiddleware,
+  updateUserProfile,
 );
 
 userRouter.get("/users", authMiddleware, getUsers);
 
-userRouter.get(
-    "/users/search",
-    authMiddleware,
-    validateSearchQueryMiddleware,
-    searchUsers
-);
+userRouter.get("/users/search", authMiddleware, validateSearchQueryMiddleware, searchUsers);
 
 export { userRouter };
