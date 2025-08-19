@@ -5,75 +5,60 @@ import { MarketService } from "@/services/marketService";
 import { fetchStats } from "../stats/userStatsThunks";
 import { fetchInventory } from "../user/inventoryThunks";
 
-const fetchMarket = createAsyncThunk(
-    "market/fetchMarket",
-    async (_, thunkAPI) => {
-        try {
-            const response = await MarketService.getMarket();
+const fetchMarket = createAsyncThunk("market/fetchMarket", async (_, thunkAPI) => {
+  try {
+    const response = await MarketService.getMarket();
 
-            return response.data;
-        } catch (error) {
-            return thunkAPI.rejectWithValue("Failed to load market");
-        }
-    }
-);
-
-const fetchCart = createAsyncThunk("cart/fetchCart", async (_, thunkAPI) => {
-    try {
-        const response = await MarketService.getCart();
-
-        return response.data;
-    } catch (error) {
-        return thunkAPI.rejectWithValue("Failed to load cart");
-    }
+    return response.data;
+  } catch {
+    return thunkAPI.rejectWithValue("Failed to load market");
+  }
 });
 
-const addToCart = createAsyncThunk(
-    "cart/addToCart",
-    async ({ itemId, quantity = 1 }, thunkAPI) => {
-        try {
-            const response = await MarketService.addToCart({
-                itemId,
-                quantity,
-            });
+const fetchCart = createAsyncThunk("cart/fetchCart", async (_, thunkAPI) => {
+  try {
+    const response = await MarketService.getCart();
 
-            return response.data;
-        } catch (error) {
-            return thunkAPI.rejectWithValue("Failed to add item in cart");
-        }
-    }
-);
+    return response.data;
+  } catch {
+    return thunkAPI.rejectWithValue("Failed to load cart");
+  }
+});
 
-const checkoutCart = createAsyncThunk(
-    "cart/checkoutCart",
-    async (_, thunkAPI) => {
-        try {
-            const response = await MarketService.checkoutCart();
+const addToCart = createAsyncThunk("cart/addToCart", async ({ itemId, quantity = 1 }, thunkAPI) => {
+  try {
+    const response = await MarketService.addToCart({
+      itemId,
+      quantity,
+    });
 
-            thunkAPI.dispatch(fetchStats());
-            thunkAPI.dispatch(fetchInventory());
+    return response.data;
+  } catch {
+    return thunkAPI.rejectWithValue("Failed to add item in cart");
+  }
+});
 
-            return response.data;
-        } catch (error) {
-            return thunkAPI.rejectWithValue("Failed to checkout cart");
-        }
-    }
-);
+const checkoutCart = createAsyncThunk("cart/checkoutCart", async (_, thunkAPI) => {
+  try {
+    const response = await MarketService.checkoutCart();
 
-const removeFromCart = createAsyncThunk(
-    "cart/removeFromCart",
-    async ({ itemId, quantity = 1 }, thunkAPI) => {
-        try {
-            const response = await MarketService.removeFromCart({
-                itemId,
-                quantity,
-            });
+    thunkAPI.dispatch(fetchStats());
+    thunkAPI.dispatch(fetchInventory());
 
-            return response.data;
-        } catch (error) {
-            return thunkAPI.rejectWithValue("Failed to remove item");
-        }
-    }
-);
+    return response.data;
+  } catch {
+    return thunkAPI.rejectWithValue("Failed to checkout cart");
+  }
+});
 
-export { fetchMarket, fetchCart, addToCart, checkoutCart, removeFromCart };
+const syncCart = createAsyncThunk("cart/syncCart", async (items, thunkAPI) => {
+  try {
+    const response = await MarketService.syncCart(items);
+
+    return response.data;
+  } catch {
+    return thunkAPI.rejectWithValue("Failed to sync cart");
+  }
+});
+
+export { fetchMarket, fetchCart, addToCart, checkoutCart, syncCart };

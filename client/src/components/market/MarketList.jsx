@@ -10,43 +10,41 @@ import { fetchMarket } from "@/store/market/marketThunks";
 import styles from "./MarketList.module.css";
 
 const MarketList = () => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const { marketItems, isLoading, error } = useSelector(
-        (state) => state.market
-    );
+  const { marketItems, isLoading, error } = useSelector((state) => state.market);
 
-    const { t } = useTranslation();
+  const { t } = useTranslation();
 
-    useEffect(() => {
-        if (!marketItems || marketItems.length === 0) {
-            dispatch(fetchMarket());
-        }
-    }, [dispatch, marketItems]);
-
-    if (isLoading) {
-        return <DotsLoader />;
+  useEffect(() => {
+    if (!marketItems || marketItems.length === 0) {
+      dispatch(fetchMarket());
     }
+  }, [dispatch, marketItems]);
 
-    if (error) {
-        return (
-            <div className={styles.error}>
-                {t("errors.somethingWentWrong")}: {error}
-            </div>
-        );
-    }
+  if (isLoading) {
+    return <DotsLoader />;
+  }
 
-    if (!marketItems.length) {
-        return <div className={styles.empty}>{t("shared.noItems")}</div>;
-    }
-
+  if (error) {
     return (
-        <div className={styles.grid}>
-            {marketItems.map((item) => (
-                <MarketItem key={item._id} item={item} />
-            ))}
-        </div>
+      <div className={styles.error}>
+        {t("errors.somethingWentWrong")}: {error}
+      </div>
     );
+  }
+
+  if (!marketItems.length) {
+    return <div className={styles.empty}>{t("shared.noItems")}</div>;
+  }
+
+  return (
+    <div className={styles.grid}>
+      {marketItems.map((item) => (
+        <MarketItem key={item._id} item={item} />
+      ))}
+    </div>
+  );
 };
 
 export { MarketList };
