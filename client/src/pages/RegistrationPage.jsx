@@ -7,24 +7,24 @@ import backgroundImg from "@/assets/login-background.png";
 import styles from "./RegistrationPage.module.css";
 
 const RegistrationPage = () => {
-    return (
-        <div
-            className={styles.registrationWrapper}
-            style={{ backgroundImage: `url(${backgroundImg})` }}
-        >
-            <div className={styles.registrationPage}>
-                <div className={styles.languageBtnWrapper}>
-                    <ChangeLanguageBtn />
-                </div>
-                <div className={styles.registrationContentWrapper}>
-                    <div className={styles.registrationContainer}>
-                        <RegistrationForm />
-                    </div>
-                </div>
-                <Footer />
-            </div>
+  return (
+    <div
+      className={styles.registrationWrapper}
+      style={{ backgroundImage: `url(${backgroundImg})` }}
+    >
+      <div className={styles.registrationPage}>
+        <div className={styles.languageBtnWrapper}>
+          <ChangeLanguageBtn />
         </div>
-    );
+        <div className={styles.registrationContentWrapper}>
+          <div className={styles.registrationContainer}>
+            <RegistrationForm />
+          </div>
+        </div>
+        <Footer />
+      </div>
+    </div>
+  );
 };
 
 export { RegistrationPage };

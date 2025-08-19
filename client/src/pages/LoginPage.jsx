@@ -8,25 +8,22 @@ import backgroundImg from "@/assets/login-background.png";
 import styles from "./LoginPage.module.css";
 
 const LoginPage = () => {
-    return (
-        <div
-            className={styles.loginWrapper}
-            style={{ backgroundImage: `url(${backgroundImg})` }}
-        >
-            <div className={styles.authPage}>
-                <div className={styles.languageBtnWrapper}>
-                    <ChangeLanguageBtn />
-                </div>
-                <div className={styles.authContentWrapper}>
-                    <div className={styles.authContainer}>
-                        <LoginImage />
-                        <LoginForm />
-                    </div>
-                </div>
-                <Footer />
-            </div>
+  return (
+    <div className={styles.loginWrapper} style={{ backgroundImage: `url(${backgroundImg})` }}>
+      <div className={styles.authPage}>
+        <div className={styles.languageBtnWrapper}>
+          <ChangeLanguageBtn />
         </div>
-    );
+        <div className={styles.authContentWrapper}>
+          <div className={styles.authContainer}>
+            <LoginImage />
+            <LoginForm />
+          </div>
+        </div>
+        <Footer />
+      </div>
+    </div>
+  );
 };
 
 export { LoginPage };

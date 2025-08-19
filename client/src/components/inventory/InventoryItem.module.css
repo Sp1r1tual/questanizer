@@ -1,41 +1,43 @@
 .card {
-    width: 10rem;
-    cursor: pointer;
-    border: 1px solid #e5e7eb;
-    border-radius: 1rem;
-    padding: 1rem;
-    text-align: center;
-    background-color: #ffffff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
+  width: 10rem;
+  cursor: pointer;
+  border: 1px solid #e5e7eb;
+  border-radius: 1rem;
+  padding: 1rem;
+  text-align: center;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
 
 .card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 .image {
-    width: 100%;
-    height: 100px;
-    object-fit: contain;
-    border-radius: 0.5rem;
+  width: 100%;
+  height: 100px;
+  object-fit: contain;
+  border-radius: 0.5rem;
 }
 
 .title {
-    font-weight: 600;
-    font-size: 1.1rem;
-    margin-bottom: 0.25rem;
-    color: #111827;
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 0.25rem;
+  color: #111827;
 }
 
 .quantity {
-    font-weight: 500;
-    font-size: 0.95rem;
-    margin-top: auto;
-    color: #374151;
+  font-weight: 500;
+  font-size: 0.95rem;
+  margin-top: auto;
+  color: #374151;
 }

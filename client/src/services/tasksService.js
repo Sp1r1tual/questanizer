@@ -1,25 +1,25 @@
 import { $api } from "@/http";
 
 class TaskService {
-    static async getAllTasks() {
-        return $api.get("/tasks");
-    }
+  static getAllTasks() {
+    return $api.get("/tasks");
+  }
 
-    static async createTask(data) {
-        return $api.post("/tasks", data);
-    }
+  static createTask(data) {
+    return $api.post("/tasks", data);
+  }
 
-    static async deleteTask(id) {
-        return $api.delete(`/tasks/${id}`);
-    }
+  static deleteTask(id) {
+    return $api.delete(`/tasks/${id}`);
+  }
 
-    static async completeTask(id) {
-        return $api.patch(`/tasks/${id}/complete`);
-    }
+  static completeTask(id) {
+    return $api.patch(`/tasks/${id}/complete`);
+  }
 
-    static async takeDamageOverdueTask(id) {
-        return $api.patch(`/tasks/${id}/overdue`);
-    }
+  static takeDamageOverdueTask(id) {
+    return $api.patch(`/tasks/${id}/overdue`);
+  }
 }
 
 export { TaskService };

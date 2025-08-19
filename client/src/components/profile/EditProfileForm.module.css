@@ -1,165 +1,172 @@
 .form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    background: linear-gradient(145deg, #ffffff, #f5f0ea);
-    border-radius: 12px;
-    max-width: 400px;
-    width: 100%;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-    animation: slideUp 0.3s ease-out;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: linear-gradient(145deg, #ffffff, #f5f0ea);
+  border-radius: 12px;
+  max-width: 400px;
+  width: 100%;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+    "Helvetica Neue", sans-serif;
+  animation: slideUp 0.3s ease-out;
 }
 
 .avatarSection {
-    text-align: center;
-    margin-bottom: 1rem;
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
 .avatar {
-    width: 120px;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 2px solid #d9c2a8;
-    margin-bottom: 0.5rem;
-    transition: transform 0.3s ease;
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #d9c2a8;
+  margin-bottom: 0.5rem;
+  transition: transform 0.3s ease;
 }
 
 .avatarInput {
-    display: none;
+  display: none;
 }
 
 .avatar:hover {
-    transform: scale(1.05);
+  transform: scale(1.05);
 }
 
 .changeAvatarBtn {
-    background: #7d5032;
-    color: #ffffff;
-    border: none;
-    border-radius: 8px;
-    padding: 0.4rem 0.8rem;
-    font-size: 0.8rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background 0.2s ease, transform 0.2s ease;
-    margin: 0 auto;
-    display: block;
+  background: #7d5032;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+  margin: 0 auto;
+  display: block;
 }
 
 .changeAvatarBtn:hover {
-    background: #503a24;
-    transform: translateY(-2px);
+  background: #503a24;
+  transform: translateY(-2px);
 }
 
 .fieldGroup {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
 }
 
 .label {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: #2f2f2f;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #2f2f2f;
 }
 
 .input,
 .textarea {
-    width: 100%;
-    padding: 0.6rem;
-    border: 1px solid #d9c2a8;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    color: #2f2f2f;
-    background: #fffaf7;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid #d9c2a8;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: #2f2f2f;
+  background: #fffaf7;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .input:focus,
 .textarea:focus {
-    outline: none;
-    border-color: #7d5032;
-    box-shadow: 0 0 0 2px rgba(125, 80, 50, 0.2);
+  outline: none;
+  border-color: #7d5032;
+  box-shadow: 0 0 0 2px rgba(125, 80, 50, 0.2);
 }
 
 .textarea {
-    resize: vertical;
-    min-height: 60px;
-    max-height: 160px;
+  resize: vertical;
+  min-height: 60px;
+  max-height: 160px;
 }
 
 .hint {
-    font-size: 0.8rem;
-    color: #7d5032;
-    text-align: right;
+  font-size: 0.8rem;
+  color: #7d5032;
+  text-align: right;
 }
 
 .actions {
-    display: flex;
-    gap: 0.75rem;
-    justify-content: flex-end;
-    margin-top: 0.75rem;
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+  margin-top: 0.75rem;
 }
 
 .submitBtn,
 .cancelBtn {
-    padding: 0.6rem 1.2rem;
-    border: none;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background 0.2s ease, transform 0.2s ease;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
 }
 
 .submitBtn {
-    background: #7d5032;
-    color: #ffffff;
+  background: #7d5032;
+  color: #ffffff;
 }
 
 .submitBtn:hover {
-    background: #503a24;
-    transform: translateY(-2px);
+  background: #503a24;
+  transform: translateY(-2px);
 }
 
 .cancelBtn {
-    background: #f5efe9;
-    color: #4a4035;
-    border: 1px solid #d9c2a8;
+  background: #f5efe9;
+  color: #4a4035;
+  border: 1px solid #d9c2a8;
 }
 
 .cancelBtn:hover {
-    background: #e6d8c4;
-    transform: translateY(-2px);
+  background: #e6d8c4;
+  transform: translateY(-2px);
 }
 
 .inputError {
-    border-color: #d93025 !important;
-    background-color: #fff0f0;
-    box-shadow: 0 0 0 2px rgba(217, 48, 37, 0.2);
+  border-color: #d93025 !important;
+  background-color: #fff0f0;
+  box-shadow: 0 0 0 2px rgba(217, 48, 37, 0.2);
 }
 
 .error {
-    color: #d93025;
-    font-size: 0.8rem;
-    margin-top: 0.25rem;
+  color: #d93025;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
 }
 
 @media (max-width: 480px) {
-    .avatar {
-        width: 80px;
-        height: 80px;
-    }
+  .avatar {
+    width: 80px;
+    height: 80px;
+  }
 
-    .actions {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
+  .actions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
 
-    .submitBtn,
-    .cancelBtn {
-        width: 100%;
-    }
+  .submitBtn,
+  .cancelBtn {
+    width: 100%;
+  }
 }

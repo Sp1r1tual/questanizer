@@ -8,42 +8,39 @@ import { changeUserLanguage } from "@/store/user/localizationThunks";
 import { LANGUAGES } from "@/data/languages";
 
 const useLanguageChange = () => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const { i18n } = useTranslation();
+  const { i18n } = useTranslation();
 
-    const currentLang =
-        useSelector((state) => state.localization.language) ||
-        i18n.language ||
-        "en";
-    const loading = useSelector((state) => state.localization.loading);
+  const currentLang = useSelector((state) => state.localization.language) || i18n.language || "en";
+  const loading = useSelector((state) => state.localization.loading);
 
-    const changeLanguage = (languageCode) => {
-        if (languageCode === currentLang) return;
+  const changeLanguage = (languageCode) => {
+    if (languageCode === currentLang) return;
 
-        i18n.changeLanguage(languageCode);
+    i18n.changeLanguage(languageCode);
 
-        const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
 
-        if (token) {
-            dispatch(changeUserLanguage(languageCode));
-            return;
-        }
+    if (token) {
+      dispatch(changeUserLanguage(languageCode));
+      return;
+    }
 
-        dispatch(setLanguage(languageCode));
-        localStorage.setItem("preferredLanguage", languageCode);
-    };
+    dispatch(setLanguage(languageCode));
+    localStorage.setItem("preferredLanguage", languageCode);
+  };
 
-    const getCurrentLanguage = () =>
-        LANGUAGES.find((lang) => lang.code === currentLang) || LANGUAGES[0];
+  const getCurrentLanguage = () =>
+    LANGUAGES.find((lang) => lang.code === currentLang) || LANGUAGES[0];
 
-    return {
-        currentLang,
-        languages: LANGUAGES,
-        changeLanguage,
-        getCurrentLanguage,
-        loading,
-    };
+  return {
+    currentLang,
+    languages: LANGUAGES,
+    changeLanguage,
+    getCurrentLanguage,
+    loading,
+  };
 };
 
 export { useLanguageChange };

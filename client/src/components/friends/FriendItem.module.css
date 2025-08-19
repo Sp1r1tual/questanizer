@@ -1,127 +1,135 @@
 .friendItem {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #fff;
-    border: 1px solid #e5d4c0;
-    border-radius: 10px;
-    padding: 0.75rem 1rem;
-    gap: 0.75rem;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-    transition: background 0.2s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  border: 1px solid #e5d4c0;
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  gap: 0.75rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
 }
 
 .friendItem:hover {
-    background: #fdf9f6;
-    transform: translateY(-1px);
+  background: #fdf9f6;
+  transform: translateY(-1px);
 }
 
 .friendAvatar {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #d9c2a8;
-    flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #d9c2a8;
+  flex-shrink: 0;
 }
 
 .friendInfo {
-    flex: 1;
-    overflow: hidden;
+  flex: 1;
+  overflow: hidden;
 }
 
 .friendName {
-    font-size: 1rem;
-    font-weight: 500;
-    color: #2f2f2f;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #2f2f2f;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .friendActions {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .addBtn,
 .removeBtn {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.875rem;
-    font-weight: 500;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s ease;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition:
+    background 0.3s ease,
+    transform 0.2s ease;
 }
 
 .addBtn {
-    background: #7d5032;
-    color: #ffffff;
+  background: #7d5032;
+  color: #ffffff;
 }
 
 .addBtn:hover {
-    background: #503a24;
-    transform: translateY(-1px);
+  background: #503a24;
+  transform: translateY(-1px);
 }
 
 .removeBtn {
-    background: #e0c4b0;
-    color: #503a24;
+  background: #e0c4b0;
+  color: #503a24;
 }
 
 .removeBtn:hover {
-    background: #d4b49c;
-    transform: translateY(-1px);
+  background: #d4b49c;
+  transform: translateY(-1px);
 }
 
 .acceptBtn {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.875rem;
-    font-weight: 500;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    background: #65a86e;
-    color: #fff;
-    transition: background 0.3s ease, transform 0.2s ease;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #65a86e;
+  color: #fff;
+  transition:
+    background 0.3s ease,
+    transform 0.2s ease;
 }
 
 .acceptBtn:hover {
-    background: #4f8a58;
-    transform: translateY(-1px);
+  background: #4f8a58;
+  transform: translateY(-1px);
 }
 
 .cancelBtn {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.875rem;
-    font-weight: 500;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    background: #f0e2d8;
-    color: #6a4d3b;
-    transition: background 0.3s ease, transform 0.2s ease;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #f0e2d8;
+  color: #6a4d3b;
+  transition:
+    background 0.3s ease,
+    transform 0.2s ease;
 }
 
 .cancelBtn:hover {
-    background: #e3d2c5;
-    transform: translateY(-1px);
+  background: #e3d2c5;
+  transform: translateY(-1px);
 }
 
 @media (max-width: 480px) {
-    .friendItem {
-        padding: 0.5rem 0.75rem;
-    }
+  .friendItem {
+    padding: 0.5rem 0.75rem;
+  }
 
-    .friendName {
-        font-size: 0.95rem;
-    }
+  .friendName {
+    font-size: 0.95rem;
+  }
 
-    .addBtn,
-    .removeBtn {
-        font-size: 0.8rem;
-        padding: 0.35rem 0.7rem;
-    }
+  .addBtn,
+  .removeBtn {
+    font-size: 0.8rem;
+    padding: 0.35rem 0.7rem;
+  }
 }

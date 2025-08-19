@@ -1,35 +1,29 @@
 import { useDispatch, useSelector } from "react-redux";
 
-import {
-    setInputTask,
-    setDeadline,
-    setIsInputInvalid,
-} from "@/store/tasks/tasksSlice";
+import { setInputTask, setDeadline, setIsInputInvalid } from "@/store/tasks/tasksSlice";
 
 const useTaskInput = () => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const { inputTask, deadline, isInputInvalid } = useSelector(
-        (state) => state.tasks
-    );
+  const { inputTask, deadline, isInputInvalid } = useSelector((state) => state.tasks);
 
-    const onInputChange = (value) => {
-        dispatch(setInputTask(value));
+  const onInputChange = (value) => {
+    dispatch(setInputTask(value));
 
-        if (isInputInvalid && value.trim() !== "") {
-            dispatch(setIsInputInvalid(false));
-        }
-    };
+    if (isInputInvalid && value.trim() !== "") {
+      dispatch(setIsInputInvalid(false));
+    }
+  };
 
-    const onSetDeadline = (dateStr) => dispatch(setDeadline(dateStr));
+  const onSetDeadline = (dateStr) => dispatch(setDeadline(dateStr));
 
-    return {
-        inputTask,
-        deadline,
-        isInputInvalid,
-        onInputChange,
-        onSetDeadline,
-    };
+  return {
+    inputTask,
+    deadline,
+    isInputInvalid,
+    onInputChange,
+    onSetDeadline,
+  };
 };
 
 export { useTaskInput };

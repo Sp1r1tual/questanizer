@@ -1,26 +1,26 @@
 .mainImg {
-    width: 100px;
-    height: auto;
-    margin-right: 10px;
-    vertical-align: middle;
+  width: 100px;
+  height: auto;
+  margin-right: 10px;
+  vertical-align: middle;
 }
 
 h2 {
-    text-align: center;
-    word-wrap: break-word;
-    font-size: 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  text-align: center;
+  word-wrap: break-word;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @media (max-width: 640px) {
-    .mainImg {
-        width: 80px;
-        margin-right: 5px;
-    }
+  .mainImg {
+    width: 80px;
+    margin-right: 5px;
+  }
 
-    h2 {
-        font-size: 1.2rem;
-    }
+  h2 {
+    font-size: 1.2rem;
+  }
 }

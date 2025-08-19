@@ -1,7 +1,7 @@
 import styles from "./Wrapper.module.css";
 
 const Wrapper = ({ children }) => {
-    return <div className={styles.wrapper}>{children}</div>;
+  return <div className={styles.wrapper}>{children}</div>;
 };
 
 export { Wrapper };

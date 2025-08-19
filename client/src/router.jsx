@@ -16,55 +16,55 @@ import { InventoryPage } from "./pages/InventoryPage";
 import { TasksPage } from "./pages/TasksPage";
 
 const router = createBrowserRouter([
-    {
+  {
+    path: "/",
+    element: <App />,
+    errorElement: <RouteErrorFallback />,
+    children: [
+      {
+        path: "login",
+        element: <LoginPage />,
+      },
+      {
+        path: "registration",
+        element: <RegistrationPage />,
+      },
+      {
+        path: "forgot-password",
+        element: <ForgotPasswordPage />,
+      },
+      {
+        path: "reset-password/:token",
+        element: <ResetPasswordPage />,
+      },
+      {
         path: "/",
-        element: <App />,
-        errorElement: <RouteErrorFallback />,
+        element: <AuthenticatedLayout />,
         children: [
-            {
-                path: "login",
-                element: <LoginPage />,
-            },
-            {
-                path: "registration",
-                element: <RegistrationPage />,
-            },
-            {
-                path: "forgot-password",
-                element: <ForgotPasswordPage />,
-            },
-            {
-                path: "reset-password/:token",
-                element: <ResetPasswordPage />,
-            },
-            {
-                path: "/",
-                element: <AuthenticatedLayout />,
-                children: [
-                    {
-                        path: "/",
-                        element: <TasksPage />,
-                    },
-                    {
-                        path: "boss",
-                        element: <BossBattlePage />,
-                    },
-                    {
-                        path: "market",
-                        element: <MarketPage />,
-                    },
-                    {
-                        path: "inventory",
-                        element: <InventoryPage />,
-                    },
-                    {
-                        path: "faq",
-                        element: <SupportPage />,
-                    },
-                ],
-            },
+          {
+            path: "/",
+            element: <TasksPage />,
+          },
+          {
+            path: "boss",
+            element: <BossBattlePage />,
+          },
+          {
+            path: "market",
+            element: <MarketPage />,
+          },
+          {
+            path: "inventory",
+            element: <InventoryPage />,
+          },
+          {
+            path: "faq",
+            element: <SupportPage />,
+          },
         ],
-    },
+      },
+    ],
+  },
 ]);
 
 export { router };

@@ -14,38 +14,38 @@ import { fetchBoss } from "@/store/boss/bossBattleThunks";
 import styles from "./BossBattle.module.css";
 
 const BossBattle = () => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const { boss, initBoss, loading } = useBoss();
+  const { boss, initBoss, loading } = useBoss();
 
-    const { user } = useAuth();
+  const { user } = useAuth();
 
-    useEffect(() => {
-        if (user?.id && !boss.bossId) {
-            dispatch(fetchBoss());
-        }
-    }, [dispatch, user, boss.bossId]);
+  useEffect(() => {
+    if (user?.id && !boss.bossId) {
+      dispatch(fetchBoss());
+    }
+  }, [dispatch, user, boss.bossId]);
 
-    const handleStartBattle = () => {
-        initBoss();
-    };
+  const handleStartBattle = () => {
+    initBoss();
+  };
 
-    return (
-        <div>
-            <Loader visible={loading} />
-            {!boss.bossId && <BossBattleStartBtn onClick={handleStartBattle} />}
-            {boss.bossId && (
-                <div className={styles.battleContainer}>
-                    <div className={styles.bossView}>
-                        <BossView />
-                    </div>
-                    <div className={styles.bossStats}>
-                        <BossStats />
-                    </div>
-                </div>
-            )}
+  return (
+    <div>
+      <Loader visible={loading} />
+      {!boss.bossId && <BossBattleStartBtn onClick={handleStartBattle} />}
+      {boss.bossId && (
+        <div className={styles.battleContainer}>
+          <div className={styles.bossView}>
+            <BossView />
+          </div>
+          <div className={styles.bossStats}>
+            <BossStats />
+          </div>
         </div>
-    );
+      )}
+    </div>
+  );
 };
 
 export { BossBattle };

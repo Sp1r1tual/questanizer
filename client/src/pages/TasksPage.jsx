@@ -10,22 +10,19 @@ import backgroundImg from "@/assets/main-background.png";
 import styles from "./TasksPage.module.css";
 
 const TasksPage = () => {
-    return (
-        <div
-            className={styles.tasksWrapper}
-            style={{ backgroundImage: `url(${backgroundImg})` }}
-        >
-            <Wrapper>
-                <ConfirmOverdueTasksModal />
-                <Dashboard>
-                    <ContainerMedium>
-                        <UserStatsView />
-                    </ContainerMedium>
-                    <TasksView />
-                </Dashboard>
-            </Wrapper>
-        </div>
-    );
+  return (
+    <div className={styles.tasksWrapper} style={{ backgroundImage: `url(${backgroundImg})` }}>
+      <Wrapper>
+        <ConfirmOverdueTasksModal />
+        <Dashboard>
+          <ContainerMedium>
+            <UserStatsView />
+          </ContainerMedium>
+          <TasksView />
+        </Dashboard>
+      </Wrapper>
+    </div>
+  );
 };
 
 export { TasksPage };

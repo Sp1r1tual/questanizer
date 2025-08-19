@@ -11,25 +11,22 @@ import backgroundImg from "@/assets/inventory-background.png";
 import styles from "./InventoryPage.module.css";
 
 const InventoryPage = () => {
-    return (
-        <div
-            className={styles.inventoryWrapper}
-            style={{ backgroundImage: `url(${backgroundImg})` }}
-        >
-            <Wrapper>
-                <InventoryItemModal />
-                <Dashboard>
-                    <ContainerMedium>
-                        <UserStatsView />
-                    </ContainerMedium>
-                    <ContainerMedium>
-                        <InventoryHeader />
-                        <InventoryList />
-                    </ContainerMedium>
-                </Dashboard>
-            </Wrapper>
-        </div>
-    );
+  return (
+    <div className={styles.inventoryWrapper} style={{ backgroundImage: `url(${backgroundImg})` }}>
+      <Wrapper>
+        <InventoryItemModal />
+        <Dashboard>
+          <ContainerMedium>
+            <UserStatsView />
+          </ContainerMedium>
+          <ContainerMedium>
+            <InventoryHeader />
+            <InventoryList />
+          </ContainerMedium>
+        </Dashboard>
+      </Wrapper>
+    </div>
+  );
 };
 
 export { InventoryPage };

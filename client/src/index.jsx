@@ -18,20 +18,20 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 const token = localStorage.getItem("token");
 
 if (token) {
-    store.dispatch(checkAuth()).finally(() => {
-        renderApp();
-    });
-} else {
-    store.dispatch(setAuthChecked(true));
+  store.dispatch(checkAuth()).finally(() => {
     renderApp();
+  });
+} else {
+  store.dispatch(setAuthChecked(true));
+  renderApp();
 }
 
 function renderApp() {
-    root.render(
-        <React.StrictMode>
-            <Provider store={store}>
-                <RouterProvider router={router} />
-            </Provider>
-        </React.StrictMode>
-    );
+  root.render(
+    <React.StrictMode>
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
+    </React.StrictMode>,
+  );
 }

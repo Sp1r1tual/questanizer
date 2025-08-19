@@ -15,21 +15,21 @@ import chatReducer from "../store/chat/chatSlice";
 import chatSocketReducer from "../store/chat/chatSocketSlice";
 
 const store = configureStore({
-    reducer: {
-        tasks: tasksReducer,
-        auth: authReducer,
-        stats: userStatsReducer,
-        bossBattle: bossBattleReducer,
-        user: userProfileReducer,
-        friends: userFriendsReducer,
-        publicUser: publicUserProfileReducer,
-        faq: faqReducer,
-        market: marketReducer,
-        inventory: inventoryReducer,
-        localization: localizationReducer,
-        chat: chatReducer,
-        chatSocket: chatSocketReducer,
-    },
+  reducer: {
+    tasks: tasksReducer,
+    auth: authReducer,
+    stats: userStatsReducer,
+    bossBattle: bossBattleReducer,
+    user: userProfileReducer,
+    friends: userFriendsReducer,
+    publicUser: publicUserProfileReducer,
+    faq: faqReducer,
+    market: marketReducer,
+    inventory: inventoryReducer,
+    localization: localizationReducer,
+    chat: chatReducer,
+    chatSocket: chatSocketReducer,
+  },
 });
 
 export { store };

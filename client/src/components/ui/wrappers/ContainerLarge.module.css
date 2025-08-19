@@ -1,19 +1,19 @@
 .container {
-    width: 100%;
-    max-width: 70%;
-    padding: 20px;
-    text-align: center;
-    background-color: rgb(240, 235, 235);
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  width: 100%;
+  max-width: 70%;
+  padding: 20px;
+  text-align: center;
+  background-color: rgb(240, 235, 235);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 @media (max-width: 640px) {
-    .container {
-        max-width: 95%;
-        padding: 15px;
-    }
+  .container {
+    max-width: 95%;
+    padding: 15px;
+  }
 }

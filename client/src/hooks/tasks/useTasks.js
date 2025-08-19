@@ -7,72 +7,64 @@ import { useTaskActions } from "./useTaskActions";
 import { addTaskAsync } from "@/store/tasks/tasksThunks";
 
 const useTasks = () => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const { tasks, loading, hasLoaded } = useSelector((state) => state.tasks);
+  const { tasks, loading, hasLoaded } = useSelector((state) => state.tasks);
 
-    const {
-        modalActive,
-        confirmModal,
-        onOpenModal,
-        onCloseModal,
-        onOpenConfirmModal,
-        onOpenGroupDeleteConfirmModal,
-        onCloseConfirmModal,
-    } = useTaskModals();
+  const {
+    modalActive,
+    confirmModal,
+    onOpenModal,
+    onCloseModal,
+    onOpenConfirmModal,
+    onOpenGroupDeleteConfirmModal,
+    onCloseConfirmModal,
+  } = useTaskModals();
 
-    const {
-        inputTask,
-        deadline,
-        isInputInvalid,
-        onInputChange,
-        onSetDeadline,
-    } = useTaskInput();
+  const { inputTask, deadline, isInputInvalid, onInputChange, onSetDeadline } = useTaskInput();
 
-    const { onDeleteTask, onCompleteTask, onConfirmAction } = useTaskActions();
+  const { onDeleteTask, onCompleteTask, onConfirmAction } = useTaskActions();
 
-    const onAddTask = ({ hasDeadline, difficulty }) => {
-        const trimmed = inputTask.trim();
+  const onAddTask = ({ hasDeadline, difficulty }) => {
+    const trimmed = inputTask.trim();
 
-        if (!trimmed || (hasDeadline && !deadline)) return;
+    if (!trimmed || (hasDeadline && !deadline)) return;
 
-        dispatch(
-            addTaskAsync({
-                text: trimmed,
-                deadline: hasDeadline ? deadline : null,
-                difficulty,
-            })
-        );
-    };
+    dispatch(
+      addTaskAsync({
+        text: trimmed,
+        deadline: hasDeadline ? deadline : null,
+        difficulty,
+      }),
+    );
+  };
 
-    const onGroupDeleteCompleted = () =>
-        onOpenGroupDeleteConfirmModal("group-delete-completed");
+  const onGroupDeleteCompleted = () => onOpenGroupDeleteConfirmModal("group-delete-completed");
 
-    const onGroupDeleteOverdue = () =>
-        onOpenGroupDeleteConfirmModal("group-delete-overdue");
+  const onGroupDeleteOverdue = () => onOpenGroupDeleteConfirmModal("group-delete-overdue");
 
-    return {
-        tasks,
-        loading,
-        hasLoaded,
-        inputTask,
-        deadline,
-        isInputInvalid,
-        modalActive,
-        confirmModal,
-        onInputChange,
-        onSetDeadline,
-        onOpenModal,
-        onCloseModal,
-        onOpenConfirmModal,
-        onCloseConfirmModal,
-        onAddTask,
-        onConfirmAction,
-        onDeleteTask,
-        onCompleteTask,
-        onGroupDeleteCompleted,
-        onGroupDeleteOverdue,
-    };
+  return {
+    tasks,
+    loading,
+    hasLoaded,
+    inputTask,
+    deadline,
+    isInputInvalid,
+    modalActive,
+    confirmModal,
+    onInputChange,
+    onSetDeadline,
+    onOpenModal,
+    onCloseModal,
+    onOpenConfirmModal,
+    onCloseConfirmModal,
+    onAddTask,
+    onConfirmAction,
+    onDeleteTask,
+    onCompleteTask,
+    onGroupDeleteCompleted,
+    onGroupDeleteOverdue,
+  };
 };
 
 export { useTasks };

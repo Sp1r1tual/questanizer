@@ -1,65 +1,67 @@
 .card {
-    background-color: #ffffff;
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.08);
-    border-radius: 0.75rem;
-    padding: 0.75rem;
-    display: flex;
-    flex-direction: column;
-    transition: box-shadow 0.3s ease, transform 0.2s ease;
-    cursor: pointer;
-    transform: translateY(0);
-    border: 1px solid transparent;
-    width: 10rem;
+  background-color: #ffffff;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.08);
+  border-radius: 0.75rem;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  transition:
+    box-shadow 0.3s ease,
+    transform 0.2s ease;
+  cursor: pointer;
+  transform: translateY(0);
+  border: 1px solid transparent;
+  width: 10rem;
 }
 
 .card:hover {
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
-    transform: translateY(-1px) scale(1.015);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px) scale(1.015);
 }
 
 .title {
-    font-size: 1rem;
-    font-weight: 600;
-    margin-bottom: 0.4rem;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
 }
 
 .img {
-    width: 90px;
-    height: 90px;
-    object-fit: contain;
-    align-self: center;
-    margin-bottom: 0.5rem;
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  align-self: center;
+  margin-bottom: 0.5rem;
 }
 
 .actions {
-    display: flex;
-    gap: 0.5rem;
-    margin-top: auto;
+  display: flex;
+  gap: 0.5rem;
+  margin-top: auto;
 }
 
 .btn {
-    padding: 0.3rem 0.625rem;
-    border-radius: 0.375rem;
-    font-size: 0.8rem;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
+  padding: 0.3rem 0.625rem;
+  border-radius: 0.375rem;
+  font-size: 0.8rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
 .btnAdd {
-    background-color: #16a34a;
-    color: #ffffff;
+  background-color: #16a34a;
+  color: #ffffff;
 }
 
 .btnAdd:hover {
-    background-color: #15803d;
+  background-color: #15803d;
 }
 
 .btnDetails {
-    background-color: #e5e7eb;
-    color: #111827;
+  background-color: #e5e7eb;
+  color: #111827;
 }
 
 .btnDetails:hover {
-    background-color: #d1d5db;
+  background-color: #d1d5db;
 }

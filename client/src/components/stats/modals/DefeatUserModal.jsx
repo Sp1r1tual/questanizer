@@ -8,31 +8,27 @@ import { resetStats } from "@/store/stats/userStatsThunks";
 import styles from "./DefeatUserModal.module.css";
 
 const DefeatUserModal = ({ onRestart }) => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const { t } = useTranslation();
+  const { t } = useTranslation();
 
-    const handleRestart = async () => {
-        try {
-            await dispatch(resetStats()).unwrap();
-            dispatch(resetBoss());
-            onRestart();
-        } catch (error) {
-            console.error("Reset failed", error);
-        }
-    };
+  const handleRestart = async () => {
+    await dispatch(resetStats()).unwrap();
+    dispatch(resetBoss());
+    onRestart();
+  };
 
-    return (
-        <div className={styles.overlay}>
-            <div className={styles.modal}>
-                <h2>{t("defeat.title")}</h2>
-                <p>{t("defeat.message")}</p>
-                <button onClick={handleRestart} className={styles.button}>
-                    {t("defeat.restartButton")}
-                </button>
-            </div>
-        </div>
-    );
+  return (
+    <div className={styles.overlay}>
+      <div className={styles.modal}>
+        <h2>{t("defeat.title")}</h2>
+        <p>{t("defeat.message")}</p>
+        <button onClick={handleRestart} className={styles.button}>
+          {t("defeat.restartButton")}
+        </button>
+      </div>
+    </div>
+  );
 };
 
 export { DefeatUserModal };

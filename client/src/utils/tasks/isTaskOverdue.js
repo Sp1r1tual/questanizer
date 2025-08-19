@@ -1,7 +1,7 @@
 const isTaskOverdue = (task) => {
-    if (!task.deadline || task.isCompleted) return false;
+  if (!task.deadline || task.isCompleted) return false;
 
-    return new Date(task.deadline) < new Date();
+  return new Date(task.deadline) < new Date();
 };
 
 export { isTaskOverdue };

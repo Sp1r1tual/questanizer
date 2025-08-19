@@ -8,14 +8,14 @@ import { clearMarketState } from "@/store/market/marketSlice";
 import { clearInventoryState } from "@/store/user/inventorySlice";
 
 const clearAllState = (dispatch) => {
-    dispatch(clearStatsState());
-    dispatch(clearTasksState());
-    dispatch(clearBossState());
-    dispatch(clearUserProfileState());
-    dispatch(clearFriendsState());
-    dispatch(clearPublicProfileState());
-    dispatch(clearMarketState());
-    dispatch(clearInventoryState());
+  dispatch(clearStatsState());
+  dispatch(clearTasksState());
+  dispatch(clearBossState());
+  dispatch(clearUserProfileState());
+  dispatch(clearFriendsState());
+  dispatch(clearPublicProfileState());
+  dispatch(clearMarketState());
+  dispatch(clearInventoryState());
 };
 
 export { clearAllState };

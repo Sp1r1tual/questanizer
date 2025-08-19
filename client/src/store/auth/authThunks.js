@@ -6,56 +6,76 @@ import { API_URL } from "@/http";
 
 import { syncUserLanguage } from "@/utils/state/syncUserLanguage";
 
-const login = createAsyncThunk(
-    "auth/login",
-    async ({ email, password }, thunkAPI) => {
-        try {
-            const response = await AuthService.login(email, password);
+const login = createAsyncThunk("auth/login", async ({ email, password }, thunkAPI) => {
+  try {
+    const response = await AuthService.login(email, password);
 
-            localStorage.setItem("token", response.data.accessToken);
+    localStorage.setItem("token", response.data.accessToken);
 
-            await syncUserLanguage(thunkAPI);
+    await syncUserLanguage(thunkAPI);
 
-            return response.data.user;
-        } catch (error) {
-            return thunkAPI.rejectWithValue("errors.auth.login");
-        }
-    }
-);
+    return response.data.user;
+  } catch {
+    return thunkAPI.rejectWithValue("errors.auth.login");
+  }
+});
 
-const register = createAsyncThunk(
-    "auth/register",
-    async ({ email, password }, thunkAPI) => {
-        try {
-            const response = await AuthService.registration(email, password);
+const register = createAsyncThunk("auth/register", async ({ email, password }, thunkAPI) => {
+  try {
+    const response = await AuthService.registration(email, password);
 
-            localStorage.setItem("token", response.data.accessToken);
+    localStorage.setItem("token", response.data.accessToken);
 
-            return response.data.user;
-        } catch (error) {
-            return thunkAPI.rejectWithValue("errors.auth.registration");
-        }
-    }
-);
+    return response.data.user;
+  } catch {
+    return thunkAPI.rejectWithValue("errors.auth.registration");
+  }
+});
 
 const logout = createAsyncThunk("auth/logout", async () => {
-    await AuthService.logout();
+  await AuthService.logout();
 
-    localStorage.removeItem("token");
+  localStorage.removeItem("token");
 });
 
 const checkAuth = createAsyncThunk("auth/checkAuth", async (_, thunkAPI) => {
-    try {
-        const response = await axios.get(`${API_URL}/refresh`, {
-            withCredentials: true,
-        });
+  try {
+    const response = await axios.get(`${API_URL}/refresh`, {
+      withCredentials: true,
+    });
 
-        localStorage.setItem("token", response.data.accessToken);
+    localStorage.setItem("token", response.data.accessToken);
 
-        return response.data.user;
-    } catch (error) {
-        return thunkAPI.rejectWithValue("errors.auth.expired");
-    }
+    return response.data.user;
+  } catch {
+    return thunkAPI.rejectWithValue("errors.auth.expired");
+  }
 });
 
-export { login, register, logout, checkAuth };
+const requestForgotPassword = createAsyncThunk(
+  "auth/requestForgotPassword",
+  async (email, thunkAPI) => {
+    try {
+      const response = await AuthService.requestPasswordReset(email);
+
+      return response.data.message || "Check your email for the reset link";
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response?.data?.message || "Something went wrong");
+    }
+  },
+);
+
+const requestResetPassword = createAsyncThunk(
+  "auth/requestResetPassword",
+  async ({ token, password }, thunkAPI) => {
+    try {
+      const response = await AuthService.resetPassword(token, password);
+
+      return response.data.message || "Password has been reset";
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response?.data?.message || "Something went wrong");
+    }
+  },
+);
+
+export { login, register, logout, checkAuth, requestForgotPassword, requestResetPassword };

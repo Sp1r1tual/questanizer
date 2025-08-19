@@ -6,34 +6,33 @@ import { greetings } from "@/data/greetings";
 import styles from "./MarketGreeting.module.css";
 
 const MarketGreeting = () => {
-    const [message, setMessage] = useState("");
+  const [message, setMessage] = useState("");
 
-    const { t } = useTranslation();
+  const { t } = useTranslation();
 
-    useEffect(() => {
-        const shouldShow = Math.random() < 0.5;
+  useEffect(() => {
+    const shouldShow = Math.random() < 0.5;
 
-        if (shouldShow) {
-            const randomMsg =
-                greetings[Math.floor(Math.random() * greetings.length)];
+    if (shouldShow) {
+      const randomMsg = greetings[Math.floor(Math.random() * greetings.length)];
 
-            setMessage(randomMsg);
-        }
-    }, []);
+      setMessage(randomMsg);
+    }
+  }, []);
 
-    useEffect(() => {
-        if (!message) return;
+  useEffect(() => {
+    if (!message) return;
 
-        const timer = setTimeout(() => {
-            setMessage("");
-        }, 5000);
+    const timer = setTimeout(() => {
+      setMessage("");
+    }, 5000);
 
-        return () => clearTimeout(timer);
-    }, [message]);
+    return () => clearTimeout(timer);
+  }, [message]);
 
-    if (!message) return null;
+  if (!message) return null;
 
-    return <div className={styles.greeting}>{t(message)}</div>;
+  return <div className={styles.greeting}>{t(message)}</div>;
 };
 
 export { MarketGreeting };

@@ -4,92 +4,87 @@ import { useSelector } from "react-redux";
 import { useTaskActions } from "@/hooks/tasks/useTaskActions";
 
 export const useOverdueTasks = () => {
-    const [showModal, setShowModal] = useState(false);
-    const [overdueTasks, setOverdueTasks] = useState([]);
-    const [taskStatuses, setTaskStatuses] = useState({});
+  const [showModal, setShowModal] = useState(false);
+  const [overdueTasks, setOverdueTasks] = useState([]);
+  const [taskStatuses, setTaskStatuses] = useState({});
 
-    const { handleOverdueConfirm } = useTaskActions();
+  const { handleOverdueConfirm } = useTaskActions();
 
-    const tasks = useSelector((state) => state.tasks.tasks);
-    const bossId = useSelector((state) => state.bossBattle.bossId);
-    const alreadyRagedTaskIds = useSelector(
-        (state) => state.bossBattle.alreadyRagedTaskIds
+  const tasks = useSelector((state) => state.tasks.tasks);
+  const bossId = useSelector((state) => state.bossBattle.bossId);
+  const alreadyRagedTaskIds = useSelector((state) => state.bossBattle.alreadyRagedTaskIds);
+
+  const getOverdueTasks = (tasksList) => {
+    const now = new Date();
+
+    return tasksList.filter(
+      (task) =>
+        !task.isCompleted && task.deadline && new Date(task.deadline) < now && !task.damageTaken,
     );
+  };
 
-    const getOverdueTasks = (tasksList) => {
-        const now = new Date();
+  useEffect(() => {
+    const checkForOverdueTasks = () => {
+      const overdueTasksList = getOverdueTasks(tasks);
 
-        return tasksList.filter(
-            (task) =>
-                !task.isCompleted &&
-                task.deadline &&
-                new Date(task.deadline) < now &&
-                !task.damageTaken
+      if (overdueTasksList.length > 0) {
+        setOverdueTasks(overdueTasksList);
+        setTaskStatuses(
+          overdueTasksList.reduce((acc, task) => {
+            acc[task._id] = false;
+            return acc;
+          }, {}),
         );
+
+        setShowModal(true);
+      }
     };
 
-    useEffect(() => {
-        const checkForOverdueTasks = () => {
-            const overdueTasksList = getOverdueTasks(tasks);
+    const interval = setInterval(checkForOverdueTasks, 60000);
 
-            if (overdueTasksList.length > 0) {
-                setOverdueTasks(overdueTasksList);
-                setTaskStatuses(
-                    overdueTasksList.reduce((acc, task) => {
-                        acc[task._id] = false;
-                        return acc;
-                    }, {})
-                );
+    if (tasks.length > 0) checkForOverdueTasks();
 
-                setShowModal(true);
-            }
-        };
+    return () => clearInterval(interval);
+  }, [tasks]);
 
-        const interval = setInterval(checkForOverdueTasks, 60000);
+  const handleTaskStatusChange = (taskId, isCompleted) => {
+    setTaskStatuses((prev) => ({
+      ...prev,
+      [taskId]: isCompleted,
+    }));
+  };
 
-        if (tasks.length > 0) checkForOverdueTasks();
+  const handleConfirm = async () => {
+    const completedTaskIds = Object.entries(taskStatuses)
+      .filter(([_, isCompleted]) => isCompleted)
+      .map(([taskId]) => taskId);
 
-        return () => clearInterval(interval);
-    }, [tasks]);
+    const uncompletedTaskIds = Object.entries(taskStatuses)
+      .filter(([_, isCompleted]) => !isCompleted)
+      .map(([taskId]) => taskId);
 
-    const handleTaskStatusChange = (taskId, isCompleted) => {
-        setTaskStatuses((prev) => ({
-            ...prev,
-            [taskId]: isCompleted,
-        }));
-    };
+    await handleOverdueConfirm({
+      completedTaskIds,
+      uncompletedTaskIds,
+      bossId,
+      alreadyRagedTaskIds,
+    });
 
-    const handleConfirm = async () => {
-        const completedTaskIds = Object.entries(taskStatuses)
-            .filter(([_, isCompleted]) => isCompleted)
-            .map(([taskId]) => taskId);
+    setShowModal(false);
+    setOverdueTasks([]);
+    setTaskStatuses({});
+  };
 
-        const uncompletedTaskIds = Object.entries(taskStatuses)
-            .filter(([_, isCompleted]) => !isCompleted)
-            .map(([taskId]) => taskId);
+  const handleClose = () => {
+    handleConfirm();
+  };
 
-        await handleOverdueConfirm({
-            completedTaskIds,
-            uncompletedTaskIds,
-            bossId,
-            alreadyRagedTaskIds,
-        });
-
-        setShowModal(false);
-        setOverdueTasks([]);
-        setTaskStatuses({});
-    };
-
-    const handleClose = () => {
-        handleConfirm();
-    };
-
-    return {
-        showModal,
-        overdueTasks,
-        taskStatuses,
-        handleTaskStatusChange,
-        handleConfirm,
-        handleClose,
-    };
+  return {
+    showModal,
+    overdueTasks,
+    taskStatuses,
+    handleTaskStatusChange,
+    handleConfirm,
+    handleClose,
+  };
 };

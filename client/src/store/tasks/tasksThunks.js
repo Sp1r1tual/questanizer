@@ -5,58 +5,52 @@ import { TaskService } from "@/services/tasksService";
 import { fetchStats } from "../stats/userStatsThunks";
 
 const fetchTasks = createAsyncThunk("tasks/fetchTasks", async (_, thunkAPI) => {
-    try {
-        const response = await TaskService.getAllTasks();
+  try {
+    const response = await TaskService.getAllTasks();
 
-        return response.data;
-    } catch (error) {
-        return thunkAPI.rejectWithValue("Failed to load tasks");
-    }
+    return response.data;
+  } catch {
+    return thunkAPI.rejectWithValue("Failed to load tasks");
+  }
 });
 
 const addTaskAsync = createAsyncThunk(
-    "tasks/addTaskAsync",
-    async ({ text, deadline, difficulty }, thunkAPI) => {
-        try {
-            const response = await TaskService.createTask({
-                text,
-                deadline,
-                difficulty,
-            });
+  "tasks/addTaskAsync",
+  async ({ text, deadline, difficulty }, thunkAPI) => {
+    try {
+      const response = await TaskService.createTask({
+        text,
+        deadline,
+        difficulty,
+      });
 
-            return response.data;
-        } catch (error) {
-            return thunkAPI.rejectWithValue("Failed to create task");
-        }
+      return response.data;
+    } catch {
+      return thunkAPI.rejectWithValue("Failed to create task");
     }
+  },
 );
 
-const deleteTaskAsync = createAsyncThunk(
-    "tasks/deleteTaskAsync",
-    async (_id, thunkAPI) => {
-        try {
-            await TaskService.deleteTask(_id);
+const deleteTaskAsync = createAsyncThunk("tasks/deleteTaskAsync", async (_id, thunkAPI) => {
+  try {
+    await TaskService.deleteTask(_id);
 
-            return _id;
-        } catch (error) {
-            return thunkAPI.rejectWithValue("Failed to delete task");
-        }
-    }
-);
+    return _id;
+  } catch {
+    return thunkAPI.rejectWithValue("Failed to delete task");
+  }
+});
 
-const completeTaskAsync = createAsyncThunk(
-    "tasks/completeTaskAsync",
-    async (_id, thunkAPI) => {
-        try {
-            const response = await TaskService.completeTask(_id);
+const completeTaskAsync = createAsyncThunk("tasks/completeTaskAsync", async (_id, thunkAPI) => {
+  try {
+    const response = await TaskService.completeTask(_id);
 
-            thunkAPI.dispatch(fetchStats());
+    thunkAPI.dispatch(fetchStats());
 
-            return response.data.task;
-        } catch (error) {
-            return thunkAPI.rejectWithValue("Failed to perform task");
-        }
-    }
-);
+    return response.data.task;
+  } catch {
+    return thunkAPI.rejectWithValue("Failed to perform task");
+  }
+});
 
 export { fetchTasks, addTaskAsync, deleteTaskAsync, completeTaskAsync };

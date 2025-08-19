@@ -9,23 +9,20 @@ import backgroundImg from "@/assets/support-background.png";
 import styles from "./SupportPage.module.css";
 
 const SupportPage = () => {
-    return (
-        <div
-            className={styles.supportWrapper}
-            style={{ backgroundImage: `url(${backgroundImg})` }}
-        >
-            <Wrapper>
-                <Dashboard>
-                    <ContainerMedium>
-                        <Answers />
-                    </ContainerMedium>
-                    <ContainerMedium>
-                        <Feedback />
-                    </ContainerMedium>
-                </Dashboard>
-            </Wrapper>
-        </div>
-    );
+  return (
+    <div className={styles.supportWrapper} style={{ backgroundImage: `url(${backgroundImg})` }}>
+      <Wrapper>
+        <Dashboard>
+          <ContainerMedium>
+            <Answers />
+          </ContainerMedium>
+          <ContainerMedium>
+            <Feedback />
+          </ContainerMedium>
+        </Dashboard>
+      </Wrapper>
+    </div>
+  );
 };
 
 export { SupportPage };

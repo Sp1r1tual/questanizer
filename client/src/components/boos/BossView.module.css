@@ -1,28 +1,28 @@
 .bossView {
-    text-align: center;
+  text-align: center;
 }
 
 .bossImage {
-    max-width: 100%;
-    height: auto;
-    border-radius: 0.5rem;
-    box-shadow: 0 0 10px rgba(80, 50, 40, 0.1);
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 10px rgba(80, 50, 40, 0.1);
 }
 
 .placeholder {
-    font-size: 1.2rem;
-    color: #4d2c20;
-    text-align: center;
-    padding: 2rem;
+  font-size: 1.2rem;
+  color: #4d2c20;
+  text-align: center;
+  padding: 2rem;
 }
 
 @media (max-width: 480px) {
-    .placeholder {
-        font-size: 1rem;
-        padding: 1rem;
-    }
+  .placeholder {
+    font-size: 1rem;
+    padding: 1rem;
+  }
 
-    .bossImage {
-        max-width: 90%;
-    }
+  .bossImage {
+    max-width: 90%;
+  }
 }

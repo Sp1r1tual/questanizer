@@ -1,101 +1,103 @@
 .dateInput {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1rem;
-    font-family: Arial, sans-serif;
-    background-color: #fafafa;
-    box-sizing: border-box;
-    display: block;
-    margin-bottom: 10px;
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-family: Arial, sans-serif;
+  background-color: #fafafa;
+  box-sizing: border-box;
+  display: block;
+  margin-bottom: 10px;
 }
 
 .invalidInput {
-    border-color: #ff6666;
-    outline: none;
+  border-color: #ff6666;
+  outline: none;
 }
 
 .error {
-    color: #ff6666;
-    font-size: 0.9rem;
-    margin: 5px 0 10px 0;
-    display: block;
-    text-align: center;
+  color: #ff6666;
+  font-size: 0.9rem;
+  margin: 5px 0 10px 0;
+  display: block;
+  text-align: center;
 }
 
 .buttonGroup {
-    display: block;
-    width: 100%;
+  display: block;
+  width: 100%;
 }
 
 .addWithDeadlineBtn,
 .addWithoutDeadlineBtn,
 .cancelBtn {
-    width: 100%;
-    padding: 8px 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #ffffff;
-    font-size: 1rem;
-    font-family: Arial, sans-serif;
-    color: #333;
-    cursor: pointer;
-    transition: background-color 0.2s ease, color 0.2s ease;
-    margin-bottom: 10px;
-    box-sizing: border-box;
+  width: 100%;
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #ffffff;
+  font-size: 1rem;
+  font-family: Arial, sans-serif;
+  color: #333;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+  margin-bottom: 10px;
+  box-sizing: border-box;
 }
 
 .addWithDeadlineBtn:hover {
-    background-color: #e8ce66;
-    color: #000;
+  background-color: #e8ce66;
+  color: #000;
 }
 
 .addWithoutDeadlineBtn:hover {
-    background-color: #e8ce66;
-    color: #000;
+  background-color: #e8ce66;
+  color: #000;
 }
 
 .cancelBtn {
-    border-color: #ff6666;
-    color: #ff6666;
+  border-color: #ff6666;
+  color: #ff6666;
 }
 
 .cancelBtn:hover {
-    background-color: #ff6666;
-    color: #ffffff;
+  background-color: #ff6666;
+  color: #ffffff;
 }
 
 .cancelBtn:disabled {
-    cursor: not-allowed;
-    opacity: 0.6;
+  cursor: not-allowed;
+  opacity: 0.6;
 }
 
 .visuallyHidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    padding: 0;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }
 
 @media (max-width: 640px) {
-    .dateInput {
-        font-size: 0.9rem;
-        padding: 6px;
-    }
+  .dateInput {
+    font-size: 0.9rem;
+    padding: 6px;
+  }
 
-    .error {
-        font-size: 0.8rem;
-    }
+  .error {
+    font-size: 0.8rem;
+  }
 
-    .addWithDeadlineBtn,
-    .addWithoutDeadlineBtn,
-    .cancelBtn {
-        padding: 6px 12px;
-        font-size: 0.9rem;
-    }
+  .addWithDeadlineBtn,
+  .addWithoutDeadlineBtn,
+  .cancelBtn {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+  }
 }

@@ -14,28 +14,25 @@ import backgroundImg from "@/assets/market-background.png";
 import styles from "./MarketPage.module.css";
 
 const MarketPage = () => {
-    return (
-        <div
-            className={styles.marketWrapper}
-            style={{ backgroundImage: `url(${backgroundImg})` }}
-        >
-            <Wrapper>
-                <MarketItemModal />
-                <DraggableCart />
-                <CartModal />
-                <Dashboard>
-                    <ContainerMedium>
-                        <UserStatsView />
-                    </ContainerMedium>
-                    <ContainerMedium>
-                        <MarketBanner />
-                        <MarketHeader />
-                        <MarketList />
-                    </ContainerMedium>
-                </Dashboard>
-            </Wrapper>
-        </div>
-    );
+  return (
+    <div className={styles.marketWrapper} style={{ backgroundImage: `url(${backgroundImg})` }}>
+      <Wrapper>
+        <MarketItemModal />
+        <DraggableCart />
+        <CartModal />
+        <Dashboard>
+          <ContainerMedium>
+            <UserStatsView />
+          </ContainerMedium>
+          <ContainerMedium>
+            <MarketBanner />
+            <MarketHeader />
+            <MarketList />
+          </ContainerMedium>
+        </Dashboard>
+      </Wrapper>
+    </div>
+  );
 };
 
 export { MarketPage };

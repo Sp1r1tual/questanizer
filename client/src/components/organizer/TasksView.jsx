@@ -18,97 +18,93 @@ import { ConfirmChoiceModal } from "../confirmations/ConfirmChoiceModal";
 import { fetchTasks } from "@/store/tasks/tasksThunks";
 
 const TasksView = () => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const { user } = useAuth();
+  const { user } = useAuth();
 
-    const {
-        tasks,
-        inputTask,
-        isInputInvalid,
-        modalActive,
-        deadline,
-        confirmModal,
-        onInputChange,
-        onOpenModal,
-        onAddTask,
-        onCloseModal,
-        onDeleteTask,
-        onCompleteTask,
-        onGroupDeleteCompleted,
-        onGroupDeleteOverdue,
-        onSetDeadline,
-        onCloseConfirmModal,
-        onConfirmAction,
-        loading,
-    } = useTasks();
+  const {
+    tasks,
+    inputTask,
+    isInputInvalid,
+    modalActive,
+    deadline,
+    confirmModal,
+    onInputChange,
+    onOpenModal,
+    onAddTask,
+    onCloseModal,
+    onDeleteTask,
+    onCompleteTask,
+    onGroupDeleteCompleted,
+    onGroupDeleteOverdue,
+    onSetDeadline,
+    onCloseConfirmModal,
+    onConfirmAction,
+    loading,
+  } = useTasks();
 
-    const { getFilteredTasks } = useTaskFilters();
+  const { getFilteredTasks } = useTaskFilters();
 
-    const { t } = useTranslation();
+  const { t } = useTranslation();
 
-    const { title, message } = useConfirmModalTexts(confirmModal, t);
+  const { title, message } = useConfirmModalTexts(confirmModal, t);
 
-    useEffect(() => {
-        if (user?.id) {
-            dispatch(fetchTasks());
-        }
-    }, [user, dispatch]);
+  useEffect(() => {
+    if (user?.id) {
+      dispatch(fetchTasks());
+    }
+  }, [user, dispatch]);
 
-    const [filters, setFilters] = useState({
-        status: "all",
-        deadline: "all",
-        difficulty: "all",
-        sortBy: "createdAt",
-    });
+  const [filters, setFilters] = useState({
+    status: "all",
+    deadline: "all",
+    difficulty: "all",
+    sortBy: "createdAt",
+  });
 
-    const handleFilterChange = (newFilters) => {
-        setFilters((prev) => ({ ...prev, ...newFilters }));
-    };
+  const handleFilterChange = (newFilters) => {
+    setFilters((prev) => ({ ...prev, ...newFilters }));
+  };
 
-    const filteredTasks = getFilteredTasks(tasks, filters);
+  const filteredTasks = getFilteredTasks(tasks, filters);
 
-    return (
-        <ContainerMedium>
-            <OrganizerHeader />
-            <TaskInput
-                value={inputTask}
-                onChange={onInputChange}
-                isInvalid={isInputInvalid}
-            />
-            <AddNewTaskBtn onClick={onOpenModal} />
-            <TaskList
-                tasks={filteredTasks}
-                onCompleteTask={onCompleteTask}
-                onDeleteTask={onDeleteTask}
-                groupDeleteCompleted={onGroupDeleteCompleted}
-                groupDeleteOverdue={onGroupDeleteOverdue}
-                loading={loading}
-                filters={filters}
-                onFilterChange={handleFilterChange}
-            />
-            {modalActive && (
-                <TaskModal
-                    isOpen={modalActive}
-                    onClose={onCloseModal}
-                    onSubmit={onAddTask}
-                    deadline={deadline}
-                    setDeadline={onSetDeadline}
-                />
-            )}
-            {confirmModal.isOpen && (
-                <ConfirmChoiceModal
-                    isOpen={confirmModal.isOpen}
-                    onClose={onCloseConfirmModal}
-                    onConfirm={onConfirmAction}
-                    title={title}
-                    message={message}
-                    confirmText={t("common.yes")}
-                    cancelText={t("common.no")}
-                />
-            )}
-        </ContainerMedium>
-    );
+  return (
+    <ContainerMedium>
+      <OrganizerHeader />
+      <TaskInput value={inputTask} onChange={onInputChange} isInvalid={isInputInvalid} />
+      <AddNewTaskBtn onClick={onOpenModal} />
+      <TaskList
+        tasks={filteredTasks}
+        onCompleteTask={onCompleteTask}
+        onDeleteTask={onDeleteTask}
+        groupDeleteCompleted={onGroupDeleteCompleted}
+        groupDeleteOverdue={onGroupDeleteOverdue}
+        loading={loading}
+        filters={filters}
+        onFilterChange={handleFilterChange}
+      />
+      {modalActive && (
+        <TaskModal
+          isOpen={modalActive}
+          onClose={onCloseModal}
+          onSubmit={onAddTask}
+          deadline={deadline}
+          setDeadline={onSetDeadline}
+        />
+      )}
+      {confirmModal.isOpen && (
+        <ConfirmChoiceModal
+          isOpen={confirmModal.isOpen}
+          onClose={onCloseConfirmModal}
+          onConfirm={onConfirmAction}
+          title={title}
+          message={message}
+          confirmText={t("common.yes")}
+          cancelText={t("common.no")}
+        />
+      )}
+    </ContainerMedium>
+  );
 };
 
 export { TasksView };

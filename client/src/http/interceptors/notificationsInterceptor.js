@@ -1,73 +1,71 @@
 import { toast } from "react-toastify";
 
 const ALLOWED_NOTIFICATION_ENDPOINTS = [
-    "/stats",
-    "/tasks",
-    "/boss",
-    "/market",
-    "/cart",
-    "/inventory",
+  "/stats",
+  "/tasks",
+  "/boss",
+  "/market",
+  "/cart",
+  "/inventory",
 ];
 
 const showMessage = (msg) => {
-    if (typeof msg === "string") {
-        return toast(msg);
-    }
+  if (typeof msg === "string") {
+    return toast(msg);
+  }
 
-    if (typeof msg === "object" && msg.text) {
-        switch (msg.type) {
-            case "success":
-                toast.success(msg.text);
-                break;
-            case "error":
-                toast.error(msg.text);
-                break;
-            case "warn":
-            case "warning":
-                toast.warn(msg.text);
-                break;
-            case "info":
-            default:
-                toast.info(msg.text);
-        }
+  if (typeof msg === "object" && msg.text) {
+    switch (msg.type) {
+      case "success":
+        toast.success(msg.text);
+        break;
+      case "error":
+        toast.error(msg.text);
+        break;
+      case "warn":
+      case "warning":
+        toast.warn(msg.text);
+        break;
+      case "info":
+      default:
+        toast.info(msg.text);
     }
+  }
 };
 
 const shouldShowNotification = (config) => {
-    return ALLOWED_NOTIFICATION_ENDPOINTS.some((endpoint) =>
-        config.url?.includes(endpoint)
-    );
+  return ALLOWED_NOTIFICATION_ENDPOINTS.some((endpoint) => config.url?.includes(endpoint));
 };
 
 const notificationInterceptor = (axiosInstance) => {
-    axiosInstance.interceptors.response.use(
-        (response) => {
-            const { message, messages } = response.data;
+  axiosInstance.interceptors.response.use(
+    (response) => {
+      const { message, messages } = response.data;
 
-            if (!shouldShowNotification(response.config)) return response;
+      if (!shouldShowNotification(response.config)) return response;
 
-            if (Array.isArray(messages)) messages.forEach(showMessage);
+      if (Array.isArray(messages)) messages.forEach(showMessage);
 
-            if (message) showMessage(message);
+      if (message) showMessage(message);
 
-            return response;
-        },
-        (error) => {
-            const errMsg = error.response?.data?.message;
+      return response;
+    },
+    (error) => {
+      const errMsg = error.response?.data?.message;
 
-            const status = error.response?.status;
-            const url = error.config?.url || "";
+      const status = error.response?.status;
+      const url = error.config?.url || "";
 
-            const isNotAuthError = status !== 401 && status !== 403;
-            const isAllowed = shouldShowNotification(error.config || { url });
+      const isNotAuthError = status !== 401 && status !== 403;
+      const isAllowed = shouldShowNotification(error.config || { url });
 
-            if (errMsg && isNotAuthError && isAllowed) {
-                toast.error(errMsg);
-            }
+      if (errMsg && isNotAuthError && isAllowed) {
+        toast.error(errMsg);
+      }
 
-            throw error;
-        }
-    );
+      throw error;
+    },
+  );
 };
 
 export { notificationInterceptor };

@@ -13,132 +13,101 @@ import { formatDate } from "@/utils/date/formatDate";
 import styles from "./UserProfileModal.module.css";
 
 const UserProfileModal = ({ onClose }) => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const currentUserId = useSelector((state) => state.auth.user.id);
-    const user = useSelector((state) => state.user.profile);
-    const isLoading = useSelector((state) => state.user.isLoading);
+  const currentUserId = useSelector((state) => state.auth.user.id);
+  const user = useSelector((state) => state.user.profile);
+  const isLoading = useSelector((state) => state.user.isLoading);
 
-    const [isEditing, setIsEditing] = useState(false);
-    const [copied, setCopied] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [copied, setCopied] = useState(false);
 
-    const { t } = useTranslation();
+  const { t } = useTranslation();
 
-    useEffect(() => {
-        dispatch(fetchUserProfile());
-    }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchUserProfile());
+  }, [dispatch]);
 
-    if (isLoading || !user) {
-        return <Loader visible={true} />;
-    }
+  if (isLoading || !user) {
+    return <Loader />;
+  }
 
-    const { name, level, health, registrationDate, bio, photoUrl } = user;
-    const formattedDate = formatDate(registrationDate);
+  const { name, level, health, registrationDate, bio, photoUrl } = user;
+  const formattedDate = formatDate(registrationDate);
 
-    const handleSave = () => {
-        setIsEditing(false);
-        dispatch(fetchUserProfile());
-    };
+  const handleSave = () => {
+    setIsEditing(false);
+    dispatch(fetchUserProfile());
+  };
 
-    const handleCancel = () => {
-        setIsEditing(false);
-    };
+  const handleCancel = () => {
+    setIsEditing(false);
+  };
 
-    const handleCopy = async () => {
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
-    };
+  const handleCopy = () => {
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
-    return (
-        <div
-            className={styles.overlay}
-            onClick={isEditing ? undefined : onClose}
-        >
-            <div
-                className={styles.modal}
-                onClick={(event) => event.stopPropagation()}
-            >
-                <button
-                    className={styles.closeBtn}
-                    onClick={onClose}
-                    aria-label={t("profile.closeModal")}
-                >
-                    ×
-                </button>
+  return (
+    <div className={styles.overlay} onClick={isEditing ? undefined : onClose}>
+      <div className={styles.modal} onClick={(event) => event.stopPropagation()}>
+        <button className={styles.closeBtn} onClick={onClose} aria-label={t("profile.closeModal")}>
+          ×
+        </button>
 
-                {isEditing ? (
-                    <EditProfileForm
-                        onCancel={handleCancel}
-                        onSave={handleSave}
-                    />
-                ) : (
-                    <>
-                        <div className={styles.profileHeader}>
-                            <img
-                                src={getAvatarUrl(photoUrl)}
-                                alt={`${name || t("profile.noUsername")}`}
-                                className={styles.avatar}
-                            />
-                            <h2 className={styles.name}>
-                                {name || t("profile.noUsername")}
-                            </h2>
-                            <p
-                                className={styles.userId}
-                                onClick={handleCopy}
-                                data-copied={copied}
-                                data-tooltip-text={t("shared.copied")}
-                            >
-                                ID: {currentUserId}
-                            </p>
-                        </div>
-
-                        <div className={styles.profileInfo}>
-                            <div className={styles.infoItem}>
-                                <strong className={styles.infoLabel}>
-                                    {t("shared.level")}:
-                                </strong>
-                                <span className={styles.infoValue}>
-                                    {level}
-                                </span>
-                            </div>
-                            <div className={styles.infoItem}>
-                                <strong className={styles.infoLabel}>
-                                    {t("shared.health")}:
-                                </strong>
-                                <span className={styles.infoValue}>
-                                    {health}
-                                </span>
-                            </div>
-                            <div className={styles.infoItem}>
-                                <strong className={styles.infoLabel}>
-                                    {t("shared.joined")}:
-                                </strong>
-                                <span className={styles.infoValue}>
-                                    {formattedDate}
-                                </span>
-                            </div>
-                            <div className={styles.infoItem}>
-                                <strong className={styles.infoLabel}>
-                                    {t("shared.bio")}:
-                                </strong>
-                                <span className={styles.infoValue}>
-                                    {bio || t("profile.noBio")}
-                                </span>
-                            </div>
-                        </div>
-
-                        <button
-                            className={styles.editBtn}
-                            onClick={() => setIsEditing(true)}
-                            aria-label={t("profile.editBtn")}
-                        >
-                            {t("profile.editBtn")}
-                        </button>
-                    </>
-                )}
+        {isEditing ? (
+          <EditProfileForm onCancel={handleCancel} onSave={handleSave} />
+        ) : (
+          <>
+            <div className={styles.profileHeader}>
+              <img
+                src={getAvatarUrl(photoUrl)}
+                alt={`${name || t("profile.noUsername")}`}
+                className={styles.avatar}
+              />
+              <h2 className={styles.name}>{name || t("profile.noUsername")}</h2>
+              <p
+                className={styles.userId}
+                onClick={handleCopy}
+                data-copied={copied}
+                data-tooltip-text={t("shared.copied")}
+              >
+                ID: {currentUserId}
+              </p>
             </div>
-        </div>
-    );
+
+            <div className={styles.profileInfo}>
+              <div className={styles.infoItem}>
+                <strong className={styles.infoLabel}>{t("shared.level")}:</strong>
+                <span className={styles.infoValue}>{level}</span>
+              </div>
+              <div className={styles.infoItem}>
+                <strong className={styles.infoLabel}>{t("shared.health")}:</strong>
+                <span className={styles.infoValue}>{health}</span>
+              </div>
+              <div className={styles.infoItem}>
+                <strong className={styles.infoLabel}>{t("shared.joined")}:</strong>
+                <span className={styles.infoValue}>{formattedDate}</span>
+              </div>
+              <div className={styles.infoItem}>
+                <strong className={styles.infoLabel}>{t("shared.bio")}:</strong>
+                <span className={styles.infoValue}>{bio || t("profile.noBio")}</span>
+              </div>
+            </div>
+
+            <button
+              className={styles.editBtn}
+              onClick={() => setIsEditing(true)}
+              aria-label={t("profile.editBtn")}
+            >
+              {t("profile.editBtn")}
+            </button>
+          </>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export { UserProfileModal };

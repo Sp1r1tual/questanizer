@@ -1,102 +1,82 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const useForm = ({ initialValues, validate }) => {
-    const [values, setValues] = useState(initialValues);
-    const [errors, setErrors] = useState({});
-    const [isLoading, setIsLoading] = useState(false);
-    const [serverError, setServerError] = useState("");
-    const [message, setMessage] = useState("");
+  const [values, setValues] = useState(initialValues);
+  const [errors, setErrors] = useState({});
+  const [message, setMessage] = useState("");
 
-    const handleChange = (event) => {
-        const field = event.target.name;
-        const value = event.target.value;
+  const isLoading = useSelector((state) => state.auth.isLoading);
 
-        setValues((prev) => ({ ...prev, [field]: value }));
+  const handleChange = (event) => {
+    const field = event.target.name;
+    const value = event.target.value;
 
-        setErrors((prev) => {
-            const { [field]: _, fillAllFields, ...next } = prev;
-            return next;
-        });
+    setValues((prev) => ({ ...prev, [field]: value }));
 
-        if (serverError) {
-            setServerError("");
-        }
-    };
-
-    const validateAll = () => {
-        const validationErrors = validate ? validate(values) : {};
-
-        setErrors(validationErrors);
-
-        return Object.keys(validationErrors).length === 0;
-    };
-
-    const handleSubmit = (onSubmit) => async (event) => {
-        event.preventDefault();
-
-        if (!validateAll()) {
-            return;
-        }
-
-        setIsLoading(true);
-        setServerError("");
-        setMessage("");
-
-        try {
-            const result = await onSubmit(values);
-
-            return result;
-        } catch (error) {
-            setServerError(
-                error.response?.data?.message ||
-                    error.message ||
-                    "An error occurred"
-            );
-            throw error;
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
-    const setSuccessMessage = (msg) => {
-        setMessage(msg);
-        setServerError("");
-    };
-
-    const clearMessages = () => {
-        setMessage("");
-        setServerError("");
-    };
-
-    const resetForm = () => {
-        setValues(initialValues);
-        setErrors({});
-        clearMessages();
-    };
-
-    const getFieldProps = (field) => ({
-        value: values[field] || "",
-        onChange: handleChange(field),
-        error: errors[field] || errors.fillAllFields,
+    setErrors((prev) => {
+      return Object.fromEntries(
+        Object.entries(prev).filter(([key]) => key !== field && key !== "fillAllFields"),
+      );
     });
+  };
 
-    return {
-        values,
-        errors,
-        isLoading,
-        serverError,
-        message,
-        handleChange,
-        handleSubmit,
-        getFieldProps,
-        setSuccessMessage,
-        clearMessages,
-        resetForm,
-        validateAll,
-        setServerError,
-        setMessage,
-        setIsLoading,
-    };
+  const validateAll = () => {
+    const validationErrors = validate ? validate(values) : {};
+
+    setErrors(validationErrors);
+
+    return Object.keys(validationErrors).length === 0;
+  };
+
+  const handleSubmit = (onSubmit) => (event) => {
+    event.preventDefault();
+
+    if (!validateAll()) {
+      return;
+    }
+
+    setMessage("");
+
+    const result = onSubmit(values);
+
+    return result;
+  };
+
+  const setSuccessMessage = (msg) => {
+    setMessage(msg);
+  };
+
+  const clearMessages = () => {
+    setMessage("");
+  };
+
+  const resetForm = () => {
+    setValues(initialValues);
+    setErrors({});
+    clearMessages();
+  };
+
+  const getFieldProps = (field) => ({
+    value: values[field] || "",
+    onChange: handleChange(field),
+    error: errors[field] || errors.fillAllFields,
+  });
+
+  return {
+    values,
+    errors,
+    isLoading,
+    message,
+    handleChange,
+    handleSubmit,
+    getFieldProps,
+    setSuccessMessage,
+    clearMessages,
+    resetForm,
+    validateAll,
+    setMessage,
+  };
 };
 
 export { useForm };

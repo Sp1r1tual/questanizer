@@ -1,157 +1,157 @@
 .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
 }
 
 .modal {
-    background: white;
-    border-radius: 12px;
-    padding: 24px;
-    max-width: 600px;
-    width: 90%;
-    max-height: 80vh;
-    overflow-y: auto;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
 .header {
-    margin-bottom: 20px;
-    text-align: center;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 .header h2 {
-    margin: 0 0 8px 0;
-    color: #d32f2f;
-    font-size: 24px;
-    font-weight: 600;
+  margin: 0 0 8px 0;
+  color: #d32f2f;
+  font-size: 24px;
+  font-weight: 600;
 }
 
 .header p {
-    margin: 0;
-    color: #666;
-    font-size: 16px;
+  margin: 0;
+  color: #666;
+  font-size: 16px;
 }
 
 .tasksList {
-    margin-bottom: 24px;
+  margin-bottom: 24px;
 }
 
 .taskItem {
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 16px;
-    margin-bottom: 12px;
-    background: #fafafa;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+  background: #fafafa;
 }
 
 .taskItem:last-child {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .taskInfo {
-    margin-bottom: 12px;
+  margin-bottom: 12px;
 }
 
 .taskText {
-    display: block;
-    font-weight: 500;
-    font-size: 16px;
-    color: #333;
-    margin-bottom: 4px;
+  display: block;
+  font-weight: 500;
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 4px;
 }
 
 .taskDeadline {
-    display: block;
-    font-size: 14px;
-    color: #d32f2f;
-    font-weight: 500;
+  display: block;
+  font-size: 14px;
+  color: #d32f2f;
+  font-weight: 500;
 }
 
 .taskActions {
-    display: flex;
-    gap: 20px;
+  display: flex;
+  gap: 20px;
 }
 
 .radioLabel {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    font-size: 14px;
-    color: #333;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
 }
 
 .radioLabel input[type="radio"] {
-    margin-right: 8px;
-    cursor: pointer;
+  margin-right: 8px;
+  cursor: pointer;
 }
 
 .radioLabel:hover {
-    color: #503a24;
+  color: #503a24;
 }
 
 .buttons {
-    display: flex;
-    gap: 12px;
-    justify-content: flex-end;
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
 }
 
 .confirmButton,
 .cancelButton {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    transition: background-color 0.2s;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.2s;
 }
 
 .confirmButton {
-    background-color: #7d5032;
-    color: white;
+  background-color: #7d5032;
+  color: white;
 }
 
 .confirmButton:hover {
-    background-color: #503a24;
+  background-color: #503a24;
 }
 
 .cancelButton {
-    background-color: #f5f5f5;
-    color: #666;
+  background-color: #f5f5f5;
+  color: #666;
 }
 
 .cancelButton:hover {
-    background-color: #e0e0e0;
+  background-color: #e0e0e0;
 }
 
 @media (max-width: 768px) {
-    .modal {
-        margin: 16px;
-        width: calc(100% - 32px);
-        padding: 20px;
-    }
+  .modal {
+    margin: 16px;
+    width: calc(100% - 32px);
+    padding: 20px;
+  }
 
-    .taskActions {
-        flex-direction: column;
-        gap: 8px;
-    }
+  .taskActions {
+    flex-direction: column;
+    gap: 8px;
+  }
 
-    .buttons {
-        flex-direction: column-reverse;
-        gap: 8px;
-    }
+  .buttons {
+    flex-direction: column-reverse;
+    gap: 8px;
+  }
 
-    .confirmButton,
-    .cancelButton {
-        width: 100%;
-        padding: 12px;
-    }
+  .confirmButton,
+  .cancelButton {
+    width: 100%;
+    padding: 12px;
+  }
 }

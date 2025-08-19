@@ -1,29 +1,32 @@
 .basket {
-    position: fixed;
-    width: 60px;
-    height: 60px;
-    background-color: #f0ebeb;
-    border: 2px solid #7d5032;
-    border-radius: 50%;
-    cursor: grab;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    user-select: none;
-    z-index: 999;
-    padding: 4px;
-    box-sizing: border-box;
-    transition: left 0.2s, top 0.2s, background-color 0.2s ease;
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  background-color: #f0ebeb;
+  border: 2px solid #7d5032;
+  border-radius: 50%;
+  cursor: grab;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  z-index: 999;
+  padding: 4px;
+  box-sizing: border-box;
+  transition:
+    left 0.2s,
+    top 0.2s,
+    background-color 0.2s ease;
 }
 
 .basket:hover {
-    background-color: #ebcda7;
-    cursor: pointer;
+  background-color: #ebcda7;
+  cursor: pointer;
 }
 
 .cartImage {
-    width: 90%;
-    height: 90%;
-    object-fit: contain;
-    pointer-events: auto;
+  width: 90%;
+  height: 90%;
+  object-fit: contain;
+  pointer-events: auto;
 }

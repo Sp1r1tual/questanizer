@@ -1,281 +1,281 @@
 {
-    "shared": {
+  "shared": {
+    "easy": "Легка",
+    "medium": "Середня",
+    "hard": "Складна",
+    "critical": "Критична",
+    "createdAt": "Створено:",
+    "deadline": "Термін:",
+    "difficulty": "Складність:",
+    "completed": "Виконано",
+    "notCompleted": "Не виконано",
+    "yes": "Так",
+    "no": "Ні",
+    "nameLabel": "Ім’я",
+    "save": "Зберегти",
+    "saving": "Збереження...",
+    "confirm": "Підтвердити",
+    "cancel": "Скасувати",
+    "close": "Закрити",
+    "remove": "Видалити",
+    "bio": "Про себе",
+    "noBio": "Опис відсутній",
+    "level": "Рівень",
+    "gold": "Золото",
+    "golds": "золота",
+    "health": "Здоров'я",
+    "joined": "Приєднався",
+    "quantity": "Кількість",
+    "total": "Всього",
+    "noItems": "Немає доступних предметів",
+    "emailLabel": "Електронна пошта",
+    "emailPlaceholder": "Введіть електронну пошту",
+    "passwordLabel": "Пароль",
+    "passwordPlaceholder": "Введіть пароль",
+    "copied": "Скопійовано",
+    "seconds": "с"
+  },
+
+  "footer": {
+    "about": "Про нас",
+    "contact": "Зв'язатися з нами"
+  },
+
+  "organizer": {
+    "addNewTaskBtn": {
+      "addTask": "Додати завдання"
+    },
+    "organizerHeader": "З чого розпочнете свою епічну пригоду?",
+    "taskDropdown": {
+      "markAsDone": "Виконати",
+      "delete": "Видалити",
+      "deleteAllCompleted": "Видалити усі виконані",
+      "deleteAllOverdue": "Видалити усі протерміновані"
+    },
+    "taskFilters": {
+      "status": {
+        "all": "Усі",
+        "completed": "Виконані",
+        "active": "Активні"
+      },
+      "deadline": {
+        "all": "Будь-який термін",
+        "overdue": "Протерміновані",
+        "upcoming": "Майбутні",
+        "none": "Без терміну"
+      },
+      "difficulty": {
+        "all": "Будь-яка складність",
         "easy": "Легка",
         "medium": "Середня",
         "hard": "Складна",
-        "critical": "Критична",
-        "createdAt": "Створено:",
-        "deadline": "Термін:",
-        "difficulty": "Складність:",
-        "completed": "Виконано",
-        "notCompleted": "Не виконано",
-        "yes": "Так",
-        "no": "Ні",
-        "nameLabel": "Ім’я",
-        "save": "Зберегти",
-        "saving": "Збереження...",
-        "confirm": "Підтвердити",
-        "cancel": "Скасувати",
-        "close": "Закрити",
-        "remove": "Видалити",
-        "bio": "Про себе",
-        "noBio": "Опис відсутній",
-        "level": "Рівень",
-        "gold": "Золото",
-        "golds": "золота",
-        "health": "Здоров'я",
-        "joined": "Приєднався",
-        "quantity": "Кількість",
-        "total": "Всього",
-        "noItems": "Немає доступних предметів",
-        "emailLabel": "Електронна пошта",
-        "emailPlaceholder": "Введіть електронну пошту",
-        "passwordLabel": "Пароль",
-        "passwordPlaceholder": "Введіть пароль",
-        "copied": "Скопійовано",
-        "seconds": "с"
+        "critical": "Критична"
+      },
+      "sortBy": {
+        "createdAt": "За датою",
+        "difficulty": "За складністю",
+        "deadline": "За терміном"
+      }
+    },
+    "taskInput": {
+      "placeholder": "Введіть, що плануєте зробити...",
+      "error": "Будь ласка, введіть опис завдання"
+    },
+    "taskItem": {
+      "overdueAlert": "ПРОСТРОЧЕНО!"
+    },
+    "taskList": { "noTasks": "Немає доступних завдань" },
+
+    "confirmation": {
+      "deleteTitle": "Видалити завдання",
+      "completeTitle": "Виконати завдання",
+      "deleteAllCompletedTitle": "Підтвердження видалення",
+      "defaultTitle": "Підтвердження",
+      "deleteMessage": "Ви впевнені, що хочете видалити завдання \"{{task}}\"?",
+      "completeMessage": "Позначити завдання \"{{task}}\" як виконане?",
+      "deleteAllCompletedMessage": "Ви впевнені, що хочете видалити всі виконані завдання?",
+      "deleteAllOverdueMessage": "Ви впевнені, що хочете видалити всі протерміновані завдання?",
+      "defaultMessage": "Підтвердження видалення"
     },
 
-    "footer": {
-        "about": "Про нас",
-        "contact": "Зв'язатися з нами"
-    },
-
-    "organizer": {
-        "addNewTaskBtn": {
-            "addTask": "Додати завдання"
-        },
-        "organizerHeader": "З чого розпочнете свою епічну пригоду?",
-        "taskDropdown": {
-            "markAsDone": "Виконати",
-            "delete": "Видалити",
-            "deleteAllCompleted": "Видалити усі виконані",
-            "deleteAllOverdue": "Видалити усі протерміновані"
-        },
-        "taskFilters": {
-            "status": {
-                "all": "Усі",
-                "completed": "Виконані",
-                "active": "Активні"
-            },
-            "deadline": {
-                "all": "Будь-який термін",
-                "overdue": "Протерміновані",
-                "upcoming": "Майбутні",
-                "none": "Без терміну"
-            },
-            "difficulty": {
-                "all": "Будь-яка складність",
-                "easy": "Легка",
-                "medium": "Середня",
-                "hard": "Складна",
-                "critical": "Критична"
-            },
-            "sortBy": {
-                "createdAt": "За датою",
-                "difficulty": "За складністю",
-                "deadline": "За терміном"
-            }
-        },
-        "taskInput": {
-            "placeholder": "Введіть, що плануєте зробити...",
-            "error": "Будь ласка, введіть опис завдання"
-        },
-        "taskItem": {
-            "overdueAlert": "ПРОСТРОЧЕНО!"
-        },
-        "taskList": { "noTasks": "Немає доступних завдань" },
-
-        "confirmation": {
-            "deleteTitle": "Видалити завдання",
-            "completeTitle": "Виконати завдання",
-            "deleteAllCompletedTitle": "Підтвердження видалення",
-            "defaultTitle": "Підтвердження",
-            "deleteMessage": "Ви впевнені, що хочете видалити завдання \"{{task}}\"?",
-            "completeMessage": "Позначити завдання \"{{task}}\" як виконане?",
-            "deleteAllCompletedMessage": "Ви впевнені, що хочете видалити всі виконані завдання?",
-            "deleteAllOverdueMessage": "Ви впевнені, що хочете видалити всі протерміновані завдання?",
-            "defaultMessage": "Підтвердження видалення"
-        },
-
-        "confirmOverdueTasks": {
-            "overdueTasks": "Протерміновані завдання",
-            "beHonest": "Будьте чесні самі з собою",
-            "checkIfCompleted": "Уточніть, чи виконали Ви ці завдання:"
-        }
-    },
-
-    "navbar": {
-        "taskScheduler": "Завдання",
-        "bossBattle": "Бій з босом",
-        "market": "Магазин",
-        "inventory": "Інвентар",
-        "faq": "Допомога"
-    },
-
-    "buttons": {
-        "login": "Увійти",
-        "logout": "Вийти",
-        "profile": "Профіль",
-        "friends": "Друзі",
-        "settings": "Налаштування"
-    },
-
-    "settings": {
-        "settingsHeader": "Налаштування",
-        "language": "Мова інтерфейсу"
-    },
-
-    "profile": {
-        "closeModal": "Закрити профіль",
-        "noUsername": "Ім’я користувача не вказано",
-        "editBtn": "Редагувати профіль",
-        "changeAvatar": "Змінити аватар",
-        "namePlaceholder": "Введіть ваше ім’я",
-        "bioPlaceholder": "Розкажіть про себе",
-        "characters": "символів"
-    },
-
-    "friends": {
-        "sectionTitle": {
-            "friendsSectionTitle": "Друзі:",
-            "requestsSectionTitle": "Запити у друзі:",
-            "friends": "друзів",
-            "friendsRequests": "запитів у друзі"
-        },
-        "friendsTitle": "Друзі",
-        "noAviable": "Немає {{type}}",
-        "accept": "Прийняти",
-        "decline": "Відхилити",
-        "cancelRequest": "Скасувати запит",
-        "add": "Додати",
-        "searchPlaceholder": "Пошук користувачів...",
-        "searchButton": "Пошук",
-        "noSearchResults": "Користувачів не знайдено",
-        "sendMessage": "Надіслати повідомлення",
-        "chatSoon": "Чат буде доступний незабаром"
-    },
-
-    "boss": {
-        "initBossBtn": "Розпочати бій з босом",
-        "rage": "Лють",
-        "power": "Сила"
-    },
-
-    "defeat": {
-        "title": "Поразка",
-        "message": "Ви втратили все своє здоров'я. Почнемо заново?",
-        "restartButton": "Розпочати нову епічну пригоду!"
-    },
-
-    "market": {
-        "marketHeader": "Містичний ринок",
-        "price": "Ціна",
-        "addToCart": "Додати в кошик",
-        "cartTitle": "Кошик",
-        "emptyCart": "Ваш кошик порожній",
-        "buyAll": "Купити все",
-        "greetings": {
-            "readyToShop": "Готові до покупок?",
-            "findSomethingUnique": "Знайдіть щось унікальне!",
-            "spendTimeWisely": "Проведіть час з користю!",
-            "somethingInteresting": "У нас є дещо цікаве!",
-            "lookingForTreasures": "Шукаєте скарби?",
-            "bestDeals": "Не проґавте найкращі пропозиції!",
-            "cartIsHungry": "Ваш кошик голодний!",
-            "shopLikeHero": "Купуйте як герой!",
-            "freshDeals": "Свіжі пропозиції щодня!",
-            "goldWellSpent": "Добре витрачене золото — це зароблене золото!"
-        }
-    },
-
-    "inventory": {
-        "inventoryHeader": "Інвентар",
-        "use": "Використати"
-    },
-
-    "auth": {
-        "forgotPassword": {
-            "title": "Забули пароль?",
-            "sendLink": "Надіслати посилання для скидання",
-            "success": "Перевірте вашу електронну пошту...",
-            "resendIn": "Ви можете подати запит ще раз через:"
-        },
-        "resetPassword": {
-            "title": "Скидання пароля",
-            "newPassword": "Новий пароль",
-            "confirmPassword": "Підтвердьте новий пароль",
-            "submit": "Оновити пароль",
-            "success": "Пароль змінено. Перенаправлення..."
-        },
-        "login": {
-            "title": "Увійти",
-            "loading": "Вхід...",
-            "forgotQuestion": "Забули пароль?",
-            "forgotLink": "Відновити тут",
-            "submit": "Увійти",
-            "noAccount": "Ще не маєте акаунта?",
-            "registerLink": "Зареєструйтесь"
-        },
-        "registration": {
-            "title": "Реєстрація",
-            "confirmLabel": "Підтвердьте пароль",
-            "confirmPlaceholder": "Повторіть пароль",
-            "submit": "Зареєструватися",
-            "loading": "Реєстрація...",
-            "haveAccount": "Вже маєте акаунт?",
-            "loginLink": "Увійти"
-        }
-    },
-
-    "validation": {
-        "fillAllFields": "Будь ласка, заповніть усі поля",
-        "invalidEmail": "Невірний формат електронної пошти",
-        "invalidPassword": "Пароль має містити 8–32 символи, хоча б одну велику латинську літеру та складатися з латинських символів",
-        "passwordMismatch": "Паролі не співпадають",
-        "invalidUsername": "Ім'я користувача має бути від 3 до 32 символів і містити лише латиницю, цифри, тире, крапку або підкреслення",
-        "invalidBio": "Опис профілю не повинен перевищувати 500 символів",
-        "searchQueryEmpty": "Пошуковий запит не може бути порожнім",
-        "searchQuerySelf": "Ви не можете шукати самого себе"
-    },
-
-    "support": {
-        "faqTitle": "Популярні запитання",
-        "feedback": "Зворотній зв'язок",
-        "bugReport": "Повідомити про помилку",
-        "getSupport": "Зв'язатися з підтримкою",
-        "suggestIdea": "Запропонувати ідею",
-        "writeHere": "Напишіть своє повідомлення тут...",
-        "send": "Надіслати"
-    },
-
-    "chat": {
-        "chatWith": "Чат з",
-        "writeMessage": "Напишіть повідомлення",
-        "deleteFromBoth": "Видалити у обох",
-        "noMessages": "Немає повідослень",
-        "failedToSendMessage": "Помилка відправлення",
-        "failedToDeleteMessage": "Помилка видалення",
-        "failedToLoadChatHistory": "Помилка при завантаженні чату",
-        "failedToMarkAsRead": "Помилка при прочитанні"
-    },
-
-    "socket": {
-        "tokenExpired": "Помилка авторизації, будь ласка, перезайдіть",
-        "socketNotConnected": "Сокет не підключено",
-        "connectionTimeout": "Не вдалося підключитися до сервера"
-    },
-
-    "errors": {
-        "error": "Помилка:",
-        "somethingWentWrong": "Щось пішло не так",
-        "tryAgain": "Спробувати ще раз",
-        "goBack": "Повернутися назад",
-        "returnHome": "На головну сторінку",
-        "auth": {
-            "registration": "Невдала реєстрація",
-            "login": "Невадала спроба увійти",
-            "expired": "Увійдіть ще раз"
-        }
+    "confirmOverdueTasks": {
+      "overdueTasks": "Протерміновані завдання",
+      "beHonest": "Будьте чесні самі з собою",
+      "checkIfCompleted": "Уточніть, чи виконали Ви ці завдання:"
     }
+  },
+
+  "navbar": {
+    "taskScheduler": "Завдання",
+    "bossBattle": "Бій з босом",
+    "market": "Магазин",
+    "inventory": "Інвентар",
+    "faq": "Допомога"
+  },
+
+  "buttons": {
+    "login": "Увійти",
+    "logout": "Вийти",
+    "profile": "Профіль",
+    "friends": "Друзі",
+    "settings": "Налаштування"
+  },
+
+  "settings": {
+    "settingsHeader": "Налаштування",
+    "language": "Мова інтерфейсу"
+  },
+
+  "profile": {
+    "closeModal": "Закрити профіль",
+    "noUsername": "Ім’я користувача не вказано",
+    "editBtn": "Редагувати профіль",
+    "changeAvatar": "Змінити аватар",
+    "namePlaceholder": "Введіть ваше ім’я",
+    "bioPlaceholder": "Розкажіть про себе",
+    "characters": "символів"
+  },
+
+  "friends": {
+    "sectionTitle": {
+      "friendsSectionTitle": "Друзі:",
+      "requestsSectionTitle": "Запити у друзі:",
+      "friends": "друзів",
+      "friendsRequests": "запитів у друзі"
+    },
+    "friendsTitle": "Друзі",
+    "noAviable": "Немає {{type}}",
+    "accept": "Прийняти",
+    "decline": "Відхилити",
+    "cancelRequest": "Скасувати запит",
+    "add": "Додати",
+    "searchPlaceholder": "Пошук користувачів...",
+    "searchButton": "Пошук",
+    "noSearchResults": "Користувачів не знайдено",
+    "sendMessage": "Надіслати повідомлення",
+    "chatSoon": "Чат буде доступний незабаром"
+  },
+
+  "boss": {
+    "initBossBtn": "Розпочати бій з босом",
+    "rage": "Лють",
+    "power": "Сила"
+  },
+
+  "defeat": {
+    "title": "Поразка",
+    "message": "Ви втратили все своє здоров'я. Почнемо заново?",
+    "restartButton": "Розпочати нову епічну пригоду!"
+  },
+
+  "market": {
+    "marketHeader": "Містичний ринок",
+    "price": "Ціна",
+    "addToCart": "Додати в кошик",
+    "cartTitle": "Кошик",
+    "emptyCart": "Ваш кошик порожній",
+    "buyAll": "Купити все",
+    "greetings": {
+      "readyToShop": "Готові до покупок?",
+      "findSomethingUnique": "Знайдіть щось унікальне!",
+      "spendTimeWisely": "Проведіть час з користю!",
+      "somethingInteresting": "У нас є дещо цікаве!",
+      "lookingForTreasures": "Шукаєте скарби?",
+      "bestDeals": "Не проґавте найкращі пропозиції!",
+      "cartIsHungry": "Ваш кошик голодний!",
+      "shopLikeHero": "Купуйте як герой!",
+      "freshDeals": "Свіжі пропозиції щодня!",
+      "goldWellSpent": "Добре витрачене золото — це зароблене золото!"
+    }
+  },
+
+  "inventory": {
+    "inventoryHeader": "Інвентар",
+    "use": "Використати"
+  },
+
+  "auth": {
+    "forgotPassword": {
+      "title": "Забули пароль?",
+      "sendLink": "Надіслати посилання для скидання",
+      "success": "Перевірте вашу електронну пошту...",
+      "resendIn": "Ви можете подати запит ще раз через:"
+    },
+    "resetPassword": {
+      "title": "Скидання пароля",
+      "newPassword": "Новий пароль",
+      "confirmPassword": "Підтвердьте новий пароль",
+      "submit": "Оновити пароль",
+      "success": "Пароль змінено. Перенаправлення..."
+    },
+    "login": {
+      "title": "Увійти",
+      "loading": "Вхід...",
+      "forgotQuestion": "Забули пароль?",
+      "forgotLink": "Відновити тут",
+      "submit": "Увійти",
+      "noAccount": "Ще не маєте акаунта?",
+      "registerLink": "Зареєструйтесь"
+    },
+    "registration": {
+      "title": "Реєстрація",
+      "confirmLabel": "Підтвердьте пароль",
+      "confirmPlaceholder": "Повторіть пароль",
+      "submit": "Зареєструватися",
+      "loading": "Реєстрація...",
+      "haveAccount": "Вже маєте акаунт?",
+      "loginLink": "Увійти"
+    }
+  },
+
+  "validation": {
+    "fillAllFields": "Будь ласка, заповніть усі поля",
+    "invalidEmail": "Невірний формат електронної пошти",
+    "invalidPassword": "Пароль має містити 8–32 символи, хоча б одну велику латинську літеру та складатися з латинських символів",
+    "passwordMismatch": "Паролі не співпадають",
+    "invalidUsername": "Ім'я користувача має бути від 3 до 32 символів і містити лише латиницю, цифри, тире, крапку або підкреслення",
+    "invalidBio": "Опис профілю не повинен перевищувати 500 символів",
+    "searchQueryEmpty": "Пошуковий запит не може бути порожнім",
+    "searchQuerySelf": "Ви не можете шукати самого себе"
+  },
+
+  "support": {
+    "faqTitle": "Популярні запитання",
+    "feedback": "Зворотній зв'язок",
+    "bugReport": "Повідомити про помилку",
+    "getSupport": "Зв'язатися з підтримкою",
+    "suggestIdea": "Запропонувати ідею",
+    "writeHere": "Напишіть своє повідомлення тут...",
+    "send": "Надіслати"
+  },
+
+  "chat": {
+    "chatWith": "Чат з",
+    "writeMessage": "Напишіть повідомлення",
+    "deleteFromBoth": "Видалити у обох",
+    "noMessages": "Немає повідослень",
+    "failedToSendMessage": "Помилка відправлення",
+    "failedToDeleteMessage": "Помилка видалення",
+    "failedToLoadChatHistory": "Помилка при завантаженні чату",
+    "failedToMarkAsRead": "Помилка при прочитанні"
+  },
+
+  "socket": {
+    "tokenExpired": "Помилка авторизації, будь ласка, перезайдіть",
+    "socketNotConnected": "Сокет не підключено",
+    "connectionTimeout": "Не вдалося підключитися до сервера"
+  },
+
+  "errors": {
+    "error": "Помилка:",
+    "somethingWentWrong": "Щось пішло не так",
+    "tryAgain": "Спробувати ще раз",
+    "goBack": "Повернутися назад",
+    "returnHome": "На головну сторінку",
+    "auth": {
+      "registration": "Невдала реєстрація",
+      "login": "Невадала спроба увійти",
+      "expired": "Увійдіть ще раз"
+    }
+  }
 }

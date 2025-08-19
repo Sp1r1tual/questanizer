@@ -1,20 +1,20 @@
 @media (max-width: 768px) {
-    .toastContainer {
-        width: calc(100vw - 32px);
-        left: 16px;
-        right: 16px;
-        top: 16px;
-    }
+  .toastContainer {
+    width: calc(100vw - 32px);
+    left: 16px;
+    right: 16px;
+    top: 16px;
+  }
 
-    .Toastify__toast {
-        margin-bottom: 8px;
-        border-radius: 8px;
-        font-size: 14px;
-        min-height: 48px;
-    }
+  .Toastify__toast {
+    margin-bottom: 8px;
+    border-radius: 8px;
+    font-size: 14px;
+    min-height: 48px;
+  }
 
-    .Toastify__close-button {
-        width: 20px;
-        height: 20px;
-    }
+  .Toastify__close-button {
+    width: 20px;
+    height: 20px;
+  }
 }

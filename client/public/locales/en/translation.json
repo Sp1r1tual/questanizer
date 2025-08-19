@@ -1,282 +1,282 @@
 {
-    "shared": {
+  "shared": {
+    "easy": "Easy",
+    "medium": "Medium",
+    "hard": "Hard",
+    "critical": "Critical",
+    "createdAt": "Created at:",
+    "deadline": "Deadline:",
+    "difficulty": "Difficulty:",
+    "completed": "Completed",
+    "notCompleted": "Not completed",
+    "yes": "Yes",
+    "no": "No",
+    "nameLabel": "Name",
+    "save": "Save",
+    "saving": "Saving...",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "close": "Close",
+    "remove": "Remove",
+    "bio": "About me",
+    "noBio": "No description",
+    "level": "Level",
+    "gold": "Gold",
+    "golds": "gold",
+    "health": "Health",
+    "joined": "Joined",
+    "quantity": "Quantity",
+    "total": "Total",
+    "noItems": "No available items",
+    "emailLabel": "Email",
+    "emailPlaceholder": "Enter your email",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "copied": "Copied",
+    "seconds": "с"
+  },
+
+  "footer": {
+    "about": "About us",
+    "contact": "Contact us"
+  },
+
+  "organizer": {
+    "addNewTaskBtn": {
+      "addTask": "Add Task"
+    },
+    "organizerHeader": "What will you start your epic adventure with?",
+    "taskDropdown": {
+      "markAsDone": "Mark as Done",
+      "delete": "Delete",
+      "deleteAllCompleted": "Delete All Completed",
+      "deleteAllOverdue": "Delete All Overdue"
+    },
+    "taskFilters": {
+      "status": {
+        "all": "All",
+        "completed": "Completed",
+        "active": "Active"
+      },
+      "deadline": {
+        "all": "Any Deadline",
+        "overdue": "Overdue",
+        "upcoming": "Upcoming",
+        "none": "No Deadline"
+      },
+      "difficulty": {
+        "all": "Any Difficulty",
         "easy": "Easy",
         "medium": "Medium",
         "hard": "Hard",
-        "critical": "Critical",
-        "createdAt": "Created at:",
-        "deadline": "Deadline:",
-        "difficulty": "Difficulty:",
-        "completed": "Completed",
-        "notCompleted": "Not completed",
-        "yes": "Yes",
-        "no": "No",
-        "nameLabel": "Name",
-        "save": "Save",
-        "saving": "Saving...",
-        "confirm": "Confirm",
-        "cancel": "Cancel",
-        "close": "Close",
-        "remove": "Remove",
-        "bio": "About me",
-        "noBio": "No description",
-        "level": "Level",
-        "gold": "Gold",
-        "golds": "gold",
-        "health": "Health",
-        "joined": "Joined",
-        "quantity": "Quantity",
-        "total": "Total",
-        "noItems": "No available items",
-        "emailLabel": "Email",
-        "emailPlaceholder": "Enter your email",
-        "passwordLabel": "Password",
-        "passwordPlaceholder": "Enter your password",
-        "copied": "Copied",
-        "seconds": "с"
+        "critical": "Critical"
+      },
+      "sortBy": {
+        "createdAt": "By Date",
+        "difficulty": "By Difficulty",
+        "deadline": "By deadline"
+      }
+    },
+    "taskInput": {
+      "placeholder": "Enter what you plan to do...",
+      "error": "Please enter a task description"
+    },
+    "taskItem": {
+      "overdueAlert": "OVERDUE!"
+    },
+    "taskList": {
+      "noTasks": "No tasks available"
+    },
+    "confirmation": {
+      "deleteTitle": "Delete Task",
+      "completeTitle": "Complete Task",
+      "deleteAllCompletedTitle": "Delete Confirmation",
+      "defaultTitle": "Confirmation",
+      "deleteMessage": "Are you sure you want to delete the task \"{{task}}\"?",
+      "completeMessage": "Mark the task \"{{task}}\" as completed?",
+      "deleteAllCompletedMessage": "Are you sure you want to delete all completed tasks?",
+      "deleteAllOverdueMessage": "Are you sure you want to delete all overdue tasks?",
+      "defaultMessage": "Confirm deletion"
     },
 
-    "footer": {
-        "about": "About us",
-        "contact": "Contact us"
-    },
-
-    "organizer": {
-        "addNewTaskBtn": {
-            "addTask": "Add Task"
-        },
-        "organizerHeader": "What will you start your epic adventure with?",
-        "taskDropdown": {
-            "markAsDone": "Mark as Done",
-            "delete": "Delete",
-            "deleteAllCompleted": "Delete All Completed",
-            "deleteAllOverdue": "Delete All Overdue"
-        },
-        "taskFilters": {
-            "status": {
-                "all": "All",
-                "completed": "Completed",
-                "active": "Active"
-            },
-            "deadline": {
-                "all": "Any Deadline",
-                "overdue": "Overdue",
-                "upcoming": "Upcoming",
-                "none": "No Deadline"
-            },
-            "difficulty": {
-                "all": "Any Difficulty",
-                "easy": "Easy",
-                "medium": "Medium",
-                "hard": "Hard",
-                "critical": "Critical"
-            },
-            "sortBy": {
-                "createdAt": "By Date",
-                "difficulty": "By Difficulty",
-                "deadline": "By deadline"
-            }
-        },
-        "taskInput": {
-            "placeholder": "Enter what you plan to do...",
-            "error": "Please enter a task description"
-        },
-        "taskItem": {
-            "overdueAlert": "OVERDUE!"
-        },
-        "taskList": {
-            "noTasks": "No tasks available"
-        },
-        "confirmation": {
-            "deleteTitle": "Delete Task",
-            "completeTitle": "Complete Task",
-            "deleteAllCompletedTitle": "Delete Confirmation",
-            "defaultTitle": "Confirmation",
-            "deleteMessage": "Are you sure you want to delete the task \"{{task}}\"?",
-            "completeMessage": "Mark the task \"{{task}}\" as completed?",
-            "deleteAllCompletedMessage": "Are you sure you want to delete all completed tasks?",
-            "deleteAllOverdueMessage": "Are you sure you want to delete all overdue tasks?",
-            "defaultMessage": "Confirm deletion"
-        },
-
-        "confirmOverdueTasks": {
-            "overdueTasks": "Overdue tasks",
-            "beHonest": "Be honest with yourself",
-            "checkIfCompleted": "Please specify if you have completed these tasks:"
-        }
-    },
-
-    "navbar": {
-        "taskScheduler": "Tasks",
-        "bossBattle": "Boss Battle",
-        "market": "Market",
-        "inventory": "Inventory",
-        "faq": "Help"
-    },
-
-    "buttons": {
-        "login": "Log In",
-        "logout": "Log Out",
-        "profile": "Profile",
-        "friends": "Friends",
-        "settings": "Settings"
-    },
-
-    "settings": {
-        "settingsHeader": "Settings",
-        "language": "Interface Language"
-    },
-
-    "profile": {
-        "closeModal": "Close Profile",
-        "noUsername": "Username not set",
-        "editBtn": "Edit Profile",
-        "changeAvatar": "Change Avatar",
-        "namePlaceholder": "Enter your name",
-        "bioPlaceholder": "Tell us about yourself",
-        "characters": "characters"
-    },
-
-    "friends": {
-        "sectionTitle": {
-            "friendsSectionTitle": "Friends:",
-            "requestsSectionTitle": "Friend Requests:",
-            "friends": "friends",
-            "friendsRequests": "friend requests"
-        },
-        "friendsTitle": "Friends",
-        "noAviable": "No {{type}}",
-        "accept": "Accept",
-        "decline": "Decline",
-        "cancelRequest": "Cancel Request",
-        "add": "Add",
-        "searchPlaceholder": "Search users...",
-        "searchButton": "Search",
-        "noSearchResults": "No users found",
-        "sendMessage": "Send Message",
-        "chatSoon": "Chat coming soon"
-    },
-
-    "boss": {
-        "initBossBtn": "Start Boss Fight",
-        "rage": "Rage",
-        "power": "Power"
-    },
-
-    "defeat": {
-        "title": "Defeat",
-        "message": "You have lost all your health. Start over?",
-        "restartButton": "Start a New Epic Adventure!"
-    },
-
-    "market": {
-        "marketHeader": "Mystic Market",
-        "price": "Price",
-        "addToCart": "Add to Cart",
-        "cartTitle": "Cart",
-        "emptyCart": "Your cart is empty",
-        "buyAll": "Buy All",
-        "greetings": {
-            "readyToShop": "Ready to shop?",
-            "findSomethingUnique": "Find something unique!",
-            "spendTimeWisely": "Spend your time wisely!",
-            "somethingInteresting": "We've got something interesting!",
-            "lookingForTreasures": "Looking for treasures?",
-            "bestDeals": "Don't miss the best deals!",
-            "cartIsHungry": "Your cart is hungry!",
-            "shopLikeHero": "Shop like a hero!",
-            "freshDeals": "Fresh deals daily!",
-            "goldWellSpent": "Gold well spent is gold earned!"
-        }
-    },
-
-    "inventory": {
-        "inventoryHeader": "Inventory",
-        "use": "Use"
-    },
-
-    "auth": {
-        "forgotPassword": {
-            "title": "Forgot Password?",
-            "sendLink": "Send Reset Link",
-            "success": "Check your email...",
-            "resendIn": "You can request again in:"
-        },
-        "resetPassword": {
-            "title": "Reset Password",
-            "newPassword": "New Password",
-            "confirmPassword": "Confirm New Password",
-            "submit": "Update Password",
-            "success": "Password changed. Redirecting..."
-        },
-        "login": {
-            "title": "Log In",
-            "loading": "Logging in...",
-            "forgotQuestion": "Forgot your password?",
-            "forgotLink": "Recover here",
-            "submit": "Log In",
-            "noAccount": "Don't have an account yet?",
-            "registerLink": "Register"
-        },
-        "registration": {
-            "title": "Registration",
-            "confirmLabel": "Confirm Password",
-            "confirmPlaceholder": "Repeat password",
-            "submit": "Register",
-            "loading": "Registering...",
-            "haveAccount": "Already have an account?",
-            "loginLink": "Log In"
-        }
-    },
-
-    "validation": {
-        "fillAllFields": "Please fill out all fields",
-        "invalidEmail": "Invalid email format",
-        "invalidPassword": "Password must be 8–32 characters, include at least one uppercase letter, and use Latin characters",
-        "passwordMismatch": "Passwords do not match",
-        "invalidUsername": "Username must be 3 to 32 characters and contain only letters, numbers, dashes, dots, or underscores",
-        "invalidBio": "Profile description must not exceed 500 characters",
-        "searchQueryEmpty": "Search query cannot be empty",
-        "searchQuerySelf": "You cannot search for yourself"
-    },
-
-    "support": {
-        "faqTitle": "Frequently Asked Questions",
-        "feedback": "Feedback",
-        "bugReport": "Report a Bug",
-        "getSupport": "Contact Support",
-        "suggestIdea": "Suggest an Idea",
-        "writeHere": "Write your message here...",
-        "send": "Send"
-    },
-
-    "chat": {
-        "chatWith": "Chat with",
-        "writeMessage": "Write a message",
-        "deleteFromBoth": "Delete for both",
-        "noMessages": "No messages",
-        "failedToSendMessage": "Failed to send message",
-        "failedToDeleteMessage": "Failed to delete message",
-        "failedToLoadChatHistory": "Failed to load chat history",
-        "failedToMarkAsRead": "Failed to mark as read"
-    },
-
-    "socket": {
-        "tokenExpired": "Authorization error, please log in again",
-        "socketNotConnected": "Socket not connected",
-        "connectionTimeout": "Failed to connect to the server"
-    },
-
-    "errors": {
-        "error": "Error:",
-        "somethingWentWrong": "Something went wrong",
-        "tryAgain": "Try again",
-        "goBack": "Go back",
-        "returnHome": "Return to homepage",
-        "auth": {
-            "registration": "Registration failed",
-            "login": "Login attempt failed",
-            "expired": "Please log in again"
-        }
+    "confirmOverdueTasks": {
+      "overdueTasks": "Overdue tasks",
+      "beHonest": "Be honest with yourself",
+      "checkIfCompleted": "Please specify if you have completed these tasks:"
     }
+  },
+
+  "navbar": {
+    "taskScheduler": "Tasks",
+    "bossBattle": "Boss Battle",
+    "market": "Market",
+    "inventory": "Inventory",
+    "faq": "Help"
+  },
+
+  "buttons": {
+    "login": "Log In",
+    "logout": "Log Out",
+    "profile": "Profile",
+    "friends": "Friends",
+    "settings": "Settings"
+  },
+
+  "settings": {
+    "settingsHeader": "Settings",
+    "language": "Interface Language"
+  },
+
+  "profile": {
+    "closeModal": "Close Profile",
+    "noUsername": "Username not set",
+    "editBtn": "Edit Profile",
+    "changeAvatar": "Change Avatar",
+    "namePlaceholder": "Enter your name",
+    "bioPlaceholder": "Tell us about yourself",
+    "characters": "characters"
+  },
+
+  "friends": {
+    "sectionTitle": {
+      "friendsSectionTitle": "Friends:",
+      "requestsSectionTitle": "Friend Requests:",
+      "friends": "friends",
+      "friendsRequests": "friend requests"
+    },
+    "friendsTitle": "Friends",
+    "noAviable": "No {{type}}",
+    "accept": "Accept",
+    "decline": "Decline",
+    "cancelRequest": "Cancel Request",
+    "add": "Add",
+    "searchPlaceholder": "Search users...",
+    "searchButton": "Search",
+    "noSearchResults": "No users found",
+    "sendMessage": "Send Message",
+    "chatSoon": "Chat coming soon"
+  },
+
+  "boss": {
+    "initBossBtn": "Start Boss Fight",
+    "rage": "Rage",
+    "power": "Power"
+  },
+
+  "defeat": {
+    "title": "Defeat",
+    "message": "You have lost all your health. Start over?",
+    "restartButton": "Start a New Epic Adventure!"
+  },
+
+  "market": {
+    "marketHeader": "Mystic Market",
+    "price": "Price",
+    "addToCart": "Add to Cart",
+    "cartTitle": "Cart",
+    "emptyCart": "Your cart is empty",
+    "buyAll": "Buy All",
+    "greetings": {
+      "readyToShop": "Ready to shop?",
+      "findSomethingUnique": "Find something unique!",
+      "spendTimeWisely": "Spend your time wisely!",
+      "somethingInteresting": "We've got something interesting!",
+      "lookingForTreasures": "Looking for treasures?",
+      "bestDeals": "Don't miss the best deals!",
+      "cartIsHungry": "Your cart is hungry!",
+      "shopLikeHero": "Shop like a hero!",
+      "freshDeals": "Fresh deals daily!",
+      "goldWellSpent": "Gold well spent is gold earned!"
+    }
+  },
+
+  "inventory": {
+    "inventoryHeader": "Inventory",
+    "use": "Use"
+  },
+
+  "auth": {
+    "forgotPassword": {
+      "title": "Forgot Password?",
+      "sendLink": "Send Reset Link",
+      "success": "Check your email...",
+      "resendIn": "You can request again in:"
+    },
+    "resetPassword": {
+      "title": "Reset Password",
+      "newPassword": "New Password",
+      "confirmPassword": "Confirm New Password",
+      "submit": "Update Password",
+      "success": "Password changed. Redirecting..."
+    },
+    "login": {
+      "title": "Log In",
+      "loading": "Logging in...",
+      "forgotQuestion": "Forgot your password?",
+      "forgotLink": "Recover here",
+      "submit": "Log In",
+      "noAccount": "Don't have an account yet?",
+      "registerLink": "Register"
+    },
+    "registration": {
+      "title": "Registration",
+      "confirmLabel": "Confirm Password",
+      "confirmPlaceholder": "Repeat password",
+      "submit": "Register",
+      "loading": "Registering...",
+      "haveAccount": "Already have an account?",
+      "loginLink": "Log In"
+    }
+  },
+
+  "validation": {
+    "fillAllFields": "Please fill out all fields",
+    "invalidEmail": "Invalid email format",
+    "invalidPassword": "Password must be 8–32 characters, include at least one uppercase letter, and use Latin characters",
+    "passwordMismatch": "Passwords do not match",
+    "invalidUsername": "Username must be 3 to 32 characters and contain only letters, numbers, dashes, dots, or underscores",
+    "invalidBio": "Profile description must not exceed 500 characters",
+    "searchQueryEmpty": "Search query cannot be empty",
+    "searchQuerySelf": "You cannot search for yourself"
+  },
+
+  "support": {
+    "faqTitle": "Frequently Asked Questions",
+    "feedback": "Feedback",
+    "bugReport": "Report a Bug",
+    "getSupport": "Contact Support",
+    "suggestIdea": "Suggest an Idea",
+    "writeHere": "Write your message here...",
+    "send": "Send"
+  },
+
+  "chat": {
+    "chatWith": "Chat with",
+    "writeMessage": "Write a message",
+    "deleteFromBoth": "Delete for both",
+    "noMessages": "No messages",
+    "failedToSendMessage": "Failed to send message",
+    "failedToDeleteMessage": "Failed to delete message",
+    "failedToLoadChatHistory": "Failed to load chat history",
+    "failedToMarkAsRead": "Failed to mark as read"
+  },
+
+  "socket": {
+    "tokenExpired": "Authorization error, please log in again",
+    "socketNotConnected": "Socket not connected",
+    "connectionTimeout": "Failed to connect to the server"
+  },
+
+  "errors": {
+    "error": "Error:",
+    "somethingWentWrong": "Something went wrong",
+    "tryAgain": "Try again",
+    "goBack": "Go back",
+    "returnHome": "Return to homepage",
+    "auth": {
+      "registration": "Registration failed",
+      "login": "Login attempt failed",
+      "expired": "Please log in again"
+    }
+  }
 }

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
 import { useForm } from "@/hooks/auth/useForm";
@@ -6,7 +7,7 @@ import { useForm } from "@/hooks/auth/useForm";
 import { Loader } from "@/components/ui/loaders/Loader";
 import { ChangeLanguageBtn } from "@/components/ui/buttons/changeLanguageBtn";
 
-import { AuthService } from "@/services/authService";
+import { requestForgotPassword } from "@/store/auth/authThunks";
 
 import { validateForgotPasswordForm } from "@/utils/validation/validateFormFields";
 
@@ -15,131 +16,108 @@ import backgroundImg from "@/assets/login-background.png";
 import styles from "./ForgotPasswordPage.module.css";
 
 const ForgotPasswordPage = () => {
-    const [cooldown, setCooldown] = useState(0);
+  const dispatch = useDispatch();
 
-    const form = useForm({
-        initialValues: { email: "" },
-        validate: validateForgotPasswordForm,
-    });
+  const [cooldown, setCooldown] = useState(0);
+  const [success, setSuccess] = useState(false);
 
-    const { t } = useTranslation();
+  const { isLoading, error } = useSelector((state) => state.auth);
 
-    useEffect(() => {
-        let timer;
+  const { errors, handleChange, values, handleSubmit } = useForm({
+    initialValues: { email: "" },
+    validate: validateForgotPasswordForm,
+  });
 
-        if (cooldown > 0) {
-            timer = setInterval(() => {
-                setCooldown((prev) => prev - 1);
-            }, 1000);
-        }
+  const { t } = useTranslation();
 
-        return () => clearInterval(timer);
-    }, [cooldown]);
+  useEffect(() => {
+    let timer;
 
-    const handleSubmit = async ({ email }) => {
-        const response = await AuthService.requestPasswordReset(email);
+    if (cooldown > 0) {
+      timer = setInterval(() => setCooldown((prev) => prev - 1), 1000);
+    }
+    return () => clearInterval(timer);
+  }, [cooldown]);
 
-        form.setMessage(
-            response.data.message || "Check your email for the reset link"
-        );
+  const handleFieldChange = (event) => {
+    setSuccess(false);
+    return handleChange(event);
+  };
 
-        setCooldown(60);
+  const onSubmitForm = async ({ email }) => {
+    const action = await dispatch(requestForgotPassword(email));
 
-        return response;
-    };
+    if (requestForgotPassword.fulfilled.match(action)) {
+      setCooldown(60);
+      setSuccess(true);
+    }
+  };
 
-    const allErrors = [
-        form.errors.fillAllFields,
-        form.errors.email,
-        form.serverError,
-    ].filter(Boolean);
+  const allErrors = [errors.fillAllFields, errors.email, error].filter(Boolean);
 
-    const handleFieldChange = (event) => {
-        if (form.serverError) form.setServerError("");
+  return (
+    <>
+      {isLoading && <Loader />}
+      <div
+        className={styles.forgotPasswordWrapper}
+        style={{ backgroundImage: `url(${backgroundImg})` }}
+      >
+        <div className={styles.forgotPassword}>
+          <div className={styles.languageBtnWrapper}>
+            <ChangeLanguageBtn />
+          </div>
+          <div className={styles.contentForm}>
+            <h2 className={styles.formTitle}>{t("auth.forgotPassword.title")}</h2>
+            <form onSubmit={handleSubmit(onSubmitForm)} noValidate>
+              <div className={styles.formGroup}>
+                <label htmlFor="email" className={styles.formLabel}>
+                  {t("shared.emailLabel")}
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={values.email}
+                  onChange={handleFieldChange}
+                  placeholder={t("shared.emailLabel")}
+                  className={`${styles.formInput} ${
+                    errors.email || errors.fillAllFields ? styles.errorInput : ""
+                  }`}
+                  autoComplete="email"
+                />
+              </div>
 
-        return form.handleChange(event);
-    };
-
-    return (
-        <>
-            <Loader visible={form.isLoading} />
-            <div
-                className={styles.forgotPasswordWrapper}
-                style={{ backgroundImage: `url(${backgroundImg})` }}
-            >
-                <div className={styles.forgotPassword}>
-                    <div className={styles.languageBtnWrapper}>
-                        <ChangeLanguageBtn />
-                    </div>
-                    <div className={styles.contentForm}>
-                        <h2 className={styles.formTitle}>
-                            {t("auth.forgotPassword.title")}
-                        </h2>
-                        <form
-                            onSubmit={form.handleSubmit(handleSubmit)}
-                            noValidate
-                        >
-                            <div className={styles.formGroup}>
-                                <label
-                                    htmlFor="email"
-                                    className={styles.formLabel}
-                                >
-                                    {t("shared.emailLabel")}
-                                </label>
-                                <input
-                                    type="email"
-                                    id="email"
-                                    value={form.values.email}
-                                    name="email"
-                                    onChange={handleFieldChange}
-                                    placeholder={t("shared.emailLabel")}
-                                    className={`${styles.formInput} ${
-                                        form.errors.email ||
-                                        form.errors.fillAllFields
-                                            ? styles.errorInput
-                                            : ""
-                                    }`}
-                                    autoComplete="email"
-                                />
-                            </div>
-
-                            {allErrors.length > 0 && (
-                                <div className={styles.error} role="alert">
-                                    <p>
-                                        {allErrors
-                                            .map((err) => t(err))
-                                            .join(", ")}
-                                    </p>
-                                </div>
-                            )}
-
-                            {form.message && (
-                                <div className={styles.success} role="alert">
-                                    <p>{t("auth.forgotPassword.success")}</p>
-                                </div>
-                            )}
-
-                            <div className={styles.buttons}>
-                                <button
-                                    type="submit"
-                                    className={styles.submitButton}
-                                    disabled={form.isLoading || cooldown > 0}
-                                >
-                                    {form.isLoading
-                                        ? t("shared.saving")
-                                        : cooldown > 0
-                                        ? `${t(
-                                              "auth.forgotPassword.resendIn"
-                                          )} ${cooldown}${t("shared.seconds")}`
-                                        : t("auth.forgotPassword.sendLink")}
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+              {allErrors.length > 0 && (
+                <div className={styles.error} role="alert">
+                  <p>{allErrors.map((err) => t(err)).join(", ")}</p>
                 </div>
-            </div>
-        </>
-    );
+              )}
+
+              {success && (
+                <div className={styles.success} role="alert">
+                  <p>{t("auth.forgotPassword.success")}</p>
+                </div>
+              )}
+
+              <div className={styles.buttons}>
+                <button
+                  type="submit"
+                  className={styles.submitButton}
+                  disabled={isLoading || cooldown > 0}
+                >
+                  {isLoading
+                    ? t("shared.saving")
+                    : cooldown > 0
+                      ? `${t("auth.forgotPassword.resendIn")} ${cooldown}${t("shared.seconds")}`
+                      : t("auth.forgotPassword.sendLink")}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 };
 
 export { ForgotPasswordPage };

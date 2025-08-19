@@ -1,27 +1,27 @@
 import { $api } from "@/http";
 
 class MarketService {
-  static async getMarket() {
-    return await $api.get("/market");
+  static getMarket() {
+    return $api.get("/market");
   }
 
-  static async getCart() {
-    return await $api.get("/cart");
+  static getCart() {
+    return $api.get("/cart");
   }
 
-  static async addToCart({ itemId, quantity }) {
-    return await $api.patch("/cart/add", {
+  static addToCart({ itemId, quantity }) {
+    return $api.patch("/cart/add", {
       itemId,
       quantity,
     });
   }
 
-  static async checkoutCart() {
-    return await $api.post("/cart/checkout");
+  static checkoutCart() {
+    return $api.post("/cart/checkout");
   }
 
-  static async syncCart(items) {
-    return await $api.post("/cart/sync", { items });
+  static syncCart(items) {
+    return $api.post("/cart/sync", { items });
   }
 }
 

@@ -1,35 +1,35 @@
 .container {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
 }
 
 .icon {
-    font-size: 0.9rem;
+  font-size: 0.9rem;
 }
 
 .info {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
 }
 
 .text {
-    font-size: 0.85rem;
+  font-size: 0.85rem;
 }
 
 @media (max-width: 480px) {
-    .container {
-        gap: 0.3rem;
-        font-size: 0.625rem;
-    }
+  .container {
+    gap: 0.3rem;
+    font-size: 0.625rem;
+  }
 
-    .icon {
-        font-size: 0.75rem;
-    }
+  .icon {
+    font-size: 0.75rem;
+  }
 
-    .text {
-        font-size: 0.75rem;
-    }
+  .text {
+    font-size: 0.75rem;
+  }
 }

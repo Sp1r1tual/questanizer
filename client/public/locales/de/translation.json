@@ -1,282 +1,282 @@
 {
-    "shared": {
+  "shared": {
+    "easy": "Leicht",
+    "medium": "Mittel",
+    "hard": "Schwierig",
+    "critical": "Kritisch",
+    "createdAt": "Erstellt am:",
+    "deadline": "Frist:",
+    "difficulty": "Schwierigkeitsgrad:",
+    "completed": "Erledigt",
+    "notCompleted": "Nicht erledigt",
+    "yes": "Ja",
+    "no": "Nein",
+    "nameLabel": "Name",
+    "save": "Speichern",
+    "saving": "Speichert...",
+    "cancel": "Abbrechen",
+    "confirm": "Bestätigen",
+    "close": "Schließen",
+    "remove": "Entfernen",
+    "bio": "Über mich",
+    "noBio": "Keine Beschreibung vorhanden",
+    "level": "Level",
+    "gold": "Gold",
+    "golds": "Gold",
+    "health": "Gesundheit",
+    "joined": "Beigetreten",
+    "quantity": "Anzahl",
+    "total": "Insgesamt",
+    "noItems": "Keine verfügbaren Gegenstände",
+    "emailLabel": "E-Mail",
+    "emailPlaceholder": "E-Mail eingeben",
+    "passwordLabel": "Passwort",
+    "passwordPlaceholder": "Passwort eingeben",
+    "copied": "Kopiert",
+    "seconds": "s"
+  },
+
+  "footer": {
+    "about": "Über uns",
+    "contact": "Kontaktieren Sie uns"
+  },
+
+  "organizer": {
+    "addNewTaskBtn": {
+      "addTask": "Aufgabe hinzufügen"
+    },
+    "organizerHeader": "Womit startest du dein episches Abenteuer?",
+    "taskDropdown": {
+      "markAsDone": "Erledigen",
+      "delete": "Löschen",
+      "deleteAllCompleted": "Alle erledigten löschen",
+      "deleteAllOverdue": "Alle überfälligen löschen"
+    },
+    "taskFilters": {
+      "status": {
+        "all": "Alle",
+        "completed": "Erledigt",
+        "active": "Aktiv"
+      },
+      "deadline": {
+        "all": "Beliebige Frist",
+        "overdue": "Überfällig",
+        "upcoming": "Bevorstehend",
+        "none": "Keine Frist"
+      },
+      "difficulty": {
+        "all": "Beliebiger Schwierigkeitsgrad",
         "easy": "Leicht",
         "medium": "Mittel",
         "hard": "Schwierig",
-        "critical": "Kritisch",
-        "createdAt": "Erstellt am:",
-        "deadline": "Frist:",
-        "difficulty": "Schwierigkeitsgrad:",
-        "completed": "Erledigt",
-        "notCompleted": "Nicht erledigt",
-        "yes": "Ja",
-        "no": "Nein",
-        "nameLabel": "Name",
-        "save": "Speichern",
-        "saving": "Speichert...",
-        "cancel": "Abbrechen",
-        "confirm": "Bestätigen",
-        "close": "Schließen",
-        "remove": "Entfernen",
-        "bio": "Über mich",
-        "noBio": "Keine Beschreibung vorhanden",
-        "level": "Level",
-        "gold": "Gold",
-        "golds": "Gold",
-        "health": "Gesundheit",
-        "joined": "Beigetreten",
-        "quantity": "Anzahl",
-        "total": "Insgesamt",
-        "noItems": "Keine verfügbaren Gegenstände",
-        "emailLabel": "E-Mail",
-        "emailPlaceholder": "E-Mail eingeben",
-        "passwordLabel": "Passwort",
-        "passwordPlaceholder": "Passwort eingeben",
-        "copied": "Kopiert",
-        "seconds": "s"
+        "critical": "Kritisch"
+      },
+      "sortBy": {
+        "createdAt": "Nach Datum",
+        "difficulty": "Nach Schwierigkeit",
+        "deadline": "Nach Begriff"
+      }
+    },
+    "taskInput": {
+      "placeholder": "Gib ein, was du vorhast...",
+      "error": "Bitte gib eine Aufgabenbeschreibung ein"
+    },
+    "taskItem": {
+      "overdueAlert": "ÜBERFÄLLIG!"
+    },
+    "taskList": {
+      "noTasks": "Keine verfügbaren Aufgaben"
+    },
+    "confirmation": {
+      "deleteTitle": "Aufgabe löschen",
+      "completeTitle": "Aufgabe erledigen",
+      "deleteAllCompletedTitle": "Löschbestätigung",
+      "defaultTitle": "Bestätigung",
+      "deleteMessage": "Bist du sicher, dass du die Aufgabe \"{{task}}\" löschen möchtest?",
+      "completeMessage": "Aufgabe \"{{task}}\" als erledigt markieren?",
+      "deleteAllCompletedMessage": "Bist du sicher, dass du alle erledigten Aufgaben löschen möchtest?",
+      "deleteAllOverdueMessage": "Bist du sicher, dass du alle überfälligen Aufgaben löschen möchtest?",
+      "defaultMessage": "Löschbestätigung"
     },
 
-    "footer": {
-        "about": "Über uns",
-        "contact": "Kontaktieren Sie uns"
-    },
-
-    "organizer": {
-        "addNewTaskBtn": {
-            "addTask": "Aufgabe hinzufügen"
-        },
-        "organizerHeader": "Womit startest du dein episches Abenteuer?",
-        "taskDropdown": {
-            "markAsDone": "Erledigen",
-            "delete": "Löschen",
-            "deleteAllCompleted": "Alle erledigten löschen",
-            "deleteAllOverdue": "Alle überfälligen löschen"
-        },
-        "taskFilters": {
-            "status": {
-                "all": "Alle",
-                "completed": "Erledigt",
-                "active": "Aktiv"
-            },
-            "deadline": {
-                "all": "Beliebige Frist",
-                "overdue": "Überfällig",
-                "upcoming": "Bevorstehend",
-                "none": "Keine Frist"
-            },
-            "difficulty": {
-                "all": "Beliebiger Schwierigkeitsgrad",
-                "easy": "Leicht",
-                "medium": "Mittel",
-                "hard": "Schwierig",
-                "critical": "Kritisch"
-            },
-            "sortBy": {
-                "createdAt": "Nach Datum",
-                "difficulty": "Nach Schwierigkeit",
-                "deadline": "Nach Begriff"
-            }
-        },
-        "taskInput": {
-            "placeholder": "Gib ein, was du vorhast...",
-            "error": "Bitte gib eine Aufgabenbeschreibung ein"
-        },
-        "taskItem": {
-            "overdueAlert": "ÜBERFÄLLIG!"
-        },
-        "taskList": {
-            "noTasks": "Keine verfügbaren Aufgaben"
-        },
-        "confirmation": {
-            "deleteTitle": "Aufgabe löschen",
-            "completeTitle": "Aufgabe erledigen",
-            "deleteAllCompletedTitle": "Löschbestätigung",
-            "defaultTitle": "Bestätigung",
-            "deleteMessage": "Bist du sicher, dass du die Aufgabe \"{{task}}\" löschen möchtest?",
-            "completeMessage": "Aufgabe \"{{task}}\" als erledigt markieren?",
-            "deleteAllCompletedMessage": "Bist du sicher, dass du alle erledigten Aufgaben löschen möchtest?",
-            "deleteAllOverdueMessage": "Bist du sicher, dass du alle überfälligen Aufgaben löschen möchtest?",
-            "defaultMessage": "Löschbestätigung"
-        },
-
-        "confirmOverdueTasks": {
-            "overdueTasks": "Überfällige Aufgaben",
-            "beHonest": "Seien Sie ehrlich zu sich selbst",
-            "checkIfCompleted": "Bitte geben Sie an, ob Sie diese Aufgaben erledigt haben:"
-        }
-    },
-
-    "navbar": {
-        "taskScheduler": "Aufgaben",
-        "bossBattle": "Bosskampf",
-        "market": "Markt",
-        "inventory": "Inventar",
-        "faq": "Hilfe"
-    },
-
-    "buttons": {
-        "login": "Einloggen",
-        "logout": "Ausloggen",
-        "profile": "Profil",
-        "friends": "Freunde",
-        "settings": "Einstellungen"
-    },
-
-    "settings": {
-        "settingsHeader": "Einstellungen",
-        "language": "Interface-Sprache"
-    },
-
-    "profile": {
-        "closeModal": "Profil schließen",
-        "noUsername": "Benutzername nicht angegeben",
-        "editBtn": "Profil bearbeiten",
-        "changeAvatar": "Avatar ändern",
-        "namePlaceholder": "Gib deinen Namen ein",
-        "bioPlaceholder": "Erzähle etwas über dich",
-        "characters": "Zeichen"
-    },
-
-    "friends": {
-        "sectionTitle": {
-            "friendsSectionTitle": "Freunde:",
-            "requestsSectionTitle": "Freundschaftsanfragen:",
-            "friends": "Freunde",
-            "friendsRequests": "Freundschaftsanfragen"
-        },
-        "friendsTitle": "Freunde",
-        "noAviable": "Keine {{type}} verfügbar",
-        "accept": "Annehmen",
-        "decline": "Ablehnen",
-        "cancelRequest": "Anfrage abbrechen",
-        "add": "Hinzufügen",
-        "searchPlaceholder": "Benutzer suchen...",
-        "searchButton": "Suchen",
-        "noSearchResults": "Keine Benutzer gefunden",
-        "sendMessage": "Nachricht senden",
-        "chatSoon": "Chat bald verfügbar"
-    },
-
-    "boss": {
-        "initBossBtn": "Bosskampf starten",
-        "rage": "Wut",
-        "power": "Kraft"
-    },
-
-    "defeat": {
-        "title": "Niederlage",
-        "message": "Du hast all deine Gesundheit verloren. Neu starten?",
-        "restartButton": "Neues episches Abenteuer starten!"
-    },
-
-    "market": {
-        "marketHeader": "Mystischer Markt",
-        "price": "Preis",
-        "addToCart": "In den Warenkorb",
-        "cartTitle": "Warenkorb",
-        "emptyCart": "Dein Warenkorb ist leer",
-        "buyAll": "Alles kaufen",
-        "greetings": {
-            "readyToShop": "Bereit zum Einkaufen?",
-            "findSomethingUnique": "Finde etwas Einzigartiges!",
-            "spendTimeWisely": "Verbringe deine Zeit sinnvoll!",
-            "somethingInteresting": "Wir haben etwas Interessantes!",
-            "lookingForTreasures": "Suchst du nach Schätzen?",
-            "bestDeals": "Verpasse nicht die besten Angebote!",
-            "cartIsHungry": "Dein Warenkorb ist hungrig!",
-            "shopLikeHero": "Kaufe wie ein Held!",
-            "freshDeals": "Täglich frische Angebote!",
-            "goldWellSpent": "Gut investiertes Gold ist verdientes Gold!"
-        }
-    },
-
-    "inventory": {
-        "inventoryHeader": "Inventar",
-        "use": "Benutzen"
-    },
-
-    "auth": {
-        "forgotPassword": {
-            "title": "Passwort vergessen?",
-            "sendLink": "Link zum Zurücksetzen senden",
-            "success": "Überprüfe deine E-Mail...",
-            "resendIn": "Sie können erneut anfragen in:"
-        },
-        "resetPassword": {
-            "title": "Passwort zurücksetzen",
-            "newPassword": "Neues Passwort",
-            "confirmPassword": "Neues Passwort bestätigen",
-            "submit": "Passwort aktualisieren",
-            "success": "Passwort geändert. Weiterleitung..."
-        },
-        "login": {
-            "title": "Einloggen",
-            "loading": "Einloggen...",
-            "forgotQuestion": "Passwort vergessen?",
-            "forgotLink": "Hier wiederherstellen",
-            "submit": "Einloggen",
-            "noAccount": "Noch keinen Account?",
-            "registerLink": "Registrieren"
-        },
-        "registration": {
-            "title": "Registrierung",
-            "confirmLabel": "Passwort bestätigen",
-            "confirmPlaceholder": "Passwort wiederholen",
-            "submit": "Registrieren",
-            "loading": "Registrierung...",
-            "haveAccount": "Bereits einen Account?",
-            "loginLink": "Einloggen"
-        }
-    },
-
-    "validation": {
-        "fillAllFields": "Bitte fülle alle Felder aus",
-        "invalidEmail": "Ungültiges E-Mail-Format",
-        "invalidPassword": "Das Passwort muss 8–32 Zeichen lang sein, mindestens einen Großbuchstaben enthalten und aus lateinischen Buchstaben bestehen",
-        "passwordMismatch": "Passwörter stimmen nicht überein",
-        "invalidUsername": "Der Benutzername muss zwischen 3 und 32 Zeichen lang sein und darf nur lateinische Buchstaben, Zahlen, Bindestriche, Punkte oder Unterstriche enthalten",
-        "invalidBio": "Das Profil darf nicht mehr als 500 Zeichen enthalten",
-        "searchQueryEmpty": "Suchanfrage darf nicht leer sein",
-        "searchQuerySelf": "Du kannst nicht nach dir selbst suchen"
-    },
-
-    "support": {
-        "faqTitle": "Häufig gestellte Fragen",
-        "feedback": "Feedback",
-        "bugReport": "Fehler melden",
-        "getSupport": "Support kontaktieren",
-        "suggestIdea": "Idee vorschlagen",
-        "writeHere": "Schreiben Sie hier Ihre Nachricht...",
-        "send": "Senden"
-    },
-
-    "chat": {
-        "chatWith": "Chat mit",
-        "writeMessage": "Nachricht schreiben",
-        "deleteFromBoth": "Für beide löschen",
-        "noMessages": "Keine Nachrichten",
-        "failedToSendMessage": "Fehler beim Senden",
-        "failedToDeleteMessage": "Fehler beim Löschen",
-        "failedToLoadChatHistory": "Fehler beim Laden des Chatverlaufs",
-        "failedToMarkAsRead": "Fehler beim Als-gelesen-Markieren"
-    },
-
-    "socket": {
-        "tokenExpired": "Autorisierungsfehler, bitte erneut einloggen",
-        "socketNotConnected": "Socket nicht verbunden",
-        "connectionTimeout": "Verbindung zum Server fehlgeschlagen"
-    },
-
-    "errors": {
-        "error": "Fehler:",
-        "somethingWentWrong": "Etwas ist schiefgelaufen",
-        "tryAgain": "Erneut versuchen",
-        "goBack": "Zurückgehen",
-        "returnHome": "Zur Startseite",
-        "auth": {
-            "registration": "Registrierung fehlgeschlagen",
-            "login": "Anmeldeversuch fehlgeschlagen",
-            "expired": "Bitte melden Sie sich erneut an"
-        }
+    "confirmOverdueTasks": {
+      "overdueTasks": "Überfällige Aufgaben",
+      "beHonest": "Seien Sie ehrlich zu sich selbst",
+      "checkIfCompleted": "Bitte geben Sie an, ob Sie diese Aufgaben erledigt haben:"
     }
+  },
+
+  "navbar": {
+    "taskScheduler": "Aufgaben",
+    "bossBattle": "Bosskampf",
+    "market": "Markt",
+    "inventory": "Inventar",
+    "faq": "Hilfe"
+  },
+
+  "buttons": {
+    "login": "Einloggen",
+    "logout": "Ausloggen",
+    "profile": "Profil",
+    "friends": "Freunde",
+    "settings": "Einstellungen"
+  },
+
+  "settings": {
+    "settingsHeader": "Einstellungen",
+    "language": "Interface-Sprache"
+  },
+
+  "profile": {
+    "closeModal": "Profil schließen",
+    "noUsername": "Benutzername nicht angegeben",
+    "editBtn": "Profil bearbeiten",
+    "changeAvatar": "Avatar ändern",
+    "namePlaceholder": "Gib deinen Namen ein",
+    "bioPlaceholder": "Erzähle etwas über dich",
+    "characters": "Zeichen"
+  },
+
+  "friends": {
+    "sectionTitle": {
+      "friendsSectionTitle": "Freunde:",
+      "requestsSectionTitle": "Freundschaftsanfragen:",
+      "friends": "Freunde",
+      "friendsRequests": "Freundschaftsanfragen"
+    },
+    "friendsTitle": "Freunde",
+    "noAviable": "Keine {{type}} verfügbar",
+    "accept": "Annehmen",
+    "decline": "Ablehnen",
+    "cancelRequest": "Anfrage abbrechen",
+    "add": "Hinzufügen",
+    "searchPlaceholder": "Benutzer suchen...",
+    "searchButton": "Suchen",
+    "noSearchResults": "Keine Benutzer gefunden",
+    "sendMessage": "Nachricht senden",
+    "chatSoon": "Chat bald verfügbar"
+  },
+
+  "boss": {
+    "initBossBtn": "Bosskampf starten",
+    "rage": "Wut",
+    "power": "Kraft"
+  },
+
+  "defeat": {
+    "title": "Niederlage",
+    "message": "Du hast all deine Gesundheit verloren. Neu starten?",
+    "restartButton": "Neues episches Abenteuer starten!"
+  },
+
+  "market": {
+    "marketHeader": "Mystischer Markt",
+    "price": "Preis",
+    "addToCart": "In den Warenkorb",
+    "cartTitle": "Warenkorb",
+    "emptyCart": "Dein Warenkorb ist leer",
+    "buyAll": "Alles kaufen",
+    "greetings": {
+      "readyToShop": "Bereit zum Einkaufen?",
+      "findSomethingUnique": "Finde etwas Einzigartiges!",
+      "spendTimeWisely": "Verbringe deine Zeit sinnvoll!",
+      "somethingInteresting": "Wir haben etwas Interessantes!",
+      "lookingForTreasures": "Suchst du nach Schätzen?",
+      "bestDeals": "Verpasse nicht die besten Angebote!",
+      "cartIsHungry": "Dein Warenkorb ist hungrig!",
+      "shopLikeHero": "Kaufe wie ein Held!",
+      "freshDeals": "Täglich frische Angebote!",
+      "goldWellSpent": "Gut investiertes Gold ist verdientes Gold!"
+    }
+  },
+
+  "inventory": {
+    "inventoryHeader": "Inventar",
+    "use": "Benutzen"
+  },
+
+  "auth": {
+    "forgotPassword": {
+      "title": "Passwort vergessen?",
+      "sendLink": "Link zum Zurücksetzen senden",
+      "success": "Überprüfe deine E-Mail...",
+      "resendIn": "Sie können erneut anfragen in:"
+    },
+    "resetPassword": {
+      "title": "Passwort zurücksetzen",
+      "newPassword": "Neues Passwort",
+      "confirmPassword": "Neues Passwort bestätigen",
+      "submit": "Passwort aktualisieren",
+      "success": "Passwort geändert. Weiterleitung..."
+    },
+    "login": {
+      "title": "Einloggen",
+      "loading": "Einloggen...",
+      "forgotQuestion": "Passwort vergessen?",
+      "forgotLink": "Hier wiederherstellen",
+      "submit": "Einloggen",
+      "noAccount": "Noch keinen Account?",
+      "registerLink": "Registrieren"
+    },
+    "registration": {
+      "title": "Registrierung",
+      "confirmLabel": "Passwort bestätigen",
+      "confirmPlaceholder": "Passwort wiederholen",
+      "submit": "Registrieren",
+      "loading": "Registrierung...",
+      "haveAccount": "Bereits einen Account?",
+      "loginLink": "Einloggen"
+    }
+  },
+
+  "validation": {
+    "fillAllFields": "Bitte fülle alle Felder aus",
+    "invalidEmail": "Ungültiges E-Mail-Format",
+    "invalidPassword": "Das Passwort muss 8–32 Zeichen lang sein, mindestens einen Großbuchstaben enthalten und aus lateinischen Buchstaben bestehen",
+    "passwordMismatch": "Passwörter stimmen nicht überein",
+    "invalidUsername": "Der Benutzername muss zwischen 3 und 32 Zeichen lang sein und darf nur lateinische Buchstaben, Zahlen, Bindestriche, Punkte oder Unterstriche enthalten",
+    "invalidBio": "Das Profil darf nicht mehr als 500 Zeichen enthalten",
+    "searchQueryEmpty": "Suchanfrage darf nicht leer sein",
+    "searchQuerySelf": "Du kannst nicht nach dir selbst suchen"
+  },
+
+  "support": {
+    "faqTitle": "Häufig gestellte Fragen",
+    "feedback": "Feedback",
+    "bugReport": "Fehler melden",
+    "getSupport": "Support kontaktieren",
+    "suggestIdea": "Idee vorschlagen",
+    "writeHere": "Schreiben Sie hier Ihre Nachricht...",
+    "send": "Senden"
+  },
+
+  "chat": {
+    "chatWith": "Chat mit",
+    "writeMessage": "Nachricht schreiben",
+    "deleteFromBoth": "Für beide löschen",
+    "noMessages": "Keine Nachrichten",
+    "failedToSendMessage": "Fehler beim Senden",
+    "failedToDeleteMessage": "Fehler beim Löschen",
+    "failedToLoadChatHistory": "Fehler beim Laden des Chatverlaufs",
+    "failedToMarkAsRead": "Fehler beim Als-gelesen-Markieren"
+  },
+
+  "socket": {
+    "tokenExpired": "Autorisierungsfehler, bitte erneut einloggen",
+    "socketNotConnected": "Socket nicht verbunden",
+    "connectionTimeout": "Verbindung zum Server fehlgeschlagen"
+  },
+
+  "errors": {
+    "error": "Fehler:",
+    "somethingWentWrong": "Etwas ist schiefgelaufen",
+    "tryAgain": "Erneut versuchen",
+    "goBack": "Zurückgehen",
+    "returnHome": "Zur Startseite",
+    "auth": {
+      "registration": "Registrierung fehlgeschlagen",
+      "login": "Anmeldeversuch fehlgeschlagen",
+      "expired": "Bitte melden Sie sich erneut an"
+    }
+  }
 }

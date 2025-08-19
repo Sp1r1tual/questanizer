@@ -1,282 +1,282 @@
 {
-    "shared": {
+  "shared": {
+    "easy": "簡単",
+    "medium": "普通",
+    "hard": "難しい",
+    "critical": "重大",
+    "createdAt": "作成日時：",
+    "deadline": "締め切り：",
+    "difficulty": "難易度：",
+    "completed": "完了",
+    "notCompleted": "未完了",
+    "yes": "はい",
+    "no": "いいえ",
+    "nameLabel": "名前",
+    "save": "保存",
+    "saving": "保存中...",
+    "cancel": "キャンセル",
+    "confirm": "確認",
+    "close": "閉じる",
+    "remove": "削除",
+    "bio": "自己紹介",
+    "noBio": "説明なし",
+    "level": "レベル",
+    "gold": "ゴールド",
+    "golds": "ゴールド",
+    "health": "体力",
+    "joined": "参加日",
+    "quantity": "数量",
+    "total": "合計",
+    "noItems": "利用可能なアイテムなし",
+    "emailLabel": "メールアドレス",
+    "emailPlaceholder": "メールアドレスを入力してください",
+    "passwordLabel": "パスワード",
+    "passwordPlaceholder": "パスワードを入力してください",
+    "copied": "コピーしました",
+    "seconds": "秒"
+  },
+
+  "footer": {
+    "about": "私たちについて",
+    "contact": "お問い合わせ"
+  },
+
+  "organizer": {
+    "addNewTaskBtn": {
+      "addTask": "タスクを追加"
+    },
+    "organizerHeader": "どんな冒険を始めますか？",
+    "taskDropdown": {
+      "markAsDone": "完了にする",
+      "delete": "削除",
+      "deleteAllCompleted": "完了したすべてを削除",
+      "deleteAllOverdue": "期限切れのすべてを削除"
+    },
+    "taskFilters": {
+      "status": {
+        "all": "すべて",
+        "completed": "完了",
+        "active": "アクティブ"
+      },
+      "deadline": {
+        "all": "すべての期限",
+        "overdue": "期限切れ",
+        "upcoming": "近日",
+        "none": "期限なし"
+      },
+      "difficulty": {
+        "all": "すべての難易度",
         "easy": "簡単",
         "medium": "普通",
         "hard": "難しい",
-        "critical": "重大",
-        "createdAt": "作成日時：",
-        "deadline": "締め切り：",
-        "difficulty": "難易度：",
-        "completed": "完了",
-        "notCompleted": "未完了",
-        "yes": "はい",
-        "no": "いいえ",
-        "nameLabel": "名前",
-        "save": "保存",
-        "saving": "保存中...",
-        "cancel": "キャンセル",
-        "confirm": "確認",
-        "close": "閉じる",
-        "remove": "削除",
-        "bio": "自己紹介",
-        "noBio": "説明なし",
-        "level": "レベル",
-        "gold": "ゴールド",
-        "golds": "ゴールド",
-        "health": "体力",
-        "joined": "参加日",
-        "quantity": "数量",
-        "total": "合計",
-        "noItems": "利用可能なアイテムなし",
-        "emailLabel": "メールアドレス",
-        "emailPlaceholder": "メールアドレスを入力してください",
-        "passwordLabel": "パスワード",
-        "passwordPlaceholder": "パスワードを入力してください",
-        "copied": "コピーしました",
-        "seconds": "秒"
+        "critical": "重大"
+      },
+      "sortBy": {
+        "createdAt": "作成日時順",
+        "difficulty": "難易度順",
+        "deadline": "用語別"
+      }
+    },
+    "taskInput": {
+      "placeholder": "やることを入力してください...",
+      "error": "タスクの説明を入力してください"
+    },
+    "taskItem": {
+      "overdueAlert": "期限切れ！"
+    },
+    "taskList": {
+      "noTasks": "利用可能なタスクはありません"
+    },
+    "confirmation": {
+      "deleteTitle": "タスクを削除",
+      "completeTitle": "タスクを完了",
+      "deleteAllCompletedTitle": "削除の確認",
+      "defaultTitle": "確認",
+      "deleteMessage": "タスク「{{task}}」を削除してもよろしいですか？",
+      "completeMessage": "タスク「{{task}}」を完了にしますか？",
+      "deleteAllCompletedMessage": "すべての完了したタスクを削除してもよろしいですか？",
+      "deleteAllOverdueMessage": "すべての期限切れタスクを削除してもよろしいですか？",
+      "defaultMessage": "削除を確認してください"
     },
 
-    "footer": {
-        "about": "私たちについて",
-        "contact": "お問い合わせ"
-    },
-
-    "organizer": {
-        "addNewTaskBtn": {
-            "addTask": "タスクを追加"
-        },
-        "organizerHeader": "どんな冒険を始めますか？",
-        "taskDropdown": {
-            "markAsDone": "完了にする",
-            "delete": "削除",
-            "deleteAllCompleted": "完了したすべてを削除",
-            "deleteAllOverdue": "期限切れのすべてを削除"
-        },
-        "taskFilters": {
-            "status": {
-                "all": "すべて",
-                "completed": "完了",
-                "active": "アクティブ"
-            },
-            "deadline": {
-                "all": "すべての期限",
-                "overdue": "期限切れ",
-                "upcoming": "近日",
-                "none": "期限なし"
-            },
-            "difficulty": {
-                "all": "すべての難易度",
-                "easy": "簡単",
-                "medium": "普通",
-                "hard": "難しい",
-                "critical": "重大"
-            },
-            "sortBy": {
-                "createdAt": "作成日時順",
-                "difficulty": "難易度順",
-                "deadline": "用語別"
-            }
-        },
-        "taskInput": {
-            "placeholder": "やることを入力してください...",
-            "error": "タスクの説明を入力してください"
-        },
-        "taskItem": {
-            "overdueAlert": "期限切れ！"
-        },
-        "taskList": {
-            "noTasks": "利用可能なタスクはありません"
-        },
-        "confirmation": {
-            "deleteTitle": "タスクを削除",
-            "completeTitle": "タスクを完了",
-            "deleteAllCompletedTitle": "削除の確認",
-            "defaultTitle": "確認",
-            "deleteMessage": "タスク「{{task}}」を削除してもよろしいですか？",
-            "completeMessage": "タスク「{{task}}」を完了にしますか？",
-            "deleteAllCompletedMessage": "すべての完了したタスクを削除してもよろしいですか？",
-            "deleteAllOverdueMessage": "すべての期限切れタスクを削除してもよろしいですか？",
-            "defaultMessage": "削除を確認してください"
-        },
-
-        "confirmOverdueTasks": {
-            "overdueTasks": "期限切れのタスク",
-            "beHonest": "自分に正直でいてください",
-            "checkIfCompleted": "これらのタスクを完了したかどうか確認してください:"
-        }
-    },
-
-    "navbar": {
-        "taskScheduler": "タスク",
-        "bossBattle": "ボス戦",
-        "market": "マーケット",
-        "inventory": "インベントリ",
-        "faq": "ヘルプ"
-    },
-
-    "buttons": {
-        "login": "ログイン",
-        "logout": "ログアウト",
-        "profile": "プロフィール",
-        "friends": "友達",
-        "settings": "設定"
-    },
-
-    "settings": {
-        "settingsHeader": "設定",
-        "language": "インターフェースの言語"
-    },
-
-    "profile": {
-        "closeModal": "プロフィールを閉じる",
-        "noUsername": "ユーザー名が設定されていません",
-        "editBtn": "プロフィール編集",
-        "changeAvatar": "アバターを変更",
-        "namePlaceholder": "名前を入力してください",
-        "bioPlaceholder": "自己紹介を書いてください",
-        "characters": "文字"
-    },
-
-    "friends": {
-        "sectionTitle": {
-            "friendsSectionTitle": "友達：",
-            "requestsSectionTitle": "友達リクエスト：",
-            "friends": "友達",
-            "friendsRequests": "友達リクエスト"
-        },
-        "friendsTitle": "友達",
-        "noAviable": "{{type}} はいません",
-        "accept": "承認",
-        "decline": "拒否",
-        "cancelRequest": "リクエストをキャンセル",
-        "add": "追加",
-        "searchPlaceholder": "ユーザーを検索...",
-        "searchButton": "検索",
-        "noSearchResults": "ユーザーが見つかりません",
-        "sendMessage": "メッセージを送る",
-        "chatSoon": "チャットは近日公開"
-    },
-
-    "boss": {
-        "initBossBtn": "ボス戦開始",
-        "rage": "怒り",
-        "power": "力"
-    },
-
-    "defeat": {
-        "title": "敗北",
-        "message": "体力が0になりました。やり直しますか？",
-        "restartButton": "新しい冒険を始める！"
-    },
-
-    "market": {
-        "marketHeader": "ミスティックマーケット",
-        "price": "価格",
-        "addToCart": "カートに追加",
-        "cartTitle": "カート",
-        "emptyCart": "カートは空です",
-        "buyAll": "すべて購入",
-        "greetings": {
-            "readyToShop": "買い物の準備はできましたか？",
-            "findSomethingUnique": "ユニークなものを見つけよう！",
-            "spendTimeWisely": "時間を有効に使おう！",
-            "somethingInteresting": "面白いものがあります！",
-            "lookingForTreasures": "宝物を探していますか？",
-            "bestDeals": "最高のディールをお見逃しなく！",
-            "cartIsHungry": "カートが空腹です！",
-            "shopLikeHero": "ヒーローのように買い物しよう！",
-            "freshDeals": "毎日新鮮なディール！",
-            "goldWellSpent": "賢く使ったゴールドは稼いだゴールド！"
-        }
-    },
-
-    "inventory": {
-        "inventoryHeader": "インベントリ",
-        "use": "使用"
-    },
-
-    "auth": {
-        "forgotPassword": {
-            "title": "パスワードを忘れた？",
-            "sendLink": "リセットリンクを送信",
-            "success": "メールを確認してください...",
-            "resendIn": "再リクエストできるまで:"
-        },
-        "resetPassword": {
-            "title": "パスワードをリセット",
-            "newPassword": "新しいパスワード",
-            "confirmPassword": "新しいパスワードを確認",
-            "submit": "パスワードを更新",
-            "success": "パスワードが変更されました。リダイレクト中..."
-        },
-        "login": {
-            "title": "ログイン",
-            "loading": "ログイン中...",
-            "forgotQuestion": "パスワードをお忘れですか？",
-            "forgotLink": "こちらで回復",
-            "submit": "ログイン",
-            "noAccount": "アカウントをお持ちでないですか？",
-            "registerLink": "登録"
-        },
-        "registration": {
-            "title": "登録",
-            "confirmLabel": "パスワード確認",
-            "confirmPlaceholder": "パスワードを再入力",
-            "submit": "登録",
-            "loading": "登録中...",
-            "haveAccount": "すでにアカウントをお持ちですか？",
-            "loginLink": "ログイン"
-        }
-    },
-
-    "validation": {
-        "fillAllFields": "すべての項目を入力してください",
-        "invalidEmail": "無効なメール形式です",
-        "invalidPassword": "パスワードは8～32文字、大文字を1つ以上含み、ラテン文字を使用してください",
-        "passwordMismatch": "パスワードが一致しません",
-        "invalidUsername": "ユーザー名は3～32文字で、英数字、ダッシュ、ドット、アンダースコアのみ使用可能です",
-        "invalidBio": "プロフィール説明は500文字以内で入力してください",
-        "searchQueryEmpty": "検索クエリは空にできません",
-        "searchQuerySelf": "自分自身を検索することはできません"
-    },
-
-    "support": {
-        "faqTitle": "よくある質問",
-        "feedback": "フィードバック",
-        "bugReport": "バグを報告",
-        "getSupport": "サポートに連絡",
-        "suggestIdea": "アイデアを提案",
-        "writeHere": "ここにメッセージを入力してください...",
-        "send": "送信"
-    },
-
-    "chat": {
-        "chatWith": "チャット相手",
-        "writeMessage": "メッセージを書く",
-        "deleteFromBoth": "両方から削除",
-        "noMessages": "メッセージがありません",
-        "failedToSendMessage": "送信エラー",
-        "failedToDeleteMessage": "削除エラー",
-        "failedToLoadChatHistory": "チャット履歴の読み込みエラー",
-        "failedToMarkAsRead": "既読にする際のエラー"
-    },
-
-    "socket": {
-        "tokenExpired": "認証エラー。再度ログインしてください",
-        "socketNotConnected": "ソケットが接続されていません",
-        "connectionTimeout": "サーバーへの接続に失敗しました"
-    },
-
-    "errors": {
-        "error": "エラー：",
-        "somethingWentWrong": "問題が発生しました",
-        "tryAgain": "再試行してください",
-        "goBack": "戻る",
-        "returnHome": "ホームに戻る",
-        "auth": {
-            "registration": "登録に失敗しました",
-            "login": "ログイン試行に失敗しました",
-            "expired": "もう一度ログインしてください"
-        }
+    "confirmOverdueTasks": {
+      "overdueTasks": "期限切れのタスク",
+      "beHonest": "自分に正直でいてください",
+      "checkIfCompleted": "これらのタスクを完了したかどうか確認してください:"
     }
+  },
+
+  "navbar": {
+    "taskScheduler": "タスク",
+    "bossBattle": "ボス戦",
+    "market": "マーケット",
+    "inventory": "インベントリ",
+    "faq": "ヘルプ"
+  },
+
+  "buttons": {
+    "login": "ログイン",
+    "logout": "ログアウト",
+    "profile": "プロフィール",
+    "friends": "友達",
+    "settings": "設定"
+  },
+
+  "settings": {
+    "settingsHeader": "設定",
+    "language": "インターフェースの言語"
+  },
+
+  "profile": {
+    "closeModal": "プロフィールを閉じる",
+    "noUsername": "ユーザー名が設定されていません",
+    "editBtn": "プロフィール編集",
+    "changeAvatar": "アバターを変更",
+    "namePlaceholder": "名前を入力してください",
+    "bioPlaceholder": "自己紹介を書いてください",
+    "characters": "文字"
+  },
+
+  "friends": {
+    "sectionTitle": {
+      "friendsSectionTitle": "友達：",
+      "requestsSectionTitle": "友達リクエスト：",
+      "friends": "友達",
+      "friendsRequests": "友達リクエスト"
+    },
+    "friendsTitle": "友達",
+    "noAviable": "{{type}} はいません",
+    "accept": "承認",
+    "decline": "拒否",
+    "cancelRequest": "リクエストをキャンセル",
+    "add": "追加",
+    "searchPlaceholder": "ユーザーを検索...",
+    "searchButton": "検索",
+    "noSearchResults": "ユーザーが見つかりません",
+    "sendMessage": "メッセージを送る",
+    "chatSoon": "チャットは近日公開"
+  },
+
+  "boss": {
+    "initBossBtn": "ボス戦開始",
+    "rage": "怒り",
+    "power": "力"
+  },
+
+  "defeat": {
+    "title": "敗北",
+    "message": "体力が0になりました。やり直しますか？",
+    "restartButton": "新しい冒険を始める！"
+  },
+
+  "market": {
+    "marketHeader": "ミスティックマーケット",
+    "price": "価格",
+    "addToCart": "カートに追加",
+    "cartTitle": "カート",
+    "emptyCart": "カートは空です",
+    "buyAll": "すべて購入",
+    "greetings": {
+      "readyToShop": "買い物の準備はできましたか？",
+      "findSomethingUnique": "ユニークなものを見つけよう！",
+      "spendTimeWisely": "時間を有効に使おう！",
+      "somethingInteresting": "面白いものがあります！",
+      "lookingForTreasures": "宝物を探していますか？",
+      "bestDeals": "最高のディールをお見逃しなく！",
+      "cartIsHungry": "カートが空腹です！",
+      "shopLikeHero": "ヒーローのように買い物しよう！",
+      "freshDeals": "毎日新鮮なディール！",
+      "goldWellSpent": "賢く使ったゴールドは稼いだゴールド！"
+    }
+  },
+
+  "inventory": {
+    "inventoryHeader": "インベントリ",
+    "use": "使用"
+  },
+
+  "auth": {
+    "forgotPassword": {
+      "title": "パスワードを忘れた？",
+      "sendLink": "リセットリンクを送信",
+      "success": "メールを確認してください...",
+      "resendIn": "再リクエストできるまで:"
+    },
+    "resetPassword": {
+      "title": "パスワードをリセット",
+      "newPassword": "新しいパスワード",
+      "confirmPassword": "新しいパスワードを確認",
+      "submit": "パスワードを更新",
+      "success": "パスワードが変更されました。リダイレクト中..."
+    },
+    "login": {
+      "title": "ログイン",
+      "loading": "ログイン中...",
+      "forgotQuestion": "パスワードをお忘れですか？",
+      "forgotLink": "こちらで回復",
+      "submit": "ログイン",
+      "noAccount": "アカウントをお持ちでないですか？",
+      "registerLink": "登録"
+    },
+    "registration": {
+      "title": "登録",
+      "confirmLabel": "パスワード確認",
+      "confirmPlaceholder": "パスワードを再入力",
+      "submit": "登録",
+      "loading": "登録中...",
+      "haveAccount": "すでにアカウントをお持ちですか？",
+      "loginLink": "ログイン"
+    }
+  },
+
+  "validation": {
+    "fillAllFields": "すべての項目を入力してください",
+    "invalidEmail": "無効なメール形式です",
+    "invalidPassword": "パスワードは8～32文字、大文字を1つ以上含み、ラテン文字を使用してください",
+    "passwordMismatch": "パスワードが一致しません",
+    "invalidUsername": "ユーザー名は3～32文字で、英数字、ダッシュ、ドット、アンダースコアのみ使用可能です",
+    "invalidBio": "プロフィール説明は500文字以内で入力してください",
+    "searchQueryEmpty": "検索クエリは空にできません",
+    "searchQuerySelf": "自分自身を検索することはできません"
+  },
+
+  "support": {
+    "faqTitle": "よくある質問",
+    "feedback": "フィードバック",
+    "bugReport": "バグを報告",
+    "getSupport": "サポートに連絡",
+    "suggestIdea": "アイデアを提案",
+    "writeHere": "ここにメッセージを入力してください...",
+    "send": "送信"
+  },
+
+  "chat": {
+    "chatWith": "チャット相手",
+    "writeMessage": "メッセージを書く",
+    "deleteFromBoth": "両方から削除",
+    "noMessages": "メッセージがありません",
+    "failedToSendMessage": "送信エラー",
+    "failedToDeleteMessage": "削除エラー",
+    "failedToLoadChatHistory": "チャット履歴の読み込みエラー",
+    "failedToMarkAsRead": "既読にする際のエラー"
+  },
+
+  "socket": {
+    "tokenExpired": "認証エラー。再度ログインしてください",
+    "socketNotConnected": "ソケットが接続されていません",
+    "connectionTimeout": "サーバーへの接続に失敗しました"
+  },
+
+  "errors": {
+    "error": "エラー：",
+    "somethingWentWrong": "問題が発生しました",
+    "tryAgain": "再試行してください",
+    "goBack": "戻る",
+    "returnHome": "ホームに戻る",
+    "auth": {
+      "registration": "登録に失敗しました",
+      "login": "ログイン試行に失敗しました",
+      "expired": "もう一度ログインしてください"
+    }
+  }
 }

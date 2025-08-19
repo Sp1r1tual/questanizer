@@ -1,10 +1,10 @@
 const isDateValid = (dateString) => {
-    if (!dateString) return false;
+  if (!dateString) return false;
 
-    const selectedYear = new Date(dateString).getFullYear();
-    const currentYear = new Date().getFullYear();
+  const selectedYear = new Date(dateString).getFullYear();
+  const currentYear = new Date().getFullYear();
 
-    return selectedYear >= currentYear && selectedYear <= 2099;
+  return selectedYear >= currentYear && selectedYear <= 2099;
 };
 
 export { isDateValid };

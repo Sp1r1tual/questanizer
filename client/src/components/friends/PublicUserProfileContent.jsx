@@ -14,93 +14,70 @@ import backArrow from "@/assets/back-arrow-svgrepo-com.png";
 import styles from "./PublicUserProfileModalContent.module.css";
 
 const PublicUserProfileContent = ({ userId, onBack, onOpenChat }) => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const publicProfile = useSelector((state) => state.publicUser.profile);
-    const isLoading = useSelector((state) => state.publicUser.isLoading);
+  const publicProfile = useSelector((state) => state.publicUser.profile);
+  const isLoading = useSelector((state) => state.publicUser.isLoading);
 
-    const { t } = useTranslation();
+  const { t } = useTranslation();
 
-    useEffect(() => {
-        if (userId) {
-            dispatch(fetchPublicUserProfile(userId));
-        }
-    }, [dispatch, userId]);
-
-    if (!publicProfile || isLoading) {
-        return <Loader visible={true} />;
+  useEffect(() => {
+    if (userId) {
+      dispatch(fetchPublicUserProfile(userId));
     }
+  }, [dispatch, userId]);
 
-    const { username, level, health, registrationDate, bio, photoUrl } =
-        publicProfile;
-    const formattedDate = formatDate(registrationDate);
+  if (!publicProfile || isLoading) {
+    return <Loader />;
+  }
 
-    return (
-        <>
-            <button
-                className={styles.backBtn}
-                onClick={onBack}
-                aria-label="Back to friends list"
-            >
-                <img src={backArrow} alt="Back" className={styles.backIcon} />
-            </button>
+  const { username, level, health, registrationDate, bio, photoUrl } = publicProfile;
+  const formattedDate = formatDate(registrationDate);
 
-            <div className={styles.profileHeader}>
-                <img
-                    src={getAvatarUrl(photoUrl)}
-                    alt={`${username || "Username not set"}'s avatar`}
-                    className={styles.avatar}
-                    onError={() =>
-                        console.error(
-                            "Image failed to load:",
-                            getAvatarUrl(photoUrl)
-                        )
-                    }
-                />
-                <h2 className={styles.name}>
-                    {username || "Username not set"}
-                </h2>
-            </div>
+  return (
+    <>
+      <button className={styles.backBtn} onClick={onBack} aria-label="Back to friends list">
+        <img src={backArrow} alt="Back" className={styles.backIcon} />
+      </button>
 
-            <div className={styles.profileInfo}>
-                <div className={styles.infoItem}>
-                    <strong className={styles.infoLabel}>
-                        {t("shared.level")}:
-                    </strong>
-                    <span className={styles.infoValue}>{level ?? "N/A"}</span>
-                </div>
-                <div className={styles.infoItem}>
-                    <strong className={styles.infoLabel}>
-                        {t("shared.health")}:
-                    </strong>
-                    <span className={styles.infoValue}>{health ?? "N/A"}</span>
-                </div>
-                <div className={styles.infoItem}>
-                    <strong className={styles.infoLabel}>
-                        {t("shared.joined")}:
-                    </strong>
-                    <span className={styles.infoValue}>{formattedDate}</span>
-                </div>
-                <div className={styles.infoItem}>
-                    <strong className={styles.infoLabel}>
-                        {t("shared.bio")}:
-                    </strong>
-                    <span className={styles.infoValue}>
-                        {bio || t("shared.noBio")}
-                    </span>
-                </div>
+      <div className={styles.profileHeader}>
+        <img
+          src={getAvatarUrl(photoUrl)}
+          alt={`${username || "Username not set"}'s avatar`}
+          className={styles.avatar}
+        />
+        <h2 className={styles.name}>{username || "Username not set"}</h2>
+      </div>
 
-                <button
-                    type="button"
-                    className={styles.chatBtn}
-                    aria-label={t("friends.sendMessage")}
-                    onClick={() => onOpenChat(userId)}
-                >
-                    {t("friends.sendMessage")}
-                </button>
-            </div>
-        </>
-    );
+      <div className={styles.profileInfo}>
+        <div className={styles.infoItem}>
+          <strong className={styles.infoLabel}>{t("shared.level")}:</strong>
+          <span className={styles.infoValue}>{level ?? "N/A"}</span>
+        </div>
+        <div className={styles.infoItem}>
+          <strong className={styles.infoLabel}>{t("shared.health")}:</strong>
+          <span className={styles.infoValue}>{health ?? "N/A"}</span>
+        </div>
+        <div className={styles.infoItem}>
+          <strong className={styles.infoLabel}>{t("shared.joined")}:</strong>
+          <span className={styles.infoValue}>{formattedDate}</span>
+        </div>
+        <div className={styles.infoItem}>
+          <strong className={styles.infoLabel}>{t("shared.bio")}:</strong>
+          <span className={styles.infoValue}>{bio || t("shared.noBio")}</span>
+        </div>
+
+        <button
+          type="button"
+          className={styles.chatBtn}
+          aria-label={t("friends.sendMessage")}
+          onClick={() => onOpenChat(userId)}
+        >
+          {t("friends.sendMessage")}
+        </button>
+      </div>
+    </>
+  );
 };
 
 export { PublicUserProfileContent };
