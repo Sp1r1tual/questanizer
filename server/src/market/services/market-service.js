@@ -9,187 +9,185 @@ import { marketItems } from "../data/marketItems.js";
 import { marketNotifications } from "../../shared/utils/notifications/notification-factory.js";
 import { localizeKeys } from "../../shared/utils/localization/localize-keys.js";
 import {
-    localizeNestedItems,
-    localizeSimpleItems,
+  localizeNestedItems,
+  localizeSimpleItems,
 } from "../../shared/utils/localization/localize-items.js";
 
 class MarketService {
-    async localizeItemName(userId, itemKey) {
-        return await localizeKeys(userId, `shared.items.${itemKey}`);
+  async localizeItemName(userId, itemKey) {
+    return await localizeKeys(userId, `shared.items.${itemKey}`);
+  }
+
+  async initializeMarketCollection() {
+    const count = await MarketItemModel.countDocuments();
+
+    if (count === 0) {
+      await MarketItemModel.insertMany(marketItems);
+    }
+  }
+
+  async getAllMarketItems(userId) {
+    const items = await MarketItemModel.find({ isActive: true });
+
+    const localizedItems = await localizeSimpleItems(userId, items);
+    return localizedItems;
+  }
+
+  async getUserCart(userId) {
+    let cart = await UserCartModel.findOne({ user: userId }).populate("items.item");
+
+    if (!cart) {
+      cart = new UserCartModel({ user: userId, items: [] });
+      await cart.save();
     }
 
-    async initializeMarketCollection() {
-        try {
-            const count = await MarketItemModel.countDocuments();
+    const localizedItems = await localizeNestedItems(userId, cart.items);
 
-            if (count === 0) {
-                await MarketItemModel.insertMany(marketItems);
-            }
-        } catch (error) {
-            console.error("Error initializing market collection:", error);
-        }
+    return {
+      ...cart.toObject(),
+      items: localizedItems,
+    };
+  }
+
+  async addToCart(userId, itemId, quantity = 1) {
+    const marketItem = await MarketItemModel.findOne({
+      _id: itemId,
+      isActive: true,
+    });
+
+    if (!marketItem) {
+      throw ApiError.NotFound("Item is not available");
     }
 
-    async getAllMarketItems(userId) {
-        const items = await MarketItemModel.find({ isActive: true });
+    const now = new Date();
 
-        const localizedItems = await localizeSimpleItems(userId, items);
-        return localizedItems;
+    const newCartItem = {
+      item: itemId,
+      quantity,
+      addedAt: now,
+    };
+
+    let cart = await UserCartModel.findOne({ user: userId });
+
+    if (!cart) {
+      cart = new UserCartModel({
+        user: userId,
+        items: [newCartItem],
+      });
+
+      await cart.save();
+      return cart;
     }
 
-    async getUserCart(userId) {
-        let cart = await UserCartModel.findOne({ user: userId }).populate(
-            "items.item"
-        );
+    const existingItem = cart.items.find((item) => item.item.toString() === itemId);
 
-        if (!cart) {
-            cart = new UserCartModel({ user: userId, items: [] });
-            await cart.save();
-        }
-
-        const localizedItems = await localizeNestedItems(userId, cart.items);
-
-        return {
-            ...cart.toObject(),
-            items: localizedItems,
-        };
+    if (existingItem) {
+      existingItem.quantity += quantity;
+      existingItem.addedAt = now;
+    } else {
+      cart.items.push(newCartItem);
     }
 
-    async addToCart(userId, itemId, quantity = 1) {
-        const marketItem = await MarketItemModel.findOne({
-            _id: itemId,
-            isActive: true,
+    await cart.save();
+    return cart;
+  }
+
+  async syncCart(userId, items) {
+    let cart = await UserCartModel.findOne({ user: userId });
+
+    if (!cart) {
+      cart = new UserCartModel({ user: userId, items: [] });
+    }
+
+    for (const { itemId, quantity } of items) {
+      const existingIndex = cart.items.findIndex((i) => i.item.toString() === itemId);
+
+      if (existingIndex === -1) {
+        cart.items.push({ item: itemId, quantity, addedAt: new Date() });
+        continue;
+      }
+
+      if (quantity <= 0) {
+        cart.items.splice(existingIndex, 1);
+        continue;
+      }
+
+      cart.items[existingIndex].quantity = quantity;
+      cart.items[existingIndex].addedAt = new Date();
+    }
+
+    await cart.save();
+    return cart;
+  }
+
+  async checkoutCart(userId) {
+    const cart = await UserCartModel.findOne({ user: userId }).populate({
+      path: "items.item",
+      model: "MarketItem",
+      select: "price",
+    });
+
+    if (!cart || cart.items.length === 0) {
+      throw ApiError.BadRequest("Cart is empty");
+    }
+
+    const userStats = await UserStatsModel.findOne({ user: userId });
+
+    const totalPrice = cart.items.reduce((sum, item) => {
+      const price = item.item?.price || 0;
+
+      return sum + price * item.quantity;
+    }, 0);
+
+    if (userStats.gold < totalPrice) {
+      return {
+        success: false,
+        messages: [await marketNotifications.notEnoughtGold(userId)],
+      };
+    }
+
+    userStats.gold -= totalPrice;
+    await userStats.save();
+
+    let inventory = await UserInventoryModel.findOne({ user: userId });
+
+    if (!inventory) {
+      inventory = new UserInventoryModel({ user: userId, items: [] });
+    }
+
+    const totalItems = cart.items.reduce((sum, item) => sum + item.quantity, 0);
+
+    for (const entry of cart.items) {
+      const index = inventory.items.findIndex(
+        (i) => i.item.toString() === entry.item._id.toString(),
+      );
+
+      if (index > -1) {
+        inventory.items[index].quantity += entry.quantity;
+      } else {
+        inventory.items.push({
+          item: entry.item._id,
+          quantity: entry.quantity,
         });
-
-        if (!marketItem) {
-            throw ApiError.NotFound("Item is not available");
-        }
-
-        const now = new Date();
-
-        const newCartItem = {
-            item: itemId,
-            quantity,
-            addedAt: now,
-        };
-
-        let cart = await UserCartModel.findOne({ user: userId });
-
-        if (!cart) {
-            cart = new UserCartModel({
-                user: userId,
-                items: [newCartItem],
-            });
-
-            await cart.save();
-            return cart;
-        }
-
-        const existingItem = cart.items.find(
-            (item) => item.item.toString() === itemId
-        );
-
-        if (existingItem) {
-            existingItem.quantity += quantity;
-            existingItem.addedAt = now;
-        } else {
-            cart.items.push(newCartItem);
-        }
-
-        await cart.save();
-        return cart;
+      }
     }
 
-    async removeFromCart(userId, itemId, quantity = null) {
-        const cart = await UserCartModel.findOne({ user: userId });
+    await inventory.save();
 
-        const itemIndex = cart.items.findIndex(
-            (item) => item.item.toString() === itemId
-        );
+    cart.items = [];
+    await cart.save();
 
-        if (itemIndex === -1) return cart;
+    const messages = [
+      await marketNotifications.checkout(userId, totalItems),
+      await marketNotifications.spent(userId, totalPrice),
+    ];
 
-        if (quantity === null || cart.items[itemIndex].quantity <= quantity) {
-            cart.items.splice(itemIndex, 1);
-        } else {
-            cart.items[itemIndex].quantity -= quantity;
-        }
-
-        await cart.save();
-        return cart;
-    }
-
-    async checkoutCart(userId) {
-        const cart = await UserCartModel.findOne({ user: userId }).populate({
-            path: "items.item",
-            model: "MarketItem",
-            select: "price",
-        });
-
-        if (!cart || cart.items.length === 0) {
-            throw ApiError.BadRequest("Cart is empty");
-        }
-
-        const userStats = await UserStatsModel.findOne({ user: userId });
-
-        const totalPrice = cart.items.reduce((sum, item) => {
-            const price = item.item?.price || 0;
-
-            return sum + price * item.quantity;
-        }, 0);
-
-        if (userStats.gold < totalPrice) {
-            return {
-                success: false,
-                messages: [await marketNotifications.notEnoughtGold(userId)],
-            };
-        }
-
-        userStats.gold -= totalPrice;
-        await userStats.save();
-
-        let inventory = await UserInventoryModel.findOne({ user: userId });
-
-        if (!inventory) {
-            inventory = new UserInventoryModel({ user: userId, items: [] });
-        }
-
-        const totalItems = cart.items.reduce(
-            (sum, item) => sum + item.quantity,
-            0
-        );
-
-        for (const entry of cart.items) {
-            const index = inventory.items.findIndex(
-                (i) => i.item.toString() === entry.item._id.toString()
-            );
-
-            if (index > -1) {
-                inventory.items[index].quantity += entry.quantity;
-            } else {
-                inventory.items.push({
-                    item: entry.item._id,
-                    quantity: entry.quantity,
-                });
-            }
-        }
-
-        await inventory.save();
-
-        cart.items = [];
-        await cart.save();
-
-        const messages = [
-            await marketNotifications.checkout(userId, totalItems),
-            await marketNotifications.spent(userId, totalPrice),
-        ];
-
-        return {
-            success: true,
-            messages,
-            spentGold: totalPrice,
-        };
-    }
+    return {
+      success: true,
+      messages,
+      spentGold: totalPrice,
+    };
+  }
 }
 
 const marketService = new MarketService();

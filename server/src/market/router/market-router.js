@@ -1,11 +1,11 @@
 import { Router } from "express";
 
 import {
-    getMarketItems,
-    getUserCart,
-    addToCart,
-    removeFromCart,
-    checkoutCart,
+  getMarketItems,
+  getUserCart,
+  addToCart,
+  syncCart,
+  checkoutCart,
 } from "../controllers/market-controller.js";
 
 import { authMiddleware } from "../../shared/middlewares/auth-middleware.js";
@@ -20,6 +20,6 @@ marketRouter.patch("/cart/add", authMiddleware, addToCart);
 
 marketRouter.post("/cart/checkout", authMiddleware, checkoutCart);
 
-marketRouter.patch("/cart/remove/:itemId", authMiddleware, removeFromCart);
+marketRouter.post("/cart/sync", authMiddleware, syncCart);
 
 export { marketRouter };
