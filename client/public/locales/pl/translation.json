@@ -33,7 +33,10 @@
     "passwordLabel": "Hasło",
     "passwordPlaceholder": "Wprowadź hasło",
     "copied": "Skopiowano",
-    "seconds": "s"
+    "seconds": "s",
+    "back": "Wstecz",
+    "refuse": "Odmówić",
+    "agree": "Zgodzić się"
   },
 
   "footer": {
@@ -51,6 +54,15 @@
       "delete": "Usuń",
       "deleteAllCompleted": "Usuń wszystkie wykonane",
       "deleteAllOverdue": "Usuń wszystkie przeterminowane"
+    },
+    "organizerModal": {
+      "setDeadline": "Ustaw termin",
+      "setDifficulty": "Wybierz trudność",
+      "selectDeadline": "Wybierz datę terminu dla swojego zadania",
+      "selectDifficulty": "Wybierz poziom trudności dla swojego zadania",
+      "uncorrectDateInput": "Proszę wybrać rok między {{year}} a 2099",
+      "addWithDeadline": "Dodaj z terminem",
+      "addWithoutDeadline": "Dodaj bez terminu"
     },
     "taskFilters": {
       "status": {
@@ -92,8 +104,8 @@
       "completeTitle": "Wykonaj zadanie",
       "deleteAllCompletedTitle": "Potwierdzenie usunięcia",
       "defaultTitle": "Potwierdzenie",
-      "deleteMessage": "Czy na pewno chcesz usunąć zadanie \"{{task}}\"?",
-      "completeMessage": "Oznaczyć zadanie \"{{task}}\" jako wykonane?",
+      "deleteMessage": "Czy na pewno chcesz usunąć zadanie {{task}}?",
+      "completeMessage": "Oznaczyć zadanie {{task}} jako wykonane?",
       "deleteAllCompletedMessage": "Czy na pewno chcesz usunąć wszystkie wykonane zadania?",
       "deleteAllOverdueMessage": "Czy na pewno chcesz usunąć wszystkie przeterminowane zadania?",
       "defaultMessage": "Potwierdzenie usunięcia"
@@ -266,6 +278,8 @@
     "socketNotConnected": "Socket nie jest podłączony",
     "connectionTimeout": "Nie udało się połączyć z serwerem"
   },
+
+  "termsAndConditions": "✨ Witamy! Cieszymy się, że jesteś tutaj. Ta aplikacja została stworzona, aby pomóc Ci być zorganizowanym, skoncentrowanym i osiągać swoje cele z mniejszym stresem i większą jasnością. Prosimy, korzystaj z niej odpowiedzialnie.\n\nKorzystając z tej aplikacji, akceptujesz poniższe warunki. Prosimy, przeczytaj je uważnie.\n\nOdpowiadasz za dokładność wprowadzanych danych.\n\nNie wprowadzaj do aplikacji poufnych, wrażliwych ani osobistych informacji. Nie ponosimy odpowiedzialności za jakikolwiek nieautoryzowany dostęp, ujawnienie lub utratę takich danych.\n\nTraktuj innych użytkowników z szacunkiem. Obraźliwe, nękające lub agresywne zachowania są surowo zabronione i mogą skutkować zawieszeniem lub trwałym zablokowaniem konta.\n\nTa aplikacja jest narzędziem organizacyjnym. Łamiąc te zasady, oszukujesz samego siebie i podważasz własne korzystanie z usługi.\n\nZastrzegamy sobie prawo do aktualizacji tych warunków w dowolnym momencie, z powiadomieniem lub bez.\n\nDalsze korzystanie z usługi po wprowadzonych zmianach oznacza akceptację nowych warunków.\n\nNie ponosimy odpowiedzialności za utratę danych, naruszenia bezpieczeństwa ani przerwy w działaniu usługi.\n\nJeśli nie zgadzasz się z tymi warunkami, prosimy o zaprzestanie korzystania z usługi.\n\n✨ Naszą misją jest pomóc Ci być zorganizowanym, skoncentrowanym i produktywnym. Wierzymy, że przestrzeganie tych prostych zasad pozwoli Ci maksymalnie wykorzystać to narzędzie i osiągnąć swoje cele z mniejszym stresem i większą jasnością.\n\nDziękujemy za korzystanie z naszej aplikacji!",
 
   "errors": {
     "error": "Pomyłka:",

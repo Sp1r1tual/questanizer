@@ -1,6 +1,8 @@
+import { useTranslation } from "react-i18next";
+
 import { useRef } from "react";
 
-import styles from "./DeadlinePage.module.css";
+import styles from "./DeadlineContent.module.css";
 
 const DeadlineContent = ({
   deadline,
@@ -11,6 +13,10 @@ const DeadlineContent = ({
   onClose,
 }) => {
   const dateInputRef = useRef(null);
+
+  const { t } = useTranslation();
+
+  const currentYear = new Date().getFullYear();
 
   const handleFocusClick = () => {
     const input = dateInputRef.current;
@@ -26,9 +32,6 @@ const DeadlineContent = ({
   return (
     <>
       <div onClick={handleFocusClick}>
-        <label htmlFor="deadline-date-input" className={styles.visuallyHidden}>
-          Select Deadline Date
-        </label>
         <input
           id="deadline-date-input"
           ref={dateInputRef}
@@ -41,22 +44,22 @@ const DeadlineContent = ({
       </div>
       {isDateInvalid && deadline && (
         <p className={styles.error}>
-          Please select a year between {new Date().getFullYear()} and 2099
+          {t("organizer.organizerModal.uncorrectDateInput", { currentYear })}
         </p>
       )}
       <div className={styles.buttonGroup}>
         <button type="button" className={styles.addWithDeadlineBtn} onClick={onAddWithDeadline}>
-          Add with deadline
+          {t("organizer.organizerModal.addWithDeadline")}
         </button>
         <button
           type="button"
           className={styles.addWithoutDeadlineBtn}
           onClick={onAddWithoutDeadline}
         >
-          Add without deadline
+          {t("organizer.organizerModal.addWithoutDeadline")}
         </button>
         <button type="button" className={styles.cancelBtn} onClick={onClose}>
-          Cancel
+          {t("shared.cancel")}
         </button>
       </div>
     </>

@@ -1,7 +1,7 @@
 import { Wrapper } from "@/components/ui/wrappers/Wrapper";
-import { InventoryItemModal } from "@/components/inventory/modals/InventoryItemModal";
+import { InventoryItemView } from "@/components/inventory/InventoryItemView";
 import { Dashboard } from "@/components/ui/wrappers/Dashboard";
-import { ContainerMedium } from "@/components/ui/wrappers/ContainerMedium";
+import { Container } from "@/components/ui/wrappers/Container";
 import { UserStatsView } from "@/components/stats/UserStatsView";
 import { InventoryHeader } from "@/components/inventory/InventoryHeader";
 import { InventoryList } from "@/components/inventory/InventoryList";
@@ -14,15 +14,15 @@ const InventoryPage = () => {
   return (
     <div className={styles.inventoryWrapper} style={{ backgroundImage: `url(${backgroundImg})` }}>
       <Wrapper>
-        <InventoryItemModal />
+        <InventoryItemView />
         <Dashboard>
-          <ContainerMedium>
+          <Container>
             <UserStatsView />
-          </ContainerMedium>
-          <ContainerMedium>
+          </Container>
+          <Container>
             <InventoryHeader />
             <InventoryList />
-          </ContainerMedium>
+          </Container>
         </Dashboard>
       </Wrapper>
     </div>

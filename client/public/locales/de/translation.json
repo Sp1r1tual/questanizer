@@ -33,7 +33,10 @@
     "passwordLabel": "Passwort",
     "passwordPlaceholder": "Passwort eingeben",
     "copied": "Kopiert",
-    "seconds": "s"
+    "seconds": "s",
+    "back": "Zurück",
+    "refuse": "Sich weigern",
+    "agree": "Zustimmen"
   },
 
   "footer": {
@@ -51,6 +54,15 @@
       "delete": "Löschen",
       "deleteAllCompleted": "Alle erledigten löschen",
       "deleteAllOverdue": "Alle überfälligen löschen"
+    },
+    "organizerModal": {
+      "setDeadline": "Deadline setzen",
+      "setDifficulty": "Schwierigkeitsgrad auswählen",
+      "selectDeadline": "Wählen Sie ein Fälligkeitsdatum für Ihre Aufgabe",
+      "selectDifficulty": "Wählen Sie den Schwierigkeitsgrad für Ihre Aufgabe",
+      "uncorrectDateInput": "Bitte wählen Sie ein Jahr zwischen {{year}} und 2099",
+      "addWithDeadline": "Mit Deadline hinzufügen",
+      "addWithoutDeadline": "Ohne Deadline hinzufügen"
     },
     "taskFilters": {
       "status": {
@@ -92,8 +104,8 @@
       "completeTitle": "Aufgabe erledigen",
       "deleteAllCompletedTitle": "Löschbestätigung",
       "defaultTitle": "Bestätigung",
-      "deleteMessage": "Bist du sicher, dass du die Aufgabe \"{{task}}\" löschen möchtest?",
-      "completeMessage": "Aufgabe \"{{task}}\" als erledigt markieren?",
+      "deleteMessage": "Bist du sicher, dass du die Aufgabe {{task}} löschen möchtest?",
+      "completeMessage": "Aufgabe {{task}} als erledigt markieren?",
       "deleteAllCompletedMessage": "Bist du sicher, dass du alle erledigten Aufgaben löschen möchtest?",
       "deleteAllOverdueMessage": "Bist du sicher, dass du alle überfälligen Aufgaben löschen möchtest?",
       "defaultMessage": "Löschbestätigung"
@@ -266,6 +278,8 @@
     "socketNotConnected": "Socket nicht verbunden",
     "connectionTimeout": "Verbindung zum Server fehlgeschlagen"
   },
+
+  "termsAndConditions": "✨ Willkommen! Wir freuen uns, dass Sie hier sind. Diese Anwendung wurde entwickelt, um Ihnen zu helfen, organisiert, fokussiert zu bleiben und Ihre Ziele mit weniger Stress und mehr Klarheit zu erreichen. Bitte nutzen Sie sie verantwortungsvoll.\n\nDurch die Nutzung dieser Anwendung stimmen Sie den folgenden Bedingungen zu. Bitte lesen Sie diese sorgfältig durch.\n\nSie sind für die Richtigkeit der von Ihnen eingegebenen Daten verantwortlich.\n\nGeben Sie keine vertraulichen, sensiblen oder persönlichen Informationen in die Anwendung ein. Wir übernehmen keine Verantwortung für unbefugten Zugriff, Offenlegung oder Verlust solcher Daten.\n\nBehandeln Sie andere Nutzer mit Respekt. Beleidigendes, missbräuchliches oder belästigendes Verhalten ist strengstens untersagt und kann zur Sperrung oder dauerhaften Deaktivierung des Kontos führen.\n\nDiese Anwendung ist ein Organisationstool. Wenn Sie diese Regeln verletzen, täuschen Sie letztlich sich selbst und untergraben Ihre eigene Nutzung des Dienstes.\n\nWir behalten uns das Recht vor, diese Bedingungen jederzeit zu ändern, mit oder ohne Vorankündigung.\n\nDie fortgesetzte Nutzung des Dienstes nach Änderungen gilt als Zustimmung zu den aktualisierten Bedingungen.\n\nWir haften nicht für Datenverlust, Sicherheitsverletzungen oder Dienstunterbrechungen.\n\nWenn Sie mit diesen Bedingungen nicht einverstanden sind, stellen Sie die Nutzung des Dienstes bitte ein.\n\n✨ Unsere Mission ist es, Ihnen zu helfen, organisiert, fokussiert und produktiv zu bleiben. Wir glauben, dass Sie durch die Einhaltung dieser einfachen Regeln das Beste aus diesem Tool herausholen und Ihre Ziele mit weniger Stress und mehr Klarheit erreichen können.\n\nVielen Dank für die Nutzung unserer Anwendung!",
 
   "errors": {
     "error": "Fehler:",

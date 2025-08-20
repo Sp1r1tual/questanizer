@@ -6,16 +6,21 @@ import { useTasks } from "@/hooks/tasks/useTasks";
 import { useTaskFilters } from "@/hooks/tasks/useTaskFilters";
 import { useConfirmModalTexts } from "@/hooks/tasks/useConfirmModalTexts";
 import { useAuth } from "@/hooks/auth/useAuth";
+import { useTaskModalState } from "@/hooks/tasks/useTaskModalState";
 
-import { ContainerMedium } from "../ui/wrappers/ContainerMedium";
+import { Modal } from "../ui/modals/Modal";
+import { Container } from "../ui/wrappers/Container";
 import { OrganizerHeader } from "./OrganizerHeader";
 import { TaskInput } from "./TaskInput";
 import { AddNewTaskBtn } from "./AddNewTaskBtn";
 import { TaskList } from "./TaskList";
-import { TaskModal } from "./modals/TaskModal";
-import { ConfirmChoiceModal } from "../confirmations/ConfirmChoiceModal";
+import { DeadlineContent } from "./DeadlineContent";
+import { DifficultyContent } from "./DifficultyContent";
+import { ConfirmChoiceModal } from "../ui/modals/ConfirmChoiceModal";
 
 import { fetchTasks } from "@/store/tasks/tasksThunks";
+
+import styles from "./TaskView.module.css";
 
 const TasksView = () => {
   const dispatch = useDispatch();
@@ -49,6 +54,23 @@ const TasksView = () => {
 
   const { title, message } = useConfirmModalTexts(confirmModal, t);
 
+  const {
+    isDateInvalid,
+    modalContent,
+    difficulty,
+    handleDateChange,
+    handleAddWithDeadline,
+    handleAddWithoutDeadline,
+    handleBack,
+    handleFinalSubmit,
+    setDifficulty,
+  } = useTaskModalState({
+    deadline,
+    setDeadline: onSetDeadline,
+    onSubmit: onAddTask,
+    onClose: onCloseModal,
+  });
+
   useEffect(() => {
     if (user?.id) {
       dispatch(fetchTasks());
@@ -68,8 +90,13 @@ const TasksView = () => {
 
   const filteredTasks = getFilteredTasks(tasks, filters);
 
+  const modalTitles = {
+    deadline: t("organizer.organizerModal.setDeadline"),
+    difficulty: t("organizer.organizerModal.setDifficulty"),
+  };
+
   return (
-    <ContainerMedium>
+    <Container>
       <OrganizerHeader />
       <TaskInput value={inputTask} onChange={onInputChange} isInvalid={isInputInvalid} />
       <AddNewTaskBtn onClick={onOpenModal} />
@@ -83,15 +110,39 @@ const TasksView = () => {
         filters={filters}
         onFilterChange={handleFilterChange}
       />
+
       {modalActive && (
-        <TaskModal
-          isOpen={modalActive}
-          onClose={onCloseModal}
-          onSubmit={onAddTask}
-          deadline={deadline}
-          setDeadline={onSetDeadline}
-        />
+        <Modal isOpen={modalActive} onClose={onCloseModal}>
+          <form onSubmit={(event) => event.preventDefault()} className={styles.taskModal}>
+            <h2 className={styles.taskModalTitle}>{modalTitles[modalContent]}</h2>
+
+            <div className={styles.taskModalHidden}>
+              {modalContent === "deadline"
+                ? t("organizer.organizerModal.selectDeadline")
+                : t("organizer.organizerModal.selectDifficulty")}
+            </div>
+            {modalContent === "deadline" && (
+              <DeadlineContent
+                deadline={deadline}
+                isDateInvalid={isDateInvalid}
+                onDateChange={handleDateChange}
+                onAddWithDeadline={handleAddWithDeadline}
+                onAddWithoutDeadline={handleAddWithoutDeadline}
+                onClose={onCloseModal}
+              />
+            )}
+            {modalContent === "difficulty" && (
+              <DifficultyContent
+                difficulty={difficulty}
+                onSelectDifficulty={setDifficulty}
+                onBack={handleBack}
+                onConfirm={handleFinalSubmit}
+              />
+            )}
+          </form>
+        </Modal>
       )}
+
       {confirmModal.isOpen && (
         <ConfirmChoiceModal
           isOpen={confirmModal.isOpen}
@@ -99,11 +150,11 @@ const TasksView = () => {
           onConfirm={onConfirmAction}
           title={title}
           message={message}
-          confirmText={t("common.yes")}
-          cancelText={t("common.no")}
+          confirmText={t("shared.yes")}
+          cancelText={t("shared.no")}
         />
       )}
-    </ContainerMedium>
+    </Container>
   );
 };
 

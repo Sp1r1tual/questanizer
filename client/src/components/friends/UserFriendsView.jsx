@@ -3,15 +3,16 @@ import { useTranslation } from "react-i18next";
 
 import { useUserFriends } from "@/hooks/user/useUserFriends";
 
-import { Loader } from "../../ui/loaders/Loader";
-import { PublicUserProfileContent } from "../PublicUserProfileContent";
-import { FriendsSearch } from "../FriendsSearch";
-import { FriendsList } from "../FriendsList";
-import { ChatModal } from "../../chat/modals/ChatModal";
+import { Modal } from "../ui/modals/Modal";
+import { Loader } from "../ui/loaders/Loader";
+import { PublicUserProfileContent } from "./PublicUserProfileContent";
+import { FriendsSearch } from "./FriendsSearch";
+import { FriendsList } from "./FriendsList";
+import { ChatView } from "../chat/ChatView";
 
-import styles from "./UserFriendsModal.module.css";
+import styles from "./UserFriendsView.module.css";
 
-const UserFriendsModal = ({ onClose }) => {
+const UserFriendsView = ({ isOpen, onClose }) => {
   const [currentView, setCurrentView] = useState("friends");
   const [selectedUserId, setSelectedUserId] = useState(null);
 
@@ -54,18 +55,10 @@ const UserFriendsModal = ({ onClose }) => {
   if (isLoading) return <Loader />;
 
   return (
-    <div className={styles.overlay}>
-      <ChatModal isOpen={isChatOpen} onClose={handleCloseChat} userId={chatUserId} />
-      <div
-        className={styles.modal}
-        onClick={(event) => event.stopPropagation()}
-        role="dialog"
-        aria-modal="true"
-      >
-        <button className={styles.closeBtn} onClick={onClose}>
-          ×
-        </button>
+    <>
+      <ChatView isOpen={isChatOpen} onClose={handleCloseChat} userId={chatUserId} />
 
+      <Modal isOpen={isOpen} onClose={onClose}>
         {currentView === "friends" ? (
           <>
             <h2 className={styles.modalTitle}>{t("friends.friendsTitle")}</h2>
@@ -99,9 +92,9 @@ const UserFriendsModal = ({ onClose }) => {
             onOpenChat={handleOpenChat}
           />
         )}
-      </div>
-    </div>
+      </Modal>
+    </>
   );
 };
 
-export { UserFriendsModal };
+export { UserFriendsView };

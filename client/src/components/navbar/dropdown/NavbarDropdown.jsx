@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 
-import { UserProfileModal } from "../../profile/modals/UserProfileModal";
-import { UserFriendsModal } from "../../friends/modals/UserFriendsModal";
-import { SettingsModal } from "../../settings/modals/SettingsModal";
+import { UserProfileView } from "../../profile/UserProfileView";
+import { UserFriendsView } from "../../friends/UserFriendsView";
+import { SettingsView } from "../../settings/SettingsView";
 import { NavbarProfileBtn } from "./NavbarProfileBtn";
 import { NavbarAuthBtn } from "./NavbarAuthBtn";
 import { SettingsBtn } from "./SettingsBtn";
@@ -76,11 +76,11 @@ const NavbarDropdown = ({ closeMenu }) => {
         )}
       </div>
 
-      {showProfileModal && <UserProfileModal onClose={() => setShowProfileModal(false)} />}
+      <UserProfileView isOpen={showProfileModal} onClose={() => setShowProfileModal(false)} />
 
-      {showFriendsModal && <UserFriendsModal onClose={() => setShowFriendsModal(false)} />}
+      <UserFriendsView isOpen={showFriendsModal} onClose={() => setShowFriendsModal(false)} />
 
-      {showSettingsModal && <SettingsModal onClose={() => setShowSettingsModal(false)} />}
+      <SettingsView isOpen={showSettingsModal} onClose={() => setShowSettingsModal(false)} />
     </>
   );
 };

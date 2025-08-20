@@ -33,7 +33,10 @@
     "passwordLabel": "Contraseña",
     "passwordPlaceholder": "Ingrese su contraseña",
     "copied": "Copiado",
-    "seconds": "s"
+    "seconds": "s",
+    "back": "Atrás",
+    "refuse": "Negarse",
+    "agree": "Estar"
   },
 
   "footer": {
@@ -51,6 +54,15 @@
       "delete": "Eliminar",
       "deleteAllCompleted": "Eliminar todas las completadas",
       "deleteAllOverdue": "Eliminar todas las atrasadas"
+    },
+    "organizerModal": {
+      "setDeadline": "Establecer fecha límite",
+      "setDifficulty": "Seleccionar dificultad",
+      "selectDeadline": "Seleccione una fecha límite para su tarea",
+      "selectDifficulty": "Seleccione el nivel de dificultad para su tarea",
+      "uncorrectDateInput": "Por favor, seleccione un año entre {{year}} y 2099",
+      "addWithDeadline": "Agregar con fecha límite",
+      "addWithoutDeadline": "Agregar sin fecha límite"
     },
     "taskFilters": {
       "status": {
@@ -92,8 +104,8 @@
       "completeTitle": "Completar tarea",
       "deleteAllCompletedTitle": "Confirmación de eliminación",
       "defaultTitle": "Confirmación",
-      "deleteMessage": "¿Estás seguro de que quieres eliminar la tarea \"{{task}}\"?",
-      "completeMessage": "¿Marcar la tarea \"{{task}}\" como completada?",
+      "deleteMessage": "¿Estás seguro de que quieres eliminar la tarea {{task}}?",
+      "completeMessage": "¿Marcar la tarea {{task}} como completada?",
       "deleteAllCompletedMessage": "¿Estás seguro de que quieres eliminar todas las tareas completadas?",
       "deleteAllOverdueMessage": "¿Estás seguro de que quieres eliminar todas las tareas atrasadas?",
       "defaultMessage": "Confirmar eliminación"
@@ -266,6 +278,8 @@
     "socketNotConnected": "Socket no conectado",
     "connectionTimeout": "No se pudo conectar al servidor"
   },
+
+  "termsAndConditions": "✨ ¡Bienvenido! Nos alegra tenerte aquí. Esta aplicación fue creada para ayudarte a mantenerte organizado, enfocado y alcanzar tus objetivos con menos estrés y mayor claridad. Por favor, úsala de manera responsable.\n\nAl utilizar esta aplicación, aceptas los siguientes términos y condiciones. Por favor, léelos atentamente.\n\nEres responsable de la exactitud de los datos que ingreses.\n\nNo ingreses información confidencial, sensible o personal en la aplicación. No somos responsables de ningún acceso no autorizado, divulgación o pérdida de dichos datos.\n\nTrata a otros usuarios con respeto. El comportamiento ofensivo, abusivo o de acoso está estrictamente prohibido y puede resultar en la suspensión o el bloqueo permanente de la cuenta.\n\nEsta aplicación es una herramienta de organización. Al violar estas reglas, en última instancia te engañas a ti mismo y socavas tu propio uso del servicio.\n\nNos reservamos el derecho de actualizar estos términos en cualquier momento, con o sin previo aviso.\n\nEl uso continuo del servicio después de los cambios constituye la aceptación de los términos actualizados.\n\nNo somos responsables de la pérdida de datos, violaciones de seguridad o interrupciones del servicio.\n\nSi no estás de acuerdo con estos términos, por favor deja de usar el servicio.\n\n✨ Nuestra misión es ayudarte a mantenerte organizado, enfocado y productivo. Creemos que al respetar estas simples reglas, puedes aprovechar al máximo esta herramienta y alcanzar tus metas con menos estrés y mayor claridad.\n\n¡Gracias por usar nuestra aplicación!",
 
   "errors": {
     "error": "Equivocación:",

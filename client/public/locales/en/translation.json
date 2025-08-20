@@ -33,7 +33,10 @@
     "passwordLabel": "Password",
     "passwordPlaceholder": "Enter your password",
     "copied": "Copied",
-    "seconds": "с"
+    "seconds": "с",
+    "back": "Back",
+    "refuse": "Refuse",
+    "agree": "Agree"
   },
 
   "footer": {
@@ -51,6 +54,15 @@
       "delete": "Delete",
       "deleteAllCompleted": "Delete All Completed",
       "deleteAllOverdue": "Delete All Overdue"
+    },
+    "organizerModal": {
+      "setDeadline": "Set a deadline",
+      "setDifficulty": "Select difficulty",
+      "selectDeadline": "Select a deadline date for your task",
+      "selectDifficulty": "Select the difficulty level for your task",
+      "uncorrectDateInput": "Please select a year between {{year}} and 2099",
+      "addWithDeadline": "Add with deadline",
+      "addWithoutDeadline": "Add without deadline"
     },
     "taskFilters": {
       "status": {
@@ -92,8 +104,8 @@
       "completeTitle": "Complete Task",
       "deleteAllCompletedTitle": "Delete Confirmation",
       "defaultTitle": "Confirmation",
-      "deleteMessage": "Are you sure you want to delete the task \"{{task}}\"?",
-      "completeMessage": "Mark the task \"{{task}}\" as completed?",
+      "deleteMessage": "Are you sure you want to delete the task {{task}}?",
+      "completeMessage": "Mark the task {{task}} as completed?",
       "deleteAllCompletedMessage": "Are you sure you want to delete all completed tasks?",
       "deleteAllOverdueMessage": "Are you sure you want to delete all overdue tasks?",
       "defaultMessage": "Confirm deletion"
@@ -266,6 +278,8 @@
     "socketNotConnected": "Socket not connected",
     "connectionTimeout": "Failed to connect to the server"
   },
+
+  "termsAndConditions": "✨ Welcome! We are glad to have you here. This application was created to help you stay organized, focused, and achieve your goals with less stress and more clarity. Please enjoy using it responsibly.\n\nBy using this application, you agree to the following terms and conditions. Please read them carefully.\n\nYou are responsible for the accuracy of the data you enter.\n\nDo not enter confidential, sensitive, or personal information into the application. We are not responsible for any unauthorized access, disclosure, or loss of such data.\n\nTreat other users with respect. Offensive, abusive, or harassing behavior is strictly prohibited and may result in account suspension or permanent ban.\n\nThis application is an organizer tool. By violating these rules, you are ultimately deceiving yourself and undermining your own use of the service.\n\nWe reserve the right to update these terms at any time, with or without notice.\n\nYour continued use of the service after changes constitutes acceptance of the updated terms.\n\nWe are not liable for any data loss, security breaches, or service interruptions.\n\nIf you do not agree with these terms, please discontinue use of the service.\n\n✨ Our mission is to help you stay organized, focused, and productive. We believe that by respecting these simple rules, you can make the most of this tool and achieve your goals with less stress and more clarity.\n\nThank you for using our application!",
 
   "errors": {
     "error": "Error:",

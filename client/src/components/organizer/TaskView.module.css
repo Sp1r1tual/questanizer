@@ -1,0 +1,11 @@
+.taskModalTitle {
+  margin-bottom: 1.2rem;
+}
+
+.taskModalHidden {
+  margin-bottom: 0.5rem;
+}
+
+.taskModal input[type="date"] {
+  margin-bottom: 2rem;
+}

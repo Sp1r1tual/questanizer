@@ -1,9 +1,9 @@
 import { Wrapper } from "@/components/ui/wrappers/Wrapper";
-import { MarketItemModal } from "@/components/market/modals/MarketItemModal";
+import { MarketItemView } from "@/components/market/MarketItemView";
 import { DraggableCart } from "@/components/cart/DraggableCart";
-import { CartModal } from "@/components/cart/modals/CartModal";
+import { CartView } from "@/components/cart/CartView";
 import { Dashboard } from "@/components/ui/wrappers/Dashboard";
-import { ContainerMedium } from "@/components/ui/wrappers/ContainerMedium";
+import { Container } from "@/components/ui/wrappers/Container";
 import { UserStatsView } from "@/components/stats/UserStatsView";
 import { MarketBanner } from "@/components/market/MarketBanner";
 import { MarketHeader } from "@/components/market/MarketHeader";
@@ -17,18 +17,18 @@ const MarketPage = () => {
   return (
     <div className={styles.marketWrapper} style={{ backgroundImage: `url(${backgroundImg})` }}>
       <Wrapper>
-        <MarketItemModal />
+        <MarketItemView />
         <DraggableCart />
-        <CartModal />
+        <CartView />
         <Dashboard>
-          <ContainerMedium>
+          <Container>
             <UserStatsView />
-          </ContainerMedium>
-          <ContainerMedium>
+          </Container>
+          <Container>
             <MarketBanner />
             <MarketHeader />
             <MarketList />
-          </ContainerMedium>
+          </Container>
         </Dashboard>
       </Wrapper>
     </div>

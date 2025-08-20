@@ -1,12 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { useAuth } from "@/hooks/auth/useAuth";
-
 import { UserExperience } from "./UserExperience";
 import { UserHealth } from "./UserHealth";
 import { UserGold } from "./UserGold";
-import { DefeatUserModal } from "./modals/DefeatUserModal";
+import { DefeatUserView } from "./DefeatUserView";
 
 import { resetBoss } from "@/store/boss/bossBattleSlice";
 
@@ -21,17 +19,15 @@ const UserStatsView = () => {
 
   const defeatTriggered = useRef(false);
 
-  const { experience, level, health, maxHealth, gold, isLoaded } = useSelector(
+  const { experience, level, health, maxHealth, gold, loaded } = useSelector(
     (state) => state.stats,
   );
 
-  const { user } = useAuth();
-
   useEffect(() => {
-    if (user?.id && !isLoaded) {
+    if (!loaded) {
       dispatch(fetchStats());
     }
-  }, [user, isLoaded, dispatch]);
+  }, [loaded, dispatch]);
 
   useEffect(() => {
     if (health <= 0 && !defeatTriggered.current) {
@@ -48,7 +44,7 @@ const UserStatsView = () => {
 
   return (
     <>
-      {isDefeated && <DefeatUserModal onRestart={handleRestart} />}
+      <DefeatUserView isOpen={isDefeated} onRestart={handleRestart} />
 
       <div className={styles.statsInner}>
         <UserExperience experience={experience} level={level} />

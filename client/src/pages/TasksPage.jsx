@@ -1,9 +1,9 @@
 import { Wrapper } from "@/components/ui/wrappers/Wrapper";
 import { Dashboard } from "@/components/ui/wrappers/Dashboard";
-import { ContainerMedium } from "@/components/ui/wrappers/ContainerMedium";
+import { Container } from "@/components/ui/wrappers/Container";
 import { UserStatsView } from "@/components/stats/UserStatsView";
 import { TasksView } from "@/components/organizer/TasksView";
-import { ConfirmOverdueTasksModal } from "@/components/organizer/modals/ConfirmOverdueTasksModal";
+import { ConfirmOverdueTasks } from "@/components/organizer/ConfirmOverdueTasks";
 
 import backgroundImg from "@/assets/main-background.png";
 
@@ -13,11 +13,11 @@ const TasksPage = () => {
   return (
     <div className={styles.tasksWrapper} style={{ backgroundImage: `url(${backgroundImg})` }}>
       <Wrapper>
-        <ConfirmOverdueTasksModal />
+        <ConfirmOverdueTasks />
         <Dashboard>
-          <ContainerMedium>
+          <Container>
             <UserStatsView />
-          </ContainerMedium>
+          </Container>
           <TasksView />
         </Dashboard>
       </Wrapper>

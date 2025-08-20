@@ -8,7 +8,7 @@ const initialState = {
   health: 100,
   maxHealth: 100,
   gold: 0,
-  isLoaded: false,
+  loaded: false,
 };
 
 const statsSlice = createSlice({
@@ -25,7 +25,7 @@ const statsSlice = createSlice({
         state.health = action.payload.hp;
         state.maxHealth = action.payload.maxHp;
         state.gold = action.payload.gold;
-        state.isLoaded = true;
+        state.loaded = true;
       })
 
       .addCase(resetStats.fulfilled, (state, action) => {

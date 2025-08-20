@@ -75,16 +75,11 @@ export const useOverdueTasks = () => {
     setTaskStatuses({});
   };
 
-  const handleClose = () => {
-    handleConfirm();
-  };
-
   return {
     showModal,
     overdueTasks,
     taskStatuses,
     handleTaskStatusChange,
     handleConfirm,
-    handleClose,
   };
 };

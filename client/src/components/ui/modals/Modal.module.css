@@ -13,15 +13,34 @@
 .modal {
   background-color: #fffdf8;
   border-radius: 1rem;
-  max-width: 500px;
   width: 100%;
-  padding: 1.5rem;
+  padding: 1.5rem 1rem;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   position: relative;
   animation: slideIn 0.3s ease-out;
   color: #1f2937;
   max-height: 90vh;
   overflow-y: auto;
+}
+
+.modal.noClose {
+  padding-top: 2rem;
+}
+
+.modal.small {
+  max-width: 300px;
+}
+
+.modal.medium {
+  max-width: 500px;
+}
+
+.modal.large {
+  max-width: 800px;
+}
+
+.modal.extralarge {
+  max-width: 1200px;
 }
 
 @keyframes slideIn {
@@ -39,16 +58,25 @@
   position: absolute;
   top: 0.75rem;
   right: 0.75rem;
-  background: none;
+  background: rgba(0, 0, 0, 0.05);
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
   color: #4b5563;
-  transition: color 0.2s ease;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    transform 0.15s ease;
   width: 2rem;
   height: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
+}
+
+.close:hover {
+  color: #111827;
+  background-color: rgba(0, 0, 0, 0.1);
+  transform: rotate(90deg);
 }

@@ -1,6 +1,6 @@
 import { Wrapper } from "@/components/ui/wrappers/Wrapper";
 import { Dashboard } from "@/components/ui/wrappers/Dashboard";
-import { ContainerMedium } from "@/components/ui/wrappers/ContainerMedium";
+import { Container } from "@/components/ui/wrappers/Container";
 import { Answers } from "@/components/support/Answers";
 import { Feedback } from "../components/support/Feedback";
 
@@ -13,12 +13,12 @@ const SupportPage = () => {
     <div className={styles.supportWrapper} style={{ backgroundImage: `url(${backgroundImg})` }}>
       <Wrapper>
         <Dashboard>
-          <ContainerMedium>
+          <Container>
             <Answers />
-          </ContainerMedium>
-          <ContainerMedium>
+          </Container>
+          <Container>
             <Feedback />
-          </ContainerMedium>
+          </Container>
         </Dashboard>
       </Wrapper>
     </div>

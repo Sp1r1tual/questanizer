@@ -1,13 +1,15 @@
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 
+import { Modal } from "../ui/modals/Modal";
+
 import { resetBoss } from "@/store/boss/bossBattleSlice";
 
 import { resetStats } from "@/store/stats/userStatsThunks";
 
-import styles from "./DefeatUserModal.module.css";
+import styles from "./DefeatUserView.module.css";
 
-const DefeatUserModal = ({ onRestart }) => {
+const DefeatUserView = ({ isOpen, onRestart }) => {
   const dispatch = useDispatch();
 
   const { t } = useTranslation();
@@ -19,16 +21,14 @@ const DefeatUserModal = ({ onRestart }) => {
   };
 
   return (
-    <div className={styles.overlay}>
-      <div className={styles.modal}>
-        <h2>{t("defeat.title")}</h2>
-        <p>{t("defeat.message")}</p>
-        <button onClick={handleRestart} className={styles.button}>
-          {t("defeat.restartButton")}
-        </button>
-      </div>
-    </div>
+    <Modal isOpen={isOpen} size="medium" closeBtn={false}>
+      <h2>{t("defeat.title")}</h2>
+      <p>{t("defeat.message")}</p>
+      <button onClick={handleRestart} className={styles.button}>
+        {t("defeat.restartButton")}
+      </button>
+    </Modal>
   );
 };
 
-export { DefeatUserModal };
+export { DefeatUserView };

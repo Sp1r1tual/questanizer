@@ -1,6 +1,6 @@
 import { Wrapper } from "@/components/ui/wrappers/Wrapper";
 import { Dashboard } from "@/components/ui/wrappers/Dashboard";
-import { ContainerMedium } from "@/components/ui/wrappers/ContainerMedium";
+import { Container } from "@/components/ui/wrappers/Container";
 import { UserStatsView } from "@/components/stats/UserStatsView";
 import { BossBattle } from "@/components/boss/BossBattle";
 
@@ -13,12 +13,12 @@ const BossBattlePage = () => {
     <div className={styles.bossWrapper} style={{ backgroundImage: `url(${backgroundImg})` }}>
       <Wrapper>
         <Dashboard>
-          <ContainerMedium>
+          <Container>
             <UserStatsView />
-          </ContainerMedium>
-          <ContainerMedium>
+          </Container>
+          <Container>
             <BossBattle />
-          </ContainerMedium>
+          </Container>
         </Dashboard>
       </Wrapper>
     </div>
