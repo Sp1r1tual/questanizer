@@ -35,7 +35,7 @@ const Answers = () => {
   return (
     <div className={styles.answersPage}>
       <h1 className={styles.title}>{t("support.faqTitle")}</h1>
-      <Loader visible={loading} />
+      {loading && <Loader />}
       <div className={styles.faqList}>
         {faqs.map((faq, index) => (
           <AnswerItem

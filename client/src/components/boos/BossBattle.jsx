@@ -32,7 +32,7 @@ const BossBattle = () => {
 
   return (
     <div>
-      <Loader visible={loading} />
+      {loading && <Loader />}
       {!boss.bossId && <BossBattleStartBtn onClick={handleStartBattle} />}
       {boss.bossId && (
         <div className={styles.battleContainer}>
