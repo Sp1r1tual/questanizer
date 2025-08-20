@@ -17,8 +17,9 @@ const useAuth = () => {
 
   const registerUser = (credentials) => dispatch(register(credentials));
 
-  const signOut = () => {
-    dispatch(logout());
+  const signOut = async () => {
+    await dispatch(logout());
+
     clearAllState(dispatch);
   };
 
