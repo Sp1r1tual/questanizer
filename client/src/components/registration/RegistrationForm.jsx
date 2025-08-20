@@ -3,19 +3,19 @@ import { useTranslation } from "react-i18next";
 
 import { useAuth } from "@/hooks/auth/useAuth";
 import { useForm } from "@/hooks/auth/useForm";
+import { useTermsAgreement } from "@/hooks/auth/useTermsAgreement";
 
 import { Loader } from "../ui/loaders/Loader";
+import { Terms } from "../terms/Terms";
 
 import { validateRegistrationForm } from "@/utils/validation/validateFormFields";
 
 import styles from "./RegistrationForm.module.css";
 
 const RegistrationForm = () => {
-  const { registerUser, authError, clearError } = useAuth();
-
   const navigate = useNavigate();
 
-  const { t } = useTranslation();
+  const { registerUser, authError, clearError } = useAuth();
 
   const { setSuccessMessage, errors, handleChange, handleSubmit, message, values, isLoading } =
     useForm({
@@ -23,12 +23,22 @@ const RegistrationForm = () => {
       validate: validateRegistrationForm,
     });
 
+  const {
+    showTerms,
+    setShowTerms,
+    setPendingCredentials,
+    hasAcceptedTerms,
+    acceptTerms,
+    declineTerms,
+  } = useTermsAgreement();
+
+  const { t } = useTranslation();
+
   const handleRegistration = async ({ email, password }) => {
     const action = await registerUser({ email, password });
 
     if (action.meta.requestStatus === "fulfilled") {
       setSuccessMessage(`Activation link was sent to ${email}💌`);
-
       setTimeout(() => {
         navigate("/login", { replace: true });
       }, 2000);
@@ -36,6 +46,17 @@ const RegistrationForm = () => {
 
     return action;
   };
+
+  const handleFormSubmit = (values) => {
+    if (hasAcceptedTerms) {
+      handleRegistration(values);
+    } else {
+      setPendingCredentials(values);
+      setShowTerms(true);
+    }
+  };
+
+  const handleAccept = () => acceptTerms(handleRegistration);
 
   const allErrors = [
     errors.fillAllFields,
@@ -46,19 +67,19 @@ const RegistrationForm = () => {
   ].filter(Boolean);
 
   const handleFieldChange = (event) => {
-    if (authError) {
-      clearError();
-    }
-
+    if (authError) clearError();
     return handleChange(event);
   };
 
   return (
     <>
+      <Terms isOpen={showTerms} onAccept={handleAccept} onDecline={declineTerms} />
+
       {isLoading && <Loader />}
+
       <div className={styles.contentForm}>
         <h2 className={styles.formTitle}>{t("auth.registration.title")}</h2>
-        <form onSubmit={handleSubmit(handleRegistration)} aria-label="registration form" noValidate>
+        <form onSubmit={handleSubmit(handleFormSubmit)} aria-label="registration form" noValidate>
           <div className={styles.formGroup}>
             <label htmlFor="email" className={styles.formLabel}>
               {t("shared.emailLabel")}
