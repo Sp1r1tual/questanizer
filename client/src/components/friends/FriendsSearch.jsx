@@ -1,5 +1,4 @@
 import { useTranslation } from "react-i18next";
-
 import { useFriendsSearch } from "@/hooks/user/useFriendsSearch";
 
 import { Pagination } from "../ui/pagination/Pagination";
@@ -32,6 +31,8 @@ const FriendsSearch = ({ getFriendStatus, onAdd, onAccept, onRemove, onShowProfi
     if (onShowProfile) onShowProfile(userId);
   };
 
+  const currentResults = results[currentPage] || [];
+
   return (
     <div>
       <div className={styles.searchContainer}>
@@ -42,11 +43,7 @@ const FriendsSearch = ({ getFriendStatus, onAdd, onAccept, onRemove, onShowProfi
           value={input}
           onChange={(event) => onInputChange(event.target.value)}
           placeholder={t("friends.searchPlaceholder")}
-          onKeyDown={(event) => {
-            if (event.key === "Enter") {
-              handleSearch();
-            }
-          }}
+          onKeyDown={(event) => event.key === "Enter" && handleSearch()}
         />
         <button className={styles.searchButton} onClick={() => handleSearch(1)}>
           {t("friends.searchButton")}
@@ -59,7 +56,7 @@ const FriendsSearch = ({ getFriendStatus, onAdd, onAccept, onRemove, onShowProfi
             <div className={styles.searchMessage}>{t(error)}</div>
           ) : message ? (
             <p className={styles.searchMessage}>{message}</p>
-          ) : results.length > 0 ? (
+          ) : currentResults.length > 0 ? (
             <>
               {totalResults > 0 && (
                 <div className={styles.searchInfo}>
@@ -69,7 +66,7 @@ const FriendsSearch = ({ getFriendStatus, onAdd, onAccept, onRemove, onShowProfi
               )}
 
               <div className={styles.usersList}>
-                {results.map((user) => (
+                {currentResults.map((user) => (
                   <FriendItem
                     key={user.id}
                     friend={user}
@@ -93,7 +90,7 @@ const FriendsSearch = ({ getFriendStatus, onAdd, onAccept, onRemove, onShowProfi
               />
             </>
           ) : (
-            <p className={styles.noResults}> {t("friends.noSearchResults")}</p>
+            <p className={styles.noResults}>{t("friends.noSearchResults")}</p>
           )}
         </div>
       )}

@@ -9,10 +9,9 @@ import { validateSearchQuery } from "@/utils/validation/validateSearchQuery";
 
 const useFriendsSearch = () => {
   const [input, setInput] = useState("");
-  const [results, setResults] = useState([]);
+  const [results, setResults] = useState({});
   const [message, setMessage] = useState(null);
   const [error, setError] = useState(null);
-  const [isLoading, setLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
 
   const currentUserId = useSelector((state) => state.auth.user.id);
@@ -31,45 +30,39 @@ const useFriendsSearch = () => {
   } = usePagination();
 
   const handleSearch = async (page = 1) => {
-    const query = input.trim();
+    const trimmedQuery = input.trim();
 
-    setError(null);
-    setMessage(null);
-    setHasSearched(true);
-
-    if (page === 1) setResults([]);
+    if (!trimmedQuery) return;
 
     const { valid, error: validationError } = validateSearchQuery(
-      query,
+      trimmedQuery,
       currentUserId,
       currentUserName,
     );
 
     if (!valid) return validationError && setError(validationError);
 
-    try {
-      setLoading(true);
-      const { data } = await $api.get(`/users/search`, {
-        params: {
-          query,
-          page,
-          limit,
-        },
-      });
+    setError(null);
+    setMessage(null);
+    setHasSearched(true);
 
-      setResults(data.users || []);
-      setMessage(data.message || null);
-
+    if (results[page]) {
       setCurrentPage(page);
-      setPaginationData({
-        totalPages: data.totalPages,
-        totalResults: data.totalResults,
-      });
-    } catch {
-      setError("There was an error while searching. Please try again");
-    } finally {
-      setLoading(false);
+      return;
     }
+
+    const { data } = await $api.get(`/users/search`, {
+      params: { query: trimmedQuery, page, limit },
+    });
+
+    setResults((prev) => ({ ...prev, [page]: data.users || [] }));
+    setMessage(data.message || null);
+
+    setCurrentPage(page);
+    setPaginationData({
+      totalPages: data.totalPages,
+      totalResults: data.totalResults,
+    });
   };
 
   const handlePageChange = (page) => {
@@ -78,9 +71,9 @@ const useFriendsSearch = () => {
 
   const onInputChange = (value) => {
     setInput(value);
+    setResults({});
     setError(null);
     setHasSearched(false);
-
     setCurrentPage(1);
     setPaginationData({ totalPages: 0, totalResults: 0 });
   };
@@ -90,7 +83,7 @@ const useFriendsSearch = () => {
     results,
     message,
     error,
-    isLoading,
+
     hasSearched,
     currentPage,
     totalPages,
