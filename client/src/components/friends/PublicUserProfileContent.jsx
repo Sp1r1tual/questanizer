@@ -2,8 +2,6 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
-import { Loader } from "../ui/loaders/Loader";
-
 import { fetchPublicUserProfile } from "@/store/user/publicUserProfileThunks";
 
 import { formatDate } from "@/utils/date/formatDate";
@@ -17,7 +15,6 @@ const PublicUserProfileContent = ({ userId, onBack, onOpenChat }) => {
   const dispatch = useDispatch();
 
   const publicProfile = useSelector((state) => state.publicUser.profile);
-  const isLoading = useSelector((state) => state.publicUser.isLoading);
 
   const { t } = useTranslation();
 
@@ -26,10 +23,6 @@ const PublicUserProfileContent = ({ userId, onBack, onOpenChat }) => {
       dispatch(fetchPublicUserProfile(userId));
     }
   }, [dispatch, userId]);
-
-  if (!publicProfile || isLoading) {
-    return <Loader />;
-  }
 
   const { username, level, health, registrationDate, bio, photoUrl } = publicProfile;
   const formattedDate = formatDate(registrationDate);

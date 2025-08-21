@@ -7,7 +7,7 @@
   align-items: center;
   padding: 1rem;
   backdrop-filter: blur(2px);
-  z-index: 1000;
+  z-index: 1300;
 }
 
 .modal {

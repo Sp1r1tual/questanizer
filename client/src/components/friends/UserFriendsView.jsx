@@ -16,7 +16,6 @@ const UserFriendsView = ({ isOpen, onClose }) => {
   const [currentView, setCurrentView] = useState("friends");
   const [selectedUserId, setSelectedUserId] = useState(null);
 
-  const [isChatOpen, setIsChatOpen] = useState(false);
   const [chatUserId, setChatUserId] = useState(null);
 
   const { t } = useTranslation();
@@ -44,56 +43,58 @@ const UserFriendsView = ({ isOpen, onClose }) => {
 
   const handleOpenChat = (userId) => {
     setChatUserId(userId);
-    setIsChatOpen(true);
+    setCurrentView("chat");
   };
 
   const handleCloseChat = () => {
-    setIsChatOpen(false);
     setChatUserId(null);
+    setCurrentView("profile");
   };
 
   if (isLoading) return <Loader />;
 
   return (
-    <>
-      <ChatView isOpen={isChatOpen} onClose={handleCloseChat} userId={chatUserId} />
+    <Modal isOpen={isOpen} onClose={onClose}>
+      {currentView === "friends" && (
+        <>
+          <h2 className={styles.modalTitle}>{t("friends.friendsTitle")}</h2>
 
-      <Modal isOpen={isOpen} onClose={onClose}>
-        {currentView === "friends" ? (
-          <>
-            <h2 className={styles.modalTitle}>{t("friends.friendsTitle")}</h2>
-
-            <FriendsSearch
-              currentUser={currentUser}
-              getFriendStatus={getFriendStatus}
-              onAdd={handleAddFriend}
-              onAccept={handleAcceptRequest}
-              onRemove={handleRemoveFriendOrCancel}
-              onShowProfile={handleShowProfile}
-            />
-
-            <FriendsList
-              items={friends}
-              onRemove={handleRemoveFriendOrCancel}
-              onShowProfile={handleShowProfile}
-            />
-
-            <FriendsList
-              items={requests}
-              onAccept={handleAcceptRequest}
-              onRemove={handleRemoveFriendOrCancel}
-              onShowProfile={handleShowProfile}
-            />
-          </>
-        ) : (
-          <PublicUserProfileContent
-            userId={selectedUserId}
-            onBack={handleBackToFriends}
-            onOpenChat={handleOpenChat}
+          <FriendsSearch
+            currentUser={currentUser}
+            getFriendStatus={getFriendStatus}
+            onAdd={handleAddFriend}
+            onAccept={handleAcceptRequest}
+            onRemove={handleRemoveFriendOrCancel}
+            onShowProfile={handleShowProfile}
           />
-        )}
-      </Modal>
-    </>
+
+          <FriendsList
+            items={friends}
+            onRemove={handleRemoveFriendOrCancel}
+            onShowProfile={handleShowProfile}
+          />
+
+          <FriendsList
+            items={requests}
+            onAccept={handleAcceptRequest}
+            onRemove={handleRemoveFriendOrCancel}
+            onShowProfile={handleShowProfile}
+          />
+        </>
+      )}
+
+      {currentView === "profile" && selectedUserId && (
+        <PublicUserProfileContent
+          userId={selectedUserId}
+          onBack={handleBackToFriends}
+          onOpenChat={() => handleOpenChat(selectedUserId)}
+        />
+      )}
+
+      {currentView === "chat" && chatUserId && (
+        <ChatView isOpen onClose={handleCloseChat} userId={chatUserId} />
+      )}
+    </Modal>
   );
 };
 

@@ -2,7 +2,6 @@ import { useTranslation } from "react-i18next";
 
 import { useFriendsSearch } from "@/hooks/user/useFriendsSearch";
 
-import { Loader } from "../ui/loaders/Loader";
 import { Pagination } from "../ui/pagination/Pagination";
 import { FriendItem } from "./FriendItem";
 
@@ -53,8 +52,6 @@ const FriendsSearch = ({ getFriendStatus, onAdd, onAccept, onRemove, onShowProfi
           {t("friends.searchButton")}
         </button>
       </div>
-
-      {isLoading && <Loader visible />}
 
       {hasSearched && !isLoading && (
         <div className={styles.searchResults}>
