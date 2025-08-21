@@ -15,8 +15,8 @@ const login = createAsyncThunk("auth/login", async ({ email, password }, thunkAP
     await syncUserLanguage(thunkAPI);
 
     return response.data.user;
-  } catch {
-    return thunkAPI.rejectWithValue("errors.auth.login");
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.response?.data?.message || "errors.auth.login");
   }
 });
 
@@ -27,11 +27,10 @@ const register = createAsyncThunk("auth/register", async ({ email, password }, t
     localStorage.setItem("token", response.data.accessToken);
 
     return response.data.user;
-  } catch {
-    return thunkAPI.rejectWithValue("errors.auth.registration");
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.response?.data?.message || "errors.auth.registration");
   }
 });
-
 const logout = createAsyncThunk("auth/logout", async () => {
   await AuthService.logout();
 

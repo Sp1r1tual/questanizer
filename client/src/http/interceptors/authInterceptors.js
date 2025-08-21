@@ -40,9 +40,14 @@ const authInterceptors = (axiosInstance) => {
     async (error) => {
       const originalRequest = error.config;
 
+      const publicPaths = ["/login", "/registration"];
+
+      if (publicPaths.some((path) => originalRequest.url.includes(path))) {
+        return Promise.reject(error);
+      }
+
       if (error.response?.status === 401 && !originalRequest._retry) {
         originalRequest._retry = true;
-
         try {
           const newToken = await refreshToken();
 

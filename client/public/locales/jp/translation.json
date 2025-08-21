@@ -228,7 +228,9 @@
       "forgotLink": "こちらで回復",
       "submit": "ログイン",
       "noAccount": "アカウントをお持ちでないですか？",
-      "registerLink": "登録"
+      "registerLink": "登録",
+      "userNotFound": "このメールアドレスのユーザーが見つかりませんでした",
+      "incorrectPassword": "パスワードが間違っています"
     },
     "registration": {
       "title": "登録",
@@ -237,7 +239,8 @@
       "submit": "登録",
       "loading": "登録中...",
       "haveAccount": "すでにアカウントをお持ちですか？",
-      "loginLink": "ログイン"
+      "loginLink": "ログイン",
+      "alreadyRegistered": "このメールアドレスのユーザーはすでに登録されています"
     }
   },
 

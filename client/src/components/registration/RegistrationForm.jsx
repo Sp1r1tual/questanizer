@@ -67,7 +67,6 @@ const RegistrationForm = () => {
   ].filter(Boolean);
 
   const handleFieldChange = (event) => {
-    if (authError) clearError();
     return handleChange(event);
   };
 

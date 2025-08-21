@@ -228,7 +228,9 @@
       "forgotLink": "Hier wiederherstellen",
       "submit": "Einloggen",
       "noAccount": "Noch keinen Account?",
-      "registerLink": "Registrieren"
+      "registerLink": "Registrieren",
+      "userNotFound": "Benutzer mit dieser E-Mail-Adresse wurde nicht gefunden",
+      "incorrectPassword": "Falsches Passwort"
     },
     "registration": {
       "title": "Registrierung",
@@ -237,7 +239,8 @@
       "submit": "Registrieren",
       "loading": "Registrierung...",
       "haveAccount": "Bereits einen Account?",
-      "loginLink": "Einloggen"
+      "loginLink": "Einloggen",
+      "alreadyRegistered": "Ein Benutzer mit dieser E-Mail ist bereits registriert"
     }
   },
 

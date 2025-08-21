@@ -32,7 +32,12 @@ export default defineConfig([
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
       "react/jsx-no-target-blank": "off",
-      "prettier/prettier": "error",
+      "prettier/prettier": [
+        "error",
+        {
+          endOfLine: "auto",
+        },
+      ],
       "prefer-const": "error",
       "react/jsx-boolean-value": ["error", "never"],
       "react/jsx-key": "error",
