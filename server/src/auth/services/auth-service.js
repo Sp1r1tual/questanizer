@@ -16,7 +16,7 @@ class AuthService {
     const candidate = await UserModel.findOne({ email });
 
     if (candidate) {
-      throw ApiError.Conflict(`A user with this mailbox: ${email} is already registered.`);
+      throw ApiError.Conflict("auth.registration.alreadyRegistered");
     }
 
     const hashPassword = await bcrypt.hash(password, 3);
@@ -60,13 +60,13 @@ class AuthService {
     const user = await UserModel.findOne({ email });
 
     if (!user) {
-      throw ApiError.NotFound("User with this email address was not found");
+      throw ApiError.NotFound("auth.login.userNotFound");
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
-      throw ApiError.UnauthorizedError("Incorrect password");
+      throw ApiError.UnauthorizedError("auth.login.incorrectPassword");
     }
 
     if (!user.isActivated) {

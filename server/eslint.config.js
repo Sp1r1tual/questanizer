@@ -30,7 +30,12 @@ export default defineConfig([
     rules: {
       "no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
       "node/no-unsupported-features/es-syntax": "off",
-      "prettier/prettier": "error",
+      "prettier/prettier": [
+        "error",
+        {
+          endOfLine: "auto",
+        },
+      ],
       "prefer-const": "error",
       "no-var": "error",
       "no-duplicate-imports": "error",
