@@ -4,7 +4,8 @@ import { useTranslation } from "react-i18next";
 import { useAuth } from "@/hooks/auth/useAuth";
 import { useForm } from "@/hooks/auth/useForm";
 
-import { Loader } from "../ui/loaders/Loader";
+import { Loader } from "../../ui/loaders/Loader";
+import { FormErrors } from "../../ui/forms/FormErrors";
 
 import { validateLoginForm } from "@/utils/validation/validateFormFields";
 
@@ -86,11 +87,7 @@ const LoginForm = () => {
             />
           </div>
 
-          {allErrors.length > 0 && (
-            <div className={styles.error} role="alert">
-              <p>{allErrors.map((err) => t(err)).join(", ")}</p>
-            </div>
-          )}
+          <FormErrors errors={allErrors} t={t} />
 
           <div className={styles.buttons}>
             <button type="submit" className={styles.submitButton} disabled={isLoading}>

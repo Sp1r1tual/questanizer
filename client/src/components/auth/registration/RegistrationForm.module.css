@@ -11,6 +11,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background: #f7f1ee;
 }
 
 .formTitle {
@@ -18,6 +19,7 @@
   font-size: 1.5rem;
   margin-bottom: 1rem;
   color: #4d2c20;
+  font-weight: bold;
 }
 
 .formGroup {
@@ -25,6 +27,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  position: relative;
 }
 
 .formLabel {
@@ -33,6 +36,11 @@
   color: #3b2b23;
   font-size: 0.875rem;
   text-align: left;
+  transition: color 0.2s ease;
+}
+
+.formLabel:hover {
+  color: #7d5032;
 }
 
 .formInput {
@@ -47,10 +55,6 @@
   width: 268px;
   box-sizing: border-box;
 }
-.formInput.errorInput {
-  border-color: darkred;
-  background-color: #ffebee;
-}
 
 .formInput:focus {
   border-color: #7d5032;
@@ -58,18 +62,16 @@
   background-color: #fffaf7;
 }
 
-.error {
-  color: darkred;
-  font-weight: bold;
-  margin-bottom: 0.75rem;
-  font-size: 0.75rem;
-  text-align: center;
+.formInput.errorInput {
+  border-color: darkred;
+  background-color: #ffebee;
 }
 
 .buttons {
   display: flex;
   justify-content: center;
   gap: 0.75rem;
+  margin-top: 1rem;
 }
 
 .submitButton {

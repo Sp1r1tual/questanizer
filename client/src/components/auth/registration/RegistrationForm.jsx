@@ -5,8 +5,9 @@ import { useAuth } from "@/hooks/auth/useAuth";
 import { useForm } from "@/hooks/auth/useForm";
 import { useTermsAgreement } from "@/hooks/auth/useTermsAgreement";
 
-import { Loader } from "../ui/loaders/Loader";
-import { Terms } from "../terms/Terms";
+import { Loader } from "../../ui/loaders/Loader";
+import { Terms } from "../../terms/Terms";
+import { FormErrors } from "../../ui/forms/FormErrors";
 
 import { validateRegistrationForm } from "@/utils/validation/validateFormFields";
 
@@ -136,11 +137,7 @@ const RegistrationForm = () => {
             />
           </div>
 
-          {allErrors.length > 0 && (
-            <div className={styles.error} role="alert">
-              <p>{allErrors.map((err) => t(err)).join(", ")}</p>
-            </div>
-          )}
+          <FormErrors errors={allErrors} t={t} />
 
           {message && (
             <div className={styles.success} role="alert">

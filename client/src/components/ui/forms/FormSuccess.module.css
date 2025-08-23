@@ -1,0 +1,7 @@
+.success {
+  color: green;
+  font-weight: bold;
+  margin-bottom: 0.75rem;
+  font-size: 0.75rem;
+  text-align: center;
+}
