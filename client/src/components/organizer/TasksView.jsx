@@ -6,7 +6,7 @@ import { useTasks } from "@/hooks/tasks/useTasks";
 import { useTaskFilters } from "@/hooks/tasks/useTaskFilters";
 import { useConfirmModalTexts } from "@/hooks/tasks/useConfirmModalTexts";
 import { useAuth } from "@/hooks/auth/useAuth";
-import { useTaskModalState } from "@/hooks/tasks/useTaskModalState";
+import { useTaskModal } from "@/hooks/tasks/useTaskModal";
 
 import { Modal } from "../ui/modals/Modal";
 import { Container } from "../ui/wrappers/Container";
@@ -64,7 +64,7 @@ const TasksView = () => {
     handleBack,
     handleFinalSubmit,
     setDifficulty,
-  } = useTaskModalState({
+  } = useTaskModal({
     deadline,
     setDeadline: onSetDeadline,
     onSubmit: onAddTask,

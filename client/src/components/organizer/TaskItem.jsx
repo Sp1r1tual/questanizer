@@ -61,16 +61,6 @@ const TaskItem = ({
           )}
         </div>
       </div>
-
-      <div className={styles.taskInfo}>
-        <span className={styles.timestamp}>
-          📅 {t("shared.createdAt")} {new Date(task.createdAt).toLocaleDateString("uk-UA")}
-        </span>
-        <span className={styles.difficulty}>⚔️ {t(`shared.${task.difficulty}`)}</span>
-        {deadlineDate && (
-          <span className={styles.timestamp}>⏰ {deadlineDate.toLocaleDateString("uk-UA")}</span>
-        )}
-      </div>
     </div>
   );
 };

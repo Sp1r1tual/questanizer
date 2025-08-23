@@ -57,6 +57,26 @@
   background-color: #d87966;
 }
 
+.difficultyButton.easy:hover {
+  background-color: #c5e1a5;
+  color: #33691e;
+}
+
+.difficultyButton.medium:hover {
+  background-color: #fff59d;
+  color: #8d6e00;
+}
+
+.difficultyButton.hard:hover {
+  background-color: #ffcc80;
+  color: #e65100;
+}
+
+.difficultyButton.critical:hover {
+  background-color: #e1bee7;
+  color: #6a1b9a;
+}
+
 .backButton {
   margin-top: 10px;
   padding: 10px 16px;

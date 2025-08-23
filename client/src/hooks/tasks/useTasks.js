@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 
-import { useTaskModals } from "./useTaskModals";
+import { useTaskModal } from "./useTaskModal";
 import { useTaskInput } from "./useTaskInput";
 import { useTaskActions } from "./useTaskActions";
 
@@ -11,24 +11,12 @@ const useTasks = () => {
 
   const { tasks, loading, hasLoaded } = useSelector((state) => state.tasks);
 
-  const {
-    modalActive,
-    confirmModal,
-    onOpenModal,
-    onCloseModal,
-    onOpenConfirmModal,
-    onOpenGroupDeleteConfirmModal,
-    onCloseConfirmModal,
-  } = useTaskModals();
-
   const { inputTask, deadline, isInputInvalid, onInputChange, onSetDeadline } = useTaskInput();
-
-  const { onDeleteTask, onCompleteTask, onConfirmAction } = useTaskActions();
 
   const onAddTask = ({ hasDeadline, difficulty }) => {
     const trimmed = inputTask.trim();
 
-    if (!trimmed || (hasDeadline && !deadline)) return;
+    if (!trimmed || (hasDeadline && !deadline)) return { success: false };
 
     dispatch(
       addTaskAsync({
@@ -37,7 +25,25 @@ const useTasks = () => {
         difficulty,
       }),
     );
+
+    return { success: true };
   };
+
+  const {
+    modalActive,
+    confirmModal,
+    onOpenModal,
+    onCloseModal,
+    onOpenConfirmModal,
+    onOpenGroupDeleteConfirmModal,
+    onCloseConfirmModal,
+  } = useTaskModal({
+    deadline,
+    setDeadline: onSetDeadline,
+    onSubmit: onAddTask,
+  });
+
+  const { onDeleteTask, onCompleteTask, onConfirmAction } = useTaskActions();
 
   const onGroupDeleteCompleted = () => onOpenGroupDeleteConfirmModal("group-delete-completed");
 
