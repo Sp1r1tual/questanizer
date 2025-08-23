@@ -3,14 +3,11 @@ import { Dashboard } from "@/components/ui/wrappers/Dashboard";
 import { Container } from "@/components/ui/wrappers/Container";
 import { UserStatsView } from "@/components/stats/UserStatsView";
 import { BossBattle } from "@/components/boss/BossBattle";
-
-import backgroundImg from "@/assets/boss-fight-background.png";
-
-import styles from "./BossBattlePage.module.css";
+import { BackgroundLayout } from "@/layouts/BackgroundLayout";
 
 const BossBattlePage = () => {
   return (
-    <div className={styles.bossWrapper} style={{ backgroundImage: `url(${backgroundImg})` }}>
+    <BackgroundLayout>
       <Wrapper>
         <Dashboard>
           <Container>
@@ -21,7 +18,7 @@ const BossBattlePage = () => {
           </Container>
         </Dashboard>
       </Wrapper>
-    </div>
+    </BackgroundLayout>
   );
 };
 

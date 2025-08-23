@@ -3,14 +3,11 @@ import { Dashboard } from "@/components/ui/wrappers/Dashboard";
 import { Container } from "@/components/ui/wrappers/Container";
 import { Answers } from "@/components/support/Answers";
 import { Feedback } from "../components/support/Feedback";
-
-import backgroundImg from "@/assets/support-background.png";
-
-import styles from "./SupportPage.module.css";
+import { BackgroundLayout } from "../layouts/BackgroundLayout";
 
 const SupportPage = () => {
   return (
-    <div className={styles.supportWrapper} style={{ backgroundImage: `url(${backgroundImg})` }}>
+    <BackgroundLayout>
       <Wrapper>
         <Dashboard>
           <Container>
@@ -21,7 +18,7 @@ const SupportPage = () => {
           </Container>
         </Dashboard>
       </Wrapper>
-    </div>
+    </BackgroundLayout>
   );
 };
 

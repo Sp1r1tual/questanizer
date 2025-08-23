@@ -6,17 +6,6 @@
   height: 100vh;
 }
 
-.loginWrapper {
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  background-attachment: fixed;
-}
-
 .languageBtnWrapper {
   position: fixed;
   top: 1rem;

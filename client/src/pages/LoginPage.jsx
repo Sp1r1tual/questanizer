@@ -2,14 +2,13 @@ import { ChangeLanguageBtn } from "@/components/ui/buttons/changeLanguageBtn";
 import { LoginImage } from "@/components/login/LoginImage";
 import { LoginForm } from "@/components/login/LoginForm";
 import { Footer } from "@/components/footer/Footer";
-
-import backgroundImg from "@/assets/login-background.png";
+import { BackgroundLayout } from "../layouts/BackgroundLayout";
 
 import styles from "./LoginPage.module.css";
 
 const LoginPage = () => {
   return (
-    <div className={styles.loginWrapper} style={{ backgroundImage: `url(${backgroundImg})` }}>
+    <BackgroundLayout>
       <div className={styles.authPage}>
         <div className={styles.languageBtnWrapper}>
           <ChangeLanguageBtn />
@@ -22,7 +21,7 @@ const LoginPage = () => {
         </div>
         <Footer />
       </div>
-    </div>
+    </BackgroundLayout>
   );
 };
 

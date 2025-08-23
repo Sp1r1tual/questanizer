@@ -7,12 +7,11 @@ import { useForm } from "@/hooks/auth/useForm";
 
 import { Loader } from "@/components/ui/loaders/Loader";
 import { ChangeLanguageBtn } from "@/components/ui/buttons/changeLanguageBtn";
+import { BackgroundLayout } from "../layouts/BackgroundLayout";
 
 import { requestResetPassword } from "@/store/auth/authThunks";
 
 import { validateResetPasswordForm } from "@/utils/validation/validateFormFields";
-
-import backgroundImg from "@/assets/login-background.png";
 
 import styles from "./ResetPasswordPage.module.css";
 
@@ -54,10 +53,7 @@ const ResetPasswordPage = () => {
   return (
     <>
       {isLoading && <Loader />}
-      <div
-        className={styles.resetPasswordWrapper}
-        style={{ backgroundImage: `url(${backgroundImg})` }}
-      >
+      <BackgroundLayout>
         <div className={styles.resetPassword}>
           <div className={styles.languageBtnWrapper}>
             <ChangeLanguageBtn />
@@ -123,7 +119,7 @@ const ResetPasswordPage = () => {
             </form>
           </div>
         </div>
-      </div>
+      </BackgroundLayout>
     </>
   );
 };

@@ -8,14 +8,11 @@ import { UserStatsView } from "@/components/stats/UserStatsView";
 import { MarketBanner } from "@/components/market/MarketBanner";
 import { MarketHeader } from "@/components/market/MarketHeader";
 import { MarketList } from "@/components/market/MarketList";
-
-import backgroundImg from "@/assets/market-background.png";
-
-import styles from "./MarketPage.module.css";
+import { BackgroundLayout } from "../layouts/BackgroundLayout";
 
 const MarketPage = () => {
   return (
-    <div className={styles.marketWrapper} style={{ backgroundImage: `url(${backgroundImg})` }}>
+    <BackgroundLayout>
       <Wrapper>
         <MarketItemView />
         <DraggableCart />
@@ -31,7 +28,7 @@ const MarketPage = () => {
           </Container>
         </Dashboard>
       </Wrapper>
-    </div>
+    </BackgroundLayout>
   );
 };
 

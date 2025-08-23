@@ -5,14 +5,11 @@ import { Container } from "@/components/ui/wrappers/Container";
 import { UserStatsView } from "@/components/stats/UserStatsView";
 import { InventoryHeader } from "@/components/inventory/InventoryHeader";
 import { InventoryList } from "@/components/inventory/InventoryList";
-
-import backgroundImg from "@/assets/inventory-background.png";
-
-import styles from "./InventoryPage.module.css";
+import { BackgroundLayout } from "../layouts/BackgroundLayout";
 
 const InventoryPage = () => {
   return (
-    <div className={styles.inventoryWrapper} style={{ backgroundImage: `url(${backgroundImg})` }}>
+    <BackgroundLayout>
       <Wrapper>
         <InventoryItemView />
         <Dashboard>
@@ -25,7 +22,7 @@ const InventoryPage = () => {
           </Container>
         </Dashboard>
       </Wrapper>
-    </div>
+    </BackgroundLayout>
   );
 };
 

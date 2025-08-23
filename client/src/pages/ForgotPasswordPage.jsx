@@ -6,12 +6,11 @@ import { useForm } from "@/hooks/auth/useForm";
 
 import { Loader } from "@/components/ui/loaders/Loader";
 import { ChangeLanguageBtn } from "@/components/ui/buttons/changeLanguageBtn";
+import { BackgroundLayout } from "../layouts/BackgroundLayout";
 
 import { requestForgotPassword } from "@/store/auth/authThunks";
 
 import { validateForgotPasswordForm } from "@/utils/validation/validateFormFields";
-
-import backgroundImg from "@/assets/login-background.png";
 
 import styles from "./ForgotPasswordPage.module.css";
 
@@ -58,10 +57,7 @@ const ForgotPasswordPage = () => {
   return (
     <>
       {isLoading && <Loader />}
-      <div
-        className={styles.forgotPasswordWrapper}
-        style={{ backgroundImage: `url(${backgroundImg})` }}
-      >
+      <BackgroundLayout>
         <div className={styles.forgotPassword}>
           <div className={styles.languageBtnWrapper}>
             <ChangeLanguageBtn />
@@ -115,7 +111,7 @@ const ForgotPasswordPage = () => {
             </form>
           </div>
         </div>
-      </div>
+      </BackgroundLayout>
     </>
   );
 };
