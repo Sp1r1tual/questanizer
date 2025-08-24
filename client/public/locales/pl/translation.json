@@ -241,7 +241,8 @@
       "haveAccount": "Masz już konto?",
       "loginLink": "Zaloguj się",
       "alreadyRegistered": "Użytkownik o tym adresie e-mail jest już zarejestrowany",
-      "activationLink": "Wiadomość e-mail z linkiem aktywacyjnym została wysłana na adres "
+      "activationLink": "Wiadomość e-mail z linkiem aktywacyjnym została wysłana na adres ",
+      "activateMsg": "Proszę aktywować konto za pomocą poczty elektronicznej"
     }
   },
 

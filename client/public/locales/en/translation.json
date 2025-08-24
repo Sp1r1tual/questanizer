@@ -230,7 +230,8 @@
       "noAccount": "Don't have an account yet?",
       "registerLink": "Register",
       "userNotFound": "User with this email address was not found",
-      "incorrectPassword": "Incorrect password"
+      "incorrectPassword": "Incorrect password",
+      "activateMsg": "Please activate your account via email"
     },
     "registration": {
       "title": "Registration",

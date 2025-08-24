@@ -70,7 +70,7 @@ class AuthService {
     }
 
     if (!user.isActivated) {
-      throw ApiError.Forbidden("Please activate your account via email");
+      throw ApiError.Forbidden("auth.login.activateMsg");
     }
 
     const userDto = new UserDto(user);
