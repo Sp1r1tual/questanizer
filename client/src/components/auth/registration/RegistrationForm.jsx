@@ -7,6 +7,7 @@ import { useTermsAgreement } from "@/hooks/auth/useTermsAgreement";
 
 import { Loader } from "../../ui/loaders/Loader";
 import { FormErrors } from "../../ui/forms/FormErrors";
+import { FormSuccess } from "../../ui/forms/FormSuccess";
 import { SubmitBtn } from "../../ui/buttons/SubmitBtn";
 import { Terms } from "../../terms/Terms";
 
@@ -28,6 +29,7 @@ const RegistrationForm = () => {
     hasAcceptedTerms,
     acceptTerms,
     declineTerms,
+    clearTermsAcceptance,
   } = useTermsAgreement();
 
   const {
@@ -54,12 +56,13 @@ const RegistrationForm = () => {
 
     if (action.meta.requestStatus === "fulfilled") {
       resetForm();
+      clearTermsAcceptance();
 
-      setSuccessMessage(`Activation link was sent to ${email}💌`);
+      setSuccessMessage(`${t("auth.registration.activationLink")}${email} 💌`);
 
       setTimeout(() => {
         navigate("/login", { replace: true });
-      }, 2000);
+      }, 10000);
     }
 
     return action;
@@ -96,8 +99,6 @@ const RegistrationForm = () => {
 
       <div className={styles.contentForm}>
         <h2 className={styles.formTitle}>{t("auth.registration.title")}</h2>
-
-        {message && <div className={styles.successMessage}>{message}</div>}
 
         <form onSubmit={handleSubmit(handleFormSubmit)} aria-label="registration form" noValidate>
           <div className={styles.formGroup}>
@@ -157,11 +158,12 @@ const RegistrationForm = () => {
             />
           </div>
 
+          <FormSuccess message={message} t={t} />
           <FormErrors errors={allErrors} t={t} />
 
           <div className={styles.buttons}>
             <SubmitBtn isLoading={isLoading} loadingText={t("auth.login.loading")}>
-              {t("auth.login.submit")}
+              {t("auth.registration.submit")}
             </SubmitBtn>
           </div>
         </form>

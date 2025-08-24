@@ -24,6 +24,11 @@ const useTermsAgreement = () => {
     setPendingCredentials(null);
   };
 
+  const clearTermsAcceptance = () => {
+    localStorage.removeItem("acceptedTerms");
+    setHasAcceptedTerms(false);
+  };
+
   return {
     showTerms,
     setShowTerms,
@@ -31,6 +36,7 @@ const useTermsAgreement = () => {
     hasAcceptedTerms,
     acceptTerms,
     declineTerms,
+    clearTermsAcceptance,
   };
 };
 

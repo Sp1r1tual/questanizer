@@ -240,7 +240,8 @@
       "loading": "Registrando...",
       "haveAccount": "¿Ya tienes una cuenta?",
       "loginLink": "Iniciar sesión",
-      "alreadyRegistered": "Un usuario con este correo electrónico ya está registrado"
+      "alreadyRegistered": "Un usuario con este correo electrónico ya está registrado",
+      "activationLink": "Se ha enviado un correo electrónico con un enlace de activación a "
     }
   },
 

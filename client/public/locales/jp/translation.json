@@ -240,7 +240,8 @@
       "loading": "登録中...",
       "haveAccount": "すでにアカウントをお持ちですか？",
       "loginLink": "ログイン",
-      "alreadyRegistered": "このメールアドレスのユーザーはすでに登録されています"
+      "alreadyRegistered": "このメールアドレスのユーザーはすでに登録されています",
+      "activationLink": "アクティベーションリンクを記載したメールが送信されました "
     }
   },
 
