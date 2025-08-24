@@ -11,9 +11,13 @@ const SubmitBtn = ({
   ...props
 }) => {
   const getButtonText = () => {
-    if (isLoading && loadingText) loadingText;
+    if (isLoading && loadingText) {
+      return loadingText;
+    }
 
-    if (cooldown > 0 && cooldownTemplate) cooldownTemplate.replace("{seconds}", cooldown);
+    if (cooldown > 0 && cooldownTemplate) {
+      return cooldownTemplate.replace("{seconds}", cooldown);
+    }
 
     return children;
   };

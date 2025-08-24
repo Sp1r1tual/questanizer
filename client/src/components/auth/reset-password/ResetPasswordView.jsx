@@ -5,7 +5,6 @@ import { useTranslation } from "react-i18next";
 
 import { Loader } from "@/components/ui/loaders/Loader";
 import { ChangeLanguageBtn } from "@/components/ui/buttons/ChangeLangBtn";
-import { BackgroundLayout } from "../../../layouts/BackgroundLayout";
 
 import { requestResetPassword } from "@/store/auth/authThunks";
 import { ResetPasswordForm } from "./ResetPasswordForm";
@@ -36,23 +35,22 @@ const ResetPasswordView = () => {
   return (
     <>
       {isLoading && <Loader />}
-      <BackgroundLayout>
-        <div className={styles.resetPassword}>
-          <div className={styles.languageBtnWrapper}>
-            <ChangeLanguageBtn />
-          </div>
-          <div className={styles.container}>
-            <h2 className={styles.heading}>{t("auth.resetPassword.title")}</h2>
-            <ResetPasswordForm
-              onSubmitForm={onResetPassword}
-              isLoading={isLoading}
-              success={success}
-              error={error}
-              t={t}
-            />
-          </div>
+
+      <div className={styles.resetPassword}>
+        <div className={styles.languageBtnWrapper}>
+          <ChangeLanguageBtn />
         </div>
-      </BackgroundLayout>
+        <div className={styles.container}>
+          <h2 className={styles.heading}>{t("auth.resetPassword.title")}</h2>
+          <ResetPasswordForm
+            onSubmitForm={onResetPassword}
+            isLoading={isLoading}
+            success={success}
+            error={error}
+            t={t}
+          />
+        </div>
+      </div>
     </>
   );
 };

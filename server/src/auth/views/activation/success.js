@@ -7,15 +7,25 @@ const activationSuccessHTML = (loginUrl) => `
         <style>
             body {
                 font-family: "Georgia", serif;
-                background-color: #f7f1ee;
                 margin: 0;
                 height: 100vh;
                 display: flex;
                 justify-content: center;
                 align-items: center;
+
+                background: linear-gradient(-45deg, #f7d9d9, #f7eae3ff, #e4d9d4ff, #F7F1EE);
+                background-size: 400% 400%;
+                animation: gradientBG 12s ease infinite;
             }
+
+            @keyframes gradientBG {
+                0% { background-position: 0% 50%; }
+                50% { background-position: 100% 50%; }
+                100% { background-position: 0% 50%; }
+            }
+
             .contentForm {
-                background-color: #f7f1ee;
+                background-color: rgba(247, 241, 238, 0.9);
                 padding: 1.5rem;
                 border-radius: 0.75rem;
                 box-shadow: 0 0 15px rgba(80, 50, 40, 0.2);

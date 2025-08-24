@@ -6,9 +6,9 @@ const formatDate = (dateString, fallback = "Unknown") => {
   if (isNaN(date)) return fallback;
 
   return date.toLocaleDateString("en-US", {
+    day: "2-digit",
+    month: "2-digit",
     year: "numeric",
-    month: "long",
-    day: "numeric",
   });
 };
 

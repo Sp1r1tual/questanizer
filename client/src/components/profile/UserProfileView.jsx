@@ -88,7 +88,7 @@ const UserProfileView = ({ isOpen, onClose }) => {
             </div>
             <div className={styles.infoItem}>
               <strong className={styles.infoLabel}>{t("shared.bio")}:</strong>
-              <span className={styles.infoValue}>{bio || t("profile.noBio")}</span>
+              <span className={styles.infoValue}>{bio || t("shared.noBio")}</span>
             </div>
           </div>
 
