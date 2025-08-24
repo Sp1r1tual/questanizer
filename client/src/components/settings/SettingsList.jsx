@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 
-import { ChangeLanguageBtn } from "../ui/buttons/changeLanguageBtn";
+import { ChangeLanguageBtn } from "../ui/buttons/ChangeLangBtn";
 
 import styles from "./SettingsList.module.css";
 

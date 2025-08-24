@@ -1,4 +1,4 @@
-import { ChangeLanguageBtn } from "@/components/ui/buttons/changeLanguageBtn";
+import { ChangeLanguageBtn } from "@/components/ui/buttons/ChangeLangBtn";
 import { LoginImage } from "./LoginImage";
 import { LoginForm } from "./LoginForm";
 import { Footer } from "@/components/footer/Footer";

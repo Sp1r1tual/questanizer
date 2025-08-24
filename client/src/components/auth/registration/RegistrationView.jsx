@@ -1,4 +1,4 @@
-import { ChangeLanguageBtn } from "@/components/ui/buttons/changeLanguageBtn";
+import { ChangeLanguageBtn } from "@/components/ui/buttons/ChangeLangBtn";
 import { RegistrationForm } from "./RegistrationForm";
 import { Footer } from "@/components/footer/Footer";
 

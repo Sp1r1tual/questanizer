@@ -74,23 +74,6 @@
   margin-top: 1rem;
 }
 
-.submitButton {
-  padding: 0.5rem 1rem;
-  background-color: #7d5032;
-  color: white;
-  border: none;
-  border-radius: 0.4rem;
-  font-weight: bold;
-  font-size: 0.875rem;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  width: 100%;
-}
-
-.submitButton:hover {
-  background-color: #5e3e28;
-}
-
 .registerLink {
   text-align: center;
   margin-top: 0.75rem;
@@ -120,16 +103,11 @@
   }
 
   .formLabel,
-  .formInput,
-  .submitButton {
+  .formInput {
     font-size: 0.75rem;
   }
 
   .formInput {
-    padding: 0.4rem 0.6rem;
-  }
-
-  .submitButton {
     padding: 0.4rem 0.6rem;
   }
 
@@ -149,16 +127,11 @@
   }
 
   .formLabel,
-  .formInput,
-  .submitButton {
+  .formInput {
     font-size: 0.95rem;
   }
 
   .formInput {
-    padding: 0.65rem 0.9rem;
-  }
-
-  .submitButton {
     padding: 0.65rem 0.9rem;
   }
 

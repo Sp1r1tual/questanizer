@@ -6,8 +6,9 @@ import { useForm } from "@/hooks/auth/useForm";
 import { useTermsAgreement } from "@/hooks/auth/useTermsAgreement";
 
 import { Loader } from "../../ui/loaders/Loader";
-import { Terms } from "../../terms/Terms";
 import { FormErrors } from "../../ui/forms/FormErrors";
+import { SubmitBtn } from "../../ui/buttons/SubmitBtn";
+import { Terms } from "../../terms/Terms";
 
 import { validateRegistrationForm } from "@/utils/validation/validateFormFields";
 
@@ -18,11 +19,7 @@ const RegistrationForm = () => {
 
   const { registerUser, authError, clearError } = useAuth();
 
-  const { setSuccessMessage, errors, handleChange, handleSubmit, message, values, isLoading } =
-    useForm({
-      initialValues: { email: "", password: "", confirmPassword: "" },
-      validate: validateRegistrationForm,
-    });
+  const { t } = useTranslation();
 
   const {
     showTerms,
@@ -33,13 +30,33 @@ const RegistrationForm = () => {
     declineTerms,
   } = useTermsAgreement();
 
-  const { t } = useTranslation();
+  const {
+    values,
+    errors,
+    isLoading,
+    message,
+    handleChange,
+    handleSubmit,
+    resetForm,
+    setSuccessMessage,
+    clearMessages,
+  } = useForm({
+    initialValues: {
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+    validate: validateRegistrationForm,
+  });
 
   const handleRegistration = async ({ email, password }) => {
     const action = await registerUser({ email, password });
 
     if (action.meta.requestStatus === "fulfilled") {
+      resetForm();
+
       setSuccessMessage(`Activation link was sent to ${email}💌`);
+
       setTimeout(() => {
         navigate("/login", { replace: true });
       }, 2000);
@@ -48,27 +65,27 @@ const RegistrationForm = () => {
     return action;
   };
 
-  const handleFormSubmit = (values) => {
+  const handleFormSubmit = (formValues) => {
+    clearMessages();
+
     if (hasAcceptedTerms) {
-      handleRegistration(values);
+      handleRegistration(formValues);
     } else {
-      setPendingCredentials(values);
+      setPendingCredentials(formValues);
       setShowTerms(true);
     }
   };
 
   const handleAccept = () => acceptTerms(handleRegistration);
 
-  const allErrors = [
-    errors.fillAllFields,
-    errors.email,
-    errors.password,
-    errors.confirmPassword,
-    authError,
-  ].filter(Boolean);
+  const allErrors = [...Object.values(errors).filter(Boolean), authError].filter(Boolean);
 
   const handleFieldChange = (event) => {
-    return handleChange(event);
+    handleChange(event);
+
+    if (authError) clearError();
+
+    if (message) clearMessages();
   };
 
   return (
@@ -79,6 +96,9 @@ const RegistrationForm = () => {
 
       <div className={styles.contentForm}>
         <h2 className={styles.formTitle}>{t("auth.registration.title")}</h2>
+
+        {message && <div className={styles.successMessage}>{message}</div>}
+
         <form onSubmit={handleSubmit(handleFormSubmit)} aria-label="registration form" noValidate>
           <div className={styles.formGroup}>
             <label htmlFor="email" className={styles.formLabel}>
@@ -139,16 +159,10 @@ const RegistrationForm = () => {
 
           <FormErrors errors={allErrors} t={t} />
 
-          {message && (
-            <div className={styles.success} role="alert">
-              <p>{message}</p>
-            </div>
-          )}
-
           <div className={styles.buttons}>
-            <button type="submit" className={styles.submitButton} disabled={isLoading}>
-              {isLoading ? t("auth.registration.loading") : t("auth.registration.submit")}
-            </button>
+            <SubmitBtn isLoading={isLoading} loadingText={t("auth.login.loading")}>
+              {t("auth.login.submit")}
+            </SubmitBtn>
           </div>
         </form>
 

@@ -1,48 +1,65 @@
 import { useNavigate, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-import { useAuth } from "@/hooks/auth/useAuth";
 import { useForm } from "@/hooks/auth/useForm";
+import { useAuth } from "@/hooks/auth/useAuth";
 
 import { Loader } from "../../ui/loaders/Loader";
 import { FormErrors } from "../../ui/forms/FormErrors";
+import { SubmitBtn } from "../../ui/buttons/SubmitBtn";
 
 import { validateLoginForm } from "@/utils/validation/validateFormFields";
 
 import styles from "./LoginForm.module.css";
 
 const LoginForm = () => {
-  const { signIn, authError, clearError } = useAuth();
-
   const navigate = useNavigate();
+
+  const { signIn, authError, clearError } = useAuth();
 
   const { t } = useTranslation();
 
-  const { errors, handleChange, handleSubmit, values, isLoading } = useForm({
-    initialValues: { email: "", password: "" },
+  const {
+    values,
+    errors,
+    isLoading,
+    message,
+    handleChange,
+    handleSubmit,
+    setMessage,
+    clearMessages,
+  } = useForm({
+    initialValues: {
+      email: "",
+      password: "",
+    },
     validate: validateLoginForm,
   });
 
-  const handleLogin = async (credentials) => {
-    const result = await signIn(credentials);
+  const handleLogin = async (data) => {
+    clearMessages();
+
+    const result = await signIn(data);
 
     if (result.meta.requestStatus === "fulfilled") {
       navigate("/", { replace: true });
+    } else {
+      if (result.error?.message) {
+        setMessage(result.error.message);
+      }
     }
 
     return result;
   };
 
-  const allErrors = [errors.fillAllFields, errors.email, errors.password, authError].filter(
-    Boolean,
-  );
+  const allErrors = [...Object.values(errors).filter(Boolean), authError].filter(Boolean);
 
   const handleFieldChange = (event) => {
-    if (authError) {
-      clearError();
-    }
+    handleChange(event);
 
-    return handleChange(event);
+    if (authError) clearError();
+
+    if (message) clearMessages();
   };
 
   return (
@@ -50,6 +67,7 @@ const LoginForm = () => {
       {isLoading && <Loader />}
       <div className={styles.contentForm}>
         <h2 className={styles.formTitle}>{t("auth.login.title")}</h2>
+
         <form onSubmit={handleSubmit(handleLogin)} noValidate>
           <div className={styles.formGroup}>
             <label htmlFor="email" className={styles.formLabel}>
@@ -90,9 +108,9 @@ const LoginForm = () => {
           <FormErrors errors={allErrors} t={t} />
 
           <div className={styles.buttons}>
-            <button type="submit" className={styles.submitButton} disabled={isLoading}>
-              {isLoading ? t("auth.login.loading") : t("auth.login.submit")}
-            </button>
+            <SubmitBtn isLoading={isLoading} loadingText={t("auth.login.loading")}>
+              {t("auth.login.submit")}
+            </SubmitBtn>
           </div>
         </form>
 

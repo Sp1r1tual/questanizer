@@ -14,3 +14,10 @@
 .submitButton:hover {
   background-color: #5e3e28;
 }
+
+@media (max-width: 480px) {
+  .submitButton {
+    font-size: 0.95rem;
+    padding: 0.65rem 0.9rem;
+  }
+}

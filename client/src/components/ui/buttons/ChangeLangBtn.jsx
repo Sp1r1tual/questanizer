@@ -1,6 +1,6 @@
 import { useLanguageChange } from "@/hooks/user/useLanguageChange";
 
-import styles from "./changeLanguageBtn.module.css";
+import styles from "./ChangeLangBtn.module.css";
 
 const ChangeLanguageBtn = () => {
   const { currentLang, languages, changeLanguage, loading } = useLanguageChange();
