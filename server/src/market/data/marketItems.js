@@ -8,12 +8,8 @@ const marketItems = [
     effect: {
       heal: 50,
     },
-    createdAt: {
-      $date: "2023-07-25T00:00:00.000Z",
-    },
-    updatedAt: {
-      $date: "2023-07-25T00:00:00.000Z",
-    },
+    createdAt: new Date("2023-07-25T00:00:00.000Z"),
+    updatedAt: new Date("2023-07-25T00:00:00.000Z"),
     itemImg: "images/items/heal-potion-questanizer.png",
   },
 ];
