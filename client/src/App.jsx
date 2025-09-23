@@ -12,11 +12,15 @@ import styles from "./App.module.css";
 
 const App = () => {
   const isAuthChecked = useSelector((state) => state.auth.isAuthChecked);
+  const isCheckingAuth = useSelector((state) => state.auth.isCheckingAuth);
+
   const imagesLoaded = useImagesLoaded();
+
+  const showPreloader = !imagesLoaded || isCheckingAuth;
 
   return (
     <>
-      {!imagesLoaded && <PreLoader fadeOut={!imagesLoaded || !isAuthChecked} />}
+      {showPreloader && <PreLoader fadeOut={isAuthChecked && imagesLoaded} />}
       <ErrorBoundaryWrapper>
         <Outlet />
       </ErrorBoundaryWrapper>
