@@ -290,12 +290,42 @@
     "error": "Fehler:",
     "somethingWentWrong": "Etwas ist schiefgelaufen",
     "tryAgain": "Erneut versuchen",
-    "goBack": "Zurückgehen",
+    "goBack": "Zurück",
     "returnHome": "Zur Startseite",
     "auth": {
-      "registration": "Registrierung fehlgeschlagen",
-      "login": "Anmeldeversuch fehlgeschlagen",
-      "expired": "Bitte melden Sie sich erneut an"
+      "registration": {
+        "failed": "Registrierung fehlgeschlagen",
+        "alreadyRegistered": "Benutzer mit dieser E-Mail existiert bereits"
+      },
+      "activation": {
+        "invalidLink": "Ungültiger Aktivierungslink",
+        "success": "Konto erfolgreich aktiviert"
+      },
+      "login": {
+        "failed": "Anmeldeversuch fehlgeschlagen",
+        "userNotFound": "Benutzer nicht gefunden",
+        "incorrectPassword": "Falsches Passwort",
+        "activateMsg": "Bitte aktiviere dein Konto vor dem Anmelden"
+      },
+      "logout": {
+        "failed": "Abmeldung fehlgeschlagen"
+      },
+      "refresh": {
+        "failed": "Token-Aktualisierung fehlgeschlagen",
+        "tokenNotFound": "Token nicht gefunden",
+        "invalidToken": "Ungültiges oder fehlendes Token in der Datenbank"
+      },
+      "password": {
+        "forgot": {
+          "failed": "Passwort-Wiederherstellung konnte nicht gestartet werden",
+          "emailNotFound": "Benutzer mit dieser E-Mail existiert nicht"
+        },
+        "reset": {
+          "failed": "Passwort konnte nicht zurückgesetzt werden",
+          "invalidToken": "Ungültiges oder abgelaufenes Reset-Token",
+          "success": "Passwort erfolgreich geändert"
+        }
+      }
     }
   }
 }

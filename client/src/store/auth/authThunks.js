@@ -31,24 +31,21 @@ const register = createAsyncThunk("auth/register", async ({ email, password }, t
     return thunkAPI.rejectWithValue(error.response?.data?.message || "errors.auth.registration");
   }
 });
+
 const logout = createAsyncThunk("auth/logout", async () => {
   await AuthService.logout();
 
   localStorage.removeItem("token");
 });
 
-const checkAuth = createAsyncThunk("auth/checkAuth", async (_, thunkAPI) => {
-  try {
-    const response = await axios.get(`${API_URL}/refresh`, {
-      withCredentials: true,
-    });
+const checkAuth = createAsyncThunk("auth/checkAuth", async () => {
+  const response = await axios.get(`${API_URL}/refresh`, {
+    withCredentials: true,
+  });
 
-    localStorage.setItem("token", response.data.accessToken);
+  localStorage.setItem("token", response.data.accessToken);
 
-    return response.data.user;
-  } catch {
-    return thunkAPI.rejectWithValue("errors.auth.expired");
-  }
+  return response.data.user;
 });
 
 const requestForgotPassword = createAsyncThunk(

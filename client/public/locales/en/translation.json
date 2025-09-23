@@ -291,11 +291,41 @@
     "somethingWentWrong": "Something went wrong",
     "tryAgain": "Try again",
     "goBack": "Go back",
-    "returnHome": "Return to homepage",
+    "returnHome": "Return to home",
     "auth": {
-      "registration": "Registration failed",
-      "login": "Login attempt failed",
-      "expired": "Please log in again"
+      "registration": {
+        "failed": "Registration failed",
+        "alreadyRegistered": "User with this email already exists"
+      },
+      "activation": {
+        "invalidLink": "Invalid activation link",
+        "success": "Account successfully activated"
+      },
+      "login": {
+        "failed": "Login attempt failed",
+        "userNotFound": "User not found",
+        "incorrectPassword": "Incorrect password",
+        "activateMsg": "Please activate your account before logging in"
+      },
+      "logout": {
+        "failed": "Logout failed"
+      },
+      "refresh": {
+        "failed": "Token refresh failed",
+        "tokenNotFound": "Token not found",
+        "invalidToken": "Invalid or missing token in database"
+      },
+      "password": {
+        "forgot": {
+          "failed": "Failed to initiate password recovery",
+          "emailNotFound": "User with this email does not exist"
+        },
+        "reset": {
+          "failed": "Failed to reset password",
+          "invalidToken": "Invalid or expired reset token",
+          "success": "Password successfully changed"
+        }
+      }
     }
   }
 }

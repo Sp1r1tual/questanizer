@@ -287,15 +287,45 @@
   "termsAndConditions": "✨ ¡Bienvenido! Nos alegra tenerte aquí. Esta aplicación fue creada para ayudarte a mantenerte organizado, enfocado y alcanzar tus objetivos con menos estrés y mayor claridad. Por favor, úsala de manera responsable.\n\nAl utilizar esta aplicación, aceptas los siguientes términos y condiciones. Por favor, léelos atentamente.\n\nEres responsable de la exactitud de los datos que ingreses.\n\nNo ingreses información confidencial, sensible o personal en la aplicación. No somos responsables de ningún acceso no autorizado, divulgación o pérdida de dichos datos.\n\nTrata a otros usuarios con respeto. El comportamiento ofensivo, abusivo o de acoso está estrictamente prohibido y puede resultar en la suspensión o el bloqueo permanente de la cuenta.\n\nEsta aplicación es una herramienta de organización. Al violar estas reglas, en última instancia te engañas a ti mismo y socavas tu propio uso del servicio.\n\nNos reservamos el derecho de actualizar estos términos en cualquier momento, con o sin previo aviso.\n\nEl uso continuo del servicio después de los cambios constituye la aceptación de los términos actualizados.\n\nNo somos responsables de la pérdida de datos, violaciones de seguridad o interrupciones del servicio.\n\nSi no estás de acuerdo con estos términos, por favor deja de usar el servicio.\n\n✨ Nuestra misión es ayudarte a mantenerte organizado, enfocado y productivo. Creemos que al respetar estas simples reglas, puedes aprovechar al máximo esta herramienta y alcanzar tus metas con menos estrés y mayor claridad.\n\n¡Gracias por usar nuestra aplicación!",
 
   "errors": {
-    "error": "Equivocación:",
+    "error": "Error:",
     "somethingWentWrong": "Algo salió mal",
     "tryAgain": "Intentar de nuevo",
-    "goBack": "Regresar",
-    "returnHome": "Volver a la página principal",
+    "goBack": "Volver",
+    "returnHome": "Regresar a la página principal",
     "auth": {
-      "registration": "Error en el registro",
-      "login": "Error en el intento de inicio de sesión",
-      "expired": "Por favor, inicie sesión de nuevo"
+      "registration": {
+        "failed": "Registro fallido",
+        "alreadyRegistered": "Usuario con este correo ya existe"
+      },
+      "activation": {
+        "invalidLink": "Enlace de activación inválido",
+        "success": "Cuenta activada con éxito"
+      },
+      "login": {
+        "failed": "Error al iniciar sesión",
+        "userNotFound": "Usuario no encontrado",
+        "incorrectPassword": "Contraseña incorrecta",
+        "activateMsg": "Por favor activa tu cuenta antes de iniciar sesión"
+      },
+      "logout": {
+        "failed": "Error al cerrar sesión"
+      },
+      "refresh": {
+        "failed": "Error al actualizar token",
+        "tokenNotFound": "Token no encontrado",
+        "invalidToken": "Token inválido o ausente en la base de datos"
+      },
+      "password": {
+        "forgot": {
+          "failed": "No se pudo iniciar la recuperación de contraseña",
+          "emailNotFound": "Usuario con este correo no existe"
+        },
+        "reset": {
+          "failed": "No se pudo restablecer la contraseña",
+          "invalidToken": "Token de restablecimiento inválido o caducado",
+          "success": "Contraseña cambiada con éxito"
+        }
+      }
     }
   }
 }
