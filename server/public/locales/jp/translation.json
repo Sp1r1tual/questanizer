@@ -33,7 +33,8 @@
 
   "market": {
     "purchase": "購入成功！{{totalItems}}個のアイテムを購入しました",
-    "spent": "{{totalPrice}}ゴールドを使いました"
+    "spent": "{{totalPrice}}ゴールドを使いました",
+    "notEnoughtGold": "購入するのに十分なゴールドがありません"
   },
 
   "stats": {

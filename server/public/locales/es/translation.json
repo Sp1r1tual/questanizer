@@ -33,7 +33,8 @@
 
   "market": {
     "purchase": "¡Compra exitosa! Has adquirido {{totalItems}} artículo(s)",
-    "spent": "Has gastado {{totalPrice}} de oro"
+    "spent": "Has gastado {{totalPrice}} de oro",
+    "notEnoughtGold": "Oro insuficiente para comprar"
   },
 
   "stats": {

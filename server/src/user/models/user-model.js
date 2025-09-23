@@ -19,7 +19,6 @@ const UserSchema = new Schema(
       minlength: 3,
       maxlength: 32,
       match: /^[a-zA-Z0-9_.-]*$/,
-      lowercase: true,
       trim: true,
     },
     bio: {

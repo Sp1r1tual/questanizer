@@ -33,7 +33,8 @@
 
   "market": {
     "purchase": "Purchase successful! Bought {{totalItems}} item(s)",
-    "spent": "Spent {{totalPrice}} gold"
+    "spent": "Spent {{totalPrice}} gold",
+    "notEnoughtGold": "Not enough gold to purchase"
   },
 
   "stats": {

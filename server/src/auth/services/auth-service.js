@@ -16,7 +16,7 @@ class AuthService {
     const candidate = await UserModel.findOne({ email });
 
     if (candidate) {
-      throw ApiError.Conflict("auth.registration.alreadyRegistered");
+      throw ApiError.Conflict("errors.auth.registration.alreadyRegistered");
     }
 
     const hashPassword = await bcrypt.hash(password, 3);
@@ -48,11 +48,10 @@ class AuthService {
     const user = await UserModel.findOne({ activationLink });
 
     if (!user) {
-      throw ApiError.NotFound("Invalid activation link");
+      throw ApiError.NotFound("errors.auth.activation.invalidLink");
     }
 
     user.isActivated = true;
-
     await user.save();
   }
 
@@ -60,17 +59,17 @@ class AuthService {
     const user = await UserModel.findOne({ email });
 
     if (!user) {
-      throw ApiError.NotFound("auth.login.userNotFound");
+      throw ApiError.NotFound("errors.auth.login.userNotFound");
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
-      throw ApiError.UnauthorizedError("auth.login.incorrectPassword");
+      throw ApiError.UnauthorizedError("errors.auth.login.incorrectPassword");
     }
 
     if (!user.isActivated) {
-      throw ApiError.Forbidden("auth.login.activateMsg");
+      throw ApiError.Forbidden("errors.auth.login.activateMsg");
     }
 
     const userDto = new UserDto(user);
@@ -93,19 +92,24 @@ class AuthService {
   }
 
   async logout(refreshToken) {
-    return await tokenService.removeToken(refreshToken);
+    const result = await tokenService.removeToken(refreshToken);
+
+    if (!result) {
+      throw ApiError.BadRequest("errors.auth.logout.failed");
+    }
+    return result;
   }
 
   async refresh(refreshToken) {
     if (!refreshToken) {
-      throw ApiError.UnauthorizedError("Token not found in database");
+      throw ApiError.UnauthorizedError("errors.auth.refresh.tokenNotFound");
     }
 
     const userData = tokenService.validateRefreshToken(refreshToken);
     const tokenFromDb = await tokenService.findToken(refreshToken);
 
     if (!userData || !tokenFromDb) {
-      throw ApiError.UnauthorizedError("Token is invalid or not in the database");
+      throw ApiError.UnauthorizedError("errors.auth.refresh.invalidToken");
     }
 
     const user = await UserModel.findById(userData.id);
@@ -123,7 +127,9 @@ class AuthService {
   async forgotPassword(email) {
     const user = await UserModel.findOne({ email });
 
-    if (!user) return;
+    if (!user) {
+      throw ApiError.NotFound("errors.auth.password.forgot.emailNotFound");
+    }
 
     const resetToken = tokenService.generateResetToken({
       email: user.email,
@@ -138,13 +144,13 @@ class AuthService {
     const userData = tokenService.validateResetToken(resetToken);
 
     if (!userData) {
-      throw ApiError.UnauthorizedError("Invalid or expired reset token");
+      throw ApiError.UnauthorizedError("errors.auth.password.reset.invalidToken");
     }
 
     const tokenData = await tokenService.findResetToken(resetToken);
 
     if (!tokenData) {
-      throw ApiError.UnauthorizedError("Invalid or expired reset token");
+      throw ApiError.UnauthorizedError("errors.auth.password.reset.invalidToken");
     }
 
     const user = await findUserById(userData.id);

@@ -33,7 +33,8 @@
 
   "market": {
     "purchase": "Zakup udany! Kupiono {{totalItems}} przedmiot(ów)",
-    "spent": "Wydano {{totalPrice}} złota"
+    "spent": "Wydano {{totalPrice}} złota",
+    "notEnoughtGold": "Za mało złota, aby dokonać zakupu"
   },
 
   "stats": {

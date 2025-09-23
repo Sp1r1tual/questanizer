@@ -33,7 +33,8 @@
 
   "market": {
     "purchase": "Kauf erfolgreich! {{totalItems}} Gegenstand/Gegenstände erworben",
-    "spent": "{{totalPrice}} Gold ausgegeben"
+    "spent": "{{totalPrice}} Gold ausgegeben",
+    "notEnoughtGold": "Nicht genug Gold zum Kaufen"
   },
 
   "stats": {

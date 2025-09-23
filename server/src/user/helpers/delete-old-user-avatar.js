@@ -10,7 +10,14 @@ const deleteOldAvatarIfNeeded = async (oldAvatarPath, newAvatarPath) => {
   ) {
     const absoluteOldPath = path.resolve("public", "avatars", path.basename(oldAvatarPath));
 
-    await fs.unlink(absoluteOldPath);
+    try {
+      await fs.access(absoluteOldPath);
+      await fs.unlink(absoluteOldPath);
+    } catch (error) {
+      if (error.code !== "ENOENT") {
+        throw error;
+      }
+    }
   }
 };
 
