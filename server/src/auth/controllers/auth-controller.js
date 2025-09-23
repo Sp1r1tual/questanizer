@@ -10,7 +10,7 @@ const setRefreshTokenCookie = (res, token) => {
     httpOnly: true,
     secure: false,
     sameSite: "lax",
-    path: "/api",
+    path: "/",
     maxAge: 30 * 24 * 60 * 60 * 1000,
   });
 };

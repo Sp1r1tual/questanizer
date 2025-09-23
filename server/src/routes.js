@@ -17,17 +17,17 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const routes = (app) => {
-  app.use("/api/public", express.static(path.resolve(__dirname, "../public")));
-  app.use("/api", supportRouter);
-  app.use("/api", authRouter);
-  app.use("/api", localizationRouter);
-  app.use("/api", userRouter);
-  app.use("/api", friendsRouter);
-  app.use("/api", tasksRouter);
-  app.use("/api", userStatsRouter);
-  app.use("/api", bossRouter);
-  app.use("/api", marketRouter);
-  app.use("/api", userInventoryRouter);
+  app.use("/public", express.static(path.resolve(__dirname, "../public")));
+  app.use("/", supportRouter);
+  app.use("/", authRouter);
+  app.use("/", localizationRouter);
+  app.use("/", userRouter);
+  app.use("/", friendsRouter);
+  app.use("/", tasksRouter);
+  app.use("/", userStatsRouter);
+  app.use("/", bossRouter);
+  app.use("/", marketRouter);
+  app.use("/", userInventoryRouter);
 };
 
 export { routes };
