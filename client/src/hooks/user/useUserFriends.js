@@ -23,12 +23,6 @@ const useUserFriends = () => {
     dispatch(fetchUserFriends());
   }, [dispatch]);
 
-  useEffect(() => {
-    if (!currentUser) {
-      dispatch(fetchUserProfile());
-    }
-  }, [dispatch, currentUser]);
-
   const friends = Object.values(friendsObj);
   const requests = Object.values(requestsObj).filter((r) => r.user);
 
