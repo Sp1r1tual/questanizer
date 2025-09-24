@@ -16,6 +16,7 @@ const initialState = {
   isCheckingAuth: false,
   error: null,
   isAuthChecked: false,
+  isBootstrapping: true,
 };
 
 const authSlice = createSlice({
@@ -87,6 +88,7 @@ const authSlice = createSlice({
         state.isAuthenticated = true;
         state.isCheckingAuth = false;
         state.isAuthChecked = true;
+        state.isBootstrapping = false;
         state.error = null;
       })
       .addCase(checkAuth.rejected, (state, action) => {
@@ -94,6 +96,7 @@ const authSlice = createSlice({
         state.isAuthenticated = false;
         state.isCheckingAuth = false;
         state.isAuthChecked = true;
+        state.isBootstrapping = false;
         state.error = action.payload;
       })
 
