@@ -17,6 +17,7 @@ const EditProfileForm = ({ onCancel, onSave }) => {
     nameError,
     bioError,
     error,
+    handleAvatarError,
   } = useUserProfileForm(onSave);
 
   const { t } = useTranslation();
@@ -24,7 +25,13 @@ const EditProfileForm = ({ onCancel, onSave }) => {
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <div className={styles.avatarSection}>
-        <img src={avatarPreview} alt="avatar" className={styles.avatar} loading="lazy" />
+        <img
+          src={avatarPreview}
+          alt="User avatar"
+          className={styles.avatar}
+          loading="lazy"
+          onError={handleAvatarError}
+        />
 
         <button
           type="button"

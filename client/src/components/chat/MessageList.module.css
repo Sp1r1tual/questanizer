@@ -6,6 +6,7 @@
   flex-direction: column;
   gap: 0.5rem;
   scroll-behavior: smooth;
+  min-height: 40vh;
 }
 
 .messageListWrapper::-webkit-scrollbar {

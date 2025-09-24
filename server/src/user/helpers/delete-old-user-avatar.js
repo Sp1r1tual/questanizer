@@ -1,23 +1,31 @@
-import fs from "fs/promises";
-import path from "path";
+import { v2 as cloudinary } from "cloudinary";
 
-const deleteOldAvatarIfNeeded = async (oldAvatarPath, newAvatarPath) => {
-  if (
-    oldAvatarPath &&
-    newAvatarPath &&
-    oldAvatarPath !== newAvatarPath &&
-    oldAvatarPath.startsWith("/public/avatars/")
-  ) {
-    const absoluteOldPath = path.resolve("public", "avatars", path.basename(oldAvatarPath));
+const deleteOldAvatarIfNeeded = async (oldAvatarUrl, newAvatarUrl) => {
+  if (!oldAvatarUrl || oldAvatarUrl === newAvatarUrl) return;
+  if (!oldAvatarUrl.includes("res.cloudinary.com")) return;
 
-    try {
-      await fs.access(absoluteOldPath);
-      await fs.unlink(absoluteOldPath);
-    } catch (error) {
-      if (error.code !== "ENOENT") {
-        throw error;
-      }
-    }
+  const publicId = extractPublicId(oldAvatarUrl);
+
+  await cloudinary.uploader.destroy(publicId);
+};
+
+const extractPublicId = (url) => {
+  try {
+    const cleanUrl = url.split("?")[0];
+    const parts = cleanUrl.split("/upload/");
+
+    if (parts.length < 2) return null;
+
+    let pathAndFile = parts[1];
+
+    pathAndFile = pathAndFile.replace(/^v\d+\//, "");
+
+    const segments = pathAndFile.split(".");
+    segments.pop();
+
+    return segments.join(".");
+  } catch {
+    return null;
   }
 };
 

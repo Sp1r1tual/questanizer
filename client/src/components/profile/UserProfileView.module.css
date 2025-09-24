@@ -30,8 +30,8 @@
 }
 
 .userId {
-  margin: 0;
-  font-size: smaller;
+  margin-top: 0.5rem;
+  font-size: 0.7rem;
   cursor: pointer;
   position: relative;
   display: inline-block;
@@ -151,7 +151,7 @@
   }
 
   .name {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
 
   .infoItem {

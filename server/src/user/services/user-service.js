@@ -27,7 +27,10 @@ class UserService {
     const user = await findUserById(userId);
 
     await validateUsername(updateData.username, user.username);
-    await deleteOldAvatarIfNeeded(user.photoUrl, updateData.photoUrl);
+
+    if (updateData.photoUrl && user.photoUrl && user.photoUrl !== updateData.photoUrl) {
+      await deleteOldAvatarIfNeeded(user.photoUrl, updateData.photoUrl);
+    }
 
     user.username = updateData.username ?? user.username;
     user.bio = updateData.bio ?? user.bio;
@@ -37,7 +40,6 @@ class UserService {
     }
 
     await user.save();
-
     return new UserDto(user);
   }
 

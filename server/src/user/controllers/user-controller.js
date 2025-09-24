@@ -29,8 +29,8 @@ const updateUserProfile = async (req, res, next) => {
     if (username !== undefined) update.username = username;
     if (bio !== undefined) update.bio = bio;
 
-    if (req.file) {
-      update.photoUrl = `/public/avatars/${req.file.filename}`;
+    if (req.file && req.file.path) {
+      update.photoUrl = req.file.path;
     }
 
     const updatedUser = await userService.updateUserProfile(userId, update);
