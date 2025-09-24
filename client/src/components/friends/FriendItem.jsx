@@ -1,7 +1,6 @@
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { getAvatarUrl } from "@/utils/user/getAvatarUrl";
+import { useAvatar } from "@/hooks/ui/useAvatar";
 
 import defaultAvatar from "@/assets/avatar-people-user-svgrepo-com.png";
 
@@ -10,7 +9,7 @@ import styles from "./FriendItem.module.css";
 const FriendItem = ({ friend, friendStatus, onAdd, onRemove, onAccept, onShowProfile }) => {
   const { t } = useTranslation();
 
-  const [avatarSrc, setAvatarSrc] = useState(getAvatarUrl(friend.photoUrl) || defaultAvatar);
+  const { avatarSrc, handleError } = useAvatar(friend?.photoUrl, defaultAvatar);
 
   if (!friend) return null;
 
@@ -37,7 +36,7 @@ const FriendItem = ({ friend, friendStatus, onAdd, onRemove, onAccept, onShowPro
         alt={`${friend.username || "User"}'s avatar`}
         className={styles.friendAvatar}
         onClick={handleProfileClick}
-        onError={() => setAvatarSrc(defaultAvatar)}
+        onError={handleError}
         style={{ cursor: "pointer" }}
       />
 

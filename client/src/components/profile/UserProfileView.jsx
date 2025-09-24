@@ -2,14 +2,17 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
+import { useAvatar } from "@/hooks/ui/useAvatar";
+
 import { Modal } from "../ui/modals/Modal";
 import { Loader } from "../ui/loaders/Loader";
 import { EditProfileForm } from "./EditProfileForm";
 
 import { fetchUserProfile } from "@/store/user/userProfileThunks";
 
-import { getAvatarUrl } from "@/utils/user/getAvatarUrl";
 import { formatDate } from "@/utils/date/formatDate";
+
+import defaultAvatar from "@/assets/avatar-people-user-svgrepo-com.png";
 
 import styles from "./UserProfileView.module.css";
 
@@ -23,17 +26,25 @@ const UserProfileView = ({ isOpen, onClose }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [copied, setCopied] = useState(false);
 
+  const { avatarSrc, handleError } = useAvatar(user?.photoUrl, defaultAvatar);
+
   const { t } = useTranslation();
 
   useEffect(() => {
-    dispatch(fetchUserProfile());
-  }, [dispatch]);
+    if (isOpen) {
+      dispatch(fetchUserProfile());
+    }
+  }, [dispatch, isOpen]);
 
   if (isLoading || !user) {
-    return <Loader />;
+    return (
+      <Modal isOpen={isOpen} onClose={onClose} size="medium">
+        <Loader />
+      </Modal>
+    );
   }
 
-  const { name, level, health, registrationDate, bio, photoUrl } = user;
+  const { name, level, health, registrationDate, bio } = user;
   const formattedDate = formatDate(registrationDate);
 
   const handleSave = () => {
@@ -46,6 +57,7 @@ const UserProfileView = ({ isOpen, onClose }) => {
   };
 
   const handleCopy = () => {
+    navigator.clipboard.writeText(currentUserId);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -57,11 +69,7 @@ const UserProfileView = ({ isOpen, onClose }) => {
       ) : (
         <>
           <div className={styles.profileHeader}>
-            <img
-              src={getAvatarUrl(photoUrl)}
-              alt={`${name || t("profile.noUsername")}`}
-              className={styles.avatar}
-            />
+            <img src={avatarSrc} alt="avatar" className={styles.avatar} onError={handleError} />
             <h2 className={styles.name}>{name || t("profile.noUsername")}</h2>
             <p
               className={styles.userId}
