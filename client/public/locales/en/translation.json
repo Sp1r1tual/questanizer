@@ -39,6 +39,8 @@
     "agree": "Agree"
   },
 
+  "preloader": "Loading… Please wait",
+
   "footer": {
     "about": "About us",
     "contact": "Contact us"

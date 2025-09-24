@@ -39,6 +39,8 @@
     "agree": "Zustimmen"
   },
 
+  "preloader": "Wird geladen… Bitte warten",
+
   "footer": {
     "about": "Über uns",
     "contact": "Kontaktieren Sie uns"

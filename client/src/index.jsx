@@ -2,36 +2,33 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import { RouterProvider } from "react-router-dom";
-
 import "./i18n";
 
-import { store } from "./store/store";
-import { checkAuth } from "./store/auth/authThunks";
-import { setAuthChecked } from "./store/auth/authSlice";
+import { useBootstrap } from "./hooks/ui/useBootstrap";
 
+import { PreLoader } from "./components/ui/loaders/PreLoader";
 import { router } from "./router";
+
+import { store } from "./store/store";
 
 import "./index.css";
 
+const Root = () => {
+  const { ready, fadeOut } = useBootstrap();
+
+  if (!ready) {
+    return <PreLoader fadeOut={fadeOut} />;
+  }
+
+  return <RouterProvider router={router} />;
+};
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-const token = localStorage.getItem("token");
-
-if (token) {
-  store.dispatch(checkAuth()).finally(() => {
-    renderApp();
-  });
-} else {
-  store.dispatch(setAuthChecked(true));
-  renderApp();
-}
-
-function renderApp() {
-  root.render(
-    <React.StrictMode>
-      <Provider store={store}>
-        <RouterProvider router={router} />
-      </Provider>
-    </React.StrictMode>,
-  );
-}
+root.render(
+  <React.StrictMode>
+    <Provider store={store}>
+      <Root />
+    </Provider>
+  </React.StrictMode>,
+);
