@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
@@ -10,13 +10,15 @@ import { formatDate } from "@/utils/date/formatDate";
 import { getAvatarUrl } from "@/utils/user/getAvatarUrl";
 
 import backArrow from "@/assets/back-arrow-svgrepo-com.png";
+import defaultAvatar from "@/assets/avatar-people-user-svgrepo-com.png";
 
 import styles from "./PublicUserProfileModalContent.module.css";
 
 const PublicUserProfileContent = ({ userId, onBack, onOpenChat }) => {
   const dispatch = useDispatch();
-
   const publicProfile = useSelector((state) => state.publicUser.profile);
+
+  const [avatarSrc, setAvatarSrc] = useState(defaultAvatar);
 
   const { t } = useTranslation();
 
@@ -26,11 +28,17 @@ const PublicUserProfileContent = ({ userId, onBack, onOpenChat }) => {
     }
   }, [dispatch, userId]);
 
+  useEffect(() => {
+    if (publicProfile?.photoUrl) {
+      setAvatarSrc(getAvatarUrl(publicProfile.photoUrl));
+    }
+  }, [publicProfile]);
+
   if (!publicProfile) {
     return <Loader />;
   }
 
-  const { username, level, health, registrationDate, bio, photoUrl } = publicProfile;
+  const { username, level, health, registrationDate, bio } = publicProfile;
   const formattedDate = formatDate(registrationDate);
 
   return (
@@ -41,9 +49,10 @@ const PublicUserProfileContent = ({ userId, onBack, onOpenChat }) => {
 
       <div className={styles.profileHeader}>
         <img
-          src={getAvatarUrl(photoUrl)}
+          src={avatarSrc}
           alt={`${username || "Username not set"}'s avatar`}
           className={styles.avatar}
+          onError={() => setAvatarSrc(defaultAvatar)}
         />
         <h2 className={styles.name}>{username || "Username not set"}</h2>
       </div>
