@@ -1,10 +1,10 @@
 import bcrypt from "bcrypt";
 import { v4 as uuidv4 } from "uuid";
+import axios from "axios";
 
 import { UserModel } from "../../user/models/user-model.js";
 import { UserInventoryModel } from "../../user/models/user-inventory-model.js";
 
-import { mailService } from "./mail-service.js";
 import { tokenService } from "./token-service.js";
 
 import { ApiError } from "../../shared/exceptions/api-error.js";
@@ -12,6 +12,30 @@ import { findUserById } from "../../shared/utils/findUserById.js";
 import { UserDto } from "../../shared/dtos/user-dto.js";
 
 class AuthService {
+  getMailServiceUrl() {
+    const url = process.env.MAIL_SERVICE_URL;
+    if (!url) throw new Error("MAIL_SERVICE_URL is not defined in environment variables");
+    return url;
+  }
+
+  async sendActivationMail(email, link) {
+    const mailServiceUrl = this.getMailServiceUrl();
+    try {
+      await axios.post(`${mailServiceUrl}/activation`, { email, link });
+    } catch {
+      throw ApiError.BadRequest("Failed to send email, please try again later");
+    }
+  }
+
+  async sendResetPasswordMail(email, link) {
+    const mailServiceUrl = this.getMailServiceUrl();
+    try {
+      await axios.post(`${mailServiceUrl}/reset`, { email, link });
+    } catch {
+      throw ApiError.BadRequest("Failed to send email, please try again later");
+    }
+  }
+
   async registration(email, password) {
     const candidate = await UserModel.findOne({ email });
 
@@ -28,10 +52,7 @@ class AuthService {
       activationLink,
     });
 
-    await mailService.sendActivationMail(
-      email,
-      `${process.env.API_URL}/activate/${activationLink}`,
-    );
+    await this.sendActivationMail(email, `${process.env.API_URL}/activate/${activationLink}`);
 
     const userDto = new UserDto(user);
     const tokens = tokenService.generateTokens({ ...userDto });
@@ -137,7 +158,11 @@ class AuthService {
     });
 
     await tokenService.saveResetToken(user._id, resetToken);
-    await mailService.sendPasswordResetMail(user.email, resetToken);
+
+    await this.sendResetPasswordMail(
+      email,
+      `${process.env.CLIENT_URL}/reset-password/${resetToken}`,
+    );
   }
 
   async resetPassword(resetToken, newPassword) {
