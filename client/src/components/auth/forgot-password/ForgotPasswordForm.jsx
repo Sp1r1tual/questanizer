@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import { useForm } from "@/hooks/auth/useForm";
 
 import { FormErrors } from "../../ui/forms/FormErrors";
@@ -39,40 +41,53 @@ const ForgotPasswordForm = ({
   };
 
   return (
-    <form onSubmit={handleSubmit(handleFormSubmit)} noValidate>
-      <div className={styles.formGroup}>
-        <label htmlFor="email" className={styles.formLabel}>
-          {t("shared.emailLabel")}
-        </label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={values.email}
-          onChange={handleFieldChange}
-          placeholder={t("shared.emailLabel")}
-          className={`${styles.formInput} ${
-            errors.email || errors.fillAllFields ? styles.errorInput : ""
+    <div className={styles.contentForm}>
+      <form onSubmit={handleSubmit(handleFormSubmit)} noValidate>
+        <div className={styles.formGroup}>
+          <label htmlFor="email" className={styles.formLabel}>
+            {t("shared.emailLabel")}
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={values.email}
+            onChange={handleFieldChange}
+            placeholder={t("shared.emailLabel")}
+            className={`${styles.formInput} ${
+              errors.email || errors.fillAllFields ? styles.errorInput : ""
+            }`}
+            autoComplete="email"
+          />
+        </div>
+
+        <div
+          className={`${styles.formMessagesWrapper} ${
+            allErrors.length || success ? styles.active : ""
           }`}
-          autoComplete="email"
-        />
-      </div>
-
-      <FormErrors errors={allErrors} t={t} />
-
-      <FormSuccess message={success ? "auth.forgotPassword.success" : ""} t={t} />
-
-      <div className={styles.buttons}>
-        <SubmitBtn
-          isLoading={isLoading}
-          loadingText={t("shared.saving")}
-          cooldown={cooldown}
-          cooldownTemplate={`${t("auth.forgotPassword.resendIn")} {seconds}${t("shared.seconds")}`}
         >
-          {t("auth.forgotPassword.sendLink")}
-        </SubmitBtn>
-      </div>
-    </form>
+          <FormErrors errors={allErrors} t={t} />
+          <FormSuccess message={success ? "auth.forgotPassword.success" : ""} t={t} />
+        </div>
+
+        <div className={styles.buttons}>
+          <SubmitBtn
+            isLoading={isLoading}
+            loadingText={t("shared.saving")}
+            cooldown={cooldown}
+            cooldownTemplate={`${t("auth.forgotPassword.resendIn")} {seconds}${t("shared.seconds")}`}
+          >
+            {t("auth.forgotPassword.sendLink")}
+          </SubmitBtn>
+        </div>
+      </form>
+
+      <p className={styles.registerLink}>
+        <Link to="/login" className={styles.link}>
+          {t("shared.back")}
+        </Link>
+      </p>
+    </div>
   );
 };
 

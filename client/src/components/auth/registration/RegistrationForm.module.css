@@ -11,13 +11,27 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: #f7f1ee;
+  transition: all 0.3s ease;
+}
+
+.formMessagesWrapper {
+  overflow: hidden;
+  transition:
+    max-height 0.35s ease,
+    opacity 0.3s ease;
+  max-height: 0;
+  opacity: 0;
+}
+
+.formMessagesWrapper.active {
+  max-height: 200px;
+  opacity: 1;
 }
 
 .formTitle {
   text-align: center;
   font-size: 1.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   color: #4d2c20;
   font-weight: bold;
 }

@@ -158,8 +158,14 @@ const RegistrationForm = () => {
             />
           </div>
 
-          <FormSuccess message={message} t={t} />
-          <FormErrors errors={allErrors} t={t} />
+          <div
+            className={`${styles.formMessagesWrapper} ${
+              message || allErrors.length ? styles.active : ""
+            }`}
+          >
+            <FormSuccess message={message} t={t} />
+            <FormErrors errors={allErrors} t={t} />
+          </div>
 
           <div className={styles.buttons}>
             <SubmitBtn isLoading={isLoading} loadingText={t("auth.login.loading")}>

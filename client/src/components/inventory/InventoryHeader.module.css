@@ -4,3 +4,8 @@
   color: #111827;
   margin-bottom: 2rem;
 }
+
+.img {
+  width: 100%;
+  border-radius: 1rem;
+}

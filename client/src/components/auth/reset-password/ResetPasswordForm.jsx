@@ -64,8 +64,14 @@ const ResetPasswordForm = ({ onSubmitForm, isLoading, success, error, t }) => {
         />
       </div>
 
-      <FormErrors errors={allErrors} t={t} />
-      <FormSuccess message={success ? "auth.resetPassword.success" : ""} t={t} />
+      <div
+        className={`${styles.formMessagesWrapper} ${
+          allErrors.length || success ? styles.active : ""
+        }`}
+      >
+        <FormErrors errors={allErrors} t={t} />
+        <FormSuccess message={success ? "auth.resetPassword.success" : ""} t={t} />
+      </div>
 
       {!success && (
         <div className={styles.buttons}>

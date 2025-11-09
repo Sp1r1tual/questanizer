@@ -105,7 +105,11 @@ const LoginForm = () => {
             />
           </div>
 
-          <FormErrors errors={allErrors} t={t} />
+          <div
+            className={`${styles.formErrorsWrapper} ${allErrors.length > 0 ? styles.active : ""}`}
+          >
+            <FormErrors errors={allErrors} t={t} />
+          </div>
 
           <div className={styles.buttons}>
             <SubmitBtn isLoading={isLoading} loadingText={t("auth.login.loading")}>

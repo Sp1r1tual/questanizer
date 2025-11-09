@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .languageBtnWrapper {
@@ -18,9 +18,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem 0;
+  padding: 1rem;
   position: relative;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 .registrationContainer {
@@ -28,37 +29,37 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: auto;
-  max-width: 100%;
+  width: fit-content;
   margin: 0 auto;
-  padding: 1rem;
+  padding: 1.5rem;
   box-shadow: 0 0 15px rgba(80, 50, 40, 0.1);
   border-radius: 0.75rem;
-  background-color: white;
+  background-color: #fff;
   position: relative;
   z-index: 2;
+  box-sizing: border-box;
 }
 
 @media (max-width: 640px) {
   .registrationContainer {
     flex-direction: column;
+    width: 90%;
+    max-width: 400px;
     padding: 1rem;
-    width: auto;
-    max-width: calc(100% - 2rem);
-    margin: 0 1rem;
   }
 
   .registrationContentWrapper {
-    padding: 0.5rem 0;
+    padding: 0.75rem;
   }
 }
 
-@media (min-width: 640px) and (max-width: 768px) {
+@media (max-width: 400px) {
   .registrationContainer {
-    flex-direction: column;
-    padding: 1rem;
-    width: auto;
-    max-width: calc(100% - 2rem);
-    margin: 0 1rem;
+    width: 95%;
+    padding: 0.75rem;
+  }
+
+  .registrationContentWrapper {
+    padding: 0.5rem;
   }
 }

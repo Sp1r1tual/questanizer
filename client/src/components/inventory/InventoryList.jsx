@@ -28,14 +28,14 @@ const InventoryList = () => {
 
   if (error) {
     return (
-      <div>
+      <div className={styles.noItems}>
         {t("errors.uploadError")}: {error}
       </div>
     );
   }
 
   if (!inventoryItems.items?.length) {
-    return <div>{t("shared.noItems")}</div>;
+    return <div className={styles.noItems}>{t("shared.noItems")}</div>;
   }
 
   return (
