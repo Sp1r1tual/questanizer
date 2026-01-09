@@ -50,6 +50,9 @@
     "addNewTaskBtn": {
       "addTask": "タスクを追加"
     },
+
+    "filterLabel": "フィルター：",
+
     "organizerHeader": "どんな冒険を始めますか？",
     "taskDropdown": {
       "markAsDone": "完了にする",

@@ -42,7 +42,7 @@ const router = createBrowserRouter([
         element: <AuthenticatedLayout />,
         children: [
           {
-            path: "/",
+            index: true,
             element: <TasksPage />,
           },
           {

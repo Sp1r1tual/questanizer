@@ -66,7 +66,7 @@ const EditProfileForm = ({ onCancel, onSave }) => {
           aria-required="true"
           disabled={isSubmitting}
         />
-        {nameError && <p className={styles.error}>{nameError}</p>}
+        {nameError && <p className={styles.error}>{t(nameError)}</p>}
       </div>
 
       <div className={styles.fieldGroup}>
@@ -84,13 +84,13 @@ const EditProfileForm = ({ onCancel, onSave }) => {
           aria-describedby="bio-hint"
           disabled={isSubmitting}
         />
-        {bioError && <p className={styles.error}>{bioError}</p>}
+        {bioError && <p className={styles.error}>{t(bioError)}</p>}
         <small id="bio-hint" className={styles.hint}>
           {bio.length}/500 {t("profile.characters")}
         </small>
       </div>
 
-      {error && <p className={styles.error}>{error}</p>}
+      {error && <p className={styles.error}>{t(error)}</p>}
 
       <div className={styles.actions}>
         <button

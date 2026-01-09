@@ -1,21 +1,34 @@
-import { useState } from "react";
+import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 
 import styles from "./Message.module.css";
 
 const Message = ({ message, isMine, currentUserId, onRemove }) => {
-  const [hover, setHover] = useState(false);
-
+  const removeBtnRef = useRef(null);
   const { t } = useTranslation();
 
   const isRead = message.read && message.readBy.length > 0;
   const showReadStatus = isMine && message.to !== currentUserId;
 
+  const handleMouseEnter = () => {
+    if (removeBtnRef.current) {
+      removeBtnRef.current.style.opacity = "1";
+      removeBtnRef.current.style.pointerEvents = "auto";
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (removeBtnRef.current) {
+      removeBtnRef.current.style.opacity = "0";
+      removeBtnRef.current.style.pointerEvents = "none";
+    }
+  };
+
   return (
     <div
       className={`${styles.messageWrapper} ${isMine ? styles.messageMine : styles.messageOther}`}
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       <div className={`${styles.messageContent} ${isMine ? styles.mine : styles.other}`}>
         <p>{message.text}</p>
@@ -26,6 +39,7 @@ const Message = ({ message, isMine, currentUserId, onRemove }) => {
               timeStyle: "short",
             })}
           </span>
+
           {showReadStatus && (
             <span className={`${styles.readStatus} ${isRead ? styles.read : styles.unread}`}>
               {isRead ? "✓✓" : "✓"}
@@ -33,8 +47,14 @@ const Message = ({ message, isMine, currentUserId, onRemove }) => {
           )}
         </div>
 
-        {isMine && hover && (
-          <button className={styles.removeBtn} onClick={onRemove} title={t("chat.deleteFromBoth")}>
+        {isMine && (
+          <button
+            ref={removeBtnRef}
+            className={styles.removeBtn}
+            onClick={onRemove}
+            title={t("chat.deleteFromBoth")}
+            style={{ opacity: 0, pointerEvents: "none" }}
+          >
             ×
           </button>
         )}

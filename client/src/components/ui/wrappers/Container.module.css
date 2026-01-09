@@ -11,16 +11,19 @@
 
 .small {
   max-width: 400px;
+  width: 100%;
   padding: 15px;
 }
 
 .medium {
   max-width: 650px;
+  width: 100%;
   padding: 20px;
 }
 
 .large {
   max-width: 900px;
+  width: 100%;
   padding: 30px;
 }
 
@@ -36,7 +39,7 @@
   }
 
   .large {
-    max-width: 100%;
+    max-width: 95%;
     padding: 20px;
   }
 }

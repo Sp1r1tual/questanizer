@@ -9,5 +9,6 @@
 @media (max-width: 640px) {
   .statsInner {
     flex-direction: column;
+    align-items: start;
   }
 }

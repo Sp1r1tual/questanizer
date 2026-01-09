@@ -34,6 +34,8 @@ const TaskList = ({
     <>
       {showFilters && <TaskFilters onFilterChange={onFilterChange} />}
       <ul className={styles.taskList}>
+        <span className={styles.tasksHeader}>{t("navbar.taskScheduler")}</span>
+
         {Array.isArray(tasks) && tasks.length > 0 ? (
           tasks.map((task) => (
             <TaskItem

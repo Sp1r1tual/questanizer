@@ -12,7 +12,7 @@ const TasksPage = () => {
       <Wrapper>
         <ConfirmOverdueTasks />
         <Dashboard>
-          <Container>
+          <Container size="large">
             <UserStatsView />
           </Container>
           <TasksView />

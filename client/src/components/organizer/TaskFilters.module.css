@@ -1,21 +1,20 @@
-.visuallyHidden {
-  border: 0;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px;
-  white-space: nowrap;
-}
-
 .filtersContainer {
   display: flex;
   flex-wrap: nowrap;
   gap: 10px;
   margin: 10px;
   width: 100%;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.selectWrapper {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  gap: 0.5rem;
+  flex-wrap: wrap;
   justify-content: center;
 }
 
@@ -24,7 +23,7 @@
   padding: 6px 12px;
   border-radius: 6px;
   border: 2px solid #7d5032;
-  font-size: 12.5px;
+  font-size: 13px;
   cursor: pointer;
   transition: all 0.3s ease;
   text-align: center;
@@ -48,12 +47,8 @@
   }
 
   .select {
-    font-size: 12px;
-    padding: 4px 10px;
-
-    flex: 1 1 calc(50% - 10px);
-    max-width: calc(50% - 10px);
-    box-sizing: border-box;
+    flex: 1 1 100%;
+    max-width: 100%;
   }
 }
 
@@ -61,5 +56,9 @@
   .select {
     flex: 1 1 0;
     max-width: none;
+  }
+
+  .selectWrapper {
+    gap: 0.3rem;
   }
 }

@@ -1,12 +1,40 @@
 .bossView {
   text-align: center;
+  max-width: 320px;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  border-radius: 0.5rem;
+  overflow: hidden;
 }
 
 .bossImage {
   max-width: 100%;
   height: auto;
+  display: block;
   border-radius: 0.5rem;
   box-shadow: 0 0 10px rgba(80, 50, 40, 0.1);
+  transition: opacity 0.25s ease;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+.visible {
+  opacity: 1;
+}
+
+.skeleton {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 37%, #e5e7eb 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.4s ease infinite;
+  border-radius: 0.5rem;
+  z-index: 1;
 }
 
 .placeholder {

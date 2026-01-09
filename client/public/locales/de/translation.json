@@ -50,6 +50,9 @@
     "addNewTaskBtn": {
       "addTask": "Aufgabe hinzufügen"
     },
+
+    "filterLabel": "Filter:",
+
     "organizerHeader": "Womit startest du dein episches Abenteuer?",
     "taskDropdown": {
       "markAsDone": "Erledigen",

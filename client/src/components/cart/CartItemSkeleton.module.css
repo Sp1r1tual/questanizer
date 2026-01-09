@@ -1,0 +1,163 @@
+.cartItem {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+  align-items: center;
+  transition: opacity 0.25s ease;
+}
+
+.itemInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.itemActions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.quantityControls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.itemControls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  height: 100%;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+.skeletonImage {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 37%, #e5e7eb 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.4s ease infinite;
+  border-radius: 0.5rem;
+  flex-shrink: 0;
+}
+
+.skeletonText {
+  background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 37%, #e5e7eb 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.4s ease infinite;
+  border-radius: 0.375rem;
+  height: 1rem;
+}
+
+.skeletonName {
+  width: 70%;
+  height: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.skeletonPrice {
+  width: 40%;
+  height: 1rem;
+}
+
+.skeletonButton {
+  background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 37%, #e5e7eb 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.4s ease infinite;
+  border-radius: 0.375rem;
+  border: none;
+}
+
+.skeletonQuantityBtn {
+  width: 2rem;
+  height: 2rem;
+}
+
+.skeletonQuantityInput {
+  width: 2.5rem;
+  height: 2rem;
+}
+
+.skeletonRemoveBtn {
+  width: 4.5rem;
+  height: 2rem;
+}
+
+@media (max-width: 640px) {
+  .cartItem {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .skeletonText {
+    width: 100%;
+  }
+
+  .skeletonImage {
+    width: 48px;
+    height: 48px;
+    border-radius: 0.5rem;
+  }
+
+  .skeletonInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .skeletonTitle {
+    width: 140px;
+    height: 1rem;
+  }
+
+  .skeletonPrice {
+    width: 80px;
+    height: 0.9rem;
+  }
+
+  .itemControls {
+    width: 100%;
+  }
+
+  .itemActions {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .quantityControls {
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .skeletonQuantityBtn {
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 0.375rem;
+  }
+
+  .skeletonQuantityInput {
+    width: 2.25rem;
+    height: 1.75rem;
+    border-radius: 0.375rem;
+  }
+
+  .skeletonRemoveBtn {
+    width: 50%;
+    height: 2.25rem;
+    border-radius: 0.5rem;
+  }
+}

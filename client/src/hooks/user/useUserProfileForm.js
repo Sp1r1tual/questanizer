@@ -39,7 +39,7 @@ const useUserProfileForm = (onSave) => {
 
     if (!file) return;
     if (file.size > 2 * 1024 * 1024) {
-      setError("Image size must be less than 2MB");
+      setError("validation.imageSizeError");
       return;
     }
 

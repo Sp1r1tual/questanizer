@@ -50,6 +50,9 @@
     "addNewTaskBtn": {
       "addTask": "Agregar tarea"
     },
+
+    "filterLabel": "Filtros:",
+
     "organizerHeader": "¿Con qué comenzarás tu aventura épica?",
     "taskDropdown": {
       "markAsDone": "Marcar como completado",

@@ -1,15 +1,35 @@
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 import styles from "./BossView.module.css";
 
 const BossView = () => {
+  const [loaded, setLoaded] = useState(false);
+
   const boss = useSelector((state) => state.bossBattle);
 
-  if (!boss.bossId) return <section className={styles.placeholder}>Boss appears here...</section>;
+  useEffect(() => {
+    setLoaded(false);
+  }, [boss.bossImg]);
+
+  if (!boss.bossId) {
+    return <section className={styles.placeholder}>Boss appears here...</section>;
+  }
 
   return (
     <section className={styles.bossView}>
-      <img src={boss.bossImg} className={styles.bossImage} alt={boss.bossName} />
+      <div className={styles.imageWrapper}>
+        {!loaded && <div className={styles.skeleton} />}
+
+        <img
+          src={boss.bossImg}
+          alt={boss.bossName}
+          className={`${styles.bossImage} ${loaded ? styles.visible : styles.hidden}`}
+          loading="eager"
+          decoding="async"
+          onLoad={() => setLoaded(true)}
+        />
+      </div>
     </section>
   );
 };

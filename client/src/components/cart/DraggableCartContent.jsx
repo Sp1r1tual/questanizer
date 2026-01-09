@@ -7,7 +7,7 @@ import cartImg from "@/assets/cart-questanizer.png";
 import styles from "./DraggableCartContent.module.css";
 
 const DraggableCartContent = ({ x, y, onClick }) => {
-  const { attributes, listeners, setNodeRef, transform } = useDraggable({
+  const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({
     id: "basket",
   });
 
@@ -21,6 +21,8 @@ const DraggableCartContent = ({ x, y, onClick }) => {
     transform: `translate3d(${translateX}px, ${translateY}px, 0)`,
     zIndex: 999,
     pointerEvents: "auto",
+    cursor: isDragging ? "grabbing" : "grab",
+    touchAction: "none",
   };
 
   return (
@@ -30,13 +32,15 @@ const DraggableCartContent = ({ x, y, onClick }) => {
       className={styles.basket}
       style={style}
       onClick={(event) => {
-        event.stopPropagation();
-        onClick?.();
+        if (!isDragging) {
+          event.stopPropagation();
+          onClick?.();
+        }
       }}
       {...listeners}
       {...attributes}
     >
-      <img src={cartImg} alt="Cart" className={styles.cartImage} />
+      <img src={cartImg} alt="Cart" className={styles.cartImage} draggable={false} />
       <CartCounter className={styles.cartCounter} />
     </div>
   );

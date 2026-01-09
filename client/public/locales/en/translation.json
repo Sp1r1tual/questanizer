@@ -50,6 +50,9 @@
     "addNewTaskBtn": {
       "addTask": "Add Task"
     },
+
+    "filterLabel": "Filters:",
+
     "organizerHeader": "What will you start your epic adventure with?",
     "taskDropdown": {
       "markAsDone": "Mark as Done",
@@ -256,7 +259,8 @@
     "invalidUsername": "Username must be 3 to 32 characters and contain only letters, numbers, dashes, dots, or underscores",
     "invalidBio": "Profile description must not exceed 500 characters",
     "searchQueryEmpty": "Search query cannot be empty",
-    "searchQuerySelf": "You cannot search for yourself"
+    "searchQuerySelf": "You cannot search for yourself",
+    "imageSizeError": "Image size must be less than 2MB"
   },
 
   "support": {

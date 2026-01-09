@@ -6,7 +6,8 @@
 }
 
 .icon {
-  font-size: 0.9rem;
+  height: 1.2rem;
+  width: 1.2rem;
 }
 
 .info {
@@ -16,11 +17,11 @@
 }
 
 .text {
-  font-size: 0.75rem;
+  font-size: 0.9rem;
 }
 
 .bar {
-  width: 100px;
+  width: 10rem;
   height: 0.4rem;
   background-color: #ddd;
   border-radius: 4px;
@@ -35,19 +36,10 @@
 @media (max-width: 480px) {
   .container {
     gap: 0.3rem;
-    font-size: 0.625rem;
-  }
-
-  .icon {
-    font-size: 0.75rem;
-  }
-
-  .text {
-    font-size: 0.7rem;
+    font-size: 1rem;
   }
 
   .bar {
-    width: 70px;
     height: 0.3rem;
   }
 }

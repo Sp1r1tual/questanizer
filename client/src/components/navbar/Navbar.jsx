@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import { NavbarDropdown } from "./dropdown/NavbarDropdown";
@@ -25,10 +25,11 @@ const Navbar = () => {
     <>
       <nav className={styles.navbar}>
         <div className={styles.logoContainer}>
-          <div className={styles.logo}>
+          <Link to="/" className={styles.logo}>
             <img className={styles.mainImg} src={headerImg} alt="main-img" />
             <h1 className={styles.title}>Questanizer</h1>
-          </div>
+          </Link>
+
           <div className={styles.navigationButtons}>
             <NavLink
               to="/"

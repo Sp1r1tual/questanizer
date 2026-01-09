@@ -1,3 +1,5 @@
+import hpSvg from "@/assets/heart-loving-svgrepo-com.svg";
+
 import styles from "./UserHealth.module.css";
 
 const UserHealth = ({ health, maxHealth }) => {
@@ -5,7 +7,7 @@ const UserHealth = ({ health, maxHealth }) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.icon}>❤️</div>
+      <img src={hpSvg} className={styles.icon} />
       <div className={styles.info}>
         <div className={styles.text}>
           HP: {health}/{maxHealth}

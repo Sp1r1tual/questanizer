@@ -96,20 +96,25 @@ const TasksView = () => {
   };
 
   return (
-    <Container>
-      <OrganizerHeader />
-      <TaskInput value={inputTask} onChange={onInputChange} isInvalid={isInputInvalid} />
-      <AddNewTaskBtn onClick={onOpenModal} />
-      <TaskList
-        tasks={filteredTasks}
-        onCompleteTask={onCompleteTask}
-        onDeleteTask={onDeleteTask}
-        groupDeleteCompleted={onGroupDeleteCompleted}
-        groupDeleteOverdue={onGroupDeleteOverdue}
-        loading={loading}
-        filters={filters}
-        onFilterChange={handleFilterChange}
-      />
+    <Container size="large">
+      <div className={styles.taskWrapper}>
+        <div className={styles.taskBlock}>
+          <OrganizerHeader />
+          <TaskInput value={inputTask} onChange={onInputChange} isInvalid={isInputInvalid} />
+          <AddNewTaskBtn onClick={onOpenModal} />
+        </div>
+
+        <TaskList
+          tasks={filteredTasks}
+          onCompleteTask={onCompleteTask}
+          onDeleteTask={onDeleteTask}
+          groupDeleteCompleted={onGroupDeleteCompleted}
+          groupDeleteOverdue={onGroupDeleteOverdue}
+          loading={loading}
+          filters={filters}
+          onFilterChange={handleFilterChange}
+        />
+      </div>
 
       {modalActive && (
         <Modal isOpen={modalActive} onClose={onCloseModal}>

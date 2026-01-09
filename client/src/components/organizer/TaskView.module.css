@@ -9,3 +9,25 @@
 .taskModal input[type="date"] {
   margin-bottom: 2rem;
 }
+
+.taskWrapper {
+  display: flex;
+  gap: 2rem;
+  min-height: 15vh;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  margin-bottom: 2rem;
+  box-sizing: border-box;
+}
+
+.taskBlock {
+  width: 100%;
+}
+
+@media (max-width: 460px) {
+  .taskWrapper {
+    min-height: 7vh;
+    gap: 1rem;
+  }
+}

@@ -1,5 +1,7 @@
 import { useTranslation } from "react-i18next";
 
+import expSvg from "@/assets/star-rate-svgrepo-com.svg";
+
 import styles from "./UserExperience.module.css";
 
 const UserExperience = ({ experience, level }) => {
@@ -10,7 +12,7 @@ const UserExperience = ({ experience, level }) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.icon}>⭐</div>
+      <img src={expSvg} className={styles.icon} />
       <div className={styles.info}>
         <div className={styles.text}>
           {t("shared.level")} {level}, XP: {experience}/{expToNext}

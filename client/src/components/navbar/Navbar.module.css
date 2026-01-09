@@ -26,6 +26,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  text-decoration: none;
 }
 
 .logo img {
@@ -140,8 +141,14 @@
   .title {
     font-size: 1.2rem;
   }
+
+  .logo {
+    gap: 0.5rem;
+  }
+
   .logo img {
     height: 40px;
+    margin: 0;
   }
   .navigationButtons {
     display: none;
@@ -157,5 +164,9 @@
 
   .dropdownMenu.active {
     display: flex;
+  }
+
+  .navButtons {
+    gap: 0.5rem;
   }
 }

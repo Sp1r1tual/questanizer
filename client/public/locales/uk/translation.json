@@ -50,6 +50,9 @@
     "addNewTaskBtn": {
       "addTask": "Додати завдання"
     },
+
+    "filterLabel": "Фільтри:",
+
     "organizerHeader": "З чого розпочнете свою епічну пригоду?",
     "taskDropdown": {
       "markAsDone": "Виконати",

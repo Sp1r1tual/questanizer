@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const useImagesLoaded = () => {
+export const useImagesLoaded = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -12,32 +12,39 @@ const useImagesLoaded = () => {
     }
 
     let loadedCount = 0;
+    const totalImages = images.length;
 
-    const handleLoad = () => {
+    const checkAllLoaded = () => {
       loadedCount++;
-      if (loadedCount >= images.length) {
+      if (loadedCount >= totalImages) {
         setIsLoaded(true);
       }
     };
 
+    const processedImages = new WeakMap();
+
     images.forEach((img) => {
-      if (img.complete && img.naturalWidth !== 0) {
-        handleLoad();
+      if (processedImages.has(img)) return;
+      processedImages.set(img, true);
+
+      if (img.complete && img.naturalHeight !== 0) {
+        checkAllLoaded();
       } else {
-        img.addEventListener("load", handleLoad, { once: true });
-        img.addEventListener("error", handleLoad, { once: true });
+        img.addEventListener("load", checkAllLoaded, { once: true });
+        img.addEventListener("error", checkAllLoaded, { once: true });
       }
     });
 
+    const timeout = setTimeout(() => {
+      if (!isLoaded) {
+        setIsLoaded(true);
+      }
+    }, 10000);
+
     return () => {
-      images.forEach((img) => {
-        img.removeEventListener("load", handleLoad);
-        img.removeEventListener("error", handleLoad);
-      });
+      clearTimeout(timeout);
     };
-  }, []);
+  }, [isLoaded]);
 
   return isLoaded;
 };
-
-export { useImagesLoaded };

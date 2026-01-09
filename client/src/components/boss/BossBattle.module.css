@@ -4,6 +4,7 @@
   gap: 2rem;
   flex-wrap: wrap;
   padding: 1rem;
+  width: 650px;
 }
 
 .bossView,
@@ -27,5 +28,11 @@
 
   .battleContainer {
     flex-wrap: nowrap;
+  }
+}
+
+@media (max-width: 460px) {
+  .battleContainer {
+    width: 100%;
   }
 }
