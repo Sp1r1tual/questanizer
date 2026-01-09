@@ -1,11 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 import { useBoss } from "@/hooks/boss/useBoss";
 import { useAuth } from "@/hooks/auth/useAuth";
 
-import { Loader } from "../ui/loaders/Loader";
 import { BossStats } from "./BossStats";
+import { BossStatsSkeleton } from "./BossStatsSkeleton";
 import { BossView } from "./BossView";
 import { BossBattleStartBtn } from "./BossBattleStartBtn";
 
@@ -15,33 +15,34 @@ import styles from "./BossBattle.module.css";
 
 const BossBattle = () => {
   const dispatch = useDispatch();
+  const [fetchAttempted, setFetchAttempted] = useState(false);
 
   const { boss, initBoss, loading } = useBoss();
-
   const { user } = useAuth();
 
   useEffect(() => {
-    if (user?.id && !boss.bossId) {
+    if (user?.id && !boss.bossId && !fetchAttempted) {
       dispatch(fetchBoss());
+      setFetchAttempted(true);
     }
-  }, [dispatch, user, boss.bossId]);
+  }, [dispatch, user?.id, boss.bossId, fetchAttempted]);
 
   const handleStartBattle = () => {
     initBoss();
   };
 
+  const shouldShowButton = fetchAttempted && !boss.bossId && !loading;
+  const shouldShowBattle = boss.bossId && (boss.bossId || loading);
+
   return (
     <div>
-      {loading && <Loader />}
-      {!boss.bossId && <BossBattleStartBtn onClick={handleStartBattle} />}
-      {boss.bossId && (
+      {shouldShowButton && <BossBattleStartBtn onClick={handleStartBattle} />}
+      {shouldShowBattle && (
         <div className={styles.battleContainer}>
           <div className={styles.bossView}>
             <BossView />
           </div>
-          <div className={styles.bossStats}>
-            <BossStats />
-          </div>
+          <div className={styles.bossStats}>{loading ? <BossStatsSkeleton /> : <BossStats />}</div>
         </div>
       )}
     </div>

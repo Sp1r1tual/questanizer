@@ -1,0 +1,40 @@
+.skeleton {
+  background: linear-gradient(90deg, #e8dfd8 0%, #f0e9e3 50%, #e8dfd8 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 0.3rem;
+  width: 100%;
+}
+
+.bossNameSkeleton {
+  height: 2rem;
+  width: 70%;
+  margin: 0 auto;
+  margin-top: 0rem;
+  margin-bottom: 2rem;
+}
+
+.statTextSkeleton {
+  height: 1rem;
+  width: 60%;
+  margin-bottom: 0.3rem;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .bossNameSkeleton {
+    height: 1.5rem;
+  }
+
+  .statTextSkeleton {
+    height: 0.9rem;
+  }
+}

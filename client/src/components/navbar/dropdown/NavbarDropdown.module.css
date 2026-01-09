@@ -16,8 +16,8 @@
 }
 
 .dropdownToggle img {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   filter: brightness(0.9);
   transition:
     filter 0.2s ease,
@@ -25,7 +25,6 @@
 }
 
 .dropdownToggle:hover img {
-  filter: brightness(1.1);
   transform: scale(1.1);
 }
 
@@ -44,6 +43,14 @@
   flex-direction: column;
   gap: 0.5rem;
   animation: fadeIn 0.2s ease-in-out;
+}
+
+.avatar {
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #4d2c20;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
 }
 
 @keyframes fadeIn {

@@ -10,56 +10,45 @@
 }
 
 .small {
-  min-width: 400px;
-  max-width: 400px;
-  width: 100%;
+  width: 400px;
   padding: 15px;
 }
 
 .medium {
-  min-width: 650px;
-  max-width: 650px;
-  width: 100%;
+  width: 650px;
   padding: 20px;
 }
 
 .large {
-  min-width: 900px;
-  max-width: 900px;
-  width: 100%;
+  width: 900px;
   padding: 30px;
 }
 
 @media (max-width: 940px) {
   .large {
-    min-width: auto;
-    max-width: 95%;
+    width: 95%;
   }
 }
 
 @media (max-width: 680px) {
   .medium {
-    min-width: auto;
-    max-width: 95%;
+    width: 95%;
   }
 }
 
 @media (max-width: 640px) {
   .small {
-    min-width: auto;
-    max-width: 90%;
+    width: 90%;
     padding: 10px;
   }
 
   .medium {
-    min-width: auto;
-    max-width: 95%;
+    width: 95%;
     padding: 15px;
   }
 
   .large {
-    min-width: auto;
-    max-width: 95%;
+    width: 95%;
     padding: 20px;
   }
 }

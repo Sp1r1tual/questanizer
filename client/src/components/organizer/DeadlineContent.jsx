@@ -44,7 +44,7 @@ const DeadlineContent = ({
       </div>
       {isDateInvalid && deadline && (
         <p className={styles.error}>
-          {t("organizer.organizerModal.uncorrectDateInput", { currentYear })}
+          {t("organizer.organizerModal.uncorrectDateInput", { year: currentYear })}
         </p>
       )}
       <div className={styles.buttonGroup}>

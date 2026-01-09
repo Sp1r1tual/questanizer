@@ -1,6 +1,5 @@
 .bossView {
   text-align: center;
-  max-width: 320px;
 }
 
 .imageWrapper {
@@ -8,6 +7,9 @@
   width: 100%;
   border-radius: 0.5rem;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  aspect-ratio: 2 / 3;
 }
 
 .bossImage {
@@ -29,6 +31,7 @@
 
 .skeleton {
   position: absolute;
+  width: 100%;
   inset: 0;
   background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 37%, #e5e7eb 63%);
   background-size: 400% 100%;
@@ -48,9 +51,5 @@
   .placeholder {
     font-size: 1rem;
     padding: 1rem;
-  }
-
-  .bossImage {
-    max-width: 90%;
   }
 }

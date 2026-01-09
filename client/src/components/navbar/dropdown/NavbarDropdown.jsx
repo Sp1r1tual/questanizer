@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { useSelector } from "react-redux";
 
 import { UserProfileView } from "../../profile/UserProfileView";
 import { UserFriendsView } from "../../friends/UserFriendsView";
@@ -20,6 +21,8 @@ const NavbarDropdown = ({ closeMenu }) => {
   const [showSettingsModal, setShowSettingsModal] = useState(false);
 
   const dropdownRef = useRef(null);
+
+  const user = useSelector((state) => state.auth.user);
 
   const toggleDropdown = () => {
     setIsOpen((prev) => {
@@ -48,7 +51,11 @@ const NavbarDropdown = ({ closeMenu }) => {
     <>
       <div className={`${styles.dropdownContainer} ${isOpen ? styles.open : ""}`} ref={dropdownRef}>
         <button className={styles.dropdownToggle} onClick={toggleDropdown}>
-          <img src={isOpen ? dropdownActiveIcon : dropdownIcon} alt="Dropdown" />
+          {user?.photoUrl ? (
+            <img src={user.photoUrl} alt={user.username} className={styles.avatar} />
+          ) : (
+            <img src={isOpen ? dropdownActiveIcon : dropdownIcon} alt="Dropdown" />
+          )}
         </button>
 
         {isOpen && (

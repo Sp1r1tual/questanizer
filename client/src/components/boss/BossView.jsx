@@ -12,10 +12,6 @@ const BossView = () => {
     setLoaded(false);
   }, [boss.bossImg]);
 
-  if (!boss.bossId) {
-    return <section className={styles.placeholder}>Boss appears here...</section>;
-  }
-
   return (
     <section className={styles.bossView}>
       <div className={styles.imageWrapper}>

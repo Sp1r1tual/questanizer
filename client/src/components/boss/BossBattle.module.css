@@ -4,13 +4,15 @@
   gap: 2rem;
   flex-wrap: wrap;
   padding: 1rem;
-  width: 650px;
+  min-width: 600px;
+  min-height: 100%;
+  width: 100%;
 }
 
 .bossView,
 .bossStats {
   flex: 1 1 100%;
-  max-width: 100%;
+  width: 100%;
   padding: 1rem;
   background-color: #fffaf7;
   border-radius: 0.5rem;
@@ -33,6 +35,6 @@
 
 @media (max-width: 460px) {
   .battleContainer {
-    width: 100%;
+    min-width: 100%;
   }
 }
