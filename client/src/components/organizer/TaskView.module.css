@@ -14,11 +14,12 @@
   display: flex;
   gap: 2rem;
   min-height: 15vh;
-  flex-wrap: wrap;
-  align-items: flex-start;
+  align-items: center;
+  flex-direction: column;
   justify-content: center;
   margin-bottom: 2rem;
   box-sizing: border-box;
+  width: 100%;
 }
 
 .taskBlock {
