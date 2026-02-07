@@ -2,6 +2,7 @@ import { ChangeLanguageBtn } from "@/components/ui/buttons/ChangeLangBtn";
 import { LoginImage } from "./LoginImage";
 import { LoginForm } from "./LoginForm";
 import { Footer } from "@/components/footer/Footer";
+import { Card } from "@/components/ui/wrappers/Card";
 
 import styles from "./LoginView.module.css";
 
@@ -12,10 +13,10 @@ const LoginView = () => {
         <ChangeLanguageBtn />
       </div>
       <div className={styles.authContentWrapper}>
-        <div className={styles.authContainer}>
+        <Card size="large" className={styles.authCard}>
           <LoginImage />
           <LoginForm />
-        </div>
+        </Card>
       </div>
       <Footer />
     </div>

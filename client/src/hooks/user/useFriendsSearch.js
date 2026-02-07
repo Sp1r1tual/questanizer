@@ -32,15 +32,17 @@ const useFriendsSearch = () => {
   const handleSearch = async (page = 1) => {
     const trimmedQuery = input.trim();
 
-    if (!trimmedQuery) return;
-
     const { valid, error: validationError } = validateSearchQuery(
       trimmedQuery,
       currentUserId,
       currentUserName,
     );
 
-    if (!valid) return validationError && setError(validationError);
+    if (!valid) {
+      setError(validationError);
+      setHasSearched(true);
+      return;
+    }
 
     setError(null);
     setMessage(null);

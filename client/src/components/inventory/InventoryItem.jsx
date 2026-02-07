@@ -25,16 +25,18 @@ const InventoryItem = ({ item, isLoading }) => {
 
   return (
     <div className={styles.card} onClick={handleViewDetails}>
-      {!imageLoaded && <div className={styles.skeletonImage} />}
+      <div className={styles.imageContainer}>
+        {!imageLoaded && <div className={styles.skeletonImage} />}
 
-      <img
-        className={`${styles.image} ${imageLoaded ? styles.visible : styles.hidden}`}
-        src={`/${item.item.itemImg}`}
-        alt={item.item.name}
-        loading="eager"
-        decoding="async"
-        onLoad={() => setImageLoaded(true)}
-      />
+        <img
+          className={`${styles.image} ${imageLoaded ? styles.visible : styles.hidden}`}
+          src={`/${item.item.itemImg}`}
+          alt={item.item.name}
+          loading="eager"
+          decoding="async"
+          onLoad={() => setImageLoaded(true)}
+        />
+      </div>
 
       <h3 className={styles.title}>{item.item.name}</h3>
       <p className={styles.quantity}>

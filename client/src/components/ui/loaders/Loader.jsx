@@ -1,8 +1,8 @@
 import styles from "./Loader.module.css";
 
-const Loader = () => {
+const Loader = ({ contained }) => {
   return (
-    <div data-testid="loader" className={styles.overlay}>
+    <div className={`${styles.overlay} ${contained ? styles.contained : ""}`}>
       <div className={styles.spinner} />
     </div>
   );

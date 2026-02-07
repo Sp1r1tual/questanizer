@@ -269,7 +269,8 @@
     "getSupport": "サポートに連絡",
     "suggestIdea": "アイデアを提案",
     "writeHere": "ここにメッセージを入力してください...",
-    "send": "送信"
+    "send": "送信",
+    "confirmLogout": "ログアウトしてもよろしいですか？"
   },
 
   "chat": {

@@ -1,9 +1,9 @@
 .contentForm {
   background-color: #f7f1ee;
-  padding: 1.5rem;
   border-radius: 0.75rem;
   box-shadow: 0 0 15px rgba(80, 50, 40, 0.2);
   width: 300px;
+  padding: 1.25rem;
   font-family: "Georgia", serif;
   position: relative;
   z-index: 1;

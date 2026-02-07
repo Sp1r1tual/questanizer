@@ -9,6 +9,56 @@
   width: 10rem;
 }
 
+.skeletonTitle {
+  width: 100%;
+  height: 1rem;
+  margin-bottom: 0.4rem;
+  background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 37%, #e5e7eb 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.4s ease infinite;
+  border-radius: 0.375rem;
+}
+
+.imageContainer {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  align-self: center;
+  margin-bottom: 0.5rem;
+}
+
+.skeletonImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 37%, #e5e7eb 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.4s ease infinite;
+  border-radius: 0.5rem;
+}
+
+.skeletonPrice {
+  width: 60%;
+  height: 0.9rem;
+  margin: 0 auto;
+  background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 37%, #e5e7eb 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.4s ease infinite;
+  border-radius: 0.375rem;
+}
+
+.skeletonAmount {
+  width: 50%;
+  height: 0.9rem;
+  margin: 0.5rem auto 0;
+  background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 37%, #e5e7eb 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.4s ease infinite;
+  border-radius: 0.375rem;
+}
+
 @keyframes shimmer {
   0% {
     background-position: 100% 0;
@@ -16,56 +66,4 @@
   100% {
     background-position: 0 0;
   }
-}
-
-.skeletonText {
-  background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 37%, #e5e7eb 63%);
-  background-size: 400% 100%;
-  animation: shimmer 1.4s ease infinite;
-  border-radius: 0.375rem;
-}
-
-.skeletonTitle {
-  width: 100%;
-  height: 1rem;
-  margin-bottom: 0.4rem;
-}
-
-.skeletonImage {
-  width: 90px;
-  height: 90px;
-  background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 37%, #e5e7eb 63%);
-  background-size: 400% 100%;
-  animation: shimmer 1.4s ease infinite;
-  border-radius: 0.5rem;
-  align-self: center;
-  margin-bottom: 0.5rem;
-}
-
-.skeletonPriceWrapper {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-.skeletonPrice {
-  width: 50%;
-  height: 0.9rem;
-}
-
-.skeletonAmountWrapper {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-.skeletonAmount {
-  width: 70%;
-  height: 0.9rem;
-}
-
-.infoWrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
 }

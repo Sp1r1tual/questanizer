@@ -95,9 +95,8 @@ const RegistrationForm = () => {
     <>
       <Terms isOpen={showTerms} onAccept={handleAccept} onDecline={declineTerms} />
 
-      {isLoading && <Loader />}
-
       <div className={styles.contentForm}>
+        {isLoading && <Loader contained />}
         <h2 className={styles.formTitle}>{t("auth.registration.title")}</h2>
 
         <form onSubmit={handleSubmit(handleFormSubmit)} aria-label="registration form" noValidate>

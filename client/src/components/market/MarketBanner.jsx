@@ -13,18 +13,19 @@ const MarketBanner = () => {
   return (
     <div className={styles.bannerWrapper}>
       <MarketGreeting />
-      <picture>
+      <div className={styles.imageContainer}>
         {!loaded && <div className={styles.skeleton} />}
-
-        <source srcSet={marketBannerMobileImg} media="(max-width: 768px)" />
-        <img
-          src={marketBannerDesktopImg}
-          alt="market-banner"
-          className={styles.img}
-          loading="eager"
-          onLoad={() => setLoaded(true)}
-        />
-      </picture>
+        <picture>
+          <source srcSet={marketBannerMobileImg} media="(max-width: 768px)" />
+          <img
+            src={marketBannerDesktopImg}
+            alt="market-banner"
+            className={`${styles.img} ${loaded ? styles.loaded : ""}`}
+            loading="eager"
+            onLoad={() => setLoaded(true)}
+          />
+        </picture>
+      </div>
     </div>
   );
 };

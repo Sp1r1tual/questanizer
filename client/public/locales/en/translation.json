@@ -270,7 +270,8 @@
     "getSupport": "Contact Support",
     "suggestIdea": "Suggest an Idea",
     "writeHere": "Write your message here...",
-    "send": "Send"
+    "send": "Send",
+    "confirmLogout": "Are you sure you want to log out?"
   },
 
   "chat": {

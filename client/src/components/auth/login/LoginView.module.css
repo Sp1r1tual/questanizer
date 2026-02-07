@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 .languageBtnWrapper {
@@ -18,52 +18,24 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
+  padding: 0.5rem;
   box-sizing: border-box;
 }
 
-.authContainer {
-  display: flex;
+.authCard {
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  max-width: 750px;
-  margin: 0 auto;
-  padding: 1.5rem;
-  box-shadow: 0 0 15px rgba(80, 50, 40, 0.1);
-  border-radius: 0.75rem;
+  padding: 0.75rem;
+  max-width: 900px;
+  width: fit-content;
   background-color: #fff;
-  box-sizing: border-box;
+  overflow: hidden;
+  justify-content: center;
 }
 
-@media (max-width: 1024px) {
-  .authContainer {
-    max-width: 600px;
-    padding: 1.25rem;
-  }
-}
-
-@media (max-width: 640px) {
-  .authContainer {
+@media (max-width: 768px) {
+  .authCard {
     flex-direction: column;
-    width: 90%;
-    max-width: 400px;
-    padding: 1rem;
-  }
-
-  .authContentWrapper {
-    padding: 0.75rem;
-  }
-}
-
-@media (max-width: 400px) {
-  .authContainer {
-    width: 95%;
-    padding: 0.75rem;
-  }
-
-  .authContentWrapper {
-    padding: 0.5rem;
+    max-width: 450px;
+    padding: 0;
   }
 }

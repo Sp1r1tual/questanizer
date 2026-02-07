@@ -25,6 +25,12 @@
 .arrow {
   font-size: 1rem;
   transition: transform 0.3s ease;
+  display: inline-block;
+  color: inherit;
+}
+
+.rotated {
+  transform: rotate(180deg);
 }
 
 .faqAnswerWrapper {
@@ -37,7 +43,7 @@
 }
 
 .faqAnswerWrapper.open {
-  max-height: 300px;
+  max-height: 500px;
   opacity: 1;
 }
 
@@ -48,6 +54,7 @@
   background-color: #fffef9;
   line-height: 1.6;
   border-top: 1px solid #d9c2a8;
+  text-align: justify;
 }
 
 @media (max-width: 768px) {

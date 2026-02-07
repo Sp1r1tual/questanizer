@@ -5,7 +5,7 @@ const AnswerItem = ({ question, answer, isOpen, onToggle }) => {
     <div className={styles.faqItem}>
       <div className={styles.faqQuestion} onClick={onToggle}>
         <span>{question}</span>
-        <span className={styles.arrow}>{isOpen ? "▲" : "▼"}</span>
+        <span className={`${styles.arrow} ${isOpen ? styles.rotated : ""}`}>▼</span>
       </div>
       <div className={`${styles.faqAnswerWrapper} ${isOpen ? styles.open : ""}`}>
         <div className={styles.faqAnswer}>{answer}</div>

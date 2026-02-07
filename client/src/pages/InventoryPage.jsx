@@ -1,28 +1,24 @@
-import { Wrapper } from "@/components/ui/wrappers/Wrapper";
+import { PageContainer } from "@/components/ui/wrappers/PageContainer";
+import { Card } from "@/components/ui/wrappers/Card";
 import { InventoryItemView } from "@/components/inventory/InventoryItemView";
-import { Dashboard } from "@/components/ui/wrappers/Dashboard";
-import { Container } from "@/components/ui/wrappers/Container";
 import { UserStatsView } from "@/components/stats/UserStatsView";
 import { InventoryHeader } from "@/components/inventory/InventoryHeader";
 import { InventoryList } from "@/components/inventory/InventoryList";
-import { BackgroundLayout } from "../layouts/BackgroundLayout";
 
 const InventoryPage = () => {
   return (
-    <BackgroundLayout>
-      <Wrapper>
-        <InventoryItemView />
-        <Dashboard>
-          <Container>
-            <UserStatsView />
-          </Container>
-          <Container>
-            <InventoryHeader />
-            <InventoryList />
-          </Container>
-        </Dashboard>
-      </Wrapper>
-    </BackgroundLayout>
+    <PageContainer>
+      <InventoryItemView />
+
+      <Card size="large">
+        <UserStatsView />
+      </Card>
+
+      <Card size="large">
+        <InventoryHeader />
+        <InventoryList />
+      </Card>
+    </PageContainer>
   );
 };
 

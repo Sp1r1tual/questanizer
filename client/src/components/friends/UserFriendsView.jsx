@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import { useUserFriends } from "@/hooks/user/useUserFriends";
 
 import { Modal } from "../ui/modals/Modal";
-import { Loader } from "../ui/loaders/Loader";
 import { PublicUserProfileContent } from "./PublicUserProfileContent";
 import { FriendsSearch } from "./FriendsSearch";
 import { FriendsList } from "./FriendsList";
@@ -51,8 +50,6 @@ const UserFriendsView = ({ isOpen, onClose }) => {
     setCurrentView("profile");
   };
 
-  if (isLoading) return <Loader />;
-
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       {currentView === "friends" && (
@@ -72,6 +69,7 @@ const UserFriendsView = ({ isOpen, onClose }) => {
             items={friends}
             onRemove={handleRemoveFriendOrCancel}
             onShowProfile={handleShowProfile}
+            isLoading={isLoading}
           />
 
           <FriendsList
@@ -79,6 +77,7 @@ const UserFriendsView = ({ isOpen, onClose }) => {
             onAccept={handleAcceptRequest}
             onRemove={handleRemoveFriendOrCancel}
             onShowProfile={handleShowProfile}
+            isLoading={isLoading}
           />
         </>
       )}

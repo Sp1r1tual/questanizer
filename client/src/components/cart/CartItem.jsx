@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { CartItemSkeleton } from "./CartItemSkeleton";
@@ -7,6 +8,7 @@ import goldSvg from "@/assets/coin-svgrepo-com.svg";
 import styles from "./CartItem.module.css";
 
 const CartItem = ({ item, onIncrease, onDecrease, onRemove, onChangeQuantity, isLoading }) => {
+  const [imageLoaded, setImageLoaded] = useState(false);
   const { t } = useTranslation();
 
   const quantity = item?.quantity || 1;
@@ -38,9 +40,19 @@ const CartItem = ({ item, onIncrease, onDecrease, onRemove, onChangeQuantity, is
 
   return (
     <div className={styles.cartItem}>
-      {item.item.itemImg && (
-        <img src={item.item.itemImg} alt={item.item.name || "Item"} className={styles.itemImage} />
-      )}
+      <div className={styles.imageContainer}>
+        {!imageLoaded && <div className={styles.skeletonImage} />}
+        {item.item.itemImg && (
+          <img
+            src={item.item.itemImg}
+            alt={item.item.name || "Item"}
+            className={`${styles.itemImage} ${imageLoaded ? styles.visible : styles.hidden}`}
+            loading="eager"
+            decoding="async"
+            onLoad={() => setImageLoaded(true)}
+          />
+        )}
+      </div>
 
       <div className={styles.itemInfo}>
         <h3 className={styles.itemName}>{item.item.name}</h3>

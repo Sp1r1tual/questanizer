@@ -16,11 +16,10 @@ const BossView = () => {
     <section className={styles.bossView}>
       <div className={styles.imageWrapper}>
         {!loaded && <div className={styles.skeleton} />}
-
         <img
           src={boss.bossImg}
           alt={boss.bossName}
-          className={`${styles.bossImage} ${loaded ? styles.visible : styles.hidden}`}
+          className={`${styles.bossImage} ${loaded ? styles.loaded : ""}`}
           loading="eager"
           decoding="async"
           onLoad={() => setLoaded(true)}

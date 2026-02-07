@@ -269,7 +269,8 @@
     "getSupport": "Skontaktuj się z pomocą",
     "suggestIdea": "Zaproponuj pomysł",
     "writeHere": "Napisz tutaj swoją wiadomość...",
-    "send": "Wyślij"
+    "send": "Wyślij",
+    "confirmLogout": "Czy na pewno chcesz się wylogować?"
   },
 
   "chat": {

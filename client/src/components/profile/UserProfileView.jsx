@@ -39,7 +39,9 @@ const UserProfileView = ({ isOpen, onClose }) => {
   if (isLoading || !user) {
     return (
       <Modal isOpen={isOpen} onClose={onClose} size="medium">
-        <Loader />
+        <div style={{ minHeight: "400px", position: "relative" }}>
+          <Loader contained />
+        </div>
       </Modal>
     );
   }

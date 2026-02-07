@@ -1,24 +1,18 @@
-import { Wrapper } from "@/components/ui/wrappers/Wrapper";
-import { Dashboard } from "@/components/ui/wrappers/Dashboard";
-import { Container } from "@/components/ui/wrappers/Container";
+import { PageContainer } from "@/components/ui/wrappers/PageContainer";
+import { Card } from "@/components/ui/wrappers/Card";
 import { Answers } from "@/components/support/Answers";
 import { Feedback } from "../components/support/Feedback";
-import { BackgroundLayout } from "../layouts/BackgroundLayout";
 
 const SupportPage = () => {
   return (
-    <BackgroundLayout>
-      <Wrapper>
-        <Dashboard>
-          <Container>
-            <Answers />
-          </Container>
-          <Container>
-            <Feedback />
-          </Container>
-        </Dashboard>
-      </Wrapper>
-    </BackgroundLayout>
+    <PageContainer>
+      <Card size="large">
+        <Answers />
+      </Card>
+      <Card size="large">
+        <Feedback />
+      </Card>
+    </PageContainer>
   );
 };
 

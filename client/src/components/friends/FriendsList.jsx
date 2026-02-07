@@ -1,10 +1,11 @@
 import { useTranslation } from "react-i18next";
 
 import { FriendItem } from "./FriendItem";
+import { FriendItemSkeleton } from "./FriendItemSkeleton";
 
 import styles from "./FriendsList.module.css";
 
-const FriendsList = ({ items, onAccept, onRemove, onShowProfile }) => {
+const FriendsList = ({ items, onAccept, onRemove, onShowProfile, isLoading }) => {
   const { t } = useTranslation();
 
   const isRequestList = !!onAccept;
@@ -15,6 +16,19 @@ const FriendsList = ({ items, onAccept, onRemove, onShowProfile }) => {
         type: "request",
       }
     : { title: "friendsSectionTitle", noItems: "friends", type: "friend" };
+
+  if (isLoading) {
+    return (
+      <div>
+        <h3 className={styles.friendsListTitle}>{t(`friends.sectionTitle.${keys.title}`)}</h3>
+        <div className={styles.friendsList}>
+          {[1, 2, 3].map((id) => (
+            <FriendItemSkeleton key={id} />
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div>

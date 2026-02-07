@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 .languageBtnWrapper {
@@ -31,7 +31,7 @@
   align-items: center;
   width: fit-content;
   margin: 0 auto;
-  padding: 1.5rem;
+  padding: 0.75rem;
   box-shadow: 0 0 15px rgba(80, 50, 40, 0.1);
   border-radius: 0.75rem;
   background-color: #fff;
@@ -46,6 +46,7 @@
     width: 90%;
     max-width: 400px;
     padding: 1rem;
+    margin-top: 2rem;
   }
 
   .registrationContentWrapper {
@@ -55,8 +56,8 @@
 
 @media (max-width: 400px) {
   .registrationContainer {
-    width: 95%;
-    padding: 0.75rem;
+    width: 100%;
+    padding: 0;
   }
 
   .registrationContentWrapper {

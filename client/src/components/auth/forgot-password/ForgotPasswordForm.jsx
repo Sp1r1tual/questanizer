@@ -41,8 +41,8 @@ const ForgotPasswordForm = ({
   };
 
   return (
-    <div className={styles.contentForm}>
-      <form onSubmit={handleSubmit(handleFormSubmit)} noValidate>
+    <>
+      <form className={styles.form} onSubmit={handleSubmit(handleFormSubmit)} noValidate>
         <div className={styles.formGroup}>
           <label htmlFor="email" className={styles.formLabel}>
             {t("shared.emailLabel")}
@@ -87,7 +87,7 @@ const ForgotPasswordForm = ({
           {t("shared.back")}
         </Link>
       </p>
-    </div>
+    </>
   );
 };
 

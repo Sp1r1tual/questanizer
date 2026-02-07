@@ -269,7 +269,8 @@
     "getSupport": "Contactar con soporte",
     "suggestIdea": "Sugerir una idea",
     "writeHere": "Escribe tu mensaje aquí...",
-    "send": "Enviar"
+    "send": "Enviar",
+    "confirmLogout": "¿Estás seguro de que quieres cerrar sesión?"
   },
 
   "chat": {

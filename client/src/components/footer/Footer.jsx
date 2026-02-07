@@ -13,8 +13,8 @@ const Footer = () => {
     <footer className={styles.footer}>
       <div className={styles.container}>
         <div className={styles.copyright}>
-          © {new Date().getFullYear()}{" "}
-          <a href="/" className={styles.link}>
+          © {new Date().getFullYear()}
+          <a href="/" className={styles.brandLink}>
             Questanizer
           </a>
         </div>
@@ -26,10 +26,10 @@ const Footer = () => {
             rel="noopener noreferrer"
             className={styles.link}
           >
-            {t("footer.about")}
+            <span>{t("footer.about")}</span>
           </a>
           <a href={`mailto:${mail}`} className={styles.link}>
-            {t("footer.contact")}
+            <span>{t("footer.contact")}</span>
           </a>
         </div>
       </div>

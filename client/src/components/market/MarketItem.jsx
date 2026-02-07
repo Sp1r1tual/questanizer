@@ -35,16 +35,18 @@ const MarketItem = ({ item, isLoading }) => {
     <div className={styles.card} onClick={handleViewDetails}>
       <h3 className={styles.title}>{item.name}</h3>
 
-      {!loaded && <div className={styles.skeletonImage} />}
+      <div className={styles.imageContainer}>
+        {!loaded && <div className={styles.skeletonImage} />}
+        <img
+          src={item.itemImg}
+          alt={item.name}
+          className={`${styles.img} ${loaded ? styles.loaded : ""}`}
+          loading="eager"
+          decoding="async"
+          onLoad={() => setLoaded(true)}
+        />
+      </div>
 
-      <img
-        src={item.itemImg}
-        alt={item.name}
-        className={`${styles.img} ${loaded ? styles.visible : styles.hidden}`}
-        loading="eager"
-        decoding="async"
-        onLoad={() => setLoaded(true)}
-      />
       <p className={styles.price}>
         {t("market.price")}: {item.price}
         <img src={goldSvg} alt="gold" className={styles.goldIcon} />

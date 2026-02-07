@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 import { useFriendsSearch } from "@/hooks/user/useFriendsSearch";
 
 import { Pagination } from "../ui/pagination/Pagination";
+import { FriendItemSkeleton } from "./FriendItemSkeleton";
 import { FriendItem } from "./FriendItem";
 
 import styles from "./FriendsSearch.module.css";
@@ -49,6 +50,16 @@ const FriendsSearch = ({ getFriendStatus, onAdd, onAccept, onRemove, onShowProfi
           {t("friends.searchButton")}
         </button>
       </div>
+
+      {isLoading && (
+        <div className={styles.searchResults}>
+          <div className={styles.usersList}>
+            {[1, 2, 3].map((id) => (
+              <FriendItemSkeleton key={id} />
+            ))}
+          </div>
+        </div>
+      )}
 
       {hasSearched && !isLoading && (
         <div className={styles.searchResults}>

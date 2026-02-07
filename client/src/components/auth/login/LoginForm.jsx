@@ -64,8 +64,8 @@ const LoginForm = () => {
 
   return (
     <>
-      {isLoading && <Loader />}
       <div className={styles.contentForm}>
+        {isLoading && <Loader contained />}
         <h2 className={styles.formTitle}>{t("auth.login.title")}</h2>
 
         <form onSubmit={handleSubmit(handleLogin)} noValidate>

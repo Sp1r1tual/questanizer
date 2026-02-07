@@ -13,11 +13,10 @@ const InventoryHeader = () => {
     <>
       <div className={styles.imageWrapper}>
         {!loaded && <div className={styles.skeleton} />}
-
         <img
           src={chestImage}
           alt="inventory"
-          className={`${styles.img} ${loaded ? styles.visible : styles.hidden}`}
+          className={`${styles.img} ${loaded ? styles.loaded : ""}`}
           loading="eager"
           onLoad={() => setLoaded(true)}
         />

@@ -2,15 +2,41 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  position: relative;
   overflow-x: hidden;
-  z-index: 0;
+}
+
+.backgroundWrapper {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+}
+
+.bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.bg.active {
+  opacity: 1;
 }
 
 .mainContent {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
   width: 100%;
-  justify-content: space-between;
+  padding-top: 6rem;
+  padding-bottom: 2rem;
+}
+
+@media (max-width: 640px) {
+  .mainContent {
+    padding-top: 5rem;
+  }
 }

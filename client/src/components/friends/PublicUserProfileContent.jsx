@@ -30,7 +30,11 @@ const PublicUserProfileContent = ({ userId, onBack, onOpenChat }) => {
   }, [dispatch, userId]);
 
   if (!publicProfile) {
-    return <Loader />;
+    return (
+      <div style={{ minHeight: "400px", position: "relative", width: "100%" }}>
+        <Loader contained />
+      </div>
+    );
   }
 
   const { username, level, health, registrationDate, bio } = publicProfile;

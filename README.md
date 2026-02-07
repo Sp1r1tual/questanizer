@@ -6,7 +6,7 @@
 
 ## Screenshot
 
-![Questanizer](https://res.cloudinary.com/dynnapuco/image/upload/v1767999303/%D0%97%D0%BD%D1%96%D0%BC%D0%BE%D0%BA_%D0%B5%D0%BA%D1%80%D0%B0%D0%BD%D0%B0_2026-01-10_005305_s0bbtu.png)
+![Questanizer](https://res.cloudinary.com/dynnapuco/image/upload/v1768000299/f6ef2add-42df-4537-8da4-540e42826f79.png)
 
 ---
 
@@ -94,3 +94,4 @@ Currently, this project does not include a formal license.
 All rights are reserved by the author.
 
 If you plan to use, modify, or distribute this project, please contact the author for permission.
+

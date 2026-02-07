@@ -9,7 +9,10 @@ import { useAuth } from "@/hooks/auth/useAuth";
 import { useTaskModal } from "@/hooks/tasks/useTaskModal";
 
 import { Modal } from "../ui/modals/Modal";
-import { Container } from "../ui/wrappers/Container";
+import { Card } from "@/components/ui/wrappers/Card";
+import { PageContainer } from "@/components/ui/wrappers/PageContainer";
+import { UserStatsView } from "@/components/stats/UserStatsView";
+
 import { OrganizerHeader } from "./OrganizerHeader";
 import { TaskInput } from "./TaskInput";
 import { AddNewTaskBtn } from "./AddNewTaskBtn";
@@ -17,6 +20,7 @@ import { TaskList } from "./TaskList";
 import { DeadlineContent } from "./DeadlineContent";
 import { DifficultyContent } from "./DifficultyContent";
 import { ConfirmChoiceModal } from "../ui/modals/ConfirmChoiceModal";
+import { ConfirmOverdueTasks } from "./ConfirmOverdueTasks";
 
 import { fetchTasks } from "@/store/tasks/tasksThunks";
 
@@ -96,25 +100,33 @@ const TasksView = () => {
   };
 
   return (
-    <Container size="large">
-      <div className={styles.taskWrapper}>
-        <div className={styles.taskBlock}>
-          <OrganizerHeader />
-          <TaskInput value={inputTask} onChange={onInputChange} isInvalid={isInputInvalid} />
-          <AddNewTaskBtn onClick={onOpenModal} />
-        </div>
+    <PageContainer>
+      <ConfirmOverdueTasks />
 
-        <TaskList
-          tasks={filteredTasks}
-          onCompleteTask={onCompleteTask}
-          onDeleteTask={onDeleteTask}
-          groupDeleteCompleted={onGroupDeleteCompleted}
-          groupDeleteOverdue={onGroupDeleteOverdue}
-          loading={loading}
-          filters={filters}
-          onFilterChange={handleFilterChange}
-        />
-      </div>
+      <Card size="large">
+        <UserStatsView />
+      </Card>
+
+      <Card size="large">
+        <div className={styles.taskWrapper}>
+          <div className={styles.taskBlock}>
+            <OrganizerHeader />
+            <TaskInput value={inputTask} onChange={onInputChange} isInvalid={isInputInvalid} />
+            <AddNewTaskBtn onClick={onOpenModal} />
+          </div>
+
+          <TaskList
+            tasks={filteredTasks}
+            onCompleteTask={onCompleteTask}
+            onDeleteTask={onDeleteTask}
+            groupDeleteCompleted={onGroupDeleteCompleted}
+            groupDeleteOverdue={onGroupDeleteOverdue}
+            loading={loading}
+            filters={filters}
+            onFilterChange={handleFilterChange}
+          />
+        </div>
+      </Card>
 
       {modalActive && (
         <Modal isOpen={modalActive} onClose={onCloseModal}>
@@ -159,7 +171,7 @@ const TasksView = () => {
           cancelText={t("shared.no")}
         />
       )}
-    </Container>
+    </PageContainer>
   );
 };
 
