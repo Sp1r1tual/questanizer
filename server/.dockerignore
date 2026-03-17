@@ -1,13 +1,5 @@
+node_modules
+.env
 .git
 .gitignore
-
-Dockerfile
-.dockerignore
-
-npm-debug.log
-
-node_modules
-coverage
-public/avatars
-
-.env
+*.log
