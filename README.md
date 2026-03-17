@@ -88,10 +88,142 @@ The project not only advanced the author technically but also allowed experiment
 - **Special events** – implement events between bosses and general project-wide special activities
 - **Complete documentation** – provide full and detailed documentation for both the client and server, covering setup, features, API endpoints, and usage instructions
 
+---
+
+## Local Development Setup
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/Sp1r1tual/questanizer.git
+```
+
+### Mail Service
+
+This project requires a separate mail service. Clone and set it up first by following the instructions in its repository:
+
+```bash
+git clone https://github.com/Sp1r1tual/mail-api.git
+```
+
+### Server
+
+### 2. Navigate to server directory
+
+```bash
+cd server
+```
+
+### 3. Install dependencies
+
+```bash
+npm install
+```
+
+### 4. Configure environment variables
+
+Copy `.env.example` to `.env` and fill in the values:
+
+```dotenv
+PORT=5000
+DB_URL=mongodb://localhost:27017/questanizer
+JWT_ACCESS_SECRET=your_jwt_access_secret
+JWT_REFRESH_SECRET=your_jwt_refresh_secret
+JWT_RESET_SECRET=your_jwt_reset_secret
+API_URL=http://localhost:5000
+CLIENT_URL=http://localhost:3000
+
+# Cloudinary — create a free account at https://cloudinary.com
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+
+# Mail Service URL (from the mail-api repository)
+MAIL_SERVICE_URL=http://localhost:10000
+```
+
+### 5. Start the server
+
+```bash
+npm run dev
+```
+
+The server will be available at `http://localhost:5000`.
+
+### Client
+
+### 6. Create a new terminal and navigate to client directory
+
+```bash
+cd client
+```
+
+### 7. Install dependencies
+
+```bash
+npm install
+```
+
+### 8. Configure environment variables
+
+Copy `.env.example` to `.env` and fill in the values:
+
+```dotenv
+VITE_API_URL=http://localhost:5000
+VITE_SOCKET_URL=http://localhost:5000
+```
+
+### 9. Start the client
+
+```bash
+npm run dev
+```
+
+The client will be available at `http://localhost:3000`.
+
+---
+
+## Docker Setup
+
+### 1. Configure environment variables
+
+Configure `.env` files for both server and client as described in the [Local Development Setup](#local-development-setup) section above, with one change — set `DB_URL` to use the Docker MongoDB service instead of localhost:
+
+```dotenv
+DB_URL=mongodb://mongo:27017/questanizer
+```
+
+### 2. Build and start all services
+
+```bash
+docker-compose up --build
+```
+
+This will start three containers: **MongoDB**, **server**, and **client**.
+
+| Service | URL                   |
+| ------- | --------------------- |
+| Client  | http://localhost:3000 |
+| Server  | http://localhost:5000 |
+| MongoDB | localhost:27017       |
+
+### 3. Stop all services
+
+```bash
+docker-compose down
+```
+
+To stop and remove volumes (clears the database):
+
+```bash
+docker-compose down -v
+```
+
+---
+
 ## License
 
 Currently, this project does not include a formal license.
 All rights are reserved by the author.
 
 If you plan to use, modify, or distribute this project, please contact the author for permission.
-
